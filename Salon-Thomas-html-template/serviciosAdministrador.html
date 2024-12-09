@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Thomas beauty</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Gestión de Servicios SPA Center" name="keywords">
+    <meta content="Gestión de Servicios SPA Center" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Libraries Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Customized Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-primary"><span class="text-dark">Thomas</span> Beauty</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav m-auto py-0">
+                  
+                    <a href="usuarios.html" class="nav-item nav-link">Usuarios</a>
+                    <a href="colaboradores.html" class="nav-item nav-link">Colaboradores</a>
+                    <a href="pedidosAdministrador.html" class="nav-item nav-link">Pedidos</a>
+                    <a href="ingresos.html" class="nav-item nav-link">Ingresos</a>
+                    <a href="inventario.html" class="nav-item nav-link">Inventario</a>
+                    <a href="reportes.html" class="nav-item nav-link">Reportes</a>
+                
+                </div>
+                <a href="index.html" class="btn btn-primary d-none d-lg-block">Cerrar Sesión</a>
+            </div>
+        </nav>
+    </div>
+    <!-- Header -->
+    <div class="container text-center py-5">
+        <h1>Gestión de Servicios</h1>
+    </div>
+
+    <!-- Tabla de Servicios -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre del Servicio</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Fila 1 -->
+                        <tr>
+                            <td>SR01</td>
+                            <td>Masajes Relajantes</td>
+                            <td>Masaje de cuerpo completo para aliviar el estrés.</td>
+                            <td>₡30,000</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" onclick="verServicio('SR01')">Ver</button>
+                                <button class="btn btn-warning btn-sm" onclick="editarServicio('SR01')">Editar</button>
+                                <button class="btn btn-danger btn-sm" onclick="eliminarServicio('SR01')">Eliminar</button>
+                            </td>
+                        </tr>
+
+                        <!-- Fila 2 -->
+                        <tr>
+                            <td>SR02</td>
+                            <td>Faciales Rejuvenecedores</td>
+                            <td>Tratamiento facial para revitalizar la piel.</td>
+                            <td>₡25,000</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" onclick="verServicio('SR02')">Ver</button>
+                                <button class="btn btn-warning btn-sm" onclick="editarServicio('SR02')">Editar</button>
+                                <button class="btn btn-danger btn-sm" onclick="eliminarServicio('SR02')">Eliminar</button>
+                            </td>
+                        </tr>
+
+                        <!-- Fila 3 -->
+                        <tr>
+                            <td>SR03</td>
+                            <td>Manicura y Pedicura</td>
+                            <td>Servicio completo de manicura y pedicura.</td>
+                            <td>₡12,000</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" onclick="verServicio('SR03')">Ver</button>
+                                <button class="btn btn-warning btn-sm" onclick="editarServicio('SR03')">Editar</button>
+                                <button class="btn btn-danger btn-sm" onclick="eliminarServicio('SR03')">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Botón para agregar nuevo servicio -->
+        <div class="text-center mt-4">
+            <button class="btn btn-success" onclick="agregarServicio()">Agregar Nuevo Servicio</button>
+        </div>
+    </div>
+
+    <!-- Modal para CRUD -->
+    <div class="modal fade" id="modalServicio" tabindex="-1" aria-labelledby="modalServicioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalServicioLabel">Agregar/Editar Servicio</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formServicio">
+                        <div class="form-group">
+                            <label for="servicioNombre">Nombre del Servicio</label>
+                            <input type="text" class="form-control" id="servicioNombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="servicioDescripcion">Descripción</label>
+                            <textarea class="form-control" id="servicioDescripcion" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="servicioPrecio">Precio</label>
+                            <input type="number" class="form-control" id="servicioPrecio" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarServicio()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container-fluid bg-dark text-light border-top py-4">
+        <div class="container text-center">
+            <p class="text-center text-white">&copy; Thomas beauty. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script para CRUD de Servicios -->
+    <script>
+        // Funciones de CRUD
+        function verServicio(id) {
+            alert(`Ver servicio: ${id}`);
+            // Aquí puedes agregar la lógica para mostrar detalles del servicio
+        }
+
+        function editarServicio(id) {
+            alert(`Editar servicio: ${id}`);
+            // Aquí puedes agregar la lógica para editar los servicios
+        }
+
+        function eliminarServicio(id) {
+            const confirmacion = confirm(`¿Estás seguro de eliminar el servicio ${id}?`);
+            if (confirmacion) {
+                alert(`Servicio ${id} eliminado.`);
+                // Aquí puedes agregar la lógica para eliminar el servicio
+            }
+        }
+
+        function agregarServicio() {
+            $('#modalServicio').modal('show');
+            // Aquí puedes configurar para agregar un servicio nuevo
+        }
+
+        function guardarServicio() {
+            const nombre = document.getElementById('servicioNombre').value;
+            const descripcion = document.getElementById('servicioDescripcion').value;
+            const precio = document.getElementById('servicioPrecio').value;
+
+            // Aquí puedes agregar la lógica para guardar el nuevo servicio
+
+            alert(`Servicio guardado: ${nombre} - ${descripcion} - ₡${precio}`);
+            $('#modalServicio').modal('hide');
+        }
+    </script>
+</body>
+
+</html>
