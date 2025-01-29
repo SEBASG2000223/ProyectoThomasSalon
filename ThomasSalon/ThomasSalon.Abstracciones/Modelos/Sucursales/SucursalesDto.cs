@@ -33,5 +33,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Sucursales
         [Required]
         public int IdEstado { get; set; }
 
+        public string NombreEstado { get; set; }
+
     }
 }

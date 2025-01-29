@@ -42,12 +42,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="General\Conversiones\Fecha.cs" />
+    <Compile Include="General\Conversiones\Productos\ConvertirAProductosTabla.cs" />
+    <Compile Include="General\Conversiones\Proveedores\ConvertirAProveedoresTabla.cs" />
     <Compile Include="General\Conversiones\Sucursales\ConvertirASucursalesTabla.cs" />
+    <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosLN.cs" />
+    <Compile Include="Productos\Editar\EditarProductosLN.cs" />
+    <Compile Include="Productos\Listar\ListarProductosLN.cs" />
+    <Compile Include="Productos\ObtenerPorId\ObtenerProductosPorIdLN.cs" />
+    <Compile Include="Productos\Registrar\RegistrarProductosLN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedores\CambiarEstado\CambiarEstadoProveedoresLN.cs" />
+    <Compile Include="Proveedores\Editar\EditarProveedoresLN.cs" />
+    <Compile Include="Proveedores\Listar\ListarProveedoresLN.cs" />
+    <Compile Include="Proveedores\ObtenerPorId\ObtenerProveedoresPorIdLN.cs" />
+    <Compile Include="Proveedores\Registrar\RegistrarProveedoresLN.cs" />
     <Compile Include="Sucursales\CambiarEstado\CambiarEstadoSucursalesLN.cs" />
     <Compile Include="Sucursales\Editar\EditarSucursalesLN.cs" />
     <Compile Include="Sucursales\Listar\ListarSucursalesLN.cs" />
-    <Compile Include="Sucursales\ObtenerPorId\ObtenerPorIdSucursalesLN.cs" />
+    <Compile Include="Sucursales\ObtenerPorId\ObtenerSucursalesPorIdLN.cs" />
     <Compile Include="Sucursales\Registrar\RegistrarSucursalesLN.cs" />
   </ItemGroup>
   <ItemGroup>

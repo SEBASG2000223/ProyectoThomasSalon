@@ -42,18 +42,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Productos\Editar\IEditarProductosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Productos\Listar\IListarProductosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Productos\ObtenerPorId\IObtenerProductosPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Productos\Registrar\IRegistrarProductosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Proveedores\CambiarEstado\ICambiarEstadoProveedoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Proveedores\Editar\IEditarProveedoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Proveedores\Listar\IListarProveedoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Proveedores\ObtenerPorId\IObtenerProveedoresPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Proveedores\Registrar\IRegistrarProveedoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\CambiarEstado\ICambiarEstadoSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Editar\IEditarSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Listar\IListarSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\ObtenerPoId\IObtenerSucursalesPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Registrar\IRegistrarSucursalesAD.cs" />
+    <Compile Include="LN\Interfaces\General\Conversiones\Productos\IConvertirAProductosTabla.cs" />
+    <Compile Include="LN\Interfaces\General\Conversiones\Proveedores\IConvertirAProveedoresTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Sucursales\IConvertirASucursalesTabla.cs" />
+    <Compile Include="LN\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosLN.cs" />
+    <Compile Include="LN\Interfaces\Productos\Editar\IEditarProductosLN.cs" />
+    <Compile Include="LN\Interfaces\Productos\Listar\IListarProductosLN.cs" />
+    <Compile Include="LN\Interfaces\Productos\ObtenerPorId\IObtenerProductosPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Productos\Registrar\IRegistrarProductosLN.cs" />
+    <Compile Include="LN\Interfaces\Proveedores\CambiarEstado\ICambiarEstadoProveedoresLN.cs" />
+    <Compile Include="LN\Interfaces\Proveedores\Editar\IEditarProveedoresLN.cs" />
+    <Compile Include="LN\Interfaces\Proveedores\Listar\IListarProveedoresLN.cs" />
+    <Compile Include="LN\Interfaces\Proveedores\ObtenerPorId\IObtenerProveedoresPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Proveedores\Registrar\IRegistrarProveedoresLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\CambiarEstado\ICambiarEstadoSucursalesLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\Editar\IEditarSucursalesLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\Listar\IListarSucursalesLN.cs" />
-    <Compile Include="LN\Interfaces\Sucursales\ObtenerPorId\IObtenerPorIdSucursalesLN.cs" />
-    <Compile Include="LN\Interfaces\Sucursales\Registrar\ISucursalesPersonasLN.cs" />
+    <Compile Include="LN\Interfaces\Sucursales\ObtenerPorId\IObtenerSucursalesPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Sucursales\Registrar\IRegistrarSucursalesLN.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\EstadoDisponibilidadTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ProductosTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ProveedoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
+    <Compile Include="Modelos\Productos\ProductosDto.cs" />
+    <Compile Include="Modelos\Proveedores\ProveedoresDto.cs" />
     <Compile Include="Modelos\Sucursales\SucursalesDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

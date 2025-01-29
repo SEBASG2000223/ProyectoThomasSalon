@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Sucursales.SucursalesDto>
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Productos.ProductosDto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ListarProductos";
 }
 
-<h2>Index</h2>
+<h2>ListarProductos</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -14,24 +14,27 @@
         <thead class="table-dark">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdSucursal)
+                    @Html.DisplayNameFor(model => model.IdProducto)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LinkDireccion)
+                    @Html.DisplayNameFor(model => model.Descripcion)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LinkImagen)
+                    @Html.DisplayNameFor(model => model.Precio)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Telefono)
+                    @Html.DisplayNameFor(model => model.IdProveedor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnidadMedida)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IdEstado)
                 </th>
-                <th>Acciones</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -39,36 +42,38 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdSucursal)
+                        @Html.DisplayFor(modelItem => item.IdProducto)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nombre)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LinkDireccion)
+                        @Html.DisplayFor(modelItem => item.Descripcion)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LinkImagen)
+                        @Html.DisplayFor(modelItem => item.Precio)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Telefono)
+                        @Html.DisplayFor(modelItem => item.NombreProveedor)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdEstado)
+                        @Html.DisplayFor(modelItem => item.UnidadMedida)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.IdSucursal }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.DisplayFor(modelItem => item.NombreEstado)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdProducto }) |
+                  
                         @if (item.IdEstado == 1)
                         {
-                            <a href="@Url.Action("Inactivar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-danger btn-sm">
+                            <a href="@Url.Action("Inactivar", "Productos", new { id = item.IdProducto })" class="btn btn-danger btn-sm">
                                 Inactivar
                             </a>
                         }
                         @if (item.IdEstado == 2)
                         {
-                            <a href="@Url.Action("Activar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-success btn-sm">
+                            <a href="@Url.Action("Activar", "Productos", new { id = item.IdProducto })" class="btn btn-success btn-sm">
                                 Activar
                             </a>
                         }
@@ -88,5 +93,5 @@
 }
 @section scripts
     {
-    <script src="~/Scripts/scriptsfront/Sucursales/ListaDataTableSucursales.js"></script>
+    <script src="~/Scripts/ScriptsFront/Productos/ListaDataTableProductos.js"></script>
 }

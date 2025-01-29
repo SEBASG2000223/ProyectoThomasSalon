@@ -7,7 +7,7 @@ using ThomasSalon.Abstracciones.Modelos.Sucursales;
 
 namespace ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.ObtenerPorId
 {
-    public interface IObtenerPorIdSucursalesLN
+    public interface IObtenerSucursalesPorIdLN
     {
         SucursalesDto Obtener(int IdSucursal);
 

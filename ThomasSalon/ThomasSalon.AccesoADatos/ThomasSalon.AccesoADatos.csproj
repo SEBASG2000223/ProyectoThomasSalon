@@ -52,7 +52,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexto.cs" />
+    <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosAD.cs" />
+    <Compile Include="Productos\Editar\EditarProductosAD.cs" />
+    <Compile Include="Productos\Listar\ListarProductosAD.cs" />
+    <Compile Include="Productos\ObtenerPorId\ObtenerProductosPorIdAD.cs" />
+    <Compile Include="Productos\Registrar\RegistrarProductosAD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedores\CambiarEstado\CambiarEstadoProveedoresAD.cs" />
+    <Compile Include="Proveedores\Editar\EditarProveedoresAD.cs" />
+    <Compile Include="Proveedores\Listar\ListarProveedoresAD.cs" />
+    <Compile Include="Proveedores\ObtenerPorId\ObtenerProveedoresPorIdAD.cs" />
+    <Compile Include="Proveedores\Registrar\RegistrarProveedoresAD.cs" />
     <Compile Include="Sucursales\CambiarEstado\CambiarEstadoSucursalesAD.cs" />
     <Compile Include="Sucursales\Editar\EditarSucursalesAD.cs" />
     <Compile Include="Sucursales\Listar\ListarSucursalesAD.cs" />

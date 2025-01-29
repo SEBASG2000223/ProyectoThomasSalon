@@ -19,16 +19,19 @@ namespace ThomasSalon.AccesoADatos.Sucursales.Listar
         public List<SucursalesDto> Listar()
         {
             List<SucursalesDto> laListaDeSucursales = (from laSucursal in _elContexto.SucursalesTabla
-                                                   select new SucursalesDto
+                                                       join elEstado in _elContexto.EstadoDisponibilidadTabla
+                                                    on laSucursal.IdEstado equals elEstado.IdEstado
+                                                       select new SucursalesDto
                                                    {
                                                        IdSucursal = laSucursal.IdSucursal,
                                                        Nombre = laSucursal.Nombre,
                                                        LinkDireccion = laSucursal.LinkDireccion,
                                                        LinkImagen = laSucursal.LinkImagen,
                                                        Telefono = laSucursal.Telefono,
-                                                       IdEstado = laSucursal.IdEstado
+                                                       IdEstado = laSucursal.IdEstado,
+                                                       NombreEstado = elEstado.Nombre
 
-                                                   }).ToList();
+                                                       }).ToList();
             return laListaDeSucursales;
         }
     }

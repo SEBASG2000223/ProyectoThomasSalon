@@ -14,9 +14,16 @@ namespace ThomasSalon.AccesoADatos
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SucursalesTabla>().ToTable("SUCURSALES");
+            modelBuilder.Entity<ProductosTabla>().ToTable("PRODUCTOS");
+            modelBuilder.Entity<ProveedoresTabla>().ToTable("PROVEEDORES");
+            modelBuilder.Entity<EstadoDisponibilidadTabla>().ToTable("ESTADO_DISPONIBILIDAD");
 
         }
         public DbSet<SucursalesTabla> SucursalesTabla { get; set; }
+        public DbSet<ProductosTabla> ProductosTabla { get; set; }
+        public DbSet<ProveedoresTabla> ProveedoresTabla { get; set; }
+        public DbSet<EstadoDisponibilidadTabla> EstadoDisponibilidadTabla { get; set; }
+
 
     }
 }

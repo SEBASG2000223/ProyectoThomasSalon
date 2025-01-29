@@ -11,11 +11,11 @@ using ThomasSalon.AccesoADatos.Sucursales.ObtenerPorId;
 
 namespace ThomasSalon.LN.Sucursales.ObtenerPorId
 {
-    public class ObtenerPorIdSucursalesLN : IObtenerPorIdSucursalesLN
+    public class ObtenerSucursalesPorIdLN : IObtenerSucursalesPorIdLN
     {
         IObtenerSucursalesPorIdAD _obtenerPorIdAD;
 
-        public ObtenerPorIdSucursalesLN()
+        public ObtenerSucursalesPorIdLN()
         {
             _obtenerPorIdAD = new ObtenerPorIdSucursalesAD();
         }

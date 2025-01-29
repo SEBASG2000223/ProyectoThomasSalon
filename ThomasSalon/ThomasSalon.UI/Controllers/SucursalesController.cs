@@ -24,18 +24,18 @@ namespace ThomasSalon.UI.Controllers
         IRegistrarSucursalesLN _registrarSucursales;
         IEditarSucursalesLN _editarSucursales;
         ICambiarEstadoSucursalesLN _cambiarEstado;
-        IObtenerPorIdSucursalesLN _obtenerPorIdSucursales;  
+        IObtenerSucursalesPorIdLN _obtenerSucursalesPorId;  
         public SucursalesController()
         {
             _listarSucursales = new ListarSucursalesLN();
             _registrarSucursales = new RegistrarSucursalesLN();
             _editarSucursales = new EditarSucursalesLN();
             _cambiarEstado = new CambiarEstadoSucursalesLN();
-            _obtenerPorIdSucursales = new ObtenerPorIdSucursalesLN();
+            _obtenerSucursalesPorId = new ObtenerSucursalesPorIdLN();
 
         }
         // GET: Sucursales
-        public ActionResult Index()
+        public ActionResult ListarSucursales()
         {
             List<SucursalesDto> laListaDeSucursales = _listarSucursales.Listar();
             return View(laListaDeSucursales);
@@ -62,7 +62,7 @@ namespace ThomasSalon.UI.Controllers
                 int cantidadDeDatosGuardados = await _registrarSucursales.Registrar(modelo);
               
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarSucursales");
             }
             catch
             {
@@ -73,24 +73,24 @@ namespace ThomasSalon.UI.Controllers
         // GET: Sucursales/Edit/5
         public ActionResult Edit(int id)
         {
-            SucursalesDto laScursal = _obtenerPorIdSucursales.Obtener(id);
-            return View(laScursal);
+            SucursalesDto laSucursal = _obtenerSucursalesPorId.Obtener(id);
+            return View(laSucursal);
         }
 
         // POST: Sucursales/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(SucursalesDto laScursal)
+        public async Task<ActionResult> Edit(SucursalesDto laSucursal)
         {
             try
             {
-                int cantidadDeDatosEditados = await _editarSucursales.Editar(laScursal);
+                int cantidadDeDatosEditados = await _editarSucursales.Editar(laSucursal);
 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarSucursales");
             }
             catch
             {
-                return View("Index");
+                return View("ListarSucursales");
             }
         }
 
@@ -108,7 +108,7 @@ namespace ThomasSalon.UI.Controllers
             {
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarSucursales");
             }
             catch
             {
@@ -120,7 +120,7 @@ namespace ThomasSalon.UI.Controllers
             
                 int resultado = await _cambiarEstado.CambiarEstado(id, 1);
 
-                  return RedirectToAction("Index");
+                  return RedirectToAction("ListarSucursales");
                 
                
             
@@ -131,7 +131,7 @@ namespace ThomasSalon.UI.Controllers
         {
             
                 int resultado = await _cambiarEstado.CambiarEstado(id, 2);
-            return RedirectToAction("Index");
+            return RedirectToAction("ListarSucursales");
 
 
 

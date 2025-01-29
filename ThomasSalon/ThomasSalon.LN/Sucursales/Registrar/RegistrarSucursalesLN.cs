@@ -25,7 +25,7 @@ namespace ThomasSalon.LN.Sucursales.Registrar
         }
         public async Task<int> Registrar(SucursalesDto modelo)
         {
-          
+            modelo.IdEstado = 1;
             int cantidadDeDatosGuardados = await _registrarSucursalesAD.Registrar(ConvertirObjetoASucursalesTabla(modelo));
             return cantidadDeDatosGuardados;
         }
