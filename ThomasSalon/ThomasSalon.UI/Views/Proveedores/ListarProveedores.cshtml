@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Proveedores.ProveedoresDto>
+
+@{
+    ViewBag.Title = "ListarProveedores";
+}
+
+<h2>ListarProveedores</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="table-responsive">
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdProveedor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdEstado)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdProveedor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Direccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreEstado)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdProveedor }) |
+                     
+                        @if (item.IdEstado == 1)
+                        {
+                            <a href="@Url.Action("Inactivar", "Proveedores", new { id = item.IdProveedor })" class="btn btn-danger btn-sm">
+                                Inactivar
+                            </a>
+                        }
+                        @if (item.IdEstado == 2)
+                        {
+                            <a href="@Url.Action("Activar", "Proveedores", new { id = item.IdProveedor })" class="btn btn-success btn-sm">
+                                Activar
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@functions{
+    public string SaberEstado(int estado)
+    {
+        if (estado == 2) return "Inactivo";
+        if (estado == 1) return "Activo";
+        return "Estado invalido";
+    }
+}
+@section scripts
+    {
+    <script src="~/Scripts/ScriptsFront/Proveedores/ListaDataTableProveedores.js"></script>
+}
