@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EBAB7063-E374-4766-AF8D-EDCBE8E89949}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThomasSalon.Abstracciones</RootNamespace>
+    <AssemblyName>ThomasSalon.Abstracciones</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\Sucursales\CambiarEstado\ICambiarEstadoSucursalesAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Sucursales\Editar\IEditarSucursalesAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Sucursales\Listar\IListarSucursalesAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Sucursales\ObtenerPoId\IObtenerSucursalesPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Sucursales\Registrar\IRegistrarSucursalesAD.cs" />
+    <Compile Include="LN\Interfaces\General\Conversiones\Sucursales\IConvertirASucursalesTabla.cs" />
+    <Compile Include="LN\Interfaces\Sucursales\CambiarEstado\ICambiarEstadoSucursalesLN.cs" />
+    <Compile Include="LN\Interfaces\Sucursales\Editar\IEditarSucursalesLN.cs" />
+    <Compile Include="LN\Interfaces\Sucursales\Listar\IListarSucursalesLN.cs" />
+    <Compile Include="LN\Interfaces\Sucursales\ObtenerPorId\IObtenerPorIdSucursalesLN.cs" />
+    <Compile Include="LN\Interfaces\Sucursales\Registrar\ISucursalesPersonasLN.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
+    <Compile Include="Modelos\Sucursales\SucursalesDto.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
