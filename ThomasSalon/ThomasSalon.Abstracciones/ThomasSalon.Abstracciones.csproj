@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\Editar\IEditarColaboradoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\Listar\IListarColaboradoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Editar\IEditarProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Listar\IListarProductosAD.cs" />
@@ -62,6 +67,12 @@
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Listar\IListarSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\ObtenerPoId\IObtenerSucursalesPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Registrar\IRegistrarSucursalesAD.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\Editar\IEditarColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\Listar\IListarColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\General\Conversiones\Colaboradores\IConvertirAColaboradoresTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Productos\IConvertirAProductosTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Proveedores\IConvertirAProveedoresTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Servicios\IConvertirAServiciosTabla.cs" />
@@ -88,9 +99,11 @@
     <Compile Include="LN\Interfaces\Sucursales\Registrar\IRegistrarSucursalesLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoDisponibilidadTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProductosTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ColaboradoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProveedoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
+    <Compile Include="Modelos\Colaboradores\ColaboradoresDto.cs" />
     <Compile Include="Modelos\Productos\ProductosDto.cs" />
     <Compile Include="Modelos\Proveedores\ProveedoresDto.cs" />
     <Compile Include="Modelos\Servicios\ServiciosDto.cs" />

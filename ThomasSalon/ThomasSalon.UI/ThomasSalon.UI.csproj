@@ -126,6 +126,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\ColaboradoresController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SucursalesController.cs" />
@@ -174,6 +175,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ScriptsFront\Colaboradores\ListaDataTableColaboradores.js" />
     <Content Include="Scripts\ScriptsFront\Productos\ListaDataTableProductos.js" />
     <Content Include="Scripts\ScriptsFront\Proveedores\ListaDataTableProveedores.js" />
     <Content Include="Scripts\ScriptsFront\Sucursales\ListaDataTableSucursales.js" />
@@ -203,6 +205,9 @@
     <Content Include="Views\Servicios\Create.cshtml" />
     <Content Include="Views\Servicios\Edit.cshtml" />
     <Content Include="Views\Servicios\ListarServicios.cshtml" />
+    <Content Include="Views\Colaboradores\Create.cshtml" />
+    <Content Include="Views\Colaboradores\Edit.cshtml" />
+    <Content Include="Views\Colaboradores\ListarColaboradores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

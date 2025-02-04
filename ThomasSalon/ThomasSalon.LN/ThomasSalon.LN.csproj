@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -41,6 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresLN.cs" />
+    <Compile Include="Colaboradores\Editar\EditarColaboradoresLN.cs" />
+    <Compile Include="Colaboradores\Listar\ListarColaboradoresLN.cs" />
+    <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdLN.cs" />
+    <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresLN.cs" />
+    <Compile Include="General\Conversiones\Colaboradores\ConvertirAColaboradoresTabla.cs" />
     <Compile Include="General\Conversiones\Fecha.cs" />
     <Compile Include="General\Conversiones\Productos\ConvertirAProductosTabla.cs" />
     <Compile Include="General\Conversiones\Proveedores\ConvertirAProveedoresTabla.cs" />
