@@ -17,13 +17,13 @@ namespace ThomasSalon.AccesoADatos
             modelBuilder.Entity<ProductosTabla>().ToTable("PRODUCTOS");
             modelBuilder.Entity<ProveedoresTabla>().ToTable("PROVEEDORES");
             modelBuilder.Entity<EstadoDisponibilidadTabla>().ToTable("ESTADO_DISPONIBILIDAD");
-
+            modelBuilder.Entity<ServiciosTabla>().ToTable("SERVICIOS");
         }
         public DbSet<SucursalesTabla> SucursalesTabla { get; set; }
         public DbSet<ProductosTabla> ProductosTabla { get; set; }
         public DbSet<ProveedoresTabla> ProveedoresTabla { get; set; }
         public DbSet<EstadoDisponibilidadTabla> EstadoDisponibilidadTabla { get; set; }
-
+        public DbSet<ServiciosTabla> ServiciosTabla { get; set; }
 
     }
 }

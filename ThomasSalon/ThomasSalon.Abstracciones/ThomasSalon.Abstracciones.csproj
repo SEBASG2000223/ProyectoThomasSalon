@@ -52,6 +52,11 @@
     <Compile Include="AccesoADatos\Interfaces\Proveedores\Listar\IListarProveedoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Proveedores\ObtenerPorId\IObtenerProveedoresPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Proveedores\Registrar\IRegistrarProveedoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\CambiarEstado\ICambiarEstadoServiciosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\Editar\IEditarServiciosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\Listar\IListarServiciosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\ObtenerPorId\IObtenerServiciosPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\Registrar\IRegistrarServiciosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\CambiarEstado\ICambiarEstadoSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Editar\IEditarSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Listar\IListarSucursalesAD.cs" />
@@ -59,6 +64,7 @@
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Registrar\IRegistrarSucursalesAD.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Productos\IConvertirAProductosTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Proveedores\IConvertirAProveedoresTabla.cs" />
+    <Compile Include="LN\Interfaces\General\Conversiones\Servicios\IConvertirAServiciosTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Sucursales\IConvertirASucursalesTabla.cs" />
     <Compile Include="LN\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosLN.cs" />
     <Compile Include="LN\Interfaces\Productos\Editar\IEditarProductosLN.cs" />
@@ -70,6 +76,11 @@
     <Compile Include="LN\Interfaces\Proveedores\Listar\IListarProveedoresLN.cs" />
     <Compile Include="LN\Interfaces\Proveedores\ObtenerPorId\IObtenerProveedoresPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Proveedores\Registrar\IRegistrarProveedoresLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\CambiarEstado\ICambiarEstadoServiciosLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\Editar\IEditarServiciosLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\Listar\IListarServiciosLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\ObtenerPorId\IObtenerServiciosPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\Registrar\IRegistrarServiciosLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\CambiarEstado\ICambiarEstadoSucursalesLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\Editar\IEditarSucursalesLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\Listar\IListarSucursalesLN.cs" />
@@ -78,9 +89,11 @@
     <Compile Include="ModelosDeBaseDeDatos\EstadoDisponibilidadTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProductosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProveedoresTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
     <Compile Include="Modelos\Productos\ProductosDto.cs" />
     <Compile Include="Modelos\Proveedores\ProveedoresDto.cs" />
+    <Compile Include="Modelos\Servicios\ServiciosDto.cs" />
     <Compile Include="Modelos\Sucursales\SucursalesDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

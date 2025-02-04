@@ -63,6 +63,11 @@
     <Compile Include="Proveedores\Listar\ListarProveedoresAD.cs" />
     <Compile Include="Proveedores\ObtenerPorId\ObtenerProveedoresPorIdAD.cs" />
     <Compile Include="Proveedores\Registrar\RegistrarProveedoresAD.cs" />
+    <Compile Include="Servicios\CambiarEstado\CambiarEstadoServiciosAD.cs" />
+    <Compile Include="Servicios\Editar\EditarServiciosAD.cs" />
+    <Compile Include="Servicios\Listar\ListarServiciosAD.cs" />
+    <Compile Include="Servicios\ObtenerPorId\ObtenerServiciosPorIdAD.cs" />
+    <Compile Include="Servicios\Registrar\RegistrarServiciosAD.cs" />
     <Compile Include="Sucursales\CambiarEstado\CambiarEstadoSucursalesAD.cs" />
     <Compile Include="Sucursales\Editar\EditarSucursalesAD.cs" />
     <Compile Include="Sucursales\Listar\ListarSucursalesAD.cs" />
