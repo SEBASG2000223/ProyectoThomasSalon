@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -41,9 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresLN.cs" />
+    <Compile Include="Colaboradores\Editar\EditarColaboradoresLN.cs" />
+    <Compile Include="Colaboradores\Listar\ListarColaboradoresLN.cs" />
+    <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdLN.cs" />
+    <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresLN.cs" />
+    <Compile Include="General\Conversiones\Colaboradores\ConvertirAColaboradoresTabla.cs" />
     <Compile Include="General\Conversiones\Fecha.cs" />
     <Compile Include="General\Conversiones\Productos\ConvertirAProductosTabla.cs" />
     <Compile Include="General\Conversiones\Proveedores\ConvertirAProveedoresTabla.cs" />
+    <Compile Include="General\Conversiones\Servicios\ConvertirAServiciosTabla.cs" />
     <Compile Include="General\Conversiones\Sucursales\ConvertirASucursalesTabla.cs" />
     <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosLN.cs" />
     <Compile Include="Productos\Editar\EditarProductosLN.cs" />
@@ -56,6 +63,11 @@
     <Compile Include="Proveedores\Listar\ListarProveedoresLN.cs" />
     <Compile Include="Proveedores\ObtenerPorId\ObtenerProveedoresPorIdLN.cs" />
     <Compile Include="Proveedores\Registrar\RegistrarProveedoresLN.cs" />
+    <Compile Include="Servicios\CambiarEstado\CambiarEstadoServiciosLN.cs" />
+    <Compile Include="Servicios\Editar\EditarServiciosLN.cs" />
+    <Compile Include="Servicios\Listar\ListarServiciosLN.cs" />
+    <Compile Include="Servicios\ObtenerPorId\ObtenerServiciosPorIdLN.cs" />
+    <Compile Include="Servicios\Registrar\RegistrarServiciosLN.cs" />
     <Compile Include="Sucursales\CambiarEstado\CambiarEstadoSucursalesLN.cs" />
     <Compile Include="Sucursales\Editar\EditarSucursalesLN.cs" />
     <Compile Include="Sucursales\Listar\ListarSucursalesLN.cs" />
