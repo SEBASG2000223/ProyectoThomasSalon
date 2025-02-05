@@ -25,7 +25,6 @@ namespace ThomasSalon.AccesoADatos.Servicios.Editar
                 elServicioEnBD.Descripcion = elServicioParaEditar.Descripcion;
                 elServicioEnBD.Precio = elServicioParaEditar.Precio;
                 elServicioEnBD.Duracion = elServicioParaEditar.Duracion;
-                elServicioEnBD.IdEstado = elServicioParaEditar.IdEstado;
                 _elContexto.Entry(elServicioEnBD).State = EntityState.Modified;
                 int cantidadDeDatosGuardados = await _elContexto.SaveChangesAsync();
                 return cantidadDeDatosGuardados;
