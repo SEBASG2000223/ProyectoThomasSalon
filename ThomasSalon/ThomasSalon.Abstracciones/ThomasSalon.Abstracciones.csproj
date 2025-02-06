@@ -47,6 +47,7 @@
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Listar\IListarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\Listar\IListarInventarioGeneralAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Editar\IEditarProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Listar\IListarProductosAD.cs" />
@@ -98,18 +99,24 @@
     <Compile Include="LN\Interfaces\Sucursales\ObtenerPorId\IObtenerSucursalesPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\Registrar\IRegistrarSucursalesLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoDisponibilidadTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\InventarioGeneralTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProductosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ColaboradoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProveedoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
     <Compile Include="Modelos\Colaboradores\ColaboradoresDto.cs" />
+    <Compile Include="Modelos\InventarioGeneral\InventarioGeneralDto.cs" />
     <Compile Include="Modelos\Productos\ProductosDto.cs" />
     <Compile Include="Modelos\Proveedores\ProveedoresDto.cs" />
     <Compile Include="Modelos\Servicios\ServiciosDto.cs" />
     <Compile Include="Modelos\Sucursales\SucursalesDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AccesoADatos\Interfaces\InventarioGeneral\ObtenerPorId\" />
+    <Folder Include="AccesoADatos\Interfaces\InventarioSucursal\" />
+    <Folder Include="Modelos\InventarioSucursal\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
