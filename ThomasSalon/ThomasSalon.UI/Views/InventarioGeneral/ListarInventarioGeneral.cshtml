@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.InventarioGeneral.InventarioGeneralDto>
+
+@{
+    ViewBag.Title = "ListarInventarioGeneral";
+}
+
+<h2>Inventario General</h2>
+
+<div class="table-responsive">
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IdProducto)</th>
+                <th>@Html.DisplayNameFor(model => model.NombreProducto)</th>
+                <th>@Html.DisplayNameFor(model => model.CantidadTotal)</th>
+                <th>@Html.DisplayNameFor(model => model.NombreProveedor)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.IdProducto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NombreProducto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CantidadTotal)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NombreProveedor)</td>
+                    <td>
+                        @Html.ActionLink("Detalles del producto", "DetallesProducto", new { id = item.IdProducto })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    
+    @section scripts
+    {
+        <script src="~/Scripts/ScriptsFront/Productos/ListaDataTableProductos.js"></script>
+    }

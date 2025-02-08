@@ -47,7 +47,7 @@
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Listar\IListarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresAD.cs" />
-    <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\Listar\IListarInventarioGeneralAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\IInventarioGeneralAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Editar\IEditarProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Listar\IListarProductosAD.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="LN\Interfaces\General\Conversiones\Proveedores\IConvertirAProveedoresTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Servicios\IConvertirAServiciosTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Sucursales\IConvertirASucursalesTabla.cs" />
+    <Compile Include="LN\Interfaces\InventarioGeneral\IInventarioGeneralLN.cs" />
     <Compile Include="LN\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosLN.cs" />
     <Compile Include="LN\Interfaces\Productos\Editar\IEditarProductosLN.cs" />
     <Compile Include="LN\Interfaces\Productos\Listar\IListarProductosLN.cs" />
@@ -114,8 +115,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AccesoADatos\Interfaces\InventarioGeneral\ObtenerPorId\" />
     <Folder Include="AccesoADatos\Interfaces\InventarioSucursal\" />
+    <Folder Include="LN\Interfaces\InventarioSucursal\" />
     <Folder Include="Modelos\InventarioSucursal\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

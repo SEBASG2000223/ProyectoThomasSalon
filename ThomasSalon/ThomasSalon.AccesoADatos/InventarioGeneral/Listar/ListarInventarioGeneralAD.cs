@@ -1,44 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.InventarioGeneral;
+using ThomasSalon.Abstracciones.Modelos.InventarioGeneral;
 
 namespace ThomasSalon.AccesoADatos.InventarioGeneral.Listar
 {
-    public class ListarInventarioGeneralAD : IListarInventarioGeneralAD
+    public class ListarInventarioGeneralAD : IInventarioGeneralAD
     {
 
 
         Contexto _elContexto;
 
-        public ListarProductosAD()
+        public ListarInventarioGeneralAD()
         {
             _elContexto = new Contexto();
         }
-        public List<ProductosDto> Listar()
+        public List<InventarioGeneralDto> Listar()
         {
+            List<InventarioGeneralDto> laListaDeProductos =
+                (from elInventario in _elContexto.InventarioGeneralTabla
+                 join elProducto in _elContexto.ProductosTabla
+                     on elInventario.IdProducto equals elProducto.IdProducto
+                 join elProveedor in _elContexto.ProveedoresTabla
+                     on elProducto.IdProveedor equals elProveedor.IdProveedor 
+                 select new InventarioGeneralDto
+                 {
+                     IdInventarioGeneral = elInventario.IdInventarioGeneral,
+                     IdProducto = elInventario.IdProducto,
+                     NombreProducto = elProducto.Nombre,
+                     NombreProveedor = elProveedor.Nombre, 
+                     CantidadTotal = elInventario.CantidadTotal
+                 }).ToList();
 
-            List<ProductosDto> laListaDeProductos = (from elProducto in _elContexto.ProductosTabla
-                                                     join elProveedor in _elContexto.ProveedoresTabla
-                                                     on elProducto.IdProveedor equals elProveedor.IdProveedor
-                                                     join elEstado in _elContexto.EstadoDisponibilidadTabla
-                                                     on elProducto.IdEstado equals elEstado.IdEstado
-                                                     select new ProductosDto
-                                                     {
-                                                         IdProducto = elProducto.IdProducto,
-                                                         Nombre = elProducto.Nombre,
-                                                         Descripcion = elProducto.Descripcion,
-                                                         Precio = elProducto.Precio,
-                                                         IdProveedor = elProducto.IdProveedor,
-                                                         NombreProveedor = elProveedor.Nombre,
-                                                         UnidadMedida = elProducto.UnidadMedida,
-                                                         IdEstado = elProducto.IdEstado,
-                                                         NombreEstado = elEstado.Nombre
-                                                     }).ToList();
             return laListaDeProductos;
-
-
         }
+
     }
 }

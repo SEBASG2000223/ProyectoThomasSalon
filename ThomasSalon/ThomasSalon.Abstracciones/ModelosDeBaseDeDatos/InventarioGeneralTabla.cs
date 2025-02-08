@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
 {
+    [Table("INVENTARIO_GENERAL")]
     public class InventarioGeneralTabla
     {
         [Key]

@@ -10,12 +10,18 @@ namespace ThomasSalon.Abstracciones.Modelos.InventarioGeneral
         [Required]
         public Guid IdInventarioGeneral { get; set; }
 
-        [Display(Name = "Producto", Description = "Producto")]
+        [Display(Name = "Identificador", Description = "Id del producto")]
         [Required]
         public int IdProducto { get; set; }
 
         [Display(Name = "Cantidad Total", Description = "Cantidad Total del Producto")]
         [Required]
         public int CantidadTotal { get; set; }
+
+        [Display(Name = "Nombre del producto", Description = "Nombre del producto")]
+        public string NombreProducto { get; set; }
+
+        [Display(Name = "Proveedor", Description = "Nombre del proveedor")]
+        public string NombreProveedor { get; set; }
     }
 }
