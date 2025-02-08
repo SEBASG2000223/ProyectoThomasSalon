@@ -52,11 +52,14 @@
     <Compile Include="General\Conversiones\Proveedores\ConvertirAProveedoresTabla.cs" />
     <Compile Include="General\Conversiones\Servicios\ConvertirAServiciosTabla.cs" />
     <Compile Include="General\Conversiones\Sucursales\ConvertirASucursalesTabla.cs" />
+
     <Compile Include="General\Conversiones\Usuarios\ConvertirAUsuariosTabla.cs" />
+
+    <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralLN.cs" />
+
     <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosLN.cs" />
     <Compile Include="Productos\Editar\EditarProductosLN.cs" />
     <Compile Include="Productos\Listar\ListarProductosLN.cs" />
-    <Compile Include="Productos\ObtenerPorId\ObtenerProductosPorIdLN.cs" />
     <Compile Include="Productos\Registrar\RegistrarProductosLN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedores\CambiarEstado\CambiarEstadoProveedoresLN.cs" />
@@ -89,6 +92,8 @@
       <Name>ThomasSalon.AccesoADatos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="InventarioSucursal\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -26,6 +26,10 @@ namespace ThomasSalon.AccesoADatos
             modelBuilder.Entity<ServiciosTabla>().ToTable("SERVICIOS");
             modelBuilder.Entity<ColaboradoresTabla>().ToTable("COLABORADORES");
 
+
+
+            modelBuilder.Entity<InventarioGeneralTabla>().ToTable("INVENTARIO_GENERAL");
+
         }
         public DbSet<SucursalesTabla> SucursalesTabla { get; set; }
         public DbSet<ProductosTabla> ProductosTabla { get; set; }
@@ -39,6 +43,7 @@ namespace ThomasSalon.AccesoADatos
 
         public DbSet<ServiciosTabla> ServiciosTabla { get; set; }
         public DbSet<ColaboradoresTabla> ColaboradoresTabla { get; set; }
+        public DbSet<InventarioGeneralTabla> InventarioGeneralTabla { get; set; }
 
 
     }

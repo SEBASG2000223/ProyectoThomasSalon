@@ -78,6 +78,7 @@
     <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresAD.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralAD.cs" />
     <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosAD.cs" />
     <Compile Include="Productos\Editar\EditarProductosAD.cs" />
     <Compile Include="Productos\Listar\ListarProductosAD.cs" />
