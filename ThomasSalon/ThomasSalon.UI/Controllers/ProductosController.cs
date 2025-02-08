@@ -55,7 +55,7 @@ namespace ThomasSalon.UI.Controllers
         // GET: Productos/Create
         public ActionResult Create()
         {
-            var proveedores = _proveedores.Listar();
+            var proveedores = _proveedores.ListarActivos();
             ViewBag.Proveedores = new SelectList(proveedores, "IdProveedor", "Nombre");
 
             return View();
@@ -81,7 +81,7 @@ namespace ThomasSalon.UI.Controllers
         // GET: Productos/Edit/5
         public ActionResult Edit(int id)
         {
-            var proveedores = _proveedores.Listar();
+            var proveedores = _proveedores.ListarActivos();
             ViewBag.Proveedores = new SelectList(proveedores, "IdProveedor", "Nombre");
 
             
