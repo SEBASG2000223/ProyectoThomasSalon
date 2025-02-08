@@ -45,6 +45,7 @@
     <Compile Include="General\Conversiones\Productos\ConvertirAProductosTabla.cs" />
     <Compile Include="General\Conversiones\Proveedores\ConvertirAProveedoresTabla.cs" />
     <Compile Include="General\Conversiones\Sucursales\ConvertirASucursalesTabla.cs" />
+    <Compile Include="General\Conversiones\Usuarios\ConvertirAUsuariosTabla.cs" />
     <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosLN.cs" />
     <Compile Include="Productos\Editar\EditarProductosLN.cs" />
     <Compile Include="Productos\Listar\ListarProductosLN.cs" />
@@ -61,6 +62,10 @@
     <Compile Include="Sucursales\Listar\ListarSucursalesLN.cs" />
     <Compile Include="Sucursales\ObtenerPorId\ObtenerSucursalesPorIdLN.cs" />
     <Compile Include="Sucursales\Registrar\RegistrarSucursalesLN.cs" />
+    <Compile Include="Usuarios\CambiarEstado\CambiarEstadoUsuariosLN.cs" />
+    <Compile Include="Usuarios\Editar\EditarUsuariosLN.cs" />
+    <Compile Include="Usuarios\Listar\ListarUsuariosLN.cs" />
+    <Compile Include="Usuarios\ObtenerPorId\ObtenerUsuariosPorIdLN.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">

@@ -68,6 +68,10 @@
     <Compile Include="Sucursales\Listar\ListarSucursalesAD.cs" />
     <Compile Include="Sucursales\ObtenerPorId\ObtenerPorIdSucursalesAD.cs" />
     <Compile Include="Sucursales\Registrar\RegistrarSucursalesAD.cs" />
+    <Compile Include="Usuarios\CambiarEstado\CambiarEstadoUsuariosAD.cs" />
+    <Compile Include="Usuarios\Editar\EditarUsuariosAD.cs" />
+    <Compile Include="Usuarios\Listar\ListarUsuariosAD.cs" />
+    <Compile Include="Usuarios\ObtenerPorId\ObtenerUsuariosPorIdAD.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">

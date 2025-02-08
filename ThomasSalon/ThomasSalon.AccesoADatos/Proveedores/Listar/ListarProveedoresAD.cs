@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Proveedores.Listar;
 using ThomasSalon.Abstracciones.Modelos.Proveedores;
+
+
+
 
 namespace ThomasSalon.AccesoADatos.Proveedores.Listar
 {
