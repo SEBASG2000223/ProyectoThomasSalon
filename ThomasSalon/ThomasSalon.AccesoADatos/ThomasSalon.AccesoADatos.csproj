@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -51,6 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresAD.cs" />
+    <Compile Include="Colaboradores\Editar\EditarColaboradoresAD.cs" />
+    <Compile Include="Colaboradores\Listar\ListarColaboradoresAD.cs" />
+    <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdAD.cs" />
+    <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresAD.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosAD.cs" />
     <Compile Include="Productos\Editar\EditarProductosAD.cs" />
@@ -63,6 +68,11 @@
     <Compile Include="Proveedores\Listar\ListarProveedoresAD.cs" />
     <Compile Include="Proveedores\ObtenerPorId\ObtenerProveedoresPorIdAD.cs" />
     <Compile Include="Proveedores\Registrar\RegistrarProveedoresAD.cs" />
+    <Compile Include="Servicios\CambiarEstado\CambiarEstadoServiciosAD.cs" />
+    <Compile Include="Servicios\Editar\EditarServiciosAD.cs" />
+    <Compile Include="Servicios\Listar\ListarServiciosAD.cs" />
+    <Compile Include="Servicios\ObtenerPorId\ObtenerServiciosPorIdAD.cs" />
+    <Compile Include="Servicios\Registrar\RegistrarServiciosAD.cs" />
     <Compile Include="Sucursales\CambiarEstado\CambiarEstadoSucursalesAD.cs" />
     <Compile Include="Sucursales\Editar\EditarSucursalesAD.cs" />
     <Compile Include="Sucursales\Listar\ListarSucursalesAD.cs" />

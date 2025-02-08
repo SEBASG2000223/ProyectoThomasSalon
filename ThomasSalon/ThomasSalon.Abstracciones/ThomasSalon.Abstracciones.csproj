@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\Editar\IEditarColaboradoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\Listar\IListarColaboradoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Editar\IEditarProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Listar\IListarProductosAD.cs" />
@@ -52,17 +57,31 @@
     <Compile Include="AccesoADatos\Interfaces\Proveedores\Listar\IListarProveedoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Proveedores\ObtenerPorId\IObtenerProveedoresPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Proveedores\Registrar\IRegistrarProveedoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\CambiarEstado\ICambiarEstadoServiciosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\Editar\IEditarServiciosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\Listar\IListarServiciosAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\ObtenerPorId\IObtenerServiciosPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Servicios\Registrar\IRegistrarServiciosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\CambiarEstado\ICambiarEstadoSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Editar\IEditarSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Listar\IListarSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\ObtenerPoId\IObtenerSucursalesPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Registrar\IRegistrarSucursalesAD.cs" />
+
     <Compile Include="AccesoADatos\Interfaces\Usuarios\CambiarEstado\ICambiarEstadoUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Editar\IEditarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Listar\IListarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdAD.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\Editar\IEditarColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\Listar\IListarColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\General\Conversiones\Colaboradores\IConvertirAColaboradoresTabla.cs" />
+
     <Compile Include="LN\Interfaces\General\Conversiones\Productos\IConvertirAProductosTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Proveedores\IConvertirAProveedoresTabla.cs" />
+    <Compile Include="LN\Interfaces\General\Conversiones\Servicios\IConvertirAServiciosTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Sucursales\IConvertirASucursalesTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Usuarios\IConvertirAUsuariosTabla.cs" />
     <Compile Include="LN\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosLN.cs" />
@@ -75,6 +94,11 @@
     <Compile Include="LN\Interfaces\Proveedores\Listar\IListarProveedoresLN.cs" />
     <Compile Include="LN\Interfaces\Proveedores\ObtenerPorId\IObtenerProveedoresPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Proveedores\Registrar\IRegistrarProveedoresLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\CambiarEstado\ICambiarEstadoServiciosLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\Editar\IEditarServiciosLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\Listar\IListarServiciosLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\ObtenerPorId\IObtenerServiciosPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Servicios\Registrar\IRegistrarServiciosLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\CambiarEstado\ICambiarEstadoSucursalesLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\Editar\IEditarSucursalesLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\Listar\IListarSucursalesLN.cs" />
@@ -86,13 +110,21 @@
     <Compile Include="LN\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoDisponibilidadTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProductosTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\ColaboradoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProveedoresTabla.cs" />
+
     <Compile Include="ModelosDeBaseDeDatos\RolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UserRolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UsuariosTabla.cs" />
+
+    <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
+    <Compile Include="Modelos\Colaboradores\ColaboradoresDto.cs" />
+
     <Compile Include="Modelos\Productos\ProductosDto.cs" />
     <Compile Include="Modelos\Proveedores\ProveedoresDto.cs" />
+    <Compile Include="Modelos\Servicios\ServiciosDto.cs" />
     <Compile Include="Modelos\Sucursales\SucursalesDto.cs" />
     <Compile Include="Modelos\Usuarios\UsuariosDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
