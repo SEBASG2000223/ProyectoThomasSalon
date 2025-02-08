@@ -64,11 +64,19 @@ namespace ThomasSalon.UI.Controllers
             {
                 int cantidadDeDatosGuardados = await _registrarProveedores.Registrar(modelo);
 
+                if (cantidadDeDatosGuardados == 0)
+                {
+                    TempData["Error"] = "Ya existe un proveedor con este nombre.";
+                    return RedirectToAction("Create"); 
+                }
+
+              
                 return RedirectToAction("ListarProveedores");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("Create");
             }
         }
 

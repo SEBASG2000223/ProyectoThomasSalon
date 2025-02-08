@@ -23,10 +23,12 @@ namespace ThomasSalon.LN.Proveedores.Listar
             List<ProveedoresDto> laListaDeProveedores = _listarProveedoresAD.Listar();
             return laListaDeProveedores;
         }
+        public List<ProveedoresDto> ListarActivos()
+        {
+            List<ProveedoresDto> laListaDeProveedores = _listarProveedoresAD.ListarActivos();
+            return laListaDeProveedores;
+        }
 
-        //public List<ProveedoresDto> ObtenerProveedores()
-        //{
-        //    return _listarProveedoresAD.ObtenerProveedores();
-        //}
+      
     }
 }
