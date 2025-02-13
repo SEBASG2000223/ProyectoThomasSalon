@@ -1,10 +1,10 @@
 ﻿@model ThomasSalon.Abstracciones.Modelos.Proveedores.ProveedoresDto
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
 
-<h2>Edit</h2>
+<h2 class="text-center">Editar Proveedor</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>ProveedoresDto</h4>
+
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -50,21 +50,23 @@
             @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <br />
     <div class="form-group">
         @Html.HiddenFor(model => model.IdEstado)
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Editar" class="btn btn-primary" />
         </div>
     </div>
 </div>
+<br />
+    
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Request.UrlReferrer" class="btn btn-dark btn-md">Volver a la lista</a>
 </div>
 
 @section Scripts {
