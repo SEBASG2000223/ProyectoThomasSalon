@@ -1,0 +1,66 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.InventarioSucursal.InventarioSucursalDto
+
+@{
+    ViewBag.Title = "DetallesProducto";
+}
+
+<h2>DetallesProducto</h2>
+
+<div>
+    <h4>InventarioSucursalDto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSucursal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdSucursal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreProveedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreProveedor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver al listado de productos", "ListarInventarioSucursal")
+</p>

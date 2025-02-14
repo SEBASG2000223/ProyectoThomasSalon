@@ -1,0 +1,93 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.Productos.ProductosDto
+
+@{
+    ViewBag.Title = "DetallesProducto";
+}
+
+<h2>Detalles del producto</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        @{
+
+            var proveedores = ViewBag.Proveedores as Dictionary<int, string>;
+
+            string nombreProveedor = (proveedores != null && proveedores.ContainsKey(Model.IdProducto))
+                ? proveedores[Model.IdProducto]
+                : "Proveedor desconocido";
+        }
+
+        <dt>Proveedor</dt>
+        <dd>@nombreProveedor</dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnidadMedida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnidadMedida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEstado)
+        </dt>
+
+        <dd>
+            @{
+                string estado = "";
+                if (Model.IdEstado == 1)
+                {
+                    estado = "Activo";
+                }
+                else
+                {
+                    estado = "Inactivo";
+                }
+
+            }
+            @Html.DisplayFor(model => estado)
+        </dd>
+
+
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver al inventario general", "ListarInventarioGeneral")
+</p>

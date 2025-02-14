@@ -9,7 +9,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Productos
 {
     public class ProductosDto
     {
-        [Display(Name = "Id Producto", Description = "Id Producto")]
+        [Display(Name = "Identificador", Description = "Id Producto")]
         public int IdProducto { get; set; }
 
         [Display(Name = "Nombre", Description = "Nombre")]

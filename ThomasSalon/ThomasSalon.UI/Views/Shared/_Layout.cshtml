@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -25,7 +26,7 @@
                     <li>@Html.ActionLink("Usuarios", "ListarUsuarios", "Usuarios", new { area = "" }, new { @class = "nav-link" })</li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                           Usuarios
+                            Usuarios
                         </a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Usuarios", "ListarSoloUsuarios", "Usuarios", null, new { @class = "dropdown-item" })</li>
@@ -40,7 +41,11 @@
 
                     <li>@Html.ActionLink("Proveedores", "ListarProveedores", "Proveedores", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Servicios", "ListarServicios", "Servicios", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Colaboradores", "ListarColaboradores", "Colaboradores", new { area = ""}, new { @class = "nav-link"})</li>
+                    <li>@Html.ActionLink("Colaboradores", "ListarColaboradores", "Colaboradores", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Inventario", "ListarInventarioGeneral", "InventarioGeneral", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @Html.Action("CargarSucursales", "Home")
+
                 </ul>
             </div>
             <div class="d-flex justify-content-end">
@@ -51,9 +56,6 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
