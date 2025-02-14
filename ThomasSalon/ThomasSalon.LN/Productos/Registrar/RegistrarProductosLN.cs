@@ -36,6 +36,7 @@ namespace ThomasSalon.LN.Productos.Registrar
                 Nombre = elProducto.Nombre,
                 Descripcion = elProducto.Descripcion,
                 Precio = elProducto.Precio,
+                LinkImagen = elProducto.LinkImagen,
                 IdProveedor = elProducto.IdProveedor,
                 UnidadMedida = elProducto.UnidadMedida,
                 IdEstado = elProducto.IdEstado
