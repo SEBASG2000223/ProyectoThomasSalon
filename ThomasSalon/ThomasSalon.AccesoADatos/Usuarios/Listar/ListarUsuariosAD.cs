@@ -54,7 +54,7 @@ namespace ThomasSalon.AccesoADatos.Usuarios.Listar
                                                       on elUsuario.Id equals usuarioRol.UserId
                                                       join rol in _elContexto.RolesTabla
                                                       on usuarioRol.RoleId equals rol.Id
-                                                      where rol.Id == 3.ToString()
+                                                      where rol.Id == 2.ToString()
                                                       select new UsuariosDto
                                                       {
                                                           Id = elUsuario.Id,
@@ -81,7 +81,7 @@ namespace ThomasSalon.AccesoADatos.Usuarios.Listar
                                                       on elUsuario.Id equals usuarioRol.UserId
                                                       join rol in _elContexto.RolesTabla
                                                       on usuarioRol.RoleId equals rol.Id
-                                                      where rol.Id == 2.ToString()
+                                                      where rol.Id == 3.ToString()
                                                       select new UsuariosDto
                                                       {
                                                           Id = elUsuario.Id,

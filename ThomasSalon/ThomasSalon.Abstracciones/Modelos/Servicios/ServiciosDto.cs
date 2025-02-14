@@ -34,6 +34,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Servicios
         [Required]
         public int IdEstado { get; set; }
 
+        public string LinkImagen { get; set; }
         public string NombreEstado { get; set; }
     }
 }

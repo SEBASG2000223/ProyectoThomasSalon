@@ -32,6 +32,7 @@ namespace ThomasSalon.AccesoADatos.Productos.Listar
                                                          Precio = elProducto.Precio,
                                                          IdProveedor = elProducto.IdProveedor,
                                                          NombreProveedor = elProveedor.Nombre,
+                                                         LinkImagen = elProducto.LinkImagen,
                                                          UnidadMedida = elProducto.UnidadMedida,
                                                          IdEstado = elProducto.IdEstado,
                                                          NombreEstado = elEstado.Nombre 

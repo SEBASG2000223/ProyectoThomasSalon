@@ -3,85 +3,85 @@
 @{
     ViewBag.Title = "ListarColaboradores";
 }
+<div class="container pt-5">
+    <h2>ListarColaboradores</h2>
 
-<h2>ListarColaboradores</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="table-responsive">
-    <table id="myTable" class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdColaborador)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Telefono)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SalarioDia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NombreEstado)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdColaborador)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Telefono)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SalarioDia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NombreEstado)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IdColaborador }) |
-
-                        @if (item.IdEstado == 1)
-                        {
-                            <a href="@Url.Action("Inactivar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-danger btn-sm">
-                                Inactivar
-                            </a>
-                        }
-                        @if (item.IdEstado == 2)
-                        {
-                            <a href="@Url.Action("Activar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-success btn-sm">
-                                Activar
-                            </a>
-                        }
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdColaborador)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalarioDia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreEstado)
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdColaborador)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalarioDia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreEstado)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IdColaborador }) |
+
+                            @if (item.IdEstado == 1)
+                            {
+                                <a href="@Url.Action("Inactivar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-danger btn-sm">
+                                    Inactivar
+                                </a>
+                            }
+                            @if (item.IdEstado == 2)
+                            {
+                                <a href="@Url.Action("Activar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-success btn-sm">
+                                    Activar
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-
-@functions{
-    public string SaberEstado(int estado)
-    {
-        if (estado == 2) return "Inactivo";
-        if (estado == 1) return "Activo";
-        return "Estado invalido";
+    @functions{
+        public string SaberEstado(int estado)
+        {
+            if (estado == 2) return "Inactivo";
+            if (estado == 1) return "Activo";
+            return "Estado invalido";
+        }
     }
-}
 
-@section scripts
+    @section scripts
 {
-    <script src="~/Scripts/ScriptsFront/Colaboradores/ListaDataTableColaboradores.js"></script>
-}
+        <script src="~/Scripts/ScriptsFront/Colaboradores/ListaDataTableColaboradores.js"></script>
+    }

@@ -60,6 +60,12 @@ namespace ThomasSalon.UI.Controllers
             List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarGerentes();
             return View(laListaDeUsuarios);
         }
+        // parcial
+        public ActionResult ListarGerentesParcial()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarGerentes();
+            return PartialView("_ListarGerentes", laListaDeUsuarios);
+        }
         // GET: Usuarios
         public ActionResult ListarSoloUsuarios()
         {
@@ -67,10 +73,22 @@ namespace ThomasSalon.UI.Controllers
             return View(laListaDeUsuarios);
         }
         // GET: Usuarios
+        public ActionResult ListarSoloUsuariosParcial()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarUsuarios();
+            return PartialView("_ListarSoloUsuarios", laListaDeUsuarios);
+        }
+        // GET: Usuarios
         public ActionResult ListarAdministradores()
         {
             List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarAdministradores();
             return View(laListaDeUsuarios);
+        }
+        // GET: Usuarios
+        public ActionResult ListarAdministradoresParcial()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarAdministradores();
+            return PartialView("_ListarAdministradores", laListaDeUsuarios);
         }
 
         // GET: Usuarios/Details/5

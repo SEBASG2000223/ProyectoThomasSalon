@@ -3,31 +3,178 @@
 }
 
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
-
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-5 pb-5">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#header-carousel" data-slide-to="1"></li>
+                <li data-target="#header-carousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <!-- Primera imagen: Uñas -->
+                <div class="carousel-item position-relative active" style="min-height: 70vh;">
+                    <img class="position-absolute w-100 h-100" src="https://images.fresha.com/lead-images/placeholders/beauty-salon-89.jpg?class=width-small" style="object-fit: cover;">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h6 class="text-white text-uppercase mb-3 animate__animated animate__fadeInDown" style="letter-spacing: 3px;">Salón de Belleza</h6>
+                            <h3 class="display-4 text-capitalize text-white mb-3">Manicure y Pedicure</h3>
+                            <p class="mx-md-5 px-5">Luce unas uñas impecables con nuestros servicios de manicura y pedicura profesional. ¡Te encantará el resultado!</p>
+                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Segunda imagen: Cortes de cabello -->
+                <div class="carousel-item position-relative" style="min-height: 70vh;">
+                    <img class="position-absolute w-100 h-100" src="https://www.okchicas.com/wp-content/uploads/2020/08/cortes-de-cabello-sin-sacrificar-tu-larga-melena-730x381.jpg" style="object-fit: cover;">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h6 class="text-white text-uppercase mb-3 animate__animated animate__fadeInDown" style="letter-spacing: 3px;">Salón de Belleza</h6>
+                            <h3 class="display-4 text-capitalize text-white mb-3">Cortes de Cabello</h3>
+                            <p class="mx-md-5 px-5">Renueva tu estilo con nuestros cortes de cabello modernos y personalizados. ¡El look perfecto te espera!</p>
+                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tercera imagen: Tinturado de cabello -->
+                <div class="carousel-item position-relative" style="min-height: 70vh;">
+                    <img class="position-absolute w-100 h-100" src="https://media.istockphoto.com/id/1497806504/es/foto/peluquer%C3%ADa-en-sal%C3%B3n-de-belleza-la-mujer-se-peina-en-el-sal%C3%B3n-de-belleza-moderno-estilista-seca.jpg?s=612x612&w=0&k=20&c=W4gT9tOhXW8WyK7Qz2UEV4PM75v8Pbk2QXmLQnZMM6c=" style="object-fit: cover;">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h6 class="text-white text-uppercase mb-3 animate__animated animate__fadeInDown" style="letter-spacing: 3px;">Salón de Belleza</h6>
+                            <h3 class="display-4 text-capitalize text-white mb-3">Tinturado de Cabello</h3>
+                            <p class="mx-md-5 px-5">Descubre un nuevo color que realce tu belleza. Ofrecemos tinturados de alta calidad para todos los estilos.</p>
+                            <a class="btn btn-outline-light py-3 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Carousel End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 pb-5 pb-lg-0">
+                    <img class="img-fluid w-100" src="https://2356021.fs1.hubspotusercontent-na1.net/hubfs/2356021/mujer-morena-arreglandose-pelo.webp" alt="Salón de Belleza">
+                </div>
+                <div class="col-lg-6">
+                    <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2">Acerca de Nosotros</h6>
+                    <h1 class="mb-4">Tu Mejor Centro de Belleza y Estilo</h1>
+                    <p class="pl-4 border-left border-primary">
+                        Somos un salón de belleza dedicado a realzar tu estilo y confianza. Ofrecemos servicios especializados en cuidado capilar, maquillaje profesional, manicura, pedicura, tratamientos faciales y corporales, extensiones de pestañas, y depilación. Nuestra misión es brindar una experiencia única de relajación y cuidado personal en un ambiente acogedor.
+                    </p>
+                    <div class="row pt-3">
+                        <div class="col-6">
+                            <div class="bg-light text-center p-4">
+                                <h3 class="display-4 text-primary" data-toggle="counter-up">50</h3>
+                                <h6 class="text-uppercase">Especialistas en Belleza</h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="bg-light text-center p-4">
+                                <h3 class="display-4 text-primary" data-toggle="counter-up">1200</h3>
+                                <h6 class="text-uppercase">Clientes Felices</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+    <!-- About End -->
+    <div id="contenido"></div>
+   
+
+
+    <!-- Service End -->
+    <!-- Open Hours Start -->
+    <!-- Horarios de Atención -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="~/Content/img/opening.jpg" style="object-fit: cover;" alt="Thomas Beauty Horarios">
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-5 pb-lg-5">
+                    <div class="hours-text bg-light p-4 p-lg-5 my-lg-5">
+                        <h6 class="d-inline-block text-white text-uppercase bg-primary py-1 px-2">Horarios</h6>
+                        <h1 class="mb-4">¡Cuidamos tu Belleza!</h1>
+                        <p>En Thomas Beauty, nos especializamos en resaltar tu belleza natural. Nuestro equipo de expertos está listo para brindarte una experiencia relajante con servicios de calidad.</p>
+                        <ul class="list-inline">
+                            <li class="h6 py-1"><i class="far fa-circle text-primary mr-3"></i>Lunes a Viernes: 9:00 AM - 7:00 PM</li>
+                            <li class="h6 py-1"><i class="far fa-circle text-primary mr-3"></i>Sábado: 9:00 AM - 6:00 PM</li>
+                            <li class="h6 py-1"><i class="far fa-circle text-primary mr-3"></i>Domingo: Cerrado</li>
+                        </ul>
+                        <a href="" class="btn btn-primary mt-2">Reservar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Open Hours End -->
+    <!-- Pricing Start -->
+    <!-- Team Start -->
+    <!-- Team End -->
+    <!-- Testimonial Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 pb-5 pb-lg-0">
+                    <img class="img-fluid w-100" src="~/Content/img/testimonial.jpg" alt="Clientes felices en Thomas Beauty">
+                </div>
+                <div class="col-lg-6">
+                    <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2">Testimonios</h6>
+                    <h1 class="mb-4">¡Lo que dicen nuestros clientes!</h1>
+                    <div class="owl-carousel testimonial-carousel">
+                        <!-- Testimonio 1 -->
+                        <div class="position-relative">
+                            <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0;"></i>
+                            <div class="d-flex align-items-center mb-3">
+                                <img class="img-fluid rounded-circle" src="~/Content/img/testimonial-1.jpg" style="width: 60px; height: 60px;" alt="Cliente feliz 1">
+                                <div class="ml-3">
+                                    <h6 class="text-uppercase">María López</h6>
+                                    <span>Estudiante</span>
+                                </div>
+                            </div>
+                            <p class="m-0">"Me encantó el servicio de manicure y pedicure en Thomas Beauty. El personal es muy amable y profesional. ¡Definitivamente volveré pronto!"</p>
+                        </div>
+                        <!-- Testimonio 2 -->
+                        <div class="position-relative">
+                            <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0;"></i>
+                            <div class="d-flex align-items-center mb-3">
+                                <img class="img-fluid rounded-circle" src="~/Content/img/testimonial-2.jpg" style="width: 60px; height: 60px;" alt="Cliente feliz 2">
+                                <div class="ml-3">
+                                    <h6 class="text-uppercase">Carla Jiménez</h6>
+                                    <span>Diseñadora gráfica</span>
+                                </div>
+                            </div>
+                            <p class="m-0">"Los cortes de cabello en Thomas Beauty son increíbles. Salí muy feliz con mi nuevo look. ¡Recomiendo este salón a todos!"</p>
+                        </div>
+                        <!-- Testimonio 3 -->
+                        <div class="position-relative">
+                            <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0;"></i>
+                            <div class="d-flex align-items-center mb-3">
+                                <img class="img-fluid rounded-circle" src="~/Content/img/testimonial-3.jpg" style="width: 60px; height: 60px;" alt="Cliente feliz 3">
+                                <div class="ml-3">
+                                    <h6 class="text-uppercase">Sofía Martínez</h6>
+                                    <span>Profesora</span>
+                                </div>
+                            </div>
+                            <p class="m-0">"Probé el servicio de tinturado en Thomas Beauty y quedé fascinada. ¡El color quedó perfecto y mi cabello se ve radiante!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonial End -->
+
 </main>
