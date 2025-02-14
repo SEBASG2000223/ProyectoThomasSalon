@@ -35,6 +35,7 @@ namespace ThomasSalon.LN.Productos.ObtenerPorId
                 IdProveedor = elProductoEnDb.IdProveedor,
                 UnidadMedida = elProductoEnDb.UnidadMedida,
                 IdEstado = elProductoEnDb.IdEstado
+                
             };
         }
     }

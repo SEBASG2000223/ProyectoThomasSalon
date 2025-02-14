@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -128,6 +129,13 @@
                     <li>@Html.ActionLink("Proveedores", "ListarProveedores", "Proveedores", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Servicios", "ListarServicios", "Servicios", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Colaboradores", "ListarColaboradores", "Colaboradores", new { area = "" }, new { @class = "nav-link" })</li>
+
+
+                    <li>@Html.ActionLink("Inventario", "ListarInventarioGeneral", "InventarioGeneral", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @Html.Action("CargarSucursales", "Home")
+
+
                 </ul>
             </div>
             <div class="d-flex justify-content-end">
@@ -139,6 +147,8 @@
     <div>
         @RenderBody()
         <hr />
+
+
 
 
     </div>

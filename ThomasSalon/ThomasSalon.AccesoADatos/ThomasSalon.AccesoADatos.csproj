@@ -78,6 +78,9 @@
     <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresAD.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralAD.cs" />
+    <Compile Include="InventarioSucursal\Crear\CrearInventarioSucursalAD.cs" />
+    <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalAD.cs" />
     <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosAD.cs" />
     <Compile Include="Productos\Editar\EditarProductosAD.cs" />
     <Compile Include="Productos\Listar\ListarProductosAD.cs" />
@@ -114,7 +117,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="InventarioSucursal\Editar\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

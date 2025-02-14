@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.InventarioSucursal.InventarioSucursalDto>
+
+@{
+    ViewBag.Title = "ListarInventarioSucursal";
+}
+
+<h2>Inventario de la sucursal</h2>
+
+<p>
+    @Html.ActionLink("Agregar producto", "AgregarInventarioSucursal")
+</p>
+<div class="table-responsive">
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreProducto)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Cantidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreProveedor)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreProducto)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreProveedor)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Actualizar inventario", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Detalles del producto", "DetallesProducto", new { id = item.IdProducto }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+    @section scripts
+  {
+        <script src="~/Scripts/ScriptsFront/Productos/ListaDataTableProductos.js"></script>
+    }
+
