@@ -21,9 +21,7 @@ namespace ThomasSalon.LN.Colaboradores.ObtenerPorId
             ColaboradoresTabla elColaboradorEnDb = _obtenerPorIdAD.Obtener(IdColaborador);
             return new ColaboradoresDto
             {
-                IdColaborador = elColaboradorEnDb.IdColaborador,
-                Nombre = elColaboradorEnDb.Nombre,
-                Telefono = elColaboradorEnDb.Telefono,
+                IdColaborador = elColaboradorEnDb.IdColaborador,              
                 SalarioDia = elColaboradorEnDb.SalarioDia,
                 IdEstado = elColaboradorEnDb.IdEstado
             };

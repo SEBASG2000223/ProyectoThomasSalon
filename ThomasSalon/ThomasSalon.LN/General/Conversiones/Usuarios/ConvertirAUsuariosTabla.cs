@@ -18,16 +18,10 @@ namespace ThomasSalon.LN.General.Conversiones.Usuarios
             { 
             Id = elUsuario.Id,
             Email = elUsuario.Email,
-           
-            Nombre = elUsuario.Nombre,
-            Genero = elUsuario.Genero,
-            Direccion = elUsuario.Direccion,
-            Edad = elUsuario.Edad,
-            Identificacion = elUsuario.Identificacion,
             IdEstado = elUsuario.IdEstado,
             IdSucursal = elUsuario.IdSucursal,
-            PhoneNumber = elUsuario.PhoneNumber,
-
+            IdPersona = elUsuario.IdPersona
+           
             };
         }
     }

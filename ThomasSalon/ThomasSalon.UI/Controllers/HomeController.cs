@@ -19,11 +19,11 @@ namespace ThomasSalon.UI.Controllers
             _listarSucursales = new ListarSucursalesLN();
         }
 
-        public PartialViewResult CargarSucursales()
-        {
-            List<SucursalesDto> sucursales = _listarSucursales.ListarActivas();
-            return PartialView("_DropdownSucursales", sucursales);
-        }
+        //public PartialViewResult CargarSucursales()
+        //{
+        //    List<SucursalesDto> sucursales = _listarSucursales.ListarActivas();
+        //    return PartialView("_DropdownSucursales", sucursales);
+        //}
         public ActionResult Index()
         {
             return View();

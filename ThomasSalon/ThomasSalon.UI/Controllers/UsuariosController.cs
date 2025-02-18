@@ -24,9 +24,10 @@ using ThomasSalon.LN.Proveedores.Listar;
 using ThomasSalon.LN.Sucursales.Listar;
 using ThomasSalon.LN.Usuarios.CambiarEstado;
 using ThomasSalon.LN.Usuarios.Editar;
-using ThomasSalon.LN.Usuarios.Listar;
+
 using ThomasSalon.LN.Usuarios.ObtenerPorId;
 using ThomasSalon.UI.Models;
+using ThomasSalon.LN.Usuarios.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
@@ -64,7 +65,7 @@ namespace ThomasSalon.UI.Controllers
         public ActionResult ListarGerentesParcial()
         {
             List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarGerentes();
-            return PartialView("_ListarGerentes", laListaDeUsuarios);
+            return PartialView();
         }
         // GET: Usuarios
         public ActionResult ListarSoloUsuarios()
@@ -76,7 +77,7 @@ namespace ThomasSalon.UI.Controllers
         public ActionResult ListarSoloUsuariosParcial()
         {
             List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarUsuarios();
-            return PartialView("_ListarSoloUsuarios", laListaDeUsuarios);
+            return PartialView();
         }
         // GET: Usuarios
         public ActionResult ListarAdministradores()
@@ -88,7 +89,7 @@ namespace ThomasSalon.UI.Controllers
         public ActionResult ListarAdministradoresParcial()
         {
             List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarAdministradores();
-            return PartialView("_ListarAdministradores", laListaDeUsuarios);
+            return PartialView();
         }
 
         // GET: Usuarios/Details/5

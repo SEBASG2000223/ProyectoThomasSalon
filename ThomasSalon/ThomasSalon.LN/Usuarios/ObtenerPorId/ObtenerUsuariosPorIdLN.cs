@@ -33,14 +33,10 @@ namespace ThomasSalon.LN.Usuarios.ObtenerPorId
                 Id = elUsuarioEnDb.Id,
                 Email = elUsuarioEnDb.Email,
              
-                Nombre = elUsuarioEnDb.Nombre,
-                Genero = elUsuarioEnDb.Genero,
-                Direccion = elUsuarioEnDb.Direccion,
-                Edad = elUsuarioEnDb.Edad,
-                Identificacion = elUsuarioEnDb.Identificacion,
-                IdEstado = elUsuarioEnDb.IdEstado,
-                IdSucursal = elUsuarioEnDb.IdSucursal,
-                PhoneNumber = elUsuarioEnDb.PhoneNumber
+         
+              
+               
+             
 
             };
         }
