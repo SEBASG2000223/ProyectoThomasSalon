@@ -14,9 +14,9 @@ namespace ThomasSalon.LN.InventarioSucursal.Listar
         {
             _listarInventarioSucursalAD = new ListarInventarioSucursalAD();
         }
-        public List<InventarioSucursalDto> Listar()
+        public List<InventarioSucursalDto> Listar(int idSucursal)
         {
-            List<InventarioSucursalDto> laListaDeInventario = _listarInventarioSucursalAD.Listar();
+            List<InventarioSucursalDto> laListaDeInventario = _listarInventarioSucursalAD.Listar(idSucursal);
             return laListaDeInventario;
         }
     }

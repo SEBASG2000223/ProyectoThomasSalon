@@ -15,7 +15,7 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.Listar
         {
             _elContexto = new Contexto();
         }
-        public List<InventarioSucursalDto> Listar()
+        public List<InventarioSucursalDto> Listar(int idSucursal)
         {
             List<InventarioSucursalDto> laListaInventario = (from Inventario in _elContexto.InventarioSucursalTabla
                                                              join sucursal in _elContexto.SucursalesTabla
@@ -26,6 +26,7 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.Listar
                                                              on elProducto.IdProveedor equals elProveedor.IdProveedor
                                                              join elEstado in _elContexto.EstadoDisponibilidadTabla
                                                              on elProducto.IdEstado equals elEstado.IdEstado
+                                                             where Inventario.IdSucursal == idSucursal
                                                              select new InventarioSucursalDto
                                                              {
                                                                  IdInventarioSucursal = Inventario.IdInventarioSucursal,
@@ -34,10 +35,11 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.Listar
                                                                  Precio = elProducto.Precio,
                                                                  NombreProveedor = elProveedor.Nombre,
                                                                  Cantidad = Inventario.Cantidad,
-                                                                
+                                                                 IdEstado = Inventario.IdEstado,
                                                              }).ToList();
             return laListaInventario;
         }
+
 
 
 

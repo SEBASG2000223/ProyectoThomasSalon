@@ -1,7 +1,7 @@
 ﻿@model ThomasSalon.Abstracciones.Modelos.Productos.ProductosDto
 
 @{
-    ViewBag.Title = "DetallesProducto";
+    ViewBag.Title = "Detalles de producto";
 }
 
 <h2>Detalles del producto</h2>
@@ -42,17 +42,20 @@
         </dd>
 
         @{
-
             var proveedores = ViewBag.Proveedores as Dictionary<int, string>;
+            string nombreProveedor = "Proveedor desconocido";
 
-            string nombreProveedor = (proveedores != null && proveedores.ContainsKey(Model.IdProducto))
-                ? proveedores[Model.IdProducto]
-                : "Proveedor desconocido";
+            if (proveedores != null && Model != null)
+            {  
+               if (proveedores.ContainsKey(Model.IdProveedor))
+                {
+                    nombreProveedor = proveedores[Model.IdProveedor];
+                }
+            }
         }
 
         <dt>Proveedor</dt>
         <dd>@nombreProveedor</dd>
-
 
         <dt>
             @Html.DisplayNameFor(model => model.UnidadMedida)
@@ -79,7 +82,7 @@
                 }
 
             }
-            @Html.DisplayFor(model => estado)
+            @estado
         </dd>
 
 
@@ -89,5 +92,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Volver al inventario general", "ListarInventarioGeneral")
+
+    <a href="@Url.Action("ListarInventarioGeneral", "InventarioGeneral")" class="btn btn-primary btn-sm">
+        Volver al inventario general
+    </a>
 </p>

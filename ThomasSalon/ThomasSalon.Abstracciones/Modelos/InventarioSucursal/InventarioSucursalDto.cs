@@ -19,7 +19,12 @@ namespace ThomasSalon.Abstracciones.Modelos.InventarioSucursal
         public int IdProducto { get; set; }
 
         [Display(Name = "Cantidad", Description = "Cantidad del producto")]
+        [Required]
         public int Cantidad { get; set; }
+
+        [Display(Name = "Estado", Description = "Estado")]
+        [Required]
+        public int IdEstado { get; set; }
 
         [Display(Name = "Precio", Description = "Precio del producto")]
         public decimal Precio { get; set; }

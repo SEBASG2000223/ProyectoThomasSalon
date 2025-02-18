@@ -10,5 +10,7 @@ namespace ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Sucursales.Listar
     public interface IListarSucursalesAD
     {
         List<SucursalesDto> Listar();
+
+        List<SucursalesDto> ListarSucursalesActivas();
     }
 }

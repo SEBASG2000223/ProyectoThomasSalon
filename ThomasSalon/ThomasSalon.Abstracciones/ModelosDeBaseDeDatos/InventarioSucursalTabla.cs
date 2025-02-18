@@ -12,5 +12,6 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
         public int IdSucursal { get; set; }
         public int IdProducto { get; set; }
         public int Cantidad { get; set; }
+        public int IdEstado { get; set; }
     }
 }

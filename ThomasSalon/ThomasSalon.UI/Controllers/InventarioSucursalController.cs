@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal.Crear;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.Listar;
+using ThomasSalon.Abstracciones.Modelos.InventarioGeneral;
 using ThomasSalon.Abstracciones.Modelos.InventarioSucursal;
 using ThomasSalon.Abstracciones.Modelos.Productos;
+using ThomasSalon.Abstracciones.Modelos.Sucursales;
 using ThomasSalon.AccesoADatos;
 using ThomasSalon.LN.InventarioSucursal.Crear;
 using ThomasSalon.LN.InventarioSucursal.Listar;
@@ -22,36 +27,53 @@ namespace ThomasSalon.UI.Controllers
     public class InventarioSucursalController : Controller
     {
         IListarInventarioSucursalLN _listarInventarioSucursal;
-        Contexto _elContexto;
         ICrearInventarioSucursalLN _crearInventarioSucursal;
-        IListarProductosLN _listarProductos;
-        IListarSucursalesLN _listarSucursales;
         IObtenerProductosPorIdLN _obtenerProductosPorId;
+        IListarProductosLN _productosListar;
+        IListarSucursalesLN _sucursalesListar;
+        IListarProductosLN _listarProductos;
+        Contexto _elContexto;
 
         public InventarioSucursalController()
         {
             _listarInventarioSucursal = new ListarInventarioSucursalLN();
             _crearInventarioSucursal = new CrearInventarioSucursalLN();
-            _listarProductos = new ListarProductosLN();
-            _listarSucursales = new ListarSucursalesLN();
             _obtenerProductosPorId = new ObtenerProductosPorIdLN();
+            _productosListar = new ListarProductosLN();
+            _sucursalesListar = new ListarSucursalesLN();
+            _listarProductos = new ListarProductosLN();
             _elContexto = new Contexto();
         }
 
         // GET: InventarioSucursal
-        public ActionResult ListarInventarioSucursal()
+        public ActionResult ListarInventarioSucursal(int idSucursal)
         {
-            List<InventarioSucursalDto> laListaDeInventario = _listarInventarioSucursal.Listar();
-            return View(laListaDeInventario);
+            TempData["IdSucursalSeleccionada"] = idSucursal; // Guardamos el idSucursal en TempData
+            List<InventarioSucursalDto> inventarios = _listarInventarioSucursal.Listar(idSucursal);
+            if (inventarios == null || !inventarios.Any())
+            {
+                ViewBag.Mensaje = "No hay productos en el inventario.";
+            }
+
+            return View(inventarios);
         }
+
+
+
 
         // GET: Productos/Details/5
         public ActionResult DetallesProducto(int id)
         {
-            ProductosDto producto = _obtenerProductosPorId.Obtener(id);
-            var proveedoresSucursales = _listarInventarioSucursal.Listar()
-                .ToDictionary(p => p.IdProducto, p => p.NombreProveedor);
-            ViewBag.ProveedoresSucursales = proveedoresSucursales;
+            var producto = _listarProductos.Listar().FirstOrDefault(p => p.IdProducto == id);
+            if (producto == null)
+            {
+                return HttpNotFound("El producto no existe");
+            }
+            var idSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
+            var proveedores = _listarProductos.ObtenerProveedoresPorProducto();
+
+            ViewBag.Proveedores = proveedores;
+
             return View(producto);
         }
 
@@ -62,13 +84,21 @@ namespace ThomasSalon.UI.Controllers
         // GET: InventarioSucursal/AgregarInventarioSucursal
         public ActionResult AgregarInventarioSucursal()
         {
-            
+            // Recuperar el idSucursal desde TempData y convertirlo con Convert.ToInt32
+            var idSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
 
-            // Obtener los productos disponibles para agregar
-            ViewBag.ProductosDisponibles = ObtenerProductosDisponibles();
+            var productos = _productosListar.ListarProductosActivos();
+            ViewBag.Productos = new SelectList(productos, "IdProducto", "Nombre");
 
-            return View();
+            // Asignar el idSucursal al modelo si es necesario
+            var modelo = new InventarioSucursalDto
+            {
+                IdSucursal = idSucursal
+            };
+
+            return View(modelo);
         }
+
 
         // POST: InventarioSucursal/AgregarInventarioSucursal
         [HttpPost]
@@ -78,39 +108,29 @@ namespace ThomasSalon.UI.Controllers
             {
                 int cantidadDeDatosGuardados = await _crearInventarioSucursal.Agregar(modelo);
 
-                // Si la inserción es exitosa, redirige a la lista de inventario.
-                return RedirectToAction("ListarInventarioSucursal");
+                return RedirectToAction("ListarInventarioSucursal", new { idSucursal = modelo.IdSucursal });
             }
-            catch (System.Data.SqlClient.SqlException ex)
+            catch (InvalidOperationException ex)
             {
-                // Verifica si el error es el del producto ya existente
-                if (ex.Number == 10001)
-                {
-                    ModelState.AddModelError("", "El producto ya existe en la sucursal y no puede ser agregado nuevamente.");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Ocurrió un error inesperado al agregar el producto al inventario.");
-                }
+                var productos = _productosListar.ListarProductosActivos();
+                ViewBag.Productos = new SelectList(productos, "IdProducto", "Nombre");
 
-                // ⚠️ Mantén al usuario en la misma vista y muestra el error
+                ViewBag.Mensaje = ex.Message;
+
+                return View(modelo);
+            }
+            catch (Exception ex)
+            {
+                var productos = _productosListar.ListarProductosActivos();
+                ViewBag.Productos = new SelectList(productos, "IdProducto", "Nombre");
+
+                ViewBag.Mensaje = "Ocurrió un error inesperado.";
                 return View(modelo);
             }
         }
 
 
-        private IEnumerable<SelectListItem> ObtenerProductosDisponibles()
-        {
-            var productosActivos = _listarProductos.Listar()
-                .Where(p => p.IdEstado == 1) 
-                .Select(p => new SelectListItem
-                {
-                    Value = p.IdProducto.ToString(),
-                    Text = p.Nombre
-                });
 
-            return productosActivos;
-        }
 
 
 

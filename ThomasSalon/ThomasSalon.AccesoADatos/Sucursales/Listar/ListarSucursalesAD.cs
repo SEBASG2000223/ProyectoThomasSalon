@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Sucursales.Listar;
+using ThomasSalon.Abstracciones.Modelos.Productos;
 using ThomasSalon.Abstracciones.Modelos.Sucursales;
 
 namespace ThomasSalon.AccesoADatos.Sucursales.Listar
@@ -33,6 +34,20 @@ namespace ThomasSalon.AccesoADatos.Sucursales.Listar
 
                                                        }).ToList();
             return laListaDeSucursales;
+        }
+
+        public List<SucursalesDto> ListarSucursalesActivas()
+        {
+            List<SucursalesDto> laListaDeSucursalesActivos = (from laSucursal in _elContexto.SucursalesTabla
+                                                            join elEstado in _elContexto.EstadoDisponibilidadTabla
+                                                               on laSucursal.IdEstado equals elEstado.IdEstado
+                                                            where laSucursal.IdEstado == 1
+                                                            select new SucursalesDto
+                                                            {
+                                                                IdSucursal = laSucursal.IdSucursal,
+                                                                Nombre = laSucursal.Nombre,
+                                                            }).ToList();
+            return laListaDeSucursalesActivos;
         }
     }
 }
