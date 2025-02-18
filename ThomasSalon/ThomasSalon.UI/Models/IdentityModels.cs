@@ -1,21 +1,26 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ThomasSalon.Abstracciones.Modelos.Personas;
 
 namespace ThomasSalon.UI.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public string Nombre { get; internal set; }
-        public string Genero { get; internal set; }
-        public string Direccion { get; internal set; }
-        public int Edad { get; internal set; }
-        public string Identificacion { get; internal set; }
-        public int IdEstado { get; internal set; }
-        public int? IdSucursal { get; internal set; }
+
+        [ForeignKey("Persona")]
+        public int IdPersona { get; set; }
+
+
+        public virtual PersonasDto Persona { get; set; }
+        public int IdEstado { get; set; }
+        public int? IdSucursal { get; set; }
+    
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

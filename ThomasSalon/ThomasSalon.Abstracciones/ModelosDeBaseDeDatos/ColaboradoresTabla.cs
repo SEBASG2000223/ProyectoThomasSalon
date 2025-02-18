@@ -12,12 +12,10 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
         [Key]
         public int IdColaborador { get; set; }
 
-        public string Nombre { get; set; }
-
-        public string Telefono { get; set; }
-
         public decimal SalarioDia { get; set; }
 
         public int IdEstado { get; set; }
+
+        public int IdPersona { get; set; }
     }
 }

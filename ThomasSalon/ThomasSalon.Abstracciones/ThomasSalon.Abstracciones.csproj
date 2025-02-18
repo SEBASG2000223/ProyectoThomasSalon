@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -50,6 +59,10 @@
     <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\IInventarioGeneralAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Crear\ICrearInventarioSucursalAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Listar\IListarInventarioSucursalAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Personas\Editar\IEditarPersonasAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Personas\Listar\IListarPersonasAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Personas\ObtenerPorId\IObtenerPersonasPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Personas\Registrar\IRegistrarPersonasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Editar\IEditarProductosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Productos\Listar\IListarProductosAD.cs" />
@@ -74,6 +87,7 @@
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Editar\IEditarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Listar\IListarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosAD.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\Editar\IEditarColaboradoresLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\Listar\IListarColaboradoresLN.cs" />
@@ -81,6 +95,7 @@
     <Compile Include="LN\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresLN.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Colaboradores\IConvertirAColaboradoresTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\InventarioSucursal\IConvertirAInventarioSucursalTabla.cs" />
+    <Compile Include="LN\Interfaces\General\Conversiones\Personas\IConvertirAPersonasTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Productos\IConvertirAProductosTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Proveedores\IConvertirAProveedoresTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Servicios\IConvertirAServiciosTabla.cs" />
@@ -89,6 +104,10 @@
     <Compile Include="LN\Interfaces\InventarioGeneral\IInventarioGeneralLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\Crear\ICrearInventarioSucursalLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\Listar\IListarInventarioSucursalLN.cs" />
+    <Compile Include="LN\Interfaces\Personas\Editar\IEditarPersonasLN.cs" />
+    <Compile Include="LN\Interfaces\Personas\Listar\IListarPersonasLN.cs" />
+    <Compile Include="LN\Interfaces\Personas\ObtenerPorId\IObtenerPersonasPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Personas\Registrar\IRegistrarPersonasLN.cs" />
     <Compile Include="LN\Interfaces\Productos\CambiarEstado\ICambiarEstadoProductosLN.cs" />
     <Compile Include="LN\Interfaces\Productos\Editar\IEditarProductosLN.cs" />
     <Compile Include="LN\Interfaces\Productos\Listar\IListarProductosLN.cs" />
@@ -113,9 +132,11 @@
     <Compile Include="LN\Interfaces\Usuarios\Editar\IEditarUsuariosLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\Listar\IListarUsuariosLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdLN.cs" />
+    <Compile Include="LN\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoDisponibilidadTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\InventarioGeneralTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\InventarioSucursalTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\PersonasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProductosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ColaboradoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProveedoresTabla.cs" />
@@ -128,6 +149,7 @@
     <Compile Include="Modelos\Colaboradores\ColaboradoresDto.cs" />
     <Compile Include="Modelos\InventarioGeneral\InventarioGeneralDto.cs" />
     <Compile Include="Modelos\InventarioSucursal\InventarioSucursalDto.cs" />
+    <Compile Include="Modelos\Personas\PersonasDto.cs" />
     <Compile Include="Modelos\Productos\ProductosDto.cs" />
     <Compile Include="Modelos\Proveedores\ProveedoresDto.cs" />
     <Compile Include="Modelos\Servicios\ServiciosDto.cs" />
@@ -143,5 +165,17 @@
     <Folder Include="LN\Interfaces\InventarioSucursal\Editar\" />
     <Folder Include="Modelos\Roles\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
 </Project>

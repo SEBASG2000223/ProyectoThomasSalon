@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Usuarios.CambiarEstado;
+using System.Data.Entity;
 
 namespace ThomasSalon.AccesoADatos.Usuarios.CambiarEstado
 {

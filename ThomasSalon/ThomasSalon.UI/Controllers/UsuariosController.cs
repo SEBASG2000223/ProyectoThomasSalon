@@ -1,3 +1,104 @@
+
+﻿using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Usuarios.Listar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Proveedores.Listar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.Listar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Usuarios.CambiarEstado;
+using ThomasSalon.Abstracciones.LN.Interfaces.Usuarios.Editar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Usuarios.Listar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Usuarios.ObtenerPorId;
+using ThomasSalon.Abstracciones.Modelos.Productos;
+using ThomasSalon.Abstracciones.Modelos.Usuarios;
+using ThomasSalon.LN.Productos.CambiarEstado;
+using ThomasSalon.LN.Productos.Editar;
+using ThomasSalon.LN.Productos.Listar;
+using ThomasSalon.LN.Productos.ObtenerPorId;
+using ThomasSalon.LN.Productos.Registrar;
+using ThomasSalon.LN.Proveedores.Listar;
+using ThomasSalon.LN.Sucursales.Listar;
+using ThomasSalon.LN.Usuarios.CambiarEstado;
+using ThomasSalon.LN.Usuarios.Editar;
+
+using ThomasSalon.LN.Usuarios.ObtenerPorId;
+using ThomasSalon.UI.Models;
+using ThomasSalon.LN.Usuarios.Listar;
+
+namespace ThomasSalon.UI.Controllers
+{
+    public class UsuariosController : Controller
+    {
+
+        IListarUsuariosLN _listarUsuarios;
+        IEditarUsuariosLN _editarUsuarios;
+        ICambiarEstadoUsuariosLN _cambiarEstadoUsuariosLN;
+        IObtenerUsuariosPorIdLN _obtenerUsuariosPorId;
+        IListarSucursalesLN _listarSucursales;
+       
+        public UsuariosController()
+        {
+            _listarUsuarios = new ListarUsuariosLN();
+            _editarUsuarios = new EditarUsuariosLN();
+            _cambiarEstadoUsuariosLN = new CambiarEstadoUsuariosLN();
+            _obtenerUsuariosPorId = new ObtenerUsuariosPorIdLN();
+            _listarSucursales = new ListarSucursalesLN();
+        }
+
+        // GET: Usuarios
+        public ActionResult ListarUsuarios()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.Listar();
+            return View(laListaDeUsuarios);
+        }
+        // GET: Usuarios
+        public ActionResult ListarGerentes()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarGerentes();
+            return View(laListaDeUsuarios);
+        }
+        // parcial
+        public ActionResult ListarGerentesParcial()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarGerentes();
+            return PartialView();
+        }
+        // GET: Usuarios
+        public ActionResult ListarSoloUsuarios()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarUsuarios();
+            return View(laListaDeUsuarios);
+        }
+        // GET: Usuarios
+        public ActionResult ListarSoloUsuariosParcial()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarUsuarios();
+            return PartialView();
+        }
+        // GET: Usuarios
+        public ActionResult ListarAdministradores()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarAdministradores();
+            return View(laListaDeUsuarios);
+        }
+        // GET: Usuarios
+        public ActionResult ListarAdministradoresParcial()
+        {
+            List<UsuariosDto> laListaDeUsuarios = _listarUsuarios.ListarAdministradores();
+            return PartialView();
+        }
+
+        // GET: Usuarios/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
 ﻿//using Microsoft.AspNet.Identity.Owin;
 //using Microsoft.AspNet.Identity;
 //using System;
@@ -96,6 +197,7 @@
 //        {
 //            return View();
 //        }
+
      
 //        // GET: Usuarios/Create
 //        public ActionResult Create()

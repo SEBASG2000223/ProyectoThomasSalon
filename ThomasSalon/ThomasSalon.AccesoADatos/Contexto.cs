@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using ThomasSalon.Abstracciones.Modelos.Personas;
 using ThomasSalon.Abstracciones.ModelosDeBaseDeDatos;
 
 namespace ThomasSalon.AccesoADatos
@@ -25,12 +26,16 @@ namespace ThomasSalon.AccesoADatos
 
             modelBuilder.Entity<ServiciosTabla>().ToTable("SERVICIOS");
             modelBuilder.Entity<ColaboradoresTabla>().ToTable("COLABORADORES");
+            modelBuilder.Entity<PersonasTabla>().ToTable("Personas");
+
 
             modelBuilder.Entity<InventarioGeneralTabla>().ToTable("INVENTARIO_GENERAL");
             modelBuilder.Entity<InventarioSucursalTabla>().ToTable("INVENTARIO_SUCURSAL");
             
 
         }
+        public DbSet<PersonasTabla> PersonasTabla { get; set; }
+
         public DbSet<SucursalesTabla> SucursalesTabla { get; set; }
         public DbSet<ProductosTabla> ProductosTabla { get; set; }
         public DbSet<ProveedoresTabla> ProveedoresTabla { get; set; }

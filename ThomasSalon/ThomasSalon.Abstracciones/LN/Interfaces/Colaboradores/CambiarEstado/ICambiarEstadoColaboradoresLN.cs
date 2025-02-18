@@ -9,5 +9,6 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.CambiarEstado
     public interface ICambiarEstadoColaboradoresLN
     {
         Task<int> CambiarEstado(int IdColaborador, int nuevoEstado);
+      
     }
 }
