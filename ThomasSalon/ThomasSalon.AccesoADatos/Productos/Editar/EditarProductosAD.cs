@@ -27,6 +27,7 @@ namespace ThomasSalon.AccesoADatos.Productos.Editar
             elProductoEnBD.IdProveedor = elProductoParaEditar.IdProveedor;
             elProductoEnBD.UnidadMedida = elProductoParaEditar.UnidadMedida;
             elProductoEnBD.IdEstado = elProductoParaEditar.IdEstado;
+            elProductoEnBD.LinkImagen = elProductoParaEditar.LinkImagen;
             EntityState estado = _elContexto.Entry(elProductoEnBD).State = System.Data.Entity.EntityState.Modified;
             int cantidadDeDatosGuardados = await _elContexto.SaveChangesAsync();
             return cantidadDeDatosGuardados;

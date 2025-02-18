@@ -48,11 +48,15 @@
     <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresLN.cs" />
     <Compile Include="General\Conversiones\Colaboradores\ConvertirAColaboradoresTabla.cs" />
     <Compile Include="General\Conversiones\Fecha.cs" />
+    <Compile Include="General\Conversiones\InventarioSucursal\ConvertirAInventarioSucursalTabla.cs" />
     <Compile Include="General\Conversiones\Productos\ConvertirAProductosTabla.cs" />
     <Compile Include="General\Conversiones\Proveedores\ConvertirAProveedoresTabla.cs" />
     <Compile Include="General\Conversiones\Servicios\ConvertirAServiciosTabla.cs" />
     <Compile Include="General\Conversiones\Sucursales\ConvertirASucursalesTabla.cs" />
     <Compile Include="General\Conversiones\Usuarios\ConvertirAUsuariosTabla.cs" />
+    <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralLN.cs" />
+    <Compile Include="InventarioSucursal\Crear\CrearInventarioSucursalLN.cs" />
+    <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalLN.cs" />
     <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosLN.cs" />
     <Compile Include="Productos\Editar\EditarProductosLN.cs" />
     <Compile Include="Productos\Listar\ListarProductosLN.cs" />
@@ -89,6 +93,8 @@
       <Name>ThomasSalon.AccesoADatos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="InventarioSucursal\Editar\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

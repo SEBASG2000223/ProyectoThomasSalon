@@ -25,6 +25,7 @@ namespace ThomasSalon.UI.Controllers
         IEditarSucursalesLN _editarSucursales;
         ICambiarEstadoSucursalesLN _cambiarEstado;
         IObtenerSucursalesPorIdLN _obtenerSucursalesPorId;  
+
         public SucursalesController()
         {
             _listarSucursales = new ListarSucursalesLN();

@@ -1,0 +1,102 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.Productos.ProductosDto
+
+@{
+    ViewBag.Title = "Detalles de producto";
+}
+
+<h2>Detalles del producto</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        @{
+            var proveedores = ViewBag.Proveedores as Dictionary<int, string>;
+            string nombreProveedor = "Proveedor desconocido";
+
+            if (proveedores != null && Model != null)
+            {
+                if (proveedores.ContainsKey(Model.IdProveedor))
+                {
+                    nombreProveedor = proveedores[Model.IdProveedor];
+                }
+            }
+        }
+
+        <dt>Proveedor</dt>
+        <dd>@nombreProveedor</dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnidadMedida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnidadMedida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEstado)
+        </dt>
+
+        <dd>
+            @{
+                string estado = "";
+                if (Model.IdEstado == 1)
+                {
+                    estado = "Activo";
+                }
+                else
+                {
+                    estado = "Inactivo";
+                }
+
+            }
+            @estado
+        </dd>
+
+
+
+
+
+    </dl>
+</div>
+<p>
+
+
+    <a href="@Url.Action("ListarInventarioGeneral", "InventarioGeneral", new { idSucursal = TempData["IdSucursalSeleccionada"] })" class="btn btn-primary btn-sm"">
+        Volver al inventario de la sucursal
+    </a>
+
+</p>
+</p>

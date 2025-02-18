@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Productos.Listar;
 using ThomasSalon.Abstracciones.Modelos.Productos;
+using ThomasSalon.Abstracciones.Modelos.Proveedores;
 
 namespace ThomasSalon.AccesoADatos.Productos.Listar
 {
@@ -32,6 +33,7 @@ namespace ThomasSalon.AccesoADatos.Productos.Listar
                                                          Precio = elProducto.Precio,
                                                          IdProveedor = elProducto.IdProveedor,
                                                          NombreProveedor = elProveedor.Nombre,
+                                                         LinkImagen = elProducto.LinkImagen,
                                                          UnidadMedida = elProducto.UnidadMedida,
                                                          IdEstado = elProducto.IdEstado,
                                                          NombreEstado = elEstado.Nombre 
@@ -40,5 +42,43 @@ namespace ThomasSalon.AccesoADatos.Productos.Listar
 
 
         }
+
+        public List<ProductosDto> ListarProductosActivos()
+        {
+            List<ProductosDto> laListaDeProductosActivos = (from elProducto in _elContexto.ProductosTabla
+                                                         join elEstado in _elContexto.EstadoDisponibilidadTabla
+                                                            on elProducto.IdEstado equals elEstado.IdEstado
+                                                         where elProducto.IdEstado == 1
+                                                         select new ProductosDto
+                                                         {
+                                                             IdProducto = elProducto.IdProducto,
+                                                             Nombre = elProducto.Nombre,
+                                                         }).ToList();
+            return laListaDeProductosActivos;
+        }
+
+        public Dictionary<int, string> ObtenerProveedoresPorProducto()
+        {
+            var proveedores = (from producto in _elContexto.ProductosTabla
+                               join proveedor in _elContexto.ProveedoresTabla
+                               on producto.IdProveedor equals proveedor.IdProveedor
+                               select new
+                               {
+                                   proveedor.IdProveedor,
+                                   proveedor.Nombre
+                               }).ToList() 
+                                 .GroupBy(p => p.IdProveedor) 
+                                 .Select(g => g.FirstOrDefault()) 
+                                 .ToList(); 
+
+            return proveedores.ToDictionary(p => p.IdProveedor, p => p.Nombre);
+        }
+
+
+
+
+
+
+
     }
 }
