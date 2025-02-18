@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.InventarioSucursal.Crear;
 using ThomasSalon.Abstracciones.ModelosDeBaseDeDatos;
 
@@ -30,14 +30,16 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.Crear
                     idSucursalParam, idProductoParam, cantidadParam
                 );
 
-                return resultado; 
+                return resultado;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                
+                    throw new InvalidOperationException("El producto ya existe en la sucursal y no puede ser agregado nuevamente.");
                
-                return 0;
             }
         }
+
+
     }
 }

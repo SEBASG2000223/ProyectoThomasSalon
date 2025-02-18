@@ -21,7 +21,7 @@ namespace ThomasSalon.UI.Controllers
 
         public PartialViewResult CargarSucursales()
         {
-            List<SucursalesDto> sucursales = _listarSucursales.ListarActivas();
+            List<SucursalesDto> sucursales = _listarSucursales.ListarSucursalesActivas();
             return PartialView("_DropdownSucursales", sucursales);
         }
         public ActionResult Index()

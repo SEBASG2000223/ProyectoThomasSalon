@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Servicios.ServiciosDto>
+
+@{
+    ViewBag.Title = "ListarServicios";
+}
+<div class="container pt-5">
+    <h2 class="text-center">Lista de Servicios</h2>
+
+    <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+        Registrar Servicio
+    </a>
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.IdServicio)</th>
+                    <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                    <th>@Html.DisplayNameFor(model => model.Precio)</th>
+                    <th>@Html.DisplayNameFor(model => model.Duracion)</th>
+                    <th>@Html.DisplayNameFor(model => model.NombreEstado)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.IdServicio)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Duracion)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NombreEstado)</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Servicios", new { id = item.IdServicio })" class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
+                            @if (item.IdEstado == 1)
+                            {
+                                <a href="@Url.Action("Inactivar", "Servicios", new { id = item.IdServicio })" class="btn btn-danger btn-sm">
+                                    Inactivar
+                                </a>
+                            }
+                            @if (item.IdEstado == 2)
+                            {
+                                <a href="@Url.Action("Activar", "Servicios", new { id = item.IdServicio })" class="btn btn-success btn-sm">
+                                    Activar
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts {
+    <script src="~/Scripts/ScriptsFront/Servicios/ListaDataTableServicios.js"></script>
+}

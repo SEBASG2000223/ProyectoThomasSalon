@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.InventarioGeneral;
 using ThomasSalon.Abstracciones.Modelos.InventarioGeneral;
 
@@ -28,12 +29,16 @@ namespace ThomasSalon.AccesoADatos.InventarioGeneral.Listar
                      IdInventarioGeneral = elInventario.IdInventarioGeneral,
                      IdProducto = elInventario.IdProducto,
                      NombreProducto = elProducto.Nombre,
+                     Precio = elProducto.Precio,
+                     CantidadTotal = elInventario.CantidadTotal,
                      NombreProveedor = elProveedor.Nombre, 
-                     CantidadTotal = elInventario.CantidadTotal
+                     IdEstado = elInventario.IdEstado,
                  }).ToList();
 
             return laListaDeProductos;
         }
+
+      
 
     }
 }

@@ -9,6 +9,6 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal
 {
     public interface IListarInventarioSucursalLN
     {
-        List<InventarioSucursalDto> Listar();
+        List<InventarioSucursalDto> Listar(int idSucursal);
     }
 }
