@@ -3,53 +3,53 @@
 @{
     ViewBag.Title = "Agregar Producto";
 }
-
-<h2>Agregar productos al inventario</h2>
-
-
-@if (ViewBag.Mensaje != null)
-{
-    <div class="alert alert-warning">
-        @ViewBag.Mensaje
-    </div>
-}
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <hr />
+<div class="container">
+    <h2>Agregar productos al inventario</h2>
 
 
-    @Html.HiddenFor(m => m.IdSucursal)
-
-    @Html.LabelFor(model => model.IdProducto, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.DropDownListFor(model => model.IdProducto, (IEnumerable<SelectListItem>)ViewBag.Productos, "Seleccione un producto", new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.IdProducto, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-warning">
+            @ViewBag.Mensaje
         </div>
-    </div>
+    }
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Crear" class="btn btn-default" />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+
+
+            @Html.HiddenFor(m => m.IdSucursal)
+
+            @Html.LabelFor(model => model.IdProducto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdProducto, (IEnumerable<SelectListItem>)ViewBag.Productos, "Seleccione un producto", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdProducto, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Crear" class="btn btn-default" />
+                </div>
+            </div>
         </div>
+    }
+
+    <div>
+        @Html.ActionLink("Volver al inventario", "ListarInventarioSucursal")
     </div>
 </div>
-}
-
-<div>
-    @Html.ActionLink("Volver al inventario", "ListarInventarioSucursal")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
