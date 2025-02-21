@@ -5,6 +5,6 @@ namespace ThomasSalon.Abstracciones.AccesoADatos.Interfaces.InventarioSucursal.O
 {
     public interface IObtenerInventarioSucursalPorIdAD
     {
-        InventarioSucursalTabla Obtener(int idProducto);
+        InventarioSucursalTabla Obtener(int idProducto, int idSucursal);
     }
 }

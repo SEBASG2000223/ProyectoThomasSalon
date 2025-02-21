@@ -40,6 +40,26 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.Listar
             return laListaInventario;
         }
 
+        public List<ProductosDto> ListarProductosActivos(int idSucursal)
+        {
+            List<ProductosDto> laListaDeProductosActivos = (
+                from elProducto in _elContexto.ProductosTabla
+                join elEstado in _elContexto.EstadoDisponibilidadTabla
+                    on elProducto.IdEstado equals elEstado.IdEstado
+                where elProducto.IdEstado == 1
+                && !_elContexto.InventarioSucursalTabla
+                    .Any(inv => inv.IdProducto == elProducto.IdProducto && inv.IdSucursal == idSucursal)
+                select new ProductosDto
+                {
+                    IdProducto = elProducto.IdProducto,
+                    Nombre = elProducto.Nombre
+                }
+            ).ToList();
+
+            return laListaDeProductosActivos;
+        }
+
+
 
 
 
