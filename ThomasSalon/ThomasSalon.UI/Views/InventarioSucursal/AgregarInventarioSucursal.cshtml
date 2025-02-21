@@ -40,15 +40,15 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Crear" class="btn btn-default" />
+                    <input type="submit" value="Crear" class="btn btn-dark btn-md" />
                 </div>
             </div>
         </div>
     }
 
-    <div>
-        @Html.ActionLink("Volver al inventario", "ListarInventarioSucursal")
-    </div>
+<a href="@Url.Action("ListarInventarioSucursal", "InventarioSucursal", new { idSucursal = TempData["IdSucursalSeleccionada"] })" class="btn btn-primary btn-sm" ">
+    Volver al inventario de la sucursal
+</a>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
