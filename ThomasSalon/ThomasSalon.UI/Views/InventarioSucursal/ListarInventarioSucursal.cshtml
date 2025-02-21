@@ -3,104 +3,107 @@
 @{
     ViewBag.Title = "ListarInventarioSucursal";
 }
+<div class="container">
 
-<h2>Inventario de la sucursal</h2>
 
-@if (ViewBag.Mensaje != null)
-{
-    <div class="alert alert-warning">
-        @ViewBag.Mensaje
-    </div>
-}
 
-<p>
+    <h2>Inventario de la sucursal</h2>
 
-    <a href="@Url.Action("AgregarInventarioSucursal")" class="btn btn-dark btn-md">
-        Agregar producto al inventario
-    </a>
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-warning">
+            @ViewBag.Mensaje
+        </div>
+    }
 
-</p>
-<div class="table-responsive">
-    <table id="myTable" class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.IdProducto)</th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NombreProducto)
-                </th>
+    <p>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Cantidad)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Precio)
-                </th>
+        <a href="@Url.Action("AgregarInventarioSucursal")" class="btn btn-dark btn-md">
+            Agregar producto al inventario
+        </a>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.NombreProveedor)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.IdEstado)
-                </th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
+    </p>
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.IdProducto)</td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NombreProducto)
-                    </td>
+                    <th>@Html.DisplayNameFor(model => model.IdProducto)</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreProducto)
+                    </th>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cantidad)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Precio)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NombreProveedor)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreProveedor)
+                    </th>
 
-                    @{
-                        string estado = "";
-                        if (item.IdEstado == 1)
-                        {
-                            estado = "Activo";
-                        }
-                        else
-                        {
-                            estado = "Inactivo";
-                        }
-
-                    }
-                    <td>
-                        @Html.DisplayFor(modelItem => estado)
-                    </td>
-                    <td>
-
-
-                        <a href="@Url.Action("DetallesProducto", "InventarioSucursal", new { id = item.IdProducto })" class="btn btn-info btn-sm">
-                            Detalles del producto
-                        </a>
-
-                        <a href="@Url.Action("Edit", "InventarioSucursal", new { id = item.IdProducto })" class="btn btn-primary btn-sm">
-                            Actualizar inventario
-                        </a>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdEstado)
+                    </th>
+                    <th>Acciones</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
 
-        </tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.IdProducto)</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreProducto)
+                        </td>
 
-    </table>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreProveedor)
+                        </td>
+
+                        @{
+                            string estado = "";
+                            if (item.IdEstado == 1)
+                            {
+                                estado = "Activo";
+                            }
+                            else
+                            {
+                                estado = "Inactivo";
+                            }
+
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => estado)
+                        </td>
+                        <td>
+
+
+                            <a href="@Url.Action("DetallesProducto", "InventarioSucursal", new { id = item.IdProducto })" class="btn btn-info btn-sm">
+                                Detalles del producto
+                            </a>
+
+                            <a href="@Url.Action("ActualizarInventario", "InventarioSucursal", new { id = item.IdProducto })" class="btn btn-primary btn-sm">
+                                Actualizar inventario
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
 </div>
-
 @section scripts
   {
     <script src="~/Scripts/ScriptsFront/Productos/ListaDataTableProductos.js"></script>

@@ -153,7 +153,6 @@ namespace ThomasSalon.UI.Controllers
                 }
             }
 
-            // Si no es el usuario logueado, redirigir a la lista de colaboradores
             return RedirectToAction("ListarColaboradores", "Colaboradores");
         }
 
@@ -206,7 +205,7 @@ namespace ThomasSalon.UI.Controllers
            
             if (id.HasValue)
             {
-                var persona = _obtenerp.Obtener(id.Value); // Obtener la persona por Id
+                var persona = _obtenerp.Obtener(id.Value); 
                 if (persona != null)
                 {
                     var model = new RegisterViewModel
@@ -215,10 +214,10 @@ namespace ThomasSalon.UI.Controllers
                         Persona = persona 
                     };
 
-                    // Cargar roles y sucursales para la vista
+                   
                     ViewBag.Roles = new SelectList(new List<SelectListItem>
             {
-                new SelectListItem { Value = "Usuario", Text = "Usuario" },
+               
                 new SelectListItem { Value = "Gerente", Text = "Gerente" },
                 new SelectListItem { Value = "Administrador", Text = "Administrador" }
             }, "Value", "Text");
@@ -230,7 +229,7 @@ namespace ThomasSalon.UI.Controllers
                 }
             }
 
-            // Si no se pasa un IdPersona, se muestra la vista vacía
+         
             return View(new RegisterViewModel());
         }
 
@@ -244,84 +243,63 @@ namespace ThomasSalon.UI.Controllers
             {
                 try
                 {
-                    // Si el id está presente en la URL, asignarlo al modelo
                     if (id.HasValue && model.IdPersona == 0)
                     {
-                        model.IdPersona = id.Value; // Asignar el IdPersona desde la URL
+                        model.IdPersona = id.Value; 
                     }
 
-                    // Si el modelo contiene una persona, la registramos
+                    
                     if (model.Persona != null && model.IdPersona == 0)
                     {
-                        // Registrar la persona, si no tiene IdPersona asignado
+                      
                         int idPersona = await _registrarPersonas.Registrar(model.Persona);
-                        model.IdPersona = idPersona; // Asociar el IdPersona al modelo
+                        model.IdPersona = idPersona; 
                     }
 
-                    // Crear el objeto ApplicationUser
+                   
                     var user = new ApplicationUser
                     {
                         UserName = model.Email,
                         Email = model.Email,
-                        IdEstado = 1, // Estado activo por defecto
-                        IdSucursal = model.IdSucursal, // Asignar la sucursal desde el modelo
-                        IdPersona = model.IdPersona // Asociar el IdPersona al usuario
+                        IdEstado = 1, 
+                        IdSucursal = model.IdSucursal,
+                        IdPersona = model.IdPersona 
                     };
 
-                    // Registrar el usuario en la base de datos
+                   
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
-                        // Asignar rol al usuario (por defecto "Administrador")
+                      
                         string rolAsignado = string.IsNullOrEmpty(model.Rol) ? "Administrador" : model.Rol;
                         await UserManager.AddToRoleAsync(user.Id, rolAsignado);
 
-                        // Redirigir al listado de colaboradores
+                     
                         return RedirectToAction("ListarColaboradores", "Colaboradores");
                     }
                     else
                     {
-                        // Si hay errores, agregar los errores al estado del modelo
+                      
                         AddErrors(result);
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Loguear el error para fines de diagnóstico
+                   
                     ModelState.AddModelError("", "Ocurrió un error al registrar el usuario.");
                 }
             }
 
-            // Si el modelo no es válido o ocurrió un error, volver a mostrar la vista con los errores
             return View(model);
         }
 
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
 
-        //// Acción para quitar el usuario
-        //public ActionResult QuitarUsuario(int id)
-        //{
-        //    try
-        //    {
-                
-        //        var persona = _obtenerp.Obtener(id); 
-        //        if (persona != null)
-        //        {
-        //            // Eliminar el usuario relacionado (logica de eliminación de usuario)
-        //            _usuarioService.EliminarUsuarioPorIdPersona(id); // Ejemplo de un método que elimine el usuario
-        //            _registrarPersonas.EliminarPersona(id); // Eliminar la persona si es necesario
-
-        //            TempData["SuccessMessage"] = "Usuario eliminado correctamente.";
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["ErrorMessage"] = "Hubo un error al eliminar el usuario.";
-        //    }
-
-        //    return RedirectToAction("ListarColaboradores");
-        //}
-
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -333,11 +311,9 @@ namespace ThomasSalon.UI.Controllers
                 try
                 {
 
-
                     if (model.Persona != null)
-                    {
-                        // Primero registrar la persona
-                    
+                    {                  
+                   
                         int idPersona = await _registrarPersonas.Registrar(model.Persona);
                         model.IdPersona = idPersona;
 
@@ -350,9 +326,7 @@ namespace ThomasSalon.UI.Controllers
                         IdEstado = 1,
                         IdSucursal = null,
                         IdPersona = model.IdPersona
-
-
-                        
+    
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);
@@ -368,8 +342,7 @@ namespace ThomasSalon.UI.Controllers
                     AddErrors(result);
                 }
                 catch (Exception ex)
-                {
-                    // Loguear error
+                {                   
                     ModelState.AddModelError("", "Ocurrió un error al registrar el usuario.");
                 }
             }
@@ -377,14 +350,7 @@ namespace ThomasSalon.UI.Controllers
             return View(model);
         }
 
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-          
-
-            return View();
-        }
+     
 
         // GET: /Account/Register
         [AllowAnonymous]
@@ -454,7 +420,6 @@ namespace ThomasSalon.UI.Controllers
             return View(model);
         }
 
-        // If we got this far, something failed, redisplay form
 
         // GET: /Account/EditAdmin
         public async Task<ActionResult> EditAdmin(string id)

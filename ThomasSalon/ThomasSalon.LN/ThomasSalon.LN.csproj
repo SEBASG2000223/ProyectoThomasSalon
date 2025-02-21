@@ -67,7 +67,9 @@
     <Compile Include="General\Conversiones\Usuarios\ConvertirAUsuariosTabla.cs" />
     <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralLN.cs" />
     <Compile Include="InventarioSucursal\Crear\CrearInventarioSucursalLN.cs" />
+    <Compile Include="InventarioSucursal\Editar\EditarInventarioSucursalLN.cs" />
     <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalLN.cs" />
+    <Compile Include="InventarioSucursal\ObtenerPorId\ObtenerInventarioSucursalPorIdLN.cs" />
     <Compile Include="Personas\Editar\EditarPersonasLN.cs" />
     <Compile Include="Personas\Listar\ListarPersonasLN.cs" />
     <Compile Include="Personas\ObtenerPorId\ObtenerPersonasPorIdLN.cs" />
@@ -109,9 +111,7 @@
       <Name>ThomasSalon.AccesoADatos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="InventarioSucursal\Editar\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

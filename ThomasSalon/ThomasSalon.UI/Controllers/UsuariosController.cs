@@ -40,7 +40,7 @@ namespace ThomasSalon.UI.Controllers
         ICambiarEstadoUsuariosLN _cambiarEstadoUsuariosLN;
         IObtenerUsuariosPorIdLN _obtenerUsuariosPorId;
         IListarSucursalesLN _listarSucursales;
-       
+
         public UsuariosController()
         {
             _listarUsuarios = new ListarUsuariosLN();
@@ -98,6 +98,8 @@ namespace ThomasSalon.UI.Controllers
         {
             return View();
         }
+    }
+}
 
 ﻿//using Microsoft.AspNet.Identity.Owin;
 //using Microsoft.AspNet.Identity;

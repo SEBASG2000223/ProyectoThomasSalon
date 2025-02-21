@@ -2,22 +2,23 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.InventarioSucursal.Crear;
+using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.InventarioSucursal.Editar;
 using ThomasSalon.Abstracciones.ModelosDeBaseDeDatos;
 
-namespace ThomasSalon.AccesoADatos.InventarioSucursal.Crear
+namespace ThomasSalon.AccesoADatos.InventarioSucursal.Editar
 {
-    public class CrearInventarioSucursalAD : ICrearInventarioSucursalAD
+    public class EditarInventarioSucursalAD : IEditarInventarioSucursalAD
     {
-        Contexto _elContexto;
+        private readonly Contexto _elContexto;
 
-        public CrearInventarioSucursalAD()
+        public EditarInventarioSucursalAD()
         {
             _elContexto = new Contexto();
         }
 
-        public async Task<int> Agregar(InventarioSucursalTabla elInventarioAGuardar)
+        public async Task<int> EditarInventarioSucursal(InventarioSucursalTabla elInventarioAGuardar)
         {
+
             try
             {
                 var idSucursalParam = new SqlParameter("@IdSucursal", SqlDbType.Int) { Value = elInventarioAGuardar.IdSucursal };
@@ -25,7 +26,7 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.Crear
                 var cantidadParam = new SqlParameter("@Cantidad", SqlDbType.Int) { Value = elInventarioAGuardar.Cantidad };
 
                 var resultado = await _elContexto.Database.ExecuteSqlCommandAsync(
-                    "EXEC SP_InsertarInventarioSucursalGerente @IdSucursal, @IdProducto, @Cantidad",
+                        "EXEC SP_ActualizarInventarioSucursalGerente @IdSucursal, @IdProducto, @Cantidad",
                     idSucursalParam, idProductoParam, cantidadParam
                 );
 
@@ -33,9 +34,9 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.Crear
             }
             catch (SqlException ex)
             {
-               
-                    throw new InvalidOperationException("El producto ya existe en la sucursal y no puede ser agregado nuevamente.");
-               
+
+                throw new InvalidOperationException("El producto no existe en la sucursal.");
+
             }
         }
 
