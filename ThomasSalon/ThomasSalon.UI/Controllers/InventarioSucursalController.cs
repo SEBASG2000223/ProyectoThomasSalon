@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.UI;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal.Crear;
+using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal.Editar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.Listar;
-using ThomasSalon.Abstracciones.Modelos.InventarioGeneral;
 using ThomasSalon.Abstracciones.Modelos.InventarioSucursal;
-using ThomasSalon.Abstracciones.Modelos.Productos;
-using ThomasSalon.Abstracciones.Modelos.Sucursales;
 using ThomasSalon.AccesoADatos;
 using ThomasSalon.LN.InventarioSucursal.Crear;
+using ThomasSalon.LN.InventarioSucursal.Editar;
 using ThomasSalon.LN.InventarioSucursal.Listar;
+using ThomasSalon.LN.InventarioSucursal.ObtenerPorId;
 using ThomasSalon.LN.Productos.Listar;
 using ThomasSalon.LN.Productos.ObtenerPorId;
 using ThomasSalon.LN.Sucursales.Listar;
@@ -32,6 +29,8 @@ namespace ThomasSalon.UI.Controllers
         IListarProductosLN _productosListar;
         IListarSucursalesLN _sucursalesListar;
         IListarProductosLN _listarProductos;
+        IEditarInventarioSucursalLN _editarInventarioSucursal;
+        IObtenerInventarioSucursalPorIdLN _obtenerInventarioSucursal;
         Contexto _elContexto;
 
         public InventarioSucursalController()
@@ -42,13 +41,15 @@ namespace ThomasSalon.UI.Controllers
             _productosListar = new ListarProductosLN();
             _sucursalesListar = new ListarSucursalesLN();
             _listarProductos = new ListarProductosLN();
+            _editarInventarioSucursal = new EditarInventarioSucursalLN();
+            _obtenerInventarioSucursal = new ObtenerInventarioSucursalPorIdLN();
             _elContexto = new Contexto();
         }
 
         // GET: InventarioSucursal
         public ActionResult ListarInventarioSucursal(int idSucursal)
         {
-            TempData["IdSucursalSeleccionada"] = idSucursal; // Guardamos el idSucursal en TempData
+            TempData["IdSucursalSeleccionada"] = idSucursal;
             List<InventarioSucursalDto> inventarios = _listarInventarioSucursal.Listar(idSucursal);
             if (inventarios == null || !inventarios.Any())
             {
@@ -83,6 +84,7 @@ namespace ThomasSalon.UI.Controllers
 
         // GET: InventarioSucursal/AgregarInventarioSucursal
         public ActionResult AgregarInventarioSucursal()
+
         {
             // Recuperar el idSucursal desde TempData y convertirlo con Convert.ToInt32
             var idSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
@@ -135,25 +137,47 @@ namespace ThomasSalon.UI.Controllers
 
 
         // GET: InventarioSucursal/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult ActualizarInventario(int id)
         {
-            return View();
+            // Recuperar el idSucursal desde TempData y convertirlo con Convert.ToInt32
+            var idSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
+
+            InventarioSucursalDto elInventario = _obtenerInventarioSucursal.Obtener(id);
+
+            var modelo = new InventarioSucursalDto
+            {
+                IdSucursal = idSucursal,
+                IdProducto = id,
+                Cantidad = elInventario.Cantidad
+            };
+            return View(modelo);
         }
 
         // POST: InventarioSucursal/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> ActualizarInventario(InventarioSucursalDto modelo)
         {
             try
             {
-                // TODO: Add update logic here
-                return RedirectToAction("ListarInventarioSucursal");
+                // Si IdSucursal no viene en el modelo, lo obtenemos de TempData
+                if (modelo.IdSucursal == 0)
+                {
+                    modelo.IdSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
+                }
+
+
+                int cantidadDeDatosEditados = await _editarInventarioSucursal.Editar(modelo);
+
+                return RedirectToAction("ListarInventarioSucursal", new { idSucursal = modelo.IdSucursal });
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+
+                ViewBag.Mensaje = "Ocurrió un error inesperado.";
+                return View(modelo);
             }
         }
+
 
         // GET: InventarioSucursal/Delete/5
         public ActionResult Delete(int id)
@@ -176,7 +200,7 @@ namespace ThomasSalon.UI.Controllers
             }
         }
 
-     
+
 
 
 

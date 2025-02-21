@@ -58,7 +58,9 @@
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\IInventarioGeneralAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Crear\ICrearInventarioSucursalAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Editar\IEditarInventarioSucursalAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Listar\IListarInventarioSucursalAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\ObtenerPorId\IObtenerInventarioSucursalPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Personas\Editar\IEditarPersonasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Personas\Listar\IListarPersonasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Personas\ObtenerPorId\IObtenerPersonasPorIdAD.cs" />
@@ -103,6 +105,8 @@
     <Compile Include="LN\Interfaces\General\Conversiones\Usuarios\IConvertirAUsuariosTabla.cs" />
     <Compile Include="LN\Interfaces\InventarioGeneral\IInventarioGeneralLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\Crear\ICrearInventarioSucursalLN.cs" />
+    <Compile Include="LN\Interfaces\InventarioSucursal\Editar\IEditarInventarioSucursalLN.cs" />
+    <Compile Include="LN\Interfaces\InventarioSucursal\IObtenerInventarioSucursalPorIdLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\Listar\IListarInventarioSucursalLN.cs" />
     <Compile Include="LN\Interfaces\Personas\Editar\IEditarPersonasLN.cs" />
     <Compile Include="LN\Interfaces\Personas\Listar\IListarPersonasLN.cs" />
@@ -161,8 +165,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AccesoADatos\Interfaces\InventarioSucursal\Editar\" />
-    <Folder Include="LN\Interfaces\InventarioSucursal\Editar\" />
     <Folder Include="Modelos\Roles\" />
   </ItemGroup>
   <ItemGroup>

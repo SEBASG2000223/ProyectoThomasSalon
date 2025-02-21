@@ -619,6 +619,7 @@
     <Content Include="Views\Productos\servicios\ListarServicios.cshtml" />
     <Content Include="Views\Productos\servicios\Servicios.cshtml" />
     <Content Include="Views\Productos\servicios\_Servicios.cshtml" />
+    <Content Include="Views\InventarioSucursal\ActualizarInventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
