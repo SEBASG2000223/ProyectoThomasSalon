@@ -7,7 +7,7 @@ namespace ThomasSalon.LN.General.Conversiones.InventarioSucursal
 {
     public class ConvertirAInventarioSucursalTabla : IConvertirAInventarioSucursalTabla
     {
-        public InventarioSucursalTabla ConvertirObjetoAProductosTabla(InventarioSucursalDto elInventario)
+        public InventarioSucursalTabla ConvertirObjetoAInventarioSucursalTabla(InventarioSucursalDto elInventario)
         {
             return new InventarioSucursalTabla
             {

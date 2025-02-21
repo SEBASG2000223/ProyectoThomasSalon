@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThomasSalon.Abstracciones.Modelos.Personas;
 
 namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
 {
@@ -14,30 +15,14 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
 
         public string Email { get; set; }
 
-       
-    
-    
-    
-        public string Nombre { get; set; }
-
-        
-        public string Genero { get; set; }
-
-     
-        public string Direccion { get; set; }
-
-       
-        public int Edad { get; set; }
-
-       
-        public string Identificacion { get; set; }
-
         public int IdEstado { get; set; }
 
-       
         public int? IdSucursal { get; set; }
 
-     
-        public string PhoneNumber { get; set; }
+        public int IdPersona { get; set; }
+
+        // Propiedad de navegación para la tabla PersonasTabla
+        public virtual PersonasTabla Persona { get; set; }
     }
+
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ThomasSalon.Abstracciones.Modelos.Personas;
 
 namespace ThomasSalon.UI.Models
 {
@@ -79,29 +80,10 @@ namespace ThomasSalon.UI.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "Las contraseñas no son similares")]
         public string ConfirmPassword { get; set; }
-
       
         [Display(Name = "Rol")]
         public string Rol { get; set; }
 
-        [Required]
-        [Display(Name = "Nombre Completo")]
-        public string Nombre { get; set; }
-
-        [Required]
-        [Display(Name = "Género")]
-        public string Genero { get; set; } // "M" o "F"
-
-        [Display(Name = "Dirección")]
-        public string Direccion { get; set; }
-
-        [Required]
-        [Range(0, 120, ErrorMessage = "Ingrese una edad válida.")]
-        [Display(Name = "Edad")]
-        public int Edad { get; set; }
-
-        [Display(Name = "Identificación")]
-        public string Identificacion { get; set; }
 
         [Required]
         [Display(Name = "Estado")]
@@ -110,39 +92,24 @@ namespace ThomasSalon.UI.Models
         [Display(Name = "Sucursal")]
         public int? IdSucursal { get; set; }
 
-        [Display(Name = "Telefono")]
-        public string PhoneNumber { get; set; }
-      
+        public PersonasDto Persona { get; set; }
+
+        public int IdPersona { get; set; }
+
+
+
     }
     public class EditViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Correo")]
         public string Email { get; set; }
-
 
         [Display(Name = "Rol")]
         public string Rol { get; set; }
+        public string Id { get; set; }
 
-        [Required]
-        [Display(Name = "Nombre Completo")]
-        public string Nombre { get; set; }
+        public PersonasDto Persona { get; set; }
 
-        [Required]
-        [Display(Name = "Género")]
-        public string Genero { get; set; } // "M" o "F"
-
-        [Display(Name = "Dirección")]
-        public string Direccion { get; set; }
-
-        [Required]
-        [Range(0, 120, ErrorMessage = "Ingrese una edad válida.")]
-        [Display(Name = "Edad")]
-        public int Edad { get; set; }
-
-        [Display(Name = "Identificación")]
-        public string Identificacion { get; set; }
+        public int IdPersona { get; set; }
 
         [Required]
         [Display(Name = "Estado")]
@@ -151,9 +118,23 @@ namespace ThomasSalon.UI.Models
         [Display(Name = "Sucursal")]
         public int? IdSucursal { get; set; }
 
-        [Display(Name = "Telefono")]
-        public string PhoneNumber { get; set; }
-        public string Id { get; set; }
+        // Campos adicionales que desees para la persona
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Display(Name = "Género")]
+        public string Genero { get; set; }
+        public string Telefono { get; set; }
+
+        [Display(Name = "Dirección")]
+        public string Direccion { get; set; }
+
+        [Display(Name = "Edad")]
+        public int Edad { get; set; }
+
+        [Display(Name = "Identificación")]
+        public string Identificacion { get; set; }
+        public decimal Salario { get; set; }
     }
 
 

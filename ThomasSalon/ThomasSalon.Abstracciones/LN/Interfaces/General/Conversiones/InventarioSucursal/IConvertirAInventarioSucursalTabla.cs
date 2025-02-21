@@ -5,6 +5,6 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.General.Conversiones.Inventari
 {
     public interface IConvertirAInventarioSucursalTabla
     {
-        InventarioSucursalTabla ConvertirObjetoAProductosTabla(InventarioSucursalDto elInventario);
+        InventarioSucursalTabla ConvertirObjetoAInventarioSucursalTabla(InventarioSucursalDto elInventario);
     }
 }

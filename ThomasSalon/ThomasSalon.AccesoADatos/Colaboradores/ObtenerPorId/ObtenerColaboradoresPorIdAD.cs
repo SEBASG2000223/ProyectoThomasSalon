@@ -23,5 +23,6 @@ namespace ThomasSalon.AccesoADatos.Colaboradores.ObtenerPorId
             ColaboradoresTabla elColaboradorEnBD = _elContexto.ColaboradoresTabla.Where(elColaborador => elColaborador.IdColaborador == IdColaborador).FirstOrDefault();
             return elColaboradorEnBD;
         }
+
     }
 }

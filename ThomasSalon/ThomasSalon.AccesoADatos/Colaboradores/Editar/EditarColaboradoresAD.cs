@@ -24,8 +24,7 @@ namespace ThomasSalon.AccesoADatos.Colaboradores.Editar
                 .Where(c => c.IdColaborador == elColaboradorParaEditar.IdColaborador)
                 .FirstOrDefault();
 
-            elColaboradorEnBD.Nombre = elColaboradorParaEditar.Nombre;
-            elColaboradorEnBD.Telefono = elColaboradorParaEditar.Telefono;
+         
             elColaboradorEnBD.SalarioDia = elColaboradorParaEditar.SalarioDia;
             elColaboradorEnBD.IdEstado = elColaboradorParaEditar.IdEstado;
 

@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Usuarios.UsuariosDto>
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Usuarios.UsuariosDto>
 
 @{
     ViewBag.Title = "ListarUsuarios";
@@ -37,7 +37,7 @@
 
 
                         <th>
-                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                            @Html.DisplayNameFor(model => model.Telefono)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.NombreEstado)
@@ -73,7 +73,7 @@
                             </td>
 
                             <td>
-                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                @Html.DisplayFor(modelItem => item.Telefono)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.NombreEstado)
@@ -82,15 +82,16 @@
                                 @Html.DisplayFor(modelItem => item.NombreRol)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
 
-                                @if (item.IdEstado == 1)
+                                @if (item.NombreEstado == "Activo")
                                 {
+                                    @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
+
                                     <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-danger btn-sm">
                                         Inactivar
                                     </a>
                                 }
-                                @if (item.IdEstado == 2)
+                                @if (item.NombreEstado == "Inactivo")
                                 {
                                     <a href="@Url.Action("Activar", "Usuarios", new { id = item.Id })" class="btn btn-success btn-sm">
                                         Activar
@@ -116,4 +117,4 @@
         @section scripts
         {
             <script src="~/Scripts/ScriptsFront/Productos/ListaDataTableProductos.js"></script>
-        }*@
+        }

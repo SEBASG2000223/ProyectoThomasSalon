@@ -20,22 +20,47 @@ namespace ThomasSalon.AccesoADatos.Usuarios.Editar
 
         public async Task<int> Editar(UsuariosTabla elUsuarioParaEditar)
         {
-            UsuariosTabla elUsuarioEnBD = _elContexto.UsuariosTabla.Where(elUsuario => elUsuario.Id == elUsuarioParaEditar.Id).FirstOrDefault();
-            elUsuarioEnBD.Id = elUsuarioParaEditar.Id;
+            // Buscar el usuario en la base de datos
+            UsuariosTabla elUsuarioEnBD = await _elContexto.UsuariosTabla
+                .Where(elUsuario => elUsuario.Id == elUsuarioParaEditar.Id)
+                .FirstOrDefaultAsync();
+
+            if (elUsuarioEnBD == null)
+            {
+                return 0; // Si el usuario no existe, retorna 0
+            }
+
+            // Buscar la persona asociada al usuario
+            PersonasTabla laPersonaEnBD = await _elContexto.PersonasTabla
+                .Where(laPersona => laPersona.IdPersona == elUsuarioEnBD.IdPersona)
+                .FirstOrDefaultAsync();
+
+            if (laPersonaEnBD != null)
+            {
+                // Actualizar los datos de la persona
+                laPersonaEnBD.Nombre = elUsuarioParaEditar.Persona.Nombre;
+                laPersonaEnBD.Telefono = elUsuarioParaEditar.Persona.Telefono;
+                laPersonaEnBD.Genero = elUsuarioParaEditar.Persona.Genero;
+                laPersonaEnBD.Direccion = elUsuarioParaEditar.Persona.Direccion;
+                laPersonaEnBD.Edad = elUsuarioParaEditar.Persona.Edad;
+                laPersonaEnBD.Identificacion = elUsuarioParaEditar.Persona.Identificacion;
+
+                _elContexto.Entry(laPersonaEnBD).State = EntityState.Modified;
+            }
+
+            // Actualizar los datos del usuario
             elUsuarioEnBD.Email = elUsuarioParaEditar.Email;
-            elUsuarioEnBD.Nombre = elUsuarioParaEditar.Nombre;
-            elUsuarioEnBD.Genero = elUsuarioParaEditar.Genero;
-            elUsuarioEnBD.Direccion = elUsuarioParaEditar.Direccion;
-            elUsuarioEnBD.Edad = elUsuarioParaEditar.Edad;
-            elUsuarioEnBD.Identificacion = elUsuarioParaEditar.Identificacion;
+          
             elUsuarioEnBD.IdEstado = elUsuarioParaEditar.IdEstado;
             elUsuarioEnBD.IdSucursal = elUsuarioParaEditar.IdSucursal;
-            elUsuarioEnBD.PhoneNumber = elUsuarioParaEditar.PhoneNumber;
 
-            EntityState estado = _elContexto.Entry(elUsuarioEnBD).State = System.Data.Entity.EntityState.Modified;
+            _elContexto.Entry(elUsuarioEnBD).State = EntityState.Modified;
+
+            // Guardar los cambios en la base de datos
             int cantidadDeDatosGuardados = await _elContexto.SaveChangesAsync();
             return cantidadDeDatosGuardados;
         }
+
     }
-    }
+}
 
