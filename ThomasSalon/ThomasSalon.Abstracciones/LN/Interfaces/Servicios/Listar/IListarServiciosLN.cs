@@ -10,5 +10,6 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.Servicios.Listar
     public interface IListarServiciosLN
     {
         List<ServiciosDto> Listar();
+        List<ServiciosDto> ListarActivos();
     }
 }

@@ -1,111 +1,106 @@
 ﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Usuarios.UsuariosDto>
 
 @{
-    ViewBag.Title = "ListarUsuarios";
+    ViewBag.Title = "Listar Usuarios";
 }
-<div class="container pt-5" style="max-width: 1200px;">
+<div class="container pt-5" style="max-width: 1300px;">
 
-    <h2>ListarUsuarios</h2>
-
+    <h2>Listar Usuarios</h2>
     <p>
-        @Html.ActionLink("Create New", "RegisterAdmin", "Account")
+        <a href="@Url.Action("RegisterAdmin", "Account")" class="btn btn-dark btn-md">
+            Registrar usuario
+        </a>
     </p>
 
-        <div class="table-responsive">
-            <table id="myTable" class="table table-bordered table-hover">
-                <thead class="table-dark">
+
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Edad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Identificacion)
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreEstado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreRol)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Email)
-                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
 
-                        <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Genero)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Direccion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Edad)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Identificacion)
-                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
 
 
-                        <th>
-                            @Html.DisplayNameFor(model => model.Telefono)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NombreEstado)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NombreRol)
-                        </th>
-                        <th></th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Edad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Identificacion)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreEstado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreRol)
+                        </td>
+                        <td>
+
+                            @if (item.NombreEstado == "Activo")
+                            {
+                                @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
+
+                                <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-danger btn-sm">
+                                    Inactivar
+                                </a>
+                            }
+                            @if (item.NombreEstado == "Inactivo")
+                            {
+                                <a href="@Url.Action("Activar", "Usuarios", new { id = item.Id })" class="btn btn-success btn-sm">
+                                    Activar
+                                </a>
+                            }
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
+                }
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Genero)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Direccion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Edad)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Identificacion)
-                            </td>
+            </tbody>
+        </table>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Telefono)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NombreEstado)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NombreRol)
-                            </td>
-                            <td>
-
-                                @if (item.NombreEstado == "Activo")
-                                {
-                                    @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
-
-                                    <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-danger btn-sm">
-                                        Inactivar
-                                    </a>
-                                }
-                                @if (item.NombreEstado == "Inactivo")
-                                {
-                                    <a href="@Url.Action("Activar", "Usuarios", new { id = item.Id })" class="btn btn-success btn-sm">
-                                        Activar
-                                    </a>
-                                }
-                            </td>
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-
-        </div>
     </div>
+</div>
         @functions{
             public string SaberEstado(int estado)
             {
