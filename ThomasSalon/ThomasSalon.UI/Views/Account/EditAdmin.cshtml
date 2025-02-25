@@ -1,0 +1,156 @@
+﻿@model ThomasSalon.UI.Models.EditViewModel
+
+@{
+    ViewBag.Title = "Edit Admin";
+}
+<div class="container">
+    <h2>Edit Admin</h2>
+
+    @using (Html.BeginForm("EditAdmin", "Account", FormMethod.Post)) // Especificar acción y método POST
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Register ViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.IdPersona) <!-- Asegurar que el Id se envía -->
+    <!-- Email -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Nombre -->
+    <div class="form-group" id="nombreField">
+        @Html.LabelFor(model => model.Nombre, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Persona.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Género -->
+    <div class="form-group" id="generoField">
+        @Html.LabelFor(model => model.Genero, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Persona.Genero, new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Masculino", Value = "M" },
+                new SelectListItem { Text = "Femenino", Value = "F" }
+            }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Dirección -->
+    <div class="form-group" id="direccionField">
+        @Html.LabelFor(model => model.Direccion, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Persona.Direccion, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Edad -->
+    <div class="form-group" id="edadField">
+        @Html.LabelFor(model => model.Edad, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Persona.Edad, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(model => model.Edad, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <!-- Edad -->
+    <div class="form-group" id="telefonoField">
+        @Html.LabelFor(model => model.Telefono, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Persona.Telefono, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Identificación -->
+    <div class="form-group" id="identificacionField">
+        @Html.LabelFor(model => model.Identificacion, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Persona.Identificacion, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Identificacion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Estado -->
+    <div class="form-group" id="estadoField">
+        @Html.LabelFor(model => model.IdEstado, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.IdEstado, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IdEstado, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Rol -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Rol, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Rol, (SelectList)ViewBag.Roles, new { @class = "form-control", id = "rolDropdown" })
+            @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" id="sucursalesField" style="display: none;">
+        @Html.LabelFor(model => model.IdSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdSucursal,
+                ViewBag.Sucursales != null ? ViewBag.Sucursales as SelectList : new SelectList(new List<SelectListItem>()),
+                new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var rolDropdown = document.getElementById("rolDropdown");
+
+        var fields = {
+            "sucursalesField": ["Administrador"], // Solo visible para Administrador
+            "nombreField": ["Usuario"],
+            "generoField": ["Usuario"],
+            "direccionField": ["Usuario"],
+            "telefonoField": ["Usuario"],
+            "edadField": ["Usuario"],
+            "identificacionField": ["Usuario"],
+            "estadoField": ["Usuario"]
+        };
+
+        function toggleFields() {
+            var selectedRole = rolDropdown.value;
+
+            // Recorremos los campos y los mostramos u ocultamos según el rol
+            Object.keys(fields).forEach(field => {
+                document.getElementById(field).style.display = fields[field].includes(selectedRole) ? "block" : "none";
+            });
+        }
+
+        toggleFields(); // Llamada inicial
+        rolDropdown.addEventListener("change", toggleFields); // Evento para cambios de rol
+    });
+</script>
+

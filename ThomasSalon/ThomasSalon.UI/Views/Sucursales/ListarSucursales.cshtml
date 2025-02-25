@@ -3,89 +3,90 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="container pt-5">
+    <h2>Index</h2>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="table-responsive">
-    <table id="myTable" class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdSucursal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LinkDireccion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LinkImagen)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Telefono)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdEstado)
-                </th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdSucursal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LinkDireccion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LinkImagen)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Telefono)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NombreEstado)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.IdSucursal }) |
-                       
-                        @if (item.IdEstado == 1)
-                        {
-                            <a href="@Url.Action("Inactivar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-danger btn-sm">
-                                Inactivar
-                            </a>
-                        }
-                        @if (item.IdEstado == 2)
-                        {
-                            <a href="@Url.Action("Activar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-success btn-sm">
-                                Activar
-                            </a>
-                        }
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdSucursal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LinkDireccion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LinkImagen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdEstado)
+                    </th>
+                    <th>Acciones</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdSucursal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LinkDireccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LinkImagen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreEstado)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IdSucursal }) |
+
+                            @if (item.IdEstado == 1)
+                            {
+                                <a href="@Url.Action("Inactivar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-danger btn-sm">
+                                    Inactivar
+                                </a>
+                            }
+                            @if (item.IdEstado == 2)
+                            {
+                                <a href="@Url.Action("Activar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-success btn-sm">
+                                    Activar
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-@functions{
-    public string SaberEstado(int estado)
-    {
-        if (estado == 2) return "Inactivo";
-        if (estado == 1) return "Activo";
-        return "Estado invalido";
+    @functions{
+        public string SaberEstado(int estado)
+        {
+            if (estado == 2) return "Inactivo";
+            if (estado == 1) return "Activo";
+            return "Estado invalido";
+        }
     }
-}
-@section scripts
+    @section scripts
     {
-    <script src="~/Scripts/ScriptsFront/Sucursales/ListaDataTableSucursales.js"></script>
-}
+        <script src="~/Scripts/ScriptsFront/Sucursales/ListaDataTableSucursales.js"></script>
+    }

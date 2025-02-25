@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Productos.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.Listar;
 using ThomasSalon.Abstracciones.Modelos.Productos;
@@ -22,6 +18,12 @@ namespace ThomasSalon.LN.Productos.Listar
         {
             List<ProductosDto> laListaDeProductos = _listarProductosAD.Listar();
             return laListaDeProductos;
+        }
+        public Dictionary<int, string> ObtenerProveedoresPorProducto()
+        {
+            Dictionary<int, string> DiccionarioProveedores = _listarProductosAD.ObtenerProveedoresPorProducto();
+            return DiccionarioProveedores;
+
         }
     }
 }

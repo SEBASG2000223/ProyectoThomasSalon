@@ -10,6 +10,9 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Registrar
 {
     public interface IRegistrarColaboradoresLN
     {
+        Task<int> Inactivar(int IdPersona);
+
+
         Task<int> Registrar(ColaboradoresDto modelo);
     }
 }

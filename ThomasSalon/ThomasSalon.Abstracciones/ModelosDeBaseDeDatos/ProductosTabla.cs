@@ -17,5 +17,7 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
         public int IdProveedor { get; set; }
         public int UnidadMedida { get; set; }
         public int IdEstado { get; set; }
+
+        public string LinkImagen { get; set; }
     }
 }

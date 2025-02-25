@@ -21,15 +21,22 @@ namespace ThomasSalon.LN.Colaboradores.Registrar
         {
             _registrarColaboradoresAD = new RegistrarColaboradoresAD();
         }
+
+        public async Task<int> Inactivar(int IdPersona)
+        {
+            return await _registrarColaboradoresAD.Inactivar(IdPersona);
+        }
+
+
         public async Task<int> Registrar(ColaboradoresDto modelo)
         {
             modelo.IdEstado = 1;
             return await _registrarColaboradoresAD.Registrar(new ColaboradoresTabla
             {
-                Nombre = modelo.Nombre,
-                Telefono = modelo.Telefono,
+                IdPersona = modelo.IdPersona,
                 SalarioDia = modelo.SalarioDia,
-                IdEstado = modelo.IdEstado
+                IdEstado = modelo.IdEstado,
+                
             });
         }
     }

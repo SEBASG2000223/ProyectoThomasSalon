@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,12 +9,16 @@ using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Editar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Registrar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Personas.Registrar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Usuarios.QuitarUsuarios;
 using ThomasSalon.Abstracciones.Modelos.Colaboradores;
 using ThomasSalon.LN.Colaboradores.CambiarEstado;
 using ThomasSalon.LN.Colaboradores.Editar;
 using ThomasSalon.LN.Colaboradores.Listar;
 using ThomasSalon.LN.Colaboradores.ObtenerPorId;
 using ThomasSalon.LN.Colaboradores.Registrar;
+using ThomasSalon.LN.Personas.Registrar;
+using ThomasSalon.LN.Usuarios.QuitarUsuarios;
 
 namespace ThomasSalon.UI.Controllers
 {
@@ -25,6 +29,8 @@ namespace ThomasSalon.UI.Controllers
         IEditarColaboradoresLN _editarColaboradores;
         ICambiarEstadoColaboradoresLN _cambiarEstado;
         IObtenerColaboradoresPorIdLN _obtenerColaboradoresPorId;
+        IRegistrarPersonasLN _registrarPersonas;
+        IQuitarUsuariosLN _quitarUsuariosLN;
 
         public ColaboradoresController()
         {
@@ -33,7 +39,10 @@ namespace ThomasSalon.UI.Controllers
             _editarColaboradores = new EditarColaboradoresLN();
             _cambiarEstado = new CambiarEstadoColaboradoresLN();
             _obtenerColaboradoresPorId = new ObtenerColaboradoresPorIdLN();
+            _registrarPersonas = new RegistrarPersonasLN();
+            _quitarUsuariosLN = new QuitarUsuariosLN();
         }
+
 
         // GET: Colaboradores
         public ActionResult ListarColaboradores()
@@ -41,6 +50,7 @@ namespace ThomasSalon.UI.Controllers
             List<ColaboradoresDto> laListaDeColaboradores = _listarColaboradores.Listar();
             return View(laListaDeColaboradores);
         }
+
 
         // GET: Colaboradores/Details/5
         public ActionResult Details(int id)
@@ -66,7 +76,20 @@ namespace ThomasSalon.UI.Controllers
         {
             try
             {
+                if (modelo.Persona != null)
+                {
+                    // Primero registrar la persona
+                    int idPersona = await _registrarPersonas.Registrar(modelo.Persona);
+
+
+
+                    // Asignar el ID de la persona al colaborador
+                    modelo.IdPersona = idPersona;
+                }
+
+                // Registrar el colaborador
                 int cantidadDeDatosGuardados = await _registrarColaboradores.Registrar(modelo);
+
                 return RedirectToAction("ListarColaboradores");
             }
             catch
@@ -118,6 +141,13 @@ namespace ThomasSalon.UI.Controllers
             {
                 return View();
             }
+        }
+
+        // Activar Colaborador
+        public async Task<ActionResult> QuitarUsuario(int idUsuario)
+        {
+            int resultado = await _quitarUsuariosLN.EliminarUsuario(idUsuario);
+            return RedirectToAction("ListarColaboradores");
         }
 
         // Activar Colaborador

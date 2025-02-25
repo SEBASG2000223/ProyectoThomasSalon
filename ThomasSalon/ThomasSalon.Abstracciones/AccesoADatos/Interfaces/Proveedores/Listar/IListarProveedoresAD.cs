@@ -11,6 +11,6 @@ namespace ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Proveedores.Listar
     public interface IListarProveedoresAD
     {
         List<ProveedoresDto> Listar();
-        //List<ProveedoresDto> ObtenerProveedores();
+        List<ProveedoresDto> ListarActivos();
     }
 }

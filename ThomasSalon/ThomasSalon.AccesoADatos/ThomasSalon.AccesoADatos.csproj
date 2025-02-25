@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +58,15 @@
     <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresAD.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralAD.cs" />
+    <Compile Include="InventarioSucursal\Crear\CrearInventarioSucursalAD.cs" />
+    <Compile Include="InventarioSucursal\Editar\EditarInventarioSucursalAD.cs" />
+    <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalAD.cs" />
+    <Compile Include="InventarioSucursal\ObtenerPorId\ObtenerInventarioSucursalPorIdAD.cs" />
+    <Compile Include="Personas\Editar\EditarPersonasAD.cs" />
+    <Compile Include="Personas\Listar\ListarPersonasAD.cs" />
+    <Compile Include="Personas\ObtenerPorId\ObtenerPersonasPorIdAD.cs" />
+    <Compile Include="Personas\Registrar\RegistrarPersonasAD.cs" />
     <Compile Include="Productos\CambiarEstado\CambiarEstadoProductosAD.cs" />
     <Compile Include="Productos\Editar\EditarProductosAD.cs" />
     <Compile Include="Productos\Listar\ListarProductosAD.cs" />
@@ -78,6 +88,11 @@
     <Compile Include="Sucursales\Listar\ListarSucursalesAD.cs" />
     <Compile Include="Sucursales\ObtenerPorId\ObtenerPorIdSucursalesAD.cs" />
     <Compile Include="Sucursales\Registrar\RegistrarSucursalesAD.cs" />
+    <Compile Include="Usuarios\CambiarEstado\CambiarEstadoUsuariosAD.cs" />
+    <Compile Include="Usuarios\Editar\EditarUsuariosAD.cs" />
+    <Compile Include="Usuarios\Listar\ListarUsuariosAD.cs" />
+    <Compile Include="Usuarios\ObtenerPorId\ObtenerUsuariosPorIdAD.cs" />
+    <Compile Include="Usuarios\QuitarUsuarios\QuitarUsuariosAD.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">
