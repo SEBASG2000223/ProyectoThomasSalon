@@ -34,6 +34,10 @@ namespace ThomasSalon.Abstracciones.Modelos.Servicios
         [Required]
         public int IdEstado { get; set; }
 
+        [Display(Name = "Tipo de servicio", Description = "Tipo del Servicio")]
+        [Required]
+        public int IdTipoServicios { get; set; }
+
         public string LinkImagen { get; set; }
         public string NombreEstado { get; set; }
     }
