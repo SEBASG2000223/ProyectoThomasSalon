@@ -21,19 +21,42 @@ namespace ThomasSalon.AccesoADatos.Usuarios.CambiarEstado
         }
         public async Task<int> CambiarEstado(string IdUsuario, int nuevoEstado)
         {
+            // Buscar el usuario usando el IdUsuario
             var usuario = await _elContexto.UsuariosTabla
-               .FirstOrDefaultAsync(elUsuario => elUsuario.Id == IdUsuario.ToString());
+                .FirstOrDefaultAsync(elUsuario => elUsuario.Id == IdUsuario);
 
+            // Buscar el colaborador usando el IdPersona del usuario
+            var colaborador = await _elContexto.ColaboradoresTabla
+                .FirstOrDefaultAsync(c => c.IdPersona == usuario.IdPersona);
+
+            bool cambiosRealizados = false;
+
+            // Si el usuario existe, actualizar su estado
             if (usuario != null)
             {
                 usuario.IdEstado = nuevoEstado;
-
                 _elContexto.Entry(usuario).State = EntityState.Modified;
-                await _elContexto.SaveChangesAsync();
-                return 1;
+                cambiosRealizados = true;
             }
 
-            return 2;
+            // Si el colaborador existe, actualizar su estado
+            if (colaborador != null)
+            {
+                colaborador.IdEstado = nuevoEstado;
+                _elContexto.Entry(colaborador).State = EntityState.Modified;
+                cambiosRealizados = true;
+            }
+
+            // Si se realizaron cambios, guardar
+            if (cambiosRealizados)
+            {
+                await _elContexto.SaveChangesAsync();
+                return 1; // Operación exitosa
+            }
+
+            return 2; // Si no se encuentran ni colaborador ni usuario
         }
+
+
     }
 }

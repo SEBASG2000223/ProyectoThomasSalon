@@ -37,5 +37,10 @@ namespace ThomasSalon.LN.Productos.Listar
             return DiccionarioProveedores;
 
         }
+        public List<ProductosDto> ProductosActivos()
+        {
+            List<ProductosDto> laListaDeProductos = _listarProductosAD.ProductosActivos();
+            return laListaDeProductos;
+        }
     }
 }
