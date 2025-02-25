@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Productos.Registrar;
 using ThomasSalon.Abstracciones.LN.Interfaces.General.Conversiones.Productos;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.Registrar;
 using ThomasSalon.Abstracciones.Modelos.Productos;
 using ThomasSalon.Abstracciones.ModelosDeBaseDeDatos;
 using ThomasSalon.AccesoADatos.Productos.Registrar;
-using ThomasSalon.LN.General.Conversiones;
-using ThomasSalon.LN.General.Conversiones.Productos;
 
 namespace ThomasSalon.LN.Productos.Registrar
 {
@@ -36,6 +30,7 @@ namespace ThomasSalon.LN.Productos.Registrar
                 Nombre = elProducto.Nombre,
                 Descripcion = elProducto.Descripcion,
                 Precio = elProducto.Precio,
+                LinkImagen = elProducto.LinkImagen,
                 IdProveedor = elProducto.IdProveedor,
                 UnidadMedida = elProducto.UnidadMedida,
                 IdEstado = elProducto.IdEstado

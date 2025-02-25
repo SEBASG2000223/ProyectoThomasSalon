@@ -21,8 +21,15 @@ namespace ThomasSalon.AccesoADatos.Proveedores.Registrar
         {
             try
             {
+                bool existe = await VerficarExistenciaPorNombre(elProveedorAGuardar);
+
+                if (existe)
+                {
+                    return 0;
+                }
+
                 _elContexto.ProveedoresTabla.Add(elProveedorAGuardar);
-                EntityState estado = _elContexto.Entry(elProveedorAGuardar).State = System.Data.Entity.EntityState.Added;
+                _elContexto.Entry(elProveedorAGuardar).State = System.Data.Entity.EntityState.Added;
                 int cantidadDeDatosGuardados = await _elContexto.SaveChangesAsync();
                 return cantidadDeDatosGuardados;
             }
@@ -30,6 +37,12 @@ namespace ThomasSalon.AccesoADatos.Proveedores.Registrar
             {
                 return 0;
             }
+        }
+
+        private async Task<bool> VerficarExistenciaPorNombre(ProveedoresTabla elProveedorAGuardar)
+        {
+            return await _elContexto.ProveedoresTabla
+                .AnyAsync(p => p.Nombre == elProveedorAGuardar.Nombre);
         }
     }
 }

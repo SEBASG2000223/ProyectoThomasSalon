@@ -41,12 +41,29 @@ namespace ThomasSalon.UI.Controllers
             List<ServiciosDto> laListaDeServicios = _listarServicios.Listar();
             return View(laListaDeServicios);
         }
+        // GET: Servicios
+        public ActionResult Servicios()
+        {
+            List<ServiciosDto> laListaDeServicios = _listarServicios.Listar();
+            return View(laListaDeServicios);
+        }
+
+        // GET: Servicios
+        public ActionResult ObtenerServiciosParcial()
+        {
+            List<ServiciosDto> laListaDeServicios = _listarServicios.Listar();
+            return PartialView("_Servicios", laListaDeServicios);
+        }
 
         // GET: Servicios/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetalleServicio(int id)
         {
-            return View();
+            ServiciosDto servicios = _obtenerServiciosPorId.Obtener(id);
+            return View(servicios);
         }
+     
+
+
 
         // GET: Servicios/Create
         public ActionResult Create()

@@ -27,6 +27,7 @@ namespace ThomasSalon.AccesoADatos.Servicios.Listar
                                         Nombre = servicio.Nombre,
                                         Descripcion = servicio.Descripcion,
                                         Precio = servicio.Precio,
+                                        LinkImagen= servicio.LinkImagen,
                                         Duracion = servicio.Duracion,
                                         IdEstado = servicio.IdEstado,
                                         NombreEstado = estado.Nombre

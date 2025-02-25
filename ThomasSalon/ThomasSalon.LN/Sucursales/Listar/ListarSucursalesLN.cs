@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Sucursales.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.Listar;
+using ThomasSalon.Abstracciones.Modelos.Productos;
 using ThomasSalon.Abstracciones.Modelos.Sucursales;
 using ThomasSalon.AccesoADatos.Sucursales.Listar;
 
@@ -23,6 +24,13 @@ namespace ThomasSalon.LN.Sucursales.Listar
         {
             List<SucursalesDto> laListaDeSucursales = _listarSucursalesAD.Listar();
             return laListaDeSucursales;
+        }
+
+
+        public List<SucursalesDto> ListarSucursalesActivas()
+        {
+            List<SucursalesDto> laListaDeSucursalesActivos = _listarSucursalesAD.ListarSucursalesActivas();
+            return laListaDeSucursalesActivos;
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.CambiarEstado;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.Editar;
@@ -55,7 +52,7 @@ namespace ThomasSalon.UI.Controllers
         // GET: Productos/Create
         public ActionResult Create()
         {
-            var proveedores = _proveedores.Listar();
+            var proveedores = _proveedores.ListarActivos();
             ViewBag.Proveedores = new SelectList(proveedores, "IdProveedor", "Nombre");
 
             return View();
@@ -81,7 +78,7 @@ namespace ThomasSalon.UI.Controllers
         // GET: Productos/Edit/5
         public ActionResult Edit(int id)
         {
-            var proveedores = _proveedores.Listar();
+            var proveedores = _proveedores.ListarActivos();
             ViewBag.Proveedores = new SelectList(proveedores, "IdProveedor", "Nombre");
 
             

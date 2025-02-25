@@ -1,0 +1,23 @@
+﻿@model List<ThomasSalon.Abstracciones.Modelos.Sucursales.SucursalesDto>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Inventario Sucursales
+    </a>
+    <ul class="dropdown-menu">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var sucursal in Model)
+            {
+                <li>
+                    @Html.ActionLink(sucursal.Nombre, "ListarInventarioSucursal", "InventarioSucursal", new { idSucursal = sucursal.IdSucursal }, new { @class = "dropdown-item" })
+                </li>
+            }
+
+        }
+        else
+        {
+            <li><span class="dropdown-item text-muted">No hay sucursales disponibles</span></li>
+        }
+    </ul>
+</li>

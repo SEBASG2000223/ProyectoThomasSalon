@@ -1,0 +1,135 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Colaboradores.ColaboradoresDto>
+
+@{
+    ViewBag.Title = "ListarColaboradores";
+}
+<div class="container pt-5">
+    <h2>Listar Colaboradores</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdColaborador)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalarioDia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdEstado)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdColaborador)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalarioDia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdEstado)
+                        </td>
+                        <td>
+                            @if (item.TieneUsuario == false)
+                            {
+                                <a href="@Url.Action("RegisterUsuarioColaborador", "Account", new { id = item.IdPersona })" class="btn btn-primary btn-sm">
+                                    Crear Usuario
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="badge badge-success">Usuario Asignado</span>
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmDeleteModal" data-id="@item.IdPersona">
+                                    Quitar Usuario
+                                </button>
+                            }
+
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IdColaborador }) |
+
+                            @if (item.IdEstado == 1)
+                            {
+                                <a href="@Url.Action("Inactivar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-danger btn-sm">
+                                    Inactivar
+                                </a>
+                            }
+                            @if (item.IdEstado == 2)
+                            {
+                                <a href="@Url.Action("Activar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-success btn-sm">
+                                    Activar
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal de Confirmación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación de Eliminación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas quitar este usuario y eliminar su registro completo?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a id="confirmDeleteButton" href="#" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions{
+    public string SaberEstado(int estado)
+    {
+        if (estado == 2) return "Inactivo";
+        if (estado == 1) return "Activo";
+        return "Estado invalido";
+    }
+}
+
+@section scripts
+{
+    <script src="~/Scripts/ScriptsFront/Colaboradores/ListaDataTableColaboradores.js"></script>
+    <script>
+      
+        $('#confirmDeleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var idPersona = button.data('id'); 
+
+            
+            var deleteUrl = '@Url.Action("QuitarUsuario", "Account", new { idUsuario = "__idPersona__" })'.replace('__idPersona__', idPersona);
+            $('#confirmDeleteButton').attr('href', deleteUrl);
+        });
+    </script>
+}
+
