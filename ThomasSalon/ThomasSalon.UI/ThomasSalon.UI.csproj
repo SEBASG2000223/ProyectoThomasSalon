@@ -323,6 +323,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioGeneralController.cs" />
     <Compile Include="Controllers\InventarioSucursalController.cs" />
@@ -544,12 +545,14 @@
     <Content Include="Scripts\mail\jqBootstrapValidation.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\nicepage.js" />
+    <Content Include="Scripts\ScriptsFront\Citas\ListaDataTableCitas.js" />
     <Content Include="Scripts\ScriptsFront\Colaboradores\ListaDataTableColaboradores.js" />
     <Content Include="Scripts\ScriptsFront\Productos\ListaDataTableProductos.js" />
     <Content Include="Scripts\ScriptsFront\Proveedores\ListaDataTableProveedores.js" />
     <Content Include="Scripts\ScriptsFront\Servicios\ListaDataTableServicios.js" />
     <Content Include="Scripts\ScriptsFront\Servicios\ObtenerVistaParcialServicios.js" />
     <Content Include="Scripts\ScriptsFront\Sucursales\ListaDataTableSucursales.js" />
+    <Content Include="Scripts\ScriptsFront\Sucursales\ObtenerVistaParcialSucursales.js" />
     <Content Include="Scripts\ScriptsFront\Usuarios\ListaDataTableUsuarios.js" />
     <Content Include="Scripts\ScriptsFront\Usuarios\ObtenerVistaParcialAdministradores.js" />
     <Content Include="Scripts\ScriptsFront\Usuarios\ObtenerVistaParcialSoloUsuarios.js" />
@@ -620,7 +623,7 @@
     <Content Include="Views\InventarioSucursal\ListarInventarioSucursal.cshtml" />
     <Content Include="Views\InventarioSucursal\AgregarInventarioSucursal.cshtml" />
     <Content Include="Views\InventarioSucursal\DetallesProducto.cshtml" />
-    <Content Include="Views\Shared\_DropdownSucursales.cshtml" />
+    <Content Include="Views\Shared\_DropdownSucursalesInventarios.cshtml" />
     <Content Include="Views\Personas\Index.cshtml" />
     <Content Include="Views\Personas\Create.cshtml" />
     <Content Include="Views\Personas\Edit.cshtml" />
@@ -632,9 +635,19 @@
     <Content Include="Views\Productos\servicios\Servicios.cshtml" />
     <Content Include="Views\Productos\servicios\_Servicios.cshtml" />
     <Content Include="Views\InventarioSucursal\ActualizarInventario.cshtml" />
+
+    <Content Include="Views\Sucursales\_Sucursales.cshtml" />
+    <Content Include="Views\Sucursales\Sucursales.cshtml" />
+
+
+    <Content Include="Views\Citas\ListarAgendas.cshtml" />
+    <Content Include="Views\Shared\_DropdownSucursalesAgendas.cshtml" />
+
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Productos\Productos.cshtml" />
     <Content Include="Views\Productos\VerCarrito.cshtml" />
+
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

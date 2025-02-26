@@ -26,7 +26,6 @@ namespace ThomasSalon.UI.Controllers
         IListarInventarioSucursalLN _listarInventarioSucursal;
         ICrearInventarioSucursalLN _crearInventarioSucursal;
         IObtenerProductosPorIdLN _obtenerProductosPorId;
-        IListarProductosLN _productosListar;
         IListarSucursalesLN _sucursalesListar;
         IListarProductosLN _listarProductos;
         IEditarInventarioSucursalLN _editarInventarioSucursal;
@@ -38,7 +37,6 @@ namespace ThomasSalon.UI.Controllers
             _listarInventarioSucursal = new ListarInventarioSucursalLN();
             _crearInventarioSucursal = new CrearInventarioSucursalLN();
             _obtenerProductosPorId = new ObtenerProductosPorIdLN();
-            _productosListar = new ListarProductosLN();
             _sucursalesListar = new ListarSucursalesLN();
             _listarProductos = new ListarProductosLN();
             _editarInventarioSucursal = new EditarInventarioSucursalLN();
@@ -60,8 +58,6 @@ namespace ThomasSalon.UI.Controllers
         }
 
 
-
-
         // GET: Productos/Details/5
         public ActionResult DetallesProducto(int id)
         {
@@ -79,20 +75,14 @@ namespace ThomasSalon.UI.Controllers
         }
 
 
-
-
-
         // GET: InventarioSucursal/AgregarInventarioSucursal
         public ActionResult AgregarInventarioSucursal()
-
         {
-            // Recuperar el idSucursal desde TempData y convertirlo con Convert.ToInt32
             var idSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
 
-            var productos = _productosListar.ListarProductosActivos();
+            var productos = _listarInventarioSucursal.ListarProductosActivos(idSucursal); // Aquí pasamos idSucursal
             ViewBag.Productos = new SelectList(productos, "IdProducto", "Nombre");
 
-            // Asignar el idSucursal al modelo si es necesario
             var modelo = new InventarioSucursalDto
             {
                 IdSucursal = idSucursal
@@ -100,6 +90,7 @@ namespace ThomasSalon.UI.Controllers
 
             return View(modelo);
         }
+
 
 
         // POST: InventarioSucursal/AgregarInventarioSucursal
@@ -114,7 +105,7 @@ namespace ThomasSalon.UI.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                var productos = _productosListar.ListarProductosActivos();
+                var productos = _listarInventarioSucursal.ListarProductosActivos(modelo.IdSucursal);
                 ViewBag.Productos = new SelectList(productos, "IdProducto", "Nombre");
 
                 ViewBag.Mensaje = ex.Message;
@@ -123,7 +114,7 @@ namespace ThomasSalon.UI.Controllers
             }
             catch (Exception ex)
             {
-                var productos = _productosListar.ListarProductosActivos();
+                var productos = _listarInventarioSucursal.ListarProductosActivos(modelo.IdSucursal);
                 ViewBag.Productos = new SelectList(productos, "IdProducto", "Nombre");
 
                 ViewBag.Mensaje = "Ocurrió un error inesperado.";
@@ -132,17 +123,13 @@ namespace ThomasSalon.UI.Controllers
         }
 
 
-
-
-
-
         // GET: InventarioSucursal/Edit/5
         public ActionResult ActualizarInventario(int id)
         {
             // Recuperar el idSucursal desde TempData y convertirlo con Convert.ToInt32
             var idSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
 
-            InventarioSucursalDto elInventario = _obtenerInventarioSucursal.Obtener(id);
+            InventarioSucursalDto elInventario = _obtenerInventarioSucursal.Obtener(id, idSucursal);
 
             var modelo = new InventarioSucursalDto
             {

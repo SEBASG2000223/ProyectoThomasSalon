@@ -25,8 +25,12 @@ namespace ThomasSalon.AccesoADatos
 
 
             modelBuilder.Entity<ServiciosTabla>().ToTable("SERVICIOS");
+            modelBuilder.Entity<TipoServiciosTabla>().ToTable("TIPOS_SERVICIOS");
             modelBuilder.Entity<ColaboradoresTabla>().ToTable("COLABORADORES");
             modelBuilder.Entity<PersonasTabla>().ToTable("Personas");
+
+            modelBuilder.Entity<CitasTabla>().ToTable("CITAS");
+            modelBuilder.Entity<EstadoCitaTabla>().ToTable("ESTADO_CITA");
 
 
             modelBuilder.Entity<InventarioGeneralTabla>().ToTable("INVENTARIO_GENERAL");
@@ -45,7 +49,9 @@ namespace ThomasSalon.AccesoADatos
         public DbSet<RolesTabla> RolesTabla { get; set; }
         public DbSet<UserRolesTabla> UserRolesTabla { get; set; }
 
-
+        public DbSet<CitasTabla> CitasTabla { get; set; }
+        public DbSet<EstadoCitaTabla> EstadoCitaTabla { get; set; }
+        public DbSet<TipoServiciosTabla> TipoServiciosTabla { get; set; }
         public DbSet<ServiciosTabla> ServiciosTabla { get; set; }
         public DbSet<ColaboradoresTabla> ColaboradoresTabla { get; set; }
         public DbSet<InventarioGeneralTabla> InventarioGeneralTabla { get; set; }

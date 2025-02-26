@@ -13,10 +13,12 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.ObtenerPorId
         {
             _elContexto = new Contexto();
         }
-        public InventarioSucursalTabla Obtener(int idProducto)
+        public InventarioSucursalTabla Obtener(int idProducto, int idSucursal)
         {
-            InventarioSucursalTabla elInventarioEnTabla = _elContexto.InventarioSucursalTabla.Where(elInventaio => elInventaio.IdProducto == idProducto).FirstOrDefault();
-            return elInventarioEnTabla;
+            return _elContexto.InventarioSucursalTabla
+                .Where(inventario => inventario.IdProducto == idProducto && inventario.IdSucursal == idSucursal)
+                .FirstOrDefault();
         }
+
     }
 }

@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\Citas\IListarCitasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Editar\IEditarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Listar\IListarColaboradoresAD.cs" />
@@ -85,11 +86,13 @@
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Listar\IListarSucursalesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\ObtenerPoId\IObtenerSucursalesPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Sucursales\Registrar\IRegistrarSucursalesAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\TipoServicios\Listar\IListarTipoServiciosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\CambiarEstado\ICambiarEstadoUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Editar\IEditarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Listar\IListarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosAD.cs" />
+    <Compile Include="LN\Interfaces\Citas\IListarCitasLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\Editar\IEditarColaboradoresLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\Listar\IListarColaboradoresLN.cs" />
@@ -132,11 +135,14 @@
     <Compile Include="LN\Interfaces\Sucursales\Listar\IListarSucursalesLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\ObtenerPorId\IObtenerSucursalesPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Sucursales\Registrar\IRegistrarSucursalesLN.cs" />
+    <Compile Include="LN\Interfaces\TipoServicios\Listar\IListarTipoServiciosLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\CambiarEstado\ICambiarEstadoUsuariosLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\Editar\IEditarUsuariosLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\Listar\IListarUsuariosLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosLN.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\CitasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\EstadoCitaTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoDisponibilidadTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\InventarioGeneralTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\InventarioSucursalTabla.cs" />
@@ -146,10 +152,12 @@
     <Compile Include="ModelosDeBaseDeDatos\ProveedoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\RolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\TipoServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UserRolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UsuariosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
+    <Compile Include="Modelos\Citas\CitasDto.cs" />
     <Compile Include="Modelos\Colaboradores\ColaboradoresDto.cs" />
     <Compile Include="Modelos\InventarioGeneral\InventarioGeneralDto.cs" />
     <Compile Include="Modelos\InventarioSucursal\InventarioSucursalDto.cs" />
@@ -158,15 +166,14 @@
     <Compile Include="Modelos\Proveedores\ProveedoresDto.cs" />
     <Compile Include="Modelos\Servicios\ServiciosDto.cs" />
     <Compile Include="Modelos\Sucursales\SucursalesDto.cs" />
+    <Compile Include="Modelos\TiposServicios\TiposServiciosDto.cs" />
     <Compile Include="Modelos\Usuarios\UsuariosDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modelos\Roles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

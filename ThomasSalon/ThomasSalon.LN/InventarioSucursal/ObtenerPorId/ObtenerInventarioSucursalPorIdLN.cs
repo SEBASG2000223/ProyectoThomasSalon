@@ -16,12 +16,12 @@ namespace ThomasSalon.LN.InventarioSucursal.ObtenerPorId
             _obtenerPorIdAD = new ObtenerInventarioSucursalPorIdAD();
         }
 
-        public InventarioSucursalDto Obtener(int idProducto)
+        public InventarioSucursalDto Obtener(int idProducto, int idSucursal)
         {
-            InventarioSucursalTabla elInventarioEnDb = _obtenerPorIdAD.Obtener(idProducto);
-            InventarioSucursalDto elInventarioAMostrar = ConvertirAProductoAMostrar(elInventarioEnDb);
-            return elInventarioAMostrar;
+            InventarioSucursalTabla elInventarioEnDb = _obtenerPorIdAD.Obtener(idProducto, idSucursal);
+            return ConvertirAProductoAMostrar(elInventarioEnDb);
         }
+
 
         private InventarioSucursalDto ConvertirAProductoAMostrar(InventarioSucursalTabla elInventarioEnDb)
         {

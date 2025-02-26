@@ -2,6 +2,7 @@
 using ThomasSalon.Abstracciones.AccesoADatos.InventarioSucursal;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal;
 using ThomasSalon.Abstracciones.Modelos.InventarioSucursal;
+using ThomasSalon.Abstracciones.Modelos.Productos;
 using ThomasSalon.AccesoADatos.InventarioSucursal.Listar;
 
 namespace ThomasSalon.LN.InventarioSucursal.Listar
@@ -19,5 +20,15 @@ namespace ThomasSalon.LN.InventarioSucursal.Listar
             List<InventarioSucursalDto> laListaDeInventario = _listarInventarioSucursalAD.Listar(idSucursal);
             return laListaDeInventario;
         }
+
+        public List<ProductosDto> ListarProductosActivos(int idSucursal)
+        {
+            List<ProductosDto> laListaDeProductosActivos = _listarInventarioSucursalAD.ListarProductosActivos(idSucursal);
+            return laListaDeProductosActivos;
+        }
+
+        
+
+
     }
 }
