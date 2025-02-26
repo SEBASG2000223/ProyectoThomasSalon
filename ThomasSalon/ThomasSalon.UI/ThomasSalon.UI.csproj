@@ -362,12 +362,20 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\ComponentesExternos\DataTable\dataTables.dataTables.min.css" />
+    <Content Include="Content\css\estilo.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\img\about.jpg" />
+    <Content Include="Content\img\boxengasse.png" />
     <Content Include="Content\img\carousel-1.jpg" />
     <Content Include="Content\img\carousel-2.jpg" />
     <Content Include="Content\img\carousel-3.jpg" />
+    <Content Include="Content\img\englishrose.png" />
+    <Content Include="Content\img\header.jpg" />
+    <Content Include="Content\img\knocknap.png" />
+    <Content Include="Content\img\lanight.png" />
+    <Content Include="Content\img\middlesteel.png" />
+    <Content Include="Content\img\midimix.png" />
     <Content Include="Content\img\opening.jpg" />
     <Content Include="Content\img\pricing.jpg" />
     <Content Include="Content\img\service-1.jpg" />
@@ -376,6 +384,9 @@
     <Content Include="Content\img\service-4.jpg" />
     <Content Include="Content\img\service-5.jpg" />
     <Content Include="Content\img\service-6.jpg" />
+    <Content Include="Content\img\silverall.png" />
+    <Content Include="Content\img\sirblue.png" />
+    <Content Include="Content\img\skinglam.png" />
     <Content Include="Content\img\team-1.jpg" />
     <Content Include="Content\img\team-2.jpg" />
     <Content Include="Content\img\team-3.jpg" />
@@ -499,6 +510,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Carrito\app.js" />
     <Content Include="Scripts\ComponentesExternos\DataTable\dataTables.min.js" />
     <Content Include="Scripts\ComponentesExternos\SweetAlert\sweetalert2%4011.js" />
     <Content Include="Scripts\intlTelInput\intlTelInput.min.js" />
@@ -622,11 +634,18 @@
     <Content Include="Views\Productos\servicios\Servicios.cshtml" />
     <Content Include="Views\Productos\servicios\_Servicios.cshtml" />
     <Content Include="Views\InventarioSucursal\ActualizarInventario.cshtml" />
+
     <Content Include="Views\Citas\ListarAgendas.cshtml" />
     <Content Include="Views\Shared\_DropdownSucursalesAgendas.cshtml" />
+
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Productos\Productos.cshtml" />
+    <Content Include="Views\Productos\VerCarrito.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\css\Carrito\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">

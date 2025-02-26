@@ -48,7 +48,7 @@ namespace ThomasSalon.UI.Controllers
         // GET: Servicios
         public ActionResult Servicios()
         {
-            List<ServiciosDto> laListaDeServicios = _listarServicios.Listar();
+            List<ServiciosDto> laListaDeServicios = _listarServicios.ListarActivos();
             return View(laListaDeServicios);
         }
 

@@ -42,6 +42,13 @@ namespace ThomasSalon.UI.Controllers
             List<ProductosDto> laListaDeProductos = _listarProductos.Listar();
             return View(laListaDeProductos);
         }
+        // GET: Productos
+        public ActionResult Productos()
+         {
+            List<ProductosDto> laListaDeProductos = _listarProductos.ProductosActivos();
+            return View(laListaDeProductos);
+        }
+
 
         // GET: Productos/Details/5
         public ActionResult Details(int id)

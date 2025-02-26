@@ -12,5 +12,6 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.Productos.Listar
     {
         List<ProductosDto> Listar();
         Dictionary<int, string> ObtenerProveedoresPorProducto();
+        List<ProductosDto> ProductosActivos();
     }
 }
