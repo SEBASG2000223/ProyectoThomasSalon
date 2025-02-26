@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Sucursales.SucursalesDto>
+
+@{
+    ViewBag.Title = "Sucursales";
+}
+
+<div class="jumbotron jumbotron-fluid bg-light text-dark mb-5">
+    <div class="container py-5">
+        <div class="row mx-0 justify-content-center text-center">
+            <div class="col-lg-6">
+                <h6 class="d-inline-block bg-primary text-white text-uppercase py-1 px-2">Nuestras Sucursales</h6>
+                <h1 class="display-4">Visítanos en estos lugares</h1>
+                <p class="lead">Encuentra la sucursal más cercana para disfrutar de nuestros servicios.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="owl-carousel branch-carousel">
+                @foreach (var item in Model)
+                {
+                    <div class="branch-item position-relative">
+                        <img class="img-fluid" src="@item.LinkImagen" alt="@item.Nombre">
+                        <div class="branch-text text-center">
+                            <h4 class="text-white font-weight-medium px-3">@item.Nombre</h4>
+                            <p class="text-white px-3 mb-3">
+                                <a href="@item.LinkDireccion" target="_blank">Ver Dirección</a>
+                            </p>
+                            <p class="text-white px-3 mb-3">Teléfono: @item.Telefono</p>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @section scripts
+{
+        <script src="~/Scripts/ScriptsFront/Sucursales/ObtenerVistaParcialSucursales.js"></script>
+    }

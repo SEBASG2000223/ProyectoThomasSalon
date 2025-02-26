@@ -552,6 +552,7 @@
     <Content Include="Scripts\ScriptsFront\Servicios\ListaDataTableServicios.js" />
     <Content Include="Scripts\ScriptsFront\Servicios\ObtenerVistaParcialServicios.js" />
     <Content Include="Scripts\ScriptsFront\Sucursales\ListaDataTableSucursales.js" />
+    <Content Include="Scripts\ScriptsFront\Sucursales\ObtenerVistaParcialSucursales.js" />
     <Content Include="Scripts\ScriptsFront\Usuarios\ListaDataTableUsuarios.js" />
     <Content Include="Scripts\ScriptsFront\Usuarios\ObtenerVistaParcialAdministradores.js" />
     <Content Include="Scripts\ScriptsFront\Usuarios\ObtenerVistaParcialSoloUsuarios.js" />
@@ -635,12 +636,17 @@
     <Content Include="Views\Productos\servicios\_Servicios.cshtml" />
     <Content Include="Views\InventarioSucursal\ActualizarInventario.cshtml" />
 
+    <Content Include="Views\Sucursales\_Sucursales.cshtml" />
+    <Content Include="Views\Sucursales\Sucursales.cshtml" />
+
+
     <Content Include="Views\Citas\ListarAgendas.cshtml" />
     <Content Include="Views\Shared\_DropdownSucursalesAgendas.cshtml" />
 
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Productos\Productos.cshtml" />
     <Content Include="Views\Productos\VerCarrito.cshtml" />
+
 
   </ItemGroup>
   <ItemGroup>

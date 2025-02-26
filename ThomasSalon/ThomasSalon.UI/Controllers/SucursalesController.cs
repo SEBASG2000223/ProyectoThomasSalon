@@ -42,6 +42,20 @@ namespace ThomasSalon.UI.Controllers
             return View(laListaDeSucursales);
         }
 
+        //GET: Sucursalres
+        public ActionResult Sucursales()
+        {
+            List<SucursalesDto> laListaDeSucursales = _listarSucursales.Listar();
+            return View(laListaDeSucursales);
+        }
+        
+        // GET: Sucursales
+        public ActionResult ObtenerSucursalesParcial()
+        {
+            List<SucursalesDto> laListaDeSucursales = _listarSucursales.Listar();
+            return PartialView("_Sucursales", laListaDeSucursales);
+        }
+
         // GET: Sucursales/Details/5
         public ActionResult Details(int id)
         {
@@ -137,5 +151,8 @@ namespace ThomasSalon.UI.Controllers
 
 
         }
+
+        
+
     }
 }
