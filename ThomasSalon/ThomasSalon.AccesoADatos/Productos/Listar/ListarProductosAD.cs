@@ -63,6 +63,29 @@ namespace ThomasSalon.AccesoADatos.Productos.Listar
         }
 
 
+        public List<ProductosDto> ProductosActivos()
+        {
+            List<ProductosDto> laListaDeProductos = (from elProducto in _elContexto.ProductosTabla
+                                                     join elProveedor in _elContexto.ProveedoresTabla
+                                                     on elProducto.IdProveedor equals elProveedor.IdProveedor
+                                                     join elEstado in _elContexto.EstadoDisponibilidadTabla
+                                                     on elProducto.IdEstado equals elEstado.IdEstado
+                                                     where elProducto.IdEstado == 1
+                                                     select new ProductosDto
+                                                     {
+                                                         IdProducto = elProducto.IdProducto,
+                                                         Nombre = elProducto.Nombre,
+                                                         Descripcion = elProducto.Descripcion,
+                                                         Precio = elProducto.Precio,
+                                                         IdProveedor = elProducto.IdProveedor,
+                                                         NombreProveedor = elProveedor.Nombre,
+                                                         LinkImagen = elProducto.LinkImagen,
+                                                         UnidadMedida = elProducto.UnidadMedida,
+                                                         IdEstado = elProducto.IdEstado,
+                                                         NombreEstado = elEstado.Nombre
+                                                     }).ToList();
+            return laListaDeProductos;
+        }
 
 
 

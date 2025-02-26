@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Citas.CitasDto>
+
+@{
+    ViewBag.Title = "Listar Agendas";
+}
+
+<div class="container pt-5">
+    <h2 class="text-center">Lista de Citas</h2>
+
+    <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+        Agendar Cita
+    </a>
+
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCita)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreServicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreUsuario)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaHora)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comentario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdEstadoCita)
+                    </th>
+
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdCita)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreServicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreUsuario)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaHora)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comentario)
+                        </td>
+
+                        @{
+                            var estado = "";
+                            if (item.IdEstadoCita == Guid.Parse("D761D2B2-0459-4BB8-AD4D-0B9B706DD6F7"))
+                            {
+                                estado = "Agendada";
+                            }
+                            else
+                            {
+                                estado = "Cancelada";
+                            }
+                        }
+
+                        <td>
+                            @Html.DisplayFor(modelItem => estado)
+                        </td>
+
+
+
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/ScriptsFront/Citas/ListaDataTableCitas.js"></script>
+}

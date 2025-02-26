@@ -41,7 +41,9 @@ namespace ThomasSalon.Abstracciones.Modelos.Usuarios
 
         public string Telefono { get; set; }
 
+        [Display(Name = "Estado", Description = "Estado")]
         public string NombreEstado { get; set; }
+        [Display(Name = "Rol", Description = "Rol")]
 
         public string NombreRol { get; set; }
     }

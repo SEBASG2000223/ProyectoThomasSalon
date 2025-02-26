@@ -13,7 +13,7 @@
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="https://www.shutterstock.com/image-photo/businessman-working-graph-papers-laptop-600nw-2028087155.jpg"
+                            <img src="https://i.pinimg.com/474x/9e/86/b5/9e86b51120952be344df8f9f6da54eee.jpg"
                                  alt="register form" class="img-fluid"
                                  style="border-radius: 1rem 0 0 1rem; width: 100%; height: 100%; object-fit: cover;" />
                         </div>
@@ -26,12 +26,10 @@
 
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
-                                        <i class="fas fa-user-plus fa-2x me-3" style="color: #ff6219;"></i>
                                         <span class="text-center h1 fw-bold mb-0">Registro de Usuario</span>
                                     </div>
 
-                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Crea una cuenta nueva</h5>
-
+<br />
                                     @Html.ValidationSummary("", new { @class = "text-danger" })
 
                                     <div class="form-outline mb-4">
@@ -60,18 +58,17 @@
                                         @Html.ValidationMessageFor(m => m.Persona.Direccion, "", new { @class = "text-danger" })
                                     </div>
 
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Persona.Genero, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.DropDownListFor(model => model.Persona.Genero, new SelectList(new[]
-                                            {
-                                                new { Value = "M", Text = "Masculino" },
-                                                new { Value = "F", Text = "Femenino" },
-                                                new { Value = "O", Text = "Otro" }
-                                            }, "Value", "Text"), "-- Seleccione Género --", new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Persona.Genero, "", new { @class = "text-danger" })
-                                        </div>
+                                    <div class="form-outline mb-4">
+                                        <label>Género</label>
+                                        @Html.DropDownListFor(m => m.Persona.Genero, new SelectList(new[]
+                                        {
+                                            new { Value = "M", Text = "Masculino" },
+                                            new { Value = "F", Text = "Femenino" },
+                                            new { Value = "O", Text = "Otro" }
+                                        }, "Value", "Text"), "-- Seleccione Género --", new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(m => m.Persona.Genero, "", new { @class = "text-danger" })
                                     </div>
+
 
                                     <div class="form-outline mb-4">
                                         <label>Edad</label>

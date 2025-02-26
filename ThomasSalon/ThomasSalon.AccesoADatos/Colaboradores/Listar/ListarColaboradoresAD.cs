@@ -50,6 +50,7 @@ namespace ThomasSalon.AccesoADatos.Colaboradores.Listar
                                                                  IdEstado = c.IdEstado,
                                                                  NombreEstado = e.Nombre,
                                                                  Nombre = p.Nombre,
+                                                                 SalarioDia = c.SalarioDia,
                                                                  Telefono = p.Telefono,
                                                                  Genero = p.Genero,
                                                                  Direccion = p.Direccion,

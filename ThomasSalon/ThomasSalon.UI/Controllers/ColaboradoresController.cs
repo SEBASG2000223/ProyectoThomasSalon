@@ -9,14 +9,19 @@ using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Editar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Registrar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Personas.Editar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Personas.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.Personas.Registrar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Usuarios.QuitarUsuarios;
 using ThomasSalon.Abstracciones.Modelos.Colaboradores;
+using ThomasSalon.Abstracciones.Modelos.Personas;
 using ThomasSalon.LN.Colaboradores.CambiarEstado;
 using ThomasSalon.LN.Colaboradores.Editar;
 using ThomasSalon.LN.Colaboradores.Listar;
 using ThomasSalon.LN.Colaboradores.ObtenerPorId;
 using ThomasSalon.LN.Colaboradores.Registrar;
+using ThomasSalon.LN.Personas.Editar;
+using ThomasSalon.LN.Personas.ObtenerPorId;
 using ThomasSalon.LN.Personas.Registrar;
 using ThomasSalon.LN.Usuarios.QuitarUsuarios;
 
@@ -31,6 +36,8 @@ namespace ThomasSalon.UI.Controllers
         IObtenerColaboradoresPorIdLN _obtenerColaboradoresPorId;
         IRegistrarPersonasLN _registrarPersonas;
         IQuitarUsuariosLN _quitarUsuariosLN;
+        IObtenerPersonasPorIdLN _obtenerPersonasPorId;
+        IEditarPersonasLN _editarPersonasLN;
 
         public ColaboradoresController()
         {
@@ -41,6 +48,8 @@ namespace ThomasSalon.UI.Controllers
             _obtenerColaboradoresPorId = new ObtenerColaboradoresPorIdLN();
             _registrarPersonas = new RegistrarPersonasLN();
             _quitarUsuariosLN = new QuitarUsuariosLN();
+            _obtenerPersonasPorId = new ObtenerPersonasPorIdLN();
+            _editarPersonasLN = new EditarPersonasLN();
         }
 
 
@@ -102,10 +111,13 @@ namespace ThomasSalon.UI.Controllers
         public ActionResult Edit(int id)
         {
             ColaboradoresDto elColaborador = _obtenerColaboradoresPorId.Obtener(id);
+
             elColaborador.IdEstado = 1;
 
             return View(elColaborador);
         }
+
+
 
         // POST: Colaboradores/Edit/5
         [HttpPost]
@@ -113,7 +125,11 @@ namespace ThomasSalon.UI.Controllers
         {
             try
             {
-                int cantidadDeDatosEditados = await _editarColaboradores.Editar(elColaborador);
+                await _editarColaboradores.Editar(elColaborador);
+                if (elColaborador.Persona != null)
+                {
+                    await _editarPersonasLN.Editar(elColaborador.Persona);
+                }
                 return RedirectToAction("ListarColaboradores");
             }
             catch

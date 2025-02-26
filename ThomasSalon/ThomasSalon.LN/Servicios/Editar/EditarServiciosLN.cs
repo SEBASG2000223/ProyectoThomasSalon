@@ -33,7 +33,8 @@ namespace ThomasSalon.LN.Servicios.Editar
                 LinkImagen = elServicio.LinkImagen,
                 Descripcion = elServicio.Descripcion,
                 Precio = elServicio.Precio,
-                Duracion = elServicio.Duracion
+                Duracion = elServicio.Duracion,
+                IdTipoServicios = elServicio.IdTipoServicios
             };
         }
     }
