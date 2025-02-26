@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Citas\Listar\ListarCitasLN.cs" />
     <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresLN.cs" />
     <Compile Include="Colaboradores\Editar\EditarColaboradoresLN.cs" />
     <Compile Include="Colaboradores\Listar\ListarColaboradoresLN.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Sucursales\Listar\ListarSucursalesLN.cs" />
     <Compile Include="Sucursales\ObtenerPorId\ObtenerSucursalesPorIdLN.cs" />
     <Compile Include="Sucursales\Registrar\RegistrarSucursalesLN.cs" />
+    <Compile Include="TipoServicios\Listar\ListarTipoServiciosLN.cs" />
     <Compile Include="Usuarios\CambiarEstado\CambiarEstadoUsuariosLN.cs" />
     <Compile Include="Usuarios\Editar\EditarUsuariosLN.cs" />
     <Compile Include="Usuarios\Listar\ListarUsuariosLN.cs" />
@@ -111,7 +113,10 @@
       <Name>ThomasSalon.AccesoADatos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Citas\Agregar\" />
+    <Folder Include="Citas\CambiarEstado\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

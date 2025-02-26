@@ -9,12 +9,14 @@ using ThomasSalon.Abstracciones.LN.Interfaces.Servicios.Editar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Servicios.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Servicios.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.Servicios.Registrar;
+using ThomasSalon.Abstracciones.LN.Interfaces.TipoServicios.Listar;
 using ThomasSalon.Abstracciones.Modelos.Servicios;
 using ThomasSalon.LN.Servicios.CambiarEstado;
 using ThomasSalon.LN.Servicios.Editar;
 using ThomasSalon.LN.Servicios.Listar;
 using ThomasSalon.LN.Servicios.ObtenerPorId;
 using ThomasSalon.LN.Servicios.Registrar;
+using ThomasSalon.LN.TipoServicios.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
@@ -25,6 +27,7 @@ namespace ThomasSalon.UI.Controllers
         IEditarServiciosLN _editarServicios;
         ICambiarEstadoServiciosLN _cambiarEstado;
         IObtenerServiciosPorIdLN _obtenerServiciosPorId;
+        IListarTipoServiciosLN _listarTipoServicios;
 
         public ServiciosController()
         {
@@ -33,6 +36,7 @@ namespace ThomasSalon.UI.Controllers
             _editarServicios = new EditarServiciosLN();
             _cambiarEstado = new CambiarEstadoServiciosLN();
             _obtenerServiciosPorId = new ObtenerServiciosPorIdLN();
+            _listarTipoServicios = new ListarTipoServiciosLN();
         }
 
         // GET: Servicios
@@ -61,13 +65,15 @@ namespace ThomasSalon.UI.Controllers
             ServiciosDto servicios = _obtenerServiciosPorId.Obtener(id);
             return View(servicios);
         }
-     
+
 
 
 
         // GET: Servicios/Create
         public ActionResult Create()
         {
+            var listaTiposServicio = _listarTipoServicios.Listar();
+            ViewBag.TiposServicios = new SelectList(listaTiposServicio, "IdTipoServicios", "Nombre");
             return View();
         }
 
@@ -82,16 +88,25 @@ namespace ThomasSalon.UI.Controllers
             }
             catch
             {
-                return View();
+                var listaTiposServicio = _listarTipoServicios.Listar();
+                ViewBag.TiposServicios = new SelectList(listaTiposServicio, "IdTipoServicios", "Nombre");
+                return View(modelo);
             }
         }
+
+
 
         // GET: Servicios/Edit/5
         public ActionResult Edit(int id)
         {
             ServiciosDto elServicio = _obtenerServiciosPorId.Obtener(id);
+
+            var listaTiposServicio = _listarTipoServicios.Listar();
+            ViewBag.TiposServicios = new SelectList(listaTiposServicio, "IdTipoServicios", "Nombre");
+
             return View(elServicio);
         }
+
 
         // POST: Servicios/Edit/5
         [HttpPost]
@@ -99,14 +114,20 @@ namespace ThomasSalon.UI.Controllers
         {
             try
             {
+                var listaTiposServicio = _listarTipoServicios.Listar();
+                ViewBag.TiposServicios = new SelectList(listaTiposServicio, "IdTipoServicios", "Nombre");
+
                 int cantidadDeDatosEditados = await _editarServicios.Editar(elServicio);
                 return RedirectToAction("ListarServicios");
             }
             catch
             {
-                return View();
+                var listaTiposServicio = _listarTipoServicios.Listar();
+                ViewBag.TiposServicios = new SelectList(listaTiposServicio, "IdTipoServicios", "Nombre");
+                return View(elServicio);
             }
         }
+
 
         public async Task<ActionResult> Activar(int id)
         {

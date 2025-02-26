@@ -30,6 +30,7 @@ namespace ThomasSalon.AccesoADatos.Servicios.Listar
                                         LinkImagen= servicio.LinkImagen,
                                         Duracion = servicio.Duracion,
                                         IdEstado = servicio.IdEstado,
+                                        IdTipoServicios = servicio.IdTipoServicios,
                                         NombreEstado = estado.Nombre
                                     }).ToList();
             return listaDeServicios;
