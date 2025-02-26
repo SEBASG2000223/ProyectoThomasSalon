@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.InventarioGeneral.InventarioGeneralDto>
+
+@{
+    ViewBag.Title = "ListarInventarioGeneral";
+}
+<div class="container">
+
+
+    <h2>Inventario General</h2>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-warning">
+            @ViewBag.Mensaje
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.IdProducto)</th>
+                    <th>@Html.DisplayNameFor(model => model.NombreProducto)</th>
+                    <th>@Html.DisplayNameFor(model => model.Precio)</th>
+                    <th>@Html.DisplayNameFor(model => model.CantidadTotal)</th>
+                    <th>@Html.DisplayNameFor(model => model.NombreProveedor)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdEstado)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.IdProducto)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NombreProducto)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CantidadTotal)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NombreProveedor)</td>
+
+                        @{
+                            string estado = "";
+                            if (item.IdEstado == 1)
+                            {
+                                estado = "Activo";
+                            }
+                            else
+                            {
+                                estado = "Inactivo";
+                            }
+
+                        }
+                        <td>@Html.DisplayFor(modelItem => @estado)</td>
+                        <td>
+                            <a href="@Url.Action("DetallesProducto", "InventarioGeneral", new { id = item.IdProducto })" class="btn btn-info btn-sm">
+                                Detalles del producto
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script src="~/Scripts/ScriptsFront/Productos/ListaDataTableProductos.js"></script>
+}

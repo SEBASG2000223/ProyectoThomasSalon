@@ -32,8 +32,11 @@ namespace ThomasSalon.LN.Servicios.Registrar
                 Nombre = elServicio.Nombre,
                 Descripcion = elServicio.Descripcion,
                 Precio = elServicio.Precio,
+                LinkImagen = elServicio.LinkImagen,
                 Duracion = elServicio.Duracion,
-                IdEstado = elServicio.IdEstado
+                IdEstado = elServicio.IdEstado,
+                IdTipoServicios = elServicio.IdTipoServicios
+            
             };
         }
     }

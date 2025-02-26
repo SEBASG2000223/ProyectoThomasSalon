@@ -10,5 +10,7 @@ namespace ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Colaboradores.Regist
     public interface IRegistrarColaboradoresAD
     {
         Task<int> Registrar(ColaboradoresTabla elColaboradorAGuardar);
+
+        Task<int> Inactivar(int idPersona);
     }
 }

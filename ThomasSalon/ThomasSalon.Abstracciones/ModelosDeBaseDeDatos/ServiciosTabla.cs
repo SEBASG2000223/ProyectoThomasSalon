@@ -16,5 +16,7 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
         public decimal Precio { get; set; }
         public TimeSpan Duracion { get; set; }
         public int IdEstado { get; set; }
+        public int IdTipoServicios { get; set; }
+        public string LinkImagen { get; set; }
     }
 }

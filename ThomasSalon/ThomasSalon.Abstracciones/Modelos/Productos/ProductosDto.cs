@@ -9,7 +9,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Productos
 {
     public class ProductosDto
     {
-        [Display(Name = "Id Producto", Description = "Id Producto")]
+        [Display(Name = "Identificador", Description = "Id Producto")]
         public int IdProducto { get; set; }
 
         [Display(Name = "Nombre", Description = "Nombre")]
@@ -24,7 +24,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Productos
         [Required]
         public decimal Precio { get; set; }
 
-        [Display(Name = "Id Proveedor", Description = "Id Proveedor")]
+        [Display(Name = "Proveedor", Description = "Proveedor")]
         [Required]
         public int IdProveedor { get; set; }
 
@@ -35,6 +35,10 @@ namespace ThomasSalon.Abstracciones.Modelos.Productos
         [Display(Name = "Estado", Description = "Estado")]
         [Required]
         public int IdEstado { get; set; }
+
+        [Display(Name = "Link Imagen", Description = "Link Imagen")]
+        [Required]
+        public string LinkImagen { get; set; }
 
         public string NombreProveedor { get; set; }
 

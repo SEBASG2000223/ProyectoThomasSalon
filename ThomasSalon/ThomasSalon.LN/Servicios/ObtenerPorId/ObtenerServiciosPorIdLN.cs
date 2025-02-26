@@ -29,10 +29,12 @@ namespace ThomasSalon.LN.Servicios.ObtenerPorId
             {
                 IdServicio = elServicioEnDb.IdServicio,
                 Nombre = elServicioEnDb.Nombre,
+                LinkImagen = elServicioEnDb.LinkImagen,
                 Descripcion = elServicioEnDb.Descripcion,
                 Precio = elServicioEnDb.Precio,
                 Duracion = elServicioEnDb.Duracion,
-                IdEstado = elServicioEnDb.IdEstado
+                IdEstado = elServicioEnDb.IdEstado,
+                IdTipoServicios = elServicioEnDb.IdTipoServicios
             };
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -10,11 +11,25 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Colaboradores.Listar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.ObtenerPorId;
+using ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Registrar;
+using ThomasSalon.Abstracciones.LN.Interfaces.Personas.ObtenerPorId;
+using ThomasSalon.Abstracciones.LN.Interfaces.Personas.Registrar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Usuarios.ObtenerPorId;
+using ThomasSalon.Abstracciones.LN.Interfaces.Usuarios.QuitarUsuarios;
+using ThomasSalon.Abstracciones.Modelos.Colaboradores;
+using ThomasSalon.Abstracciones.Modelos.Personas;
 using ThomasSalon.AccesoADatos;
+using ThomasSalon.AccesoADatos.Colaboradores.Listar;
+using ThomasSalon.LN.Colaboradores.ObtenerPorId;
+using ThomasSalon.LN.Colaboradores.Registrar;
+using ThomasSalon.LN.Personas.ObtenerPorId;
+using ThomasSalon.LN.Personas.Registrar;
 using ThomasSalon.LN.Sucursales.Listar;
 using ThomasSalon.LN.Usuarios.ObtenerPorId;
+using ThomasSalon.LN.Usuarios.QuitarUsuarios;
 using ThomasSalon.UI.Models;
 
 namespace ThomasSalon.UI.Controllers
@@ -26,6 +41,12 @@ namespace ThomasSalon.UI.Controllers
         private ApplicationUserManager _userManager;
         Contexto _elContexto;
         IListarSucursalesLN _listarSucursales;
+        IRegistrarPersonasLN _registrarPersonas;
+        IRegistrarColaboradoresLN _registrarColaboradores;
+        IObtenerColaboradoresPorIdLN _obtener;
+        IObtenerPersonasPorIdLN _obtenerp;
+        IQuitarUsuariosLN _quitarUsuariosLN;
+        IListarColaboradoresAD listarRoles;
 
 
         public AccountController()
@@ -33,9 +54,18 @@ namespace ThomasSalon.UI.Controllers
 
             _elContexto = new Contexto();
             _listarSucursales = new ListarSucursalesLN();
+            _registrarPersonas = new RegistrarPersonasLN();
+            _registrarColaboradores = new RegistrarColaboradoresLN();
+            _obtener = new ObtenerColaboradoresPorIdLN();
+            _obtenerp = new ObtenerPersonasPorIdLN();
+            _quitarUsuariosLN = new QuitarUsuariosLN();
+            listarRoles = new ListarColaboradoresAD();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+
+
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -47,9 +77,9 @@ namespace ThomasSalon.UI.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -65,7 +95,7 @@ namespace ThomasSalon.UI.Controllers
             }
         }
 
-    
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -112,6 +142,23 @@ namespace ThomasSalon.UI.Controllers
                 return View(model);
             }
         }
+        public async Task<ActionResult> QuitarUsuario(int idUsuario)
+        {
+            int resultado = await _quitarUsuariosLN.EliminarUsuario(idUsuario);
+
+            if (resultado == 1)
+            {
+                var userId = User.Identity.GetUserId();
+
+                if (userId == idUsuario.ToString())
+                {
+
+                    return RedirectToAction("LogOff", "Account");
+                }
+            }
+
+            return RedirectToAction("ListarColaboradores", "Colaboradores");
+        }
 
         //
         // GET: /Account/VerifyCode
@@ -142,7 +189,7 @@ namespace ThomasSalon.UI.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,8 +202,102 @@ namespace ThomasSalon.UI.Controllers
                     return View(model);
             }
         }
+        // GET: /Account/RegisterUsuarioColaborador
+        [AllowAnonymous]
+        public async Task<ActionResult> RegisterUsuarioColaborador(int? id)
+        {
 
-        //
+            if (id.HasValue)
+            {
+                var persona = _obtenerp.Obtener(id.Value);
+                if (persona != null)
+                {
+                    var model = new RegisterViewModel
+                    {
+                        IdPersona = persona.IdPersona,
+                        Persona = persona
+                    };
+
+                    var rolesDisponibles = await _elContexto.RolesTabla
+                        .Where(r => r.Name == "Administrador" || r.Name == "Gerente")
+                        .Select(r => r.Name)
+                        .ToListAsync();
+
+                    ViewBag.Roles = new SelectList(rolesDisponibles, model.Rol);
+
+
+
+                    var sucursales = _listarSucursales.Listar();
+                    ViewBag.Sucursales = new SelectList(sucursales, "IdSucursal", "Nombre");
+
+                    return View(model);
+                }
+            }
+
+
+            return View(new RegisterViewModel());
+        }
+
+        // POST: /Account/RegisterUsuarioColaborador
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterUsuarioColaborador(RegisterViewModel model, int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (id.HasValue && model.IdPersona == 0)
+                    {
+                        model.IdPersona = id.Value;
+                    }
+
+
+                    if (model.Persona != null && model.IdPersona == 0)
+                    {
+
+                        int idPersona = await _registrarPersonas.Registrar(model.Persona);
+                        model.IdPersona = idPersona;
+                    }
+
+
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        IdEstado = 1,
+                        IdSucursal = model.IdSucursal,
+                        IdPersona = model.IdPersona
+                    };
+
+
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+
+                        string rolAsignado = string.IsNullOrEmpty(model.Rol) ? "Administrador" : model.Rol;
+                        await UserManager.AddToRoleAsync(user.Id, rolAsignado);
+
+
+                        return RedirectToAction("ListarColaboradores", "Colaboradores");
+                    }
+                    else
+                    {
+
+                        AddErrors(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    ModelState.AddModelError("", "Ocurrió un error al registrar el usuario.");
+                }
+            }
+
+            return View(model);
+        }
+
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -164,7 +305,6 @@ namespace ThomasSalon.UI.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -175,25 +315,29 @@ namespace ThomasSalon.UI.Controllers
             {
                 try
                 {
+
+                    if (model.Persona != null)
+                    {
+
+                        int idPersona = await _registrarPersonas.Registrar(model.Persona);
+                        model.IdPersona = idPersona;
+
+                    }
+
                     var user = new ApplicationUser
                     {
                         UserName = model.Email,
                         Email = model.Email,
-                        Nombre = model.Nombre,
-                        Genero = model.Genero,
-                        Direccion = model.Direccion,
-                        Edad = model.Edad,
-                        Identificacion = model.Identificacion,
                         IdEstado = 1,
                         IdSucursal = null,
-                        PhoneNumber = model.PhoneNumber
-                       
+                        IdPersona = model.IdPersona
+
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
-                        
+
                         string rolAsignado = string.IsNullOrEmpty(model.Rol) ? "Usuario" : model.Rol;
 
                         await UserManager.AddToRoleAsync(user.Id, rolAsignado);
@@ -204,15 +348,14 @@ namespace ThomasSalon.UI.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // Loguear error
                     ModelState.AddModelError("", "Ocurrió un error al registrar el usuario.");
                 }
             }
 
             return View(model);
-        }   
-        
-        
+        }
+
+
 
         // GET: /Account/Register
         [AllowAnonymous]
@@ -228,6 +371,7 @@ namespace ThomasSalon.UI.Controllers
 
             ViewBag.Roles = new SelectList(rolesDisponibles, "Value", "Text");
             ViewBag.Sucursales = new SelectList(sucursales, "IdSucursal", "Nombre");
+
             return View();
         }
 
@@ -240,21 +384,23 @@ namespace ThomasSalon.UI.Controllers
             {
                 try
                 {
+                    if (model.Persona != null)
+                    {
 
-                   
+                        int idPersona = await _registrarPersonas.Registrar(model.Persona);
+                        model.IdPersona = idPersona;
+
+                    }
+
 
                     var user = new ApplicationUser
                     {
                         UserName = model.Email,
                         Email = model.Email,
-                        Nombre = model.Nombre,
-                        Genero = model.Genero,
-                        Direccion = model.Direccion,
-                        Edad = model.Edad,
-                        Identificacion = model.Identificacion,
+                        IdPersona = model.IdPersona,
                         IdEstado = 1,
                         IdSucursal = model.IdSucursal,
-                        PhoneNumber = model.PhoneNumber
+
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);
@@ -267,20 +413,19 @@ namespace ThomasSalon.UI.Controllers
                     }
                     AddErrors(result);
                 }
-              
-                    // Loguear error
-                  catch (Exception ex)
+
+                // Loguear error
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Error: " + ex.Message);
                 }
 
-            
-        }
+
+            }
 
             return View(model);
         }
 
-        // If we got this far, something failed, redisplay form
 
         // GET: /Account/EditAdmin
         public async Task<ActionResult> EditAdmin(string id)
@@ -295,34 +440,58 @@ namespace ThomasSalon.UI.Controllers
             {
                 return HttpNotFound();
             }
+            // Obtener detalles del colaborador si existe
+            var colaborador = await _elContexto.ColaboradoresTabla
+                .FirstOrDefaultAsync(c => c.IdPersona == user.IdPersona);
+            // Obtener detalles de la persona relacionada
+            var persona = await _elContexto.PersonasTabla
+                .FirstOrDefaultAsync(p => p.IdPersona == user.IdPersona);
+
+            if (persona == null)
+            {
+                return HttpNotFound();
+            }
 
             var model = new EditViewModel
             {
-                Id = id,
                 Email = user.Email,
-                Nombre = user.Nombre,
-                Genero = user.Genero,
-                Direccion = user.Direccion,
-                Edad = user.Edad,
-                Identificacion = user.Identificacion,
                 IdEstado = user.IdEstado,
                 IdSucursal = user.IdSucursal,
-                PhoneNumber = user.PhoneNumber,
-                Rol = (await UserManager.GetRolesAsync(user.Id)).FirstOrDefault() // Obtener el rol actual
+                Rol = (await UserManager.GetRolesAsync(user.Id)).FirstOrDefault(), 
+                IdPersona = user.IdPersona,
+                Persona = new PersonasDto
+
+                {
+                    Nombre = persona.Nombre,
+                    Genero = persona.Genero,
+                    Direccion = persona.Direccion,
+                    Telefono = persona.Telefono,
+                    Edad = persona.Edad,
+                    Identificacion = persona.Identificacion
+                },
+                Salario = colaborador?.SalarioDia ?? 0
             };
 
             // Obtener lista de sucursales con Id y Nombre
             var sucursales = _listarSucursales.Listar()
                 .Select(s => new SelectListItem
                 {
-                    Value = s.IdSucursal.ToString(), // ID de la sucursal
-                    Text = s.Nombre // Nombre de la sucursal
+                    Value = s.IdSucursal.ToString(),
+                    Text = s.Nombre
                 }).ToList();
 
             ViewBag.Sucursales = new SelectList(sucursales, "Value", "Text", model.IdSucursal);
+            if (ViewBag.Sucursales == null)
+            {
+                throw new Exception("ViewBag.Sucursales está llegando nulo.");
+            }
+            var rolesDisponibles = await _elContexto.RolesTabla
+                       .Where(r => r.Name == "Administrador" || r.Name == "Gerente")
+                       .Select(r => r.Name)
+                       .ToListAsync();
 
-            var rolesDisponibles = await _elContexto.RolesTabla.Select(r => r.Name).ToListAsync();
-            ViewBag.Roles = new SelectList(rolesDisponibles, model.Rol); // Selecciona el rol actual
+            ViewBag.Roles = new SelectList(rolesDisponibles, model.Rol);
+
             return View(model);
         }
 
@@ -330,84 +499,119 @@ namespace ThomasSalon.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditAdmin(EditViewModel model)
         {
-            // Verifica si el modelo está llegando vacío
             if (model == null)
             {
                 ModelState.AddModelError("", "El modelo no llegó al servidor.");
                 return View(model);
             }
 
+            Console.WriteLine($"EditAdmin - IdPersona recibido: {model.IdPersona}");
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Buscar el usuario por su Id
-                    var user = await UserManager.FindByIdAsync(model.Id);
-                    if (user == null)
-                    {
-                        return HttpNotFound();
-                    }
+                    var user = await UserManager.FindByIdAsync(model.Id.ToString());
+                    if (user == null) return HttpNotFound();
 
-                    // Actualiza los campos del usuario
+                    var rolesActuales = await UserManager.GetRolesAsync(user.Id);
+                    bool esAdminActual = rolesActuales.Contains("Administrador");
+
+                    // Actualizar datos básicos del usuario
                     user.Email = model.Email;
-                    user.UserName = model.Email;  // Asegúrate de actualizar el nombre de usuario
-                    user.Nombre = model.Nombre;
-                    user.Genero = model.Genero;
-                    user.Direccion = model.Direccion;
-                    user.Edad = model.Edad;
-                    user.Identificacion = model.Identificacion;
+                    user.UserName = model.Email;
                     user.IdEstado = model.IdEstado;
                     user.IdSucursal = model.IdSucursal;
-                    user.PhoneNumber = model.PhoneNumber;
 
-                    // Actualiza el usuario en la base de datos
-                    var result = await UserManager.UpdateAsync(user);
 
-                    if (result.Succeeded)
+                    var persona = await _elContexto.PersonasTabla.FirstOrDefaultAsync(p => p.IdPersona == model.IdPersona);
+                    if (persona != null)
                     {
-                        // Elimina los roles anteriores del usuario
-                        var rolesActuales = await UserManager.GetRolesAsync(user.Id);
-                        if (rolesActuales.Any())
-                        {
-                            // Elimina los roles anteriores
-                            await UserManager.RemoveFromRolesAsync(user.Id, rolesActuales.ToArray());
-                        }
-
-                        // Asigna el nuevo rol al usuario
-                        if (!string.IsNullOrEmpty(model.Rol))
-                        {
-                            await UserManager.AddToRoleAsync(user.Id, model.Rol);
-                        }
-
-                        // Redirige a la lista de usuarios
-                        return RedirectToAction("ListarUsuarios", "Usuarios");
+                        persona.Nombre = model.Persona.Nombre;
+                        persona.Genero = model.Persona.Genero;
+                        persona.Telefono = model.Persona.Telefono;
+                        persona.Direccion = model.Persona.Direccion;
+                        persona.Edad = model.Persona.Edad;
+                        persona.Identificacion = model.Persona.Identificacion;
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Error al actualizar el usuario.");
+                        ModelState.AddModelError("", "La persona asociada no existe.");
+                        return View(model);
                     }
+
+
+                    // Actualizar usuario en la base de datos
+                    var result = await UserManager.UpdateAsync(user);
+                    if (!result.Succeeded)
+                    {
+                        ModelState.AddModelError("", "Error al actualizar el usuario.");
+                        return View(model);
+                    }
+
+                    // Manejo de roles
+                    if (rolesActuales.Any())
+                        await UserManager.RemoveFromRolesAsync(user.Id, rolesActuales.ToArray());
+
+                    var rolAsignado = string.IsNullOrEmpty(model.Rol) ? "Usuario" : model.Rol;
+                    await UserManager.AddToRoleAsync(user.Id, rolAsignado);
+
+
+                    bool esAdminNuevo = model.Rol == "Administrador";
+
+                    // 📌 Manejo de colaboradores (crear, inactivar o reactivar)
+                    var colaboradorExistente = await _elContexto.ColaboradoresTabla
+                        .FirstOrDefaultAsync(c => c.IdPersona == model.IdPersona);
+
+                    if (!esAdminActual && esAdminNuevo) // Si antes no era admin y ahora sí
+                    {
+                        if (colaboradorExistente != null)
+                        {
+                            // Si el colaborador existe y está inactivo, solo se reactiva sin cambiar el salario
+                            Console.WriteLine("Reactivando colaborador sin cambiar salario...");
+                            colaboradorExistente.IdEstado = 1;
+                        }
+                        else
+                        {
+                            // Si no existe, se crea un nuevo colaborador
+                            Console.WriteLine("Creando colaborador...");
+                            var resultRegistrar = await _registrarColaboradores.Registrar(new ColaboradoresDto
+                            {
+                                IdPersona = model.IdPersona,
+                                SalarioDia = model.Salario,
+                                IdEstado = 1
+                            });
+
+                            Console.WriteLine($"Resultado de Registrar: {resultRegistrar}");
+                        }
+                    }
+                    else if (esAdminActual && !esAdminNuevo) // Si era admin y ahora no lo es
+                    {
+                        // Si el usuario deja de ser administrador pero se convierte en gerente, no se inactiva ni cambia el salario
+                        if (colaboradorExistente != null && model.Rol != "Gerente")
+                        {
+                            Console.WriteLine("Inactivando colaborador porque dejó de ser Administrador y no es Gerente...");
+                            colaboradorExistente.IdEstado = 2;
+                        }
+                    }
+
+                    await _elContexto.SaveChangesAsync();
+                    return RedirectToAction("ListarUsuarios", "Usuarios");
                 }
                 catch (Exception ex)
                 {
-                    // Captura cualquier excepción y agrega un mensaje de error
                     ModelState.AddModelError("", "Error: " + ex.Message);
-                }
-            }
-            else
-            {
-                // Si el modelo no es válido, muestra los errores en la consola
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine(error.ErrorMessage);
+                    Console.WriteLine($"Error en EditAdmin: {ex.Message}");
                 }
             }
 
-            // Si el modelo no es válido, redirige a la vista con los errores
             return View(model);
         }
 
 
-        //
+
+
+        
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)

@@ -16,8 +16,7 @@ namespace ThomasSalon.LN.General.Conversiones.Colaboradores
             return new ColaboradoresTabla
             {
                 IdColaborador = elColaborador.IdColaborador,
-                Nombre = elColaborador.Nombre,
-                Telefono = elColaborador.Telefono,
+                IdPersona= elColaborador.IdPersona,
                 SalarioDia = elColaborador.SalarioDia,
                 IdEstado = elColaborador.IdEstado
             };

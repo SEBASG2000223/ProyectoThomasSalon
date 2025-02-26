@@ -25,6 +25,7 @@ namespace ThomasSalon.UI.Controllers
         IEditarSucursalesLN _editarSucursales;
         ICambiarEstadoSucursalesLN _cambiarEstado;
         IObtenerSucursalesPorIdLN _obtenerSucursalesPorId;  
+
         public SucursalesController()
         {
             _listarSucursales = new ListarSucursalesLN();
@@ -39,6 +40,20 @@ namespace ThomasSalon.UI.Controllers
         {
             List<SucursalesDto> laListaDeSucursales = _listarSucursales.Listar();
             return View(laListaDeSucursales);
+        }
+
+        //GET: Sucursalres
+        public ActionResult Sucursales()
+        {
+            List<SucursalesDto> laListaDeSucursales = _listarSucursales.Listar();
+            return View(laListaDeSucursales);
+        }
+        
+        // GET: Sucursales
+        public ActionResult ObtenerSucursalesParcial()
+        {
+            List<SucursalesDto> laListaDeSucursales = _listarSucursales.Listar();
+            return PartialView("_Sucursales", laListaDeSucursales);
         }
 
         // GET: Sucursales/Details/5
@@ -136,5 +151,8 @@ namespace ThomasSalon.UI.Controllers
 
 
         }
+
+        
+
     }
 }

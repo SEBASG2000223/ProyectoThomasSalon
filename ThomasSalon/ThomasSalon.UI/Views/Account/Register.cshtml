@@ -13,64 +13,67 @@
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="https://www.shutterstock.com/image-photo/businessman-working-graph-papers-laptop-600nw-2028087155.jpg"
+                            <img src="https://i.pinimg.com/474x/9e/86/b5/9e86b51120952be344df8f9f6da54eee.jpg"
                                  alt="register form" class="img-fluid"
                                  style="border-radius: 1rem 0 0 1rem; width: 100%; height: 100%; object-fit: cover;" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
-
+                                @Html.HiddenFor(m => m.IdSucursal, new { value = "0" })
                                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
                                 {
                                     @Html.AntiForgeryToken()
 
+
                                     <div class="d-flex align-items-center mb-3 pb-1">
-                                        <i class="fas fa-user-plus fa-2x me-3" style="color: #ff6219;"></i>
                                         <span class="text-center h1 fw-bold mb-0">Registro de Usuario</span>
                                     </div>
 
-                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Crea una cuenta nueva</h5>
-
+<br />
                                     @Html.ValidationSummary("", new { @class = "text-danger" })
 
-                            <div class="form-outline mb-4">
-                                <label>Nombre Completo</label>
-                                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control form-control-lg", placeholder = "Nombre Completo" })
-                                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label>Correo electrónico</label>
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", placeholder = "Correo electrónico" })
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label>Identificación</label>
-                                @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control form-control-lg", placeholder = "Identificación" })
-                                @Html.ValidationMessageFor(m => m.Identificacion, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label>Telefono</label>
-                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control form-control-lg", placeholder = "Telefono" })
-                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label>Dirección</label>
-                                @Html.TextBoxFor(m => m.Direccion, new { @class = "form-control form-control-lg", placeholder = "Dirección" })
-                                @Html.ValidationMessageFor(m => m.Direccion, "", new { @class = "text-danger" })
-                            </div>
-
                                     <div class="form-outline mb-4">
-                                        <label>Género</label>
-                                        <select class="form-control form-control-lg" name="Genero">
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Femenino</option>
-                                        </select>
+                                        <label>Nombre Completo</label>
+                                        @Html.TextBoxFor(m => m.Persona.Nombre, new { @class = "form-control form-control-lg", placeholder = "Nombre Completo" })
+                                        @Html.ValidationMessageFor(m => m.Persona.Nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label>Correo electrónico</label>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg", placeholder = "Correo electrónico" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label>Identificación</label>
+                                        @Html.TextBoxFor(m => m.Persona.Identificacion, new { @class = "form-control form-control-lg", placeholder = "Identificación" })
+                                        @Html.ValidationMessageFor(m => m.Persona.Identificacion, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label>Telefono</label>
+                                        @Html.TextBoxFor(m => m.Persona.Telefono, new { @class = "form-control form-control-lg", placeholder = "Telefono" })
+                                        @Html.ValidationMessageFor(m => m.Persona.Telefono, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label>Dirección</label>
+                                        @Html.TextBoxFor(m => m.Persona.Direccion, new { @class = "form-control form-control-lg", placeholder = "Dirección" })
+                                        @Html.ValidationMessageFor(m => m.Persona.Direccion, "", new { @class = "text-danger" })
                                     </div>
 
                                     <div class="form-outline mb-4">
+                                        <label>Género</label>
+                                        @Html.DropDownListFor(m => m.Persona.Genero, new SelectList(new[]
+                                        {
+                                            new { Value = "M", Text = "Masculino" },
+                                            new { Value = "F", Text = "Femenino" },
+                                            new { Value = "O", Text = "Otro" }
+                                        }, "Value", "Text"), "-- Seleccione Género --", new { @class = "form-control form-control-lg" })
+                                        @Html.ValidationMessageFor(m => m.Persona.Genero, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-outline mb-4">
                                         <label>Edad</label>
-                                        @Html.TextBoxFor(m => m.Edad, new { @class = "form-control form-control-lg", type = "number", placeholder = "Edad" })
-                                        @Html.ValidationMessageFor(m => m.Edad, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.Persona.Edad, new { @class = "form-control form-control-lg", type = "number", placeholder = "Edad" })
+                                        @Html.ValidationMessageFor(m => m.Persona.Edad, "", new { @class = "text-danger" })
                                     </div>
 
                                     <div class="form-outline mb-4">

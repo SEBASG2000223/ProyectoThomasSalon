@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.CambiarEstado;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.Editar;
@@ -45,6 +42,13 @@ namespace ThomasSalon.UI.Controllers
             List<ProductosDto> laListaDeProductos = _listarProductos.Listar();
             return View(laListaDeProductos);
         }
+        // GET: Productos
+        public ActionResult Productos()
+         {
+            List<ProductosDto> laListaDeProductos = _listarProductos.ProductosActivos();
+            return View(laListaDeProductos);
+        }
+
 
         // GET: Productos/Details/5
         public ActionResult Details(int id)

@@ -27,6 +27,27 @@ namespace ThomasSalon.AccesoADatos.Servicios.Listar
                                         Nombre = servicio.Nombre,
                                         Descripcion = servicio.Descripcion,
                                         Precio = servicio.Precio,
+                                        LinkImagen= servicio.LinkImagen,
+                                        Duracion = servicio.Duracion,
+                                        IdEstado = servicio.IdEstado,
+                                        IdTipoServicios = servicio.IdTipoServicios,
+                                        NombreEstado = estado.Nombre
+                                    }).ToList();
+            return listaDeServicios;
+        }
+        public List<ServiciosDto> ListarActivos()
+        {
+            var listaDeServicios = (from servicio in _elContexto.ServiciosTabla
+                                    join estado in _elContexto.EstadoDisponibilidadTabla
+                                    on servicio.IdEstado equals estado.IdEstado
+                                    where servicio.IdEstado == 1
+                                    select new ServiciosDto
+                                    {
+                                        IdServicio = servicio.IdServicio,
+                                        Nombre = servicio.Nombre,
+                                        Descripcion = servicio.Descripcion,
+                                        Precio = servicio.Precio,
+                                        LinkImagen = servicio.LinkImagen,
                                         Duracion = servicio.Duracion,
                                         IdEstado = servicio.IdEstado,
                                         NombreEstado = estado.Nombre

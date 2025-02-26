@@ -31,9 +31,11 @@ namespace ThomasSalon.LN.Productos.ObtenerPorId
                 Nombre = elProductoEnDb.Nombre,
                 Descripcion = elProductoEnDb.Descripcion,
                 Precio = elProductoEnDb.Precio,
+                LinkImagen = elProductoEnDb.LinkImagen,
                 IdProveedor = elProductoEnDb.IdProveedor,
                 UnidadMedida = elProductoEnDb.UnidadMedida,
                 IdEstado = elProductoEnDb.IdEstado
+                
             };
         }
     }

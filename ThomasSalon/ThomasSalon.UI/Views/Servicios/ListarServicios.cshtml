@@ -3,56 +3,86 @@
 @{
     ViewBag.Title = "ListarServicios";
 }
+<div class="container pt-5">
+    <h2 class="text-center">Lista de Servicios</h2>
 
-<h2>ListarServicios</h2>
+    <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+        Registrar Servicio
+    </a>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="table-responsive">
-    <table id="myTable" class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.IdServicio)</th>
-                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-                <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
-                <th>@Html.DisplayNameFor(model => model.Precio)</th>
-                <th>@Html.DisplayNameFor(model => model.Duracion)</th>
-                <th>@Html.DisplayNameFor(model => model.NombreEstado)</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.IdServicio)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Precio)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Duracion)</td>
-                    <td>@Html.DisplayFor(modelItem => item.NombreEstado)</td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IdServicio }) |
-                        @if (item.IdEstado == 1)
-                        {
-                            <a href="@Url.Action("Inactivar", "Servicios", new { id = item.IdServicio })" class="btn btn-danger btn-sm">
-                                Inactivar
-                            </a>
-                        }
-                        @if (item.IdEstado == 2)
-                        {
-                            <a href="@Url.Action("Activar", "Servicios", new { id = item.IdServicio })" class="btn btn-success btn-sm">
-                                Activar
-                            </a>
-                        }
-                    </td>
+                    <th>@Html.DisplayNameFor(model => model.IdServicio)</th>
+                    <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                    <th>@Html.DisplayNameFor(model => model.Precio)</th>
+                    <th>@Html.DisplayNameFor(model => model.Duracion)</th>
+                    <th>@Html.DisplayNameFor(model => model.NombreEstado)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdTipoServicios)</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.IdServicio)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Duracion)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NombreEstado)</td>
 
+                        @{ var tipoServicio = "";
+                            if (item.IdTipoServicios == 1)
+                            {
+                                tipoServicio = "Cabello";
+                            }
+
+
+                            else if (item.IdTipoServicios == 2)
+                            {
+                                tipoServicio = "Uñas";
+
+                            }
+                            else if (item.IdTipoServicios == 3)
+                            {
+                                tipoServicio = "Barbería";
+
+                            }
+                            else
+                            {
+                                tipoServicio = "Estética";
+                            }
+                            
+                        }
+
+                        <td>@Html.DisplayFor(modelItem => tipoServicio)</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Servicios", new { id = item.IdServicio })" class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
+                            @if (item.IdEstado == 1)
+                            {
+                                <a href="@Url.Action("Inactivar", "Servicios", new { id = item.IdServicio })" class="btn btn-danger btn-sm">
+                                    Inactivar
+                                </a>
+                            }
+                            @if (item.IdEstado == 2)
+                            {
+                                <a href="@Url.Action("Activar", "Servicios", new { id = item.IdServicio })" class="btn btn-success btn-sm">
+                                    Activar
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 @section scripts {
     <script src="~/Scripts/ScriptsFront/Servicios/ListaDataTableServicios.js"></script>
 }
