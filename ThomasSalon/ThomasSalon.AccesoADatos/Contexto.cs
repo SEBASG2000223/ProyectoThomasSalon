@@ -31,13 +31,32 @@ namespace ThomasSalon.AccesoADatos
 
             modelBuilder.Entity<CitasTabla>().ToTable("CITAS");
             modelBuilder.Entity<EstadoCitaTabla>().ToTable("ESTADO_CITA");
-
+            modelBuilder.Entity<PedidosTabla>().ToTable("PEDIDOS");
 
             modelBuilder.Entity<InventarioGeneralTabla>().ToTable("INVENTARIO_GENERAL");
             modelBuilder.Entity<InventarioSucursalTabla>().ToTable("INVENTARIO_SUCURSAL");
-            
+            modelBuilder.Entity<DetallePedidoTabla>().ToTable("DETALLE_PEDIDOS");
+
+            modelBuilder.Entity<CarritoTemporalTabla>().ToTable("CarritoTemporal");
+
+           
+            modelBuilder.Entity<MetodosDePagoTabla>().ToTable("METODOS_PAGO");
+            modelBuilder.Entity<ProvinciasTabla>().ToTable("PROVINCIAS");
+            modelBuilder.Entity<TipoDeEntregaTabla>().ToTable("TIPOS_ENTREGA");
+
+            modelBuilder.Entity<EstadoDePedidoTabla>().ToTable("ESTADO_PEDIDO");
+
+
+
+
+
+
 
         }
+        public DbSet<EstadoDePedidoTabla> EstadoDePedidoTabla { get; set; }
+
+        public DbSet<PedidosTabla> PedidosTabla { get; set; }
+
         public DbSet<PersonasTabla> PersonasTabla { get; set; }
 
         public DbSet<SucursalesTabla> SucursalesTabla { get; set; }
@@ -45,6 +64,7 @@ namespace ThomasSalon.AccesoADatos
         public DbSet<ProveedoresTabla> ProveedoresTabla { get; set; }
         public DbSet<EstadoDisponibilidadTabla> EstadoDisponibilidadTabla { get; set; }
 
+        public DbSet<DetallePedidoTabla> DetallePedidoTabla { get; set; }
         public DbSet<UsuariosTabla> UsuariosTabla { get; set; }
         public DbSet<RolesTabla> RolesTabla { get; set; }
         public DbSet<UserRolesTabla> UserRolesTabla { get; set; }
@@ -56,6 +76,15 @@ namespace ThomasSalon.AccesoADatos
         public DbSet<ColaboradoresTabla> ColaboradoresTabla { get; set; }
         public DbSet<InventarioGeneralTabla> InventarioGeneralTabla { get; set; }
         public DbSet<InventarioSucursalTabla> InventarioSucursalTabla { get; set; }
+
+        public DbSet<CarritoTemporalTabla> CarritoTemporalTabla { get; set; }
+
+        public DbSet<TipoDeEntregaTabla> TipoDeEntregaTabla { get; set; }
+        public DbSet<ProvinciasTabla> ProvinciasTabla { get; set; }
+        public DbSet<MetodosDePagoTabla> MetodosDePagoTabla { get; set; }
+
+
+
 
 
     }

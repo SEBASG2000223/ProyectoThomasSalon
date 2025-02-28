@@ -64,6 +64,7 @@
     <Compile Include="InventarioSucursal\Editar\EditarInventarioSucursalAD.cs" />
     <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalAD.cs" />
     <Compile Include="InventarioSucursal\ObtenerPorId\ObtenerInventarioSucursalPorIdAD.cs" />
+    <Compile Include="Pedidos\Listar\ListarPedidosAD.cs" />
     <Compile Include="Personas\Editar\EditarPersonasAD.cs" />
     <Compile Include="Personas\Listar\ListarPersonasAD.cs" />
     <Compile Include="Personas\ObtenerPorId\ObtenerPersonasPorIdAD.cs" />

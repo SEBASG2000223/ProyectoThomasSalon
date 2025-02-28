@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Pedidos.PedidosDto>
+
+@{
+    ViewBag.Title = "Listar Pedidos";
+}
+
+<div class="container pt-5" style="max-width: 1300px;">
+    <h2>Listar Pedidos</h2>
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.EstadoPedido)</th>
+                    <th>@Html.DisplayNameFor(model => model.Sucursal)</th>
+                    <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+                    <th>@Html.DisplayNameFor(model => model.MetodoPago)</th>
+                    <th>@Html.DisplayNameFor(model => model.TipoEntrega)</th>
+                    <th>@Html.DisplayNameFor(model => model.Provincia)</th>
+                    <th>@Html.DisplayNameFor(model => model.DireccionExacta)</th>
+                    <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+                    <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                    <th>@Html.DisplayNameFor(model => model.MontoTotal)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pedido in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => pedido.EstadoPedido)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.Sucursal)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.Usuario)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.MetodoPago)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.TipoEntrega)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.Provincia)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.DireccionExacta)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.Comentario)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.Fecha)</td>
+                        <td>@Html.DisplayFor(modelItem => pedido.MontoTotal)</td>
+                        <td>
+                            <a href="@Url.Action("Detalles", "Pedidos", new { id = pedido.IdPedido })" class="btn btn-info btn-sm">Detalles</a>
+
+                            <button class="btn btn-danger rechazar-pedido" data-id="@pedido.IdPedido">❌ Rechazar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+        $(document).on("click", ".rechazar-pedido", function () {
+            var idPedido = $(this).data("id");
+
+            if (!confirm("¿Seguro que deseas rechazar este pedido? Esta acción restaurará el stock.")) {
+                return;
+            }
+
+            $.post('@Url.Action("RechazarPedido", "Pedidos")', { idPedido: idPedido }, function (response) {
+                if (response.success) {
+                    alert(response.message);
+                    location.reload(); // Recargar la página para actualizar la lista de pedidos
+                } else {
+                    alert(response.message);
+                }
+            }).fail(() => alert("Error al rechazar el pedido."));
+        });
+    </script>
+}
+

@@ -1,0 +1,193 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Productos.ProductosDto>
+
+@{
+    ViewBag.Title = "Carrito de Compras";
+}
+
+<h2 class="text-center">🛒 Mi Carrito</h2>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="carrito-body"></tbody>
+    </table>
+
+    <h5 class="text-right">Subtotal: <span id="subtotal">₡0.00</span></h5>
+    <h5 class="text-right">Costo de Envío: <span id="costo-envio">₡0.00</span></h5>
+    <h4 class="text-right font-weight-bold">Total a Pagar: <span id="total-pago">₡0.00</span></h4>
+
+    <div class="card p-3 mt-4">
+        <h4>📦 Datos del Pedido</h4>
+
+        <div class="form-group">
+            <label for="tipoEntrega">Tipo de Entrega:</label>
+            @Html.DropDownList("tipoEntrega", ViewBag.TiposEntrega as SelectList, "Seleccione un tipo de entrega", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group" id="direccion-group">
+            <label for="direccion">Dirección Exacta:</label>
+            <input type="text" id="direccion" class="form-control" placeholder="Ingrese su dirección">
+        </div>
+
+        <div class="form-group">
+            <label for="IdSucursal">Seleccione Sucursal:</label>
+            @Html.DropDownList("IdSucursal", ViewBag.Sucursales as SelectList, "Seleccione una sucursal", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label for="provincia">Provincia:</label>
+            @Html.DropDownList("provincia", ViewBag.Provincias as SelectList, "Seleccione una provincia", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label for="metodoPago">Método de Pago:</label>
+            @Html.DropDownList("metodoPago", ViewBag.MetodosPago as SelectList, "Seleccione un método de pago", new { @class = "form-control" })
+        </div>
+        <div class="modal fade" id="modalStockInsuficiente" tabindex="-1" aria-labelledby="tituloModalStock" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="tituloModalStock">Stock Insuficiente</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Los siguientes productos no tienen suficiente stock en la sucursal seleccionada:</p>
+                        <ul id="listaProductosStockModal"></ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Entendido</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" class="form-control" placeholder="Agregue detalles adicionales..."></textarea>
+        </div>
+
+        <button id="finalizarPedido" class="btn btn-success btn-block mt-3">✅ Finalizar Pedido</button>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            function cargarCarrito() {
+                var idProvincia = $("#provincia").val();
+                var idTipoEntrega = $("#tipoEntrega").val();
+
+                $.get('@Url.Action("ObtenerCarritoProductos", "Carrito")', { idProvincia, idTipoEntrega }, function (response) {
+                    var tbody = $("#carrito-body").empty();
+
+                    if (!response.carrito || response.carrito.length === 0) {
+                        tbody.append(`<tr><td colspan="5" class="text-center">Tu carrito está vacío 🛒</td></tr>`);
+                        $("#subtotal").text("₡0.00");
+                        $("#costo-envio").text("₡0.00");
+                        $("#total-pago").text("₡0.00");
+                        return;
+                    }
+
+                    response.carrito.forEach(function (item) {
+                        var totalPorProducto = item.Cantidad * item.PrecioUnitario;
+                        tbody.append(`
+                            <tr>
+                                <td><img src="${item.LinkImagen}" alt="${item.Nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"></td>
+                                <td>${item.Nombre}</td>
+                                <td><input type="number" class="cantidad form-control" data-id="${item.IdProducto}" value="${item.Cantidad}" min="1"></td>
+                                <td class="total-producto">₡${totalPorProducto.toFixed(2)}</td>
+                                <td><button class="btn btn-danger btn-sm eliminar" data-id="${item.IdProducto}">🗑️</button></td>
+                            </tr>
+                        `);
+                    });
+
+                    actualizarTotales(response.subtotal, response.costoEnvio, response.total);
+                }).fail(function () {
+                    alert("Error al cargar el carrito. Inténtalo de nuevo.");
+                });
+            }
+
+            function actualizarTotales(subtotal, costoEnvio, total) {
+                $("#subtotal").text(`₡${subtotal.toFixed(2)}`);
+                $("#costo-envio").text(`₡${costoEnvio.toFixed(2)}`);
+                $("#total-pago").text(`₡${total.toFixed(2)}`);
+            }
+
+            $(document).on("change", ".cantidad", function () {
+                var idProducto = $(this).data("id");
+                var nuevaCantidad = parseInt($(this).val());
+
+                if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
+                    nuevaCantidad = 1;
+                    $(this).val(1);
+                }
+
+                $.post('@Url.Action("ActualizarCantidad", "Carrito")', { idProducto, cantidad: nuevaCantidad })
+                    .done(cargarCarrito)
+                    .fail(() => alert("No se pudo actualizar la cantidad."));
+            });
+
+            $(document).on("click", ".eliminar", function () {
+                var idProducto = $(this).data("id");
+
+                if (!confirm("¿Seguro que quieres eliminar este producto?")) return;
+
+                $.post('@Url.Action("EliminarDelCarrito", "Carrito")', { idProducto })
+                    .done(response => {
+                        alert(response.mensaje);
+                        cargarCarrito();
+                    })
+                    .fail(() => alert("No se pudo eliminar el producto."));
+            });
+
+            $(document).on("change", "#tipoEntrega, #provincia", function () {
+                cargarCarrito();
+            });
+$("#finalizarPedido").click(function () {
+    var pedido = {
+        idMetodoPago: $("#metodoPago").val(),
+        idTipoEntrega: $("#tipoEntrega").val(),
+        direccionExacta: $("#direccion").val(),
+        idSucursal: $("#IdSucursal").val(),
+        idProvincia: $("#provincia").val(),
+        comentario: $("#comentario").val()
+    };
+
+    $.post('@Url.Action("RealizarCompra", "Carrito")', pedido, function (response) {
+        if (response.success) {
+            alert("Pedido realizado con éxito.");
+            window.location.href = '@Url.Action("ResumenPedido", "Carrito")' + '?idPedido=' + response.idPedido;
+        } else if (response.productos) {
+            let listaHtml = "";
+            response.productos.forEach(producto => {
+                let stockOtras = producto.StockOtrasSucursales.length > 0
+                    ? producto.StockOtrasSucursales.map(s => `${s.Sucursal}: ${s.Cantidad}`).join(", ")
+                    : "No disponible en otras sucursales";
+
+                listaHtml += `<li><strong>${producto.Nombre}</strong> - Disponibles en sucursal: ${producto.StockDisponible}, Requeridos: ${producto.Requerido}. <br><span style="color:gray;">Stock en otras sucursales: ${stockOtras}</span></li>`;
+            });
+
+            $("#listaProductosStockModal").html(listaHtml);
+            $("#modalStockInsuficiente").modal("show");
+        } else {
+            alert(response.message);
+        }
+    }).fail(() => alert("No se pudo completar el pedido."));
+});
+
+
+
+            cargarCarrito();
+        });
+    </script>
+}
