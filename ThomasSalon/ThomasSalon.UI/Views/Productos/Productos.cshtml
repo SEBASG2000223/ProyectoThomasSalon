@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Productos.ProductosDto>
+
+@{
+    ViewBag.Title = "Productos";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="~/Content/css/estilo.css">
+
+<h2 class="text-center">Productos</h2>
+
+
+
+<section class="contenedor">
+    <!-- Contenedor de elementos -->
+    <div class="contenedor-items">
+        @foreach (var item in Model)
+        {
+            <div class="item">
+                <span class="titulo-item">@item.Nombre</span>
+                @if (!string.IsNullOrEmpty(item.LinkImagen))
+                {
+                    <img src="@item.LinkImagen" alt="@item.Nombre" class="img-item">
+                }
+            <span class="precio-item text-dark">@item.Precio</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>
+        }
+    </div>
+
+    <!-- Carrito de Compras -->
+    <div class="carrito" id="carrito">
+        <div class="header-carrito">
+            <h2 class="text-light">Tu Carrito</h2>
+        </div>
+
+        <div class="carrito-items">
+            <!-- Aquí se llenará dinámicamente con JavaScript -->
+        </div>
+
+        <div class="carrito-total">
+            <div class="fila">
+                <strong>Tu Total</strong>
+                <span class="carrito-precio-total">₡0.00</span>
+            </div>
+            <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i></button>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script src="~/Scripts/Carrito/app.js"></script>
+}

@@ -33,7 +33,8 @@ namespace ThomasSalon.LN.Servicios.ObtenerPorId
                 Descripcion = elServicioEnDb.Descripcion,
                 Precio = elServicioEnDb.Precio,
                 Duracion = elServicioEnDb.Duracion,
-                IdEstado = elServicioEnDb.IdEstado
+                IdEstado = elServicioEnDb.IdEstado,
+                IdTipoServicios = elServicioEnDb.IdTipoServicios
             };
         }
     }

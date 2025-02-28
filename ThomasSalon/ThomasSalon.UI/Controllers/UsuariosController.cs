@@ -98,6 +98,27 @@ namespace ThomasSalon.UI.Controllers
         {
             return View();
         }
+        public async Task<ActionResult> Activar(string id)
+        {
+
+            int resultado = await _cambiarEstadoUsuariosLN.CambiarEstado(id, 1);
+
+            return RedirectToAction("ListarUsuarios");
+
+
+
+
+        }
+
+        public async Task<ActionResult> Inactivar(string id)
+        {
+
+            int resultado = await _cambiarEstadoUsuariosLN.CambiarEstado(id, 2);
+            return RedirectToAction("ListarUsuarios");
+
+
+
+        }
     }
 }
 

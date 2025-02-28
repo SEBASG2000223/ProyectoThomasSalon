@@ -23,5 +23,11 @@ namespace ThomasSalon.LN.Servicios.Listar
             List<ServiciosDto> laListaDeServicios = _listarServiciosAD.Listar();
             return laListaDeServicios;
         }
+
+        public List<ServiciosDto> ListarActivos()
+        {
+            List<ServiciosDto> laListaDeServicios = _listarServiciosAD.ListarActivos();
+            return laListaDeServicios;
+        }
     }
 }

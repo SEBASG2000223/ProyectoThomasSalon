@@ -11,62 +11,63 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Registrar Usuario</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-horizontal">
+    <h4>Registrar Usuario</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <!-- Email -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <!-- Password -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <!-- Role -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.Rol, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Rol, (SelectList)ViewBag.Roles, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <!-- Sucursal -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.IdSucursal, ViewBag.Sucursales as SelectList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Registrar" class="btn btn-default" />
-                </div>
-            </div>
+    <!-- Email -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Rol -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Rol, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Rol, (SelectList)ViewBag.Roles, new { @class = "form-control", id = "rolDropdown" })
+            @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" id="sucursalesField" style="display: none;">
+        @Html.LabelFor(model => model.IdSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdSucursal,
+                ViewBag.Sucursales != null ? ViewBag.Sucursales as SelectList : new SelectList(new List<SelectListItem>()),
+                new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Registrar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
     }
 
     <div>
@@ -76,3 +77,25 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var rolDropdown = document.getElementById("rolDropdown");
+
+        var fields = {
+            "sucursalesField": ["Administrador"]
+          
+        };
+
+        function toggleFields() {
+            var selectedRole = rolDropdown.value;
+
+            // Recorremos los campos y los mostramos u ocultamos según el rol
+            Object.keys(fields).forEach(field => {
+                document.getElementById(field).style.display = fields[field].includes(selectedRole) ? "block" : "none";
+            });
+        }
+
+        toggleFields(); // Llamada inicial
+        rolDropdown.addEventListener("change", toggleFields); // Evento para cambios de rol
+    });
+</script>
