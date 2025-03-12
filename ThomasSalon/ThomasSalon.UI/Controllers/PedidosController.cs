@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,11 +30,21 @@ namespace ThomasSalon.UI.Controllers
 
         }
         // GET: Pedidos
+
+
         public ActionResult ListarPedidos()
         {
             List<PedidosDto> laListaDePedidos = _listarPedidos.Listar();
             return View(laListaDePedidos);
         }
+
+        public ActionResult ListarPedidosCliente()
+        {
+            String idUsuario = User.Identity.GetUserId();
+            List<PedidosDto> laListaDePedidos = _listarPedidos.ListarPedidosCliente(idUsuario);
+            return View(laListaDePedidos);
+        }
+
         [HttpPost]
         public ActionResult RechazarPedido(Guid idPedido)
         {
@@ -68,7 +79,78 @@ namespace ThomasSalon.UI.Controllers
             return Json(new { success = true, message = "Pedido rechazado y stock restaurado correctamente." });
         }
 
+        [HttpPost]
+        public ActionResult AceptarPedido(Guid idPedido)
+        {
+            var pedido = _elContexto.PedidosTabla.FirstOrDefault(p => p.IdPedido == idPedido);
 
+            if (pedido == null)
+            {
+                return Json(new { success = false, message = "Pedido no encontrado." });
+            }
+
+            pedido.IdEstadoPedido = 2; // Estado 'Aceptado'
+            _elContexto.SaveChanges();
+
+            return Json(new { success = true, message = "Pedido aceptado correctamente." });
+        }
+
+
+        public ActionResult ObtenerImagen(Guid idPedido)
+        {
+            try
+            {
+                // Buscar el pedido con su IdAdjuntos
+                var pedido = _elContexto.PedidosTabla
+                    .Where(p => p.IdPedido == idPedido)
+                    .Select(p => p.IdAdjuntos)
+                    .FirstOrDefault();
+
+                if (pedido == null)
+                {
+                    return Json(null, JsonRequestBehavior.AllowGet); // No hay adjunto asociado
+                }
+
+                // Buscar el adjunto en la tabla ADJUNTOS_PEDIDOS
+                var adjunto = _elContexto.AdjuntosPedidosTabla
+                    .Where(a => a.IdAdjuntos == pedido)
+                    .Select(a => a.Adjunto)
+                    .FirstOrDefault();
+
+                if (adjunto == null || adjunto.Length == 0)
+                {
+                    return Json(null, JsonRequestBehavior.AllowGet); // Si no hay imagen, devolver null
+                }
+
+                // Convertir la imagen en Base64
+                string base64String = Convert.ToBase64String(adjunto);
+
+                return Json(base64String, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = "Error al obtener la imagen: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+
+        [HttpPost]
+        public ActionResult EntregarPedido(Guid idPedido)
+        {
+            var pedido = _elContexto.PedidosTabla.FirstOrDefault(p => p.IdPedido == idPedido);
+
+            if (pedido == null)
+            {
+                return Json(new { success = false, message = "Pedido no encontrado." });
+            }
+
+            pedido.IdEstadoPedido = 4; // Estado 'Entregado'
+            _elContexto.SaveChanges();
+
+            return Json(new { success = true, message = "Pedido entregado correctamente." });
+        }
         // GET: Pedidos/Details/5
         public ActionResult Details(int id)
         {

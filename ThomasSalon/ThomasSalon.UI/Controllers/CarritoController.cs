@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.Listar;
 using ThomasSalon.LN.Sucursales.Listar;
+using System.IO;
+using System.Web;
 
 namespace ThomasSalon.UI.Controllers
 {
@@ -51,9 +53,9 @@ namespace ThomasSalon.UI.Controllers
             return View(laListaDeProductos);
         }
 
-
         [HttpPost]
-        public ActionResult RealizarCompra(Guid idMetodoPago, Guid idTipoEntrega, string direccionExacta, string comentario, int idSucursal, Guid idProvincia)
+        public ActionResult RealizarCompra(Guid idMetodoPago, Guid idTipoEntrega,
+ string direccionExacta, string comentario, int idSucursal, Guid? idProvincia, HttpPostedFileBase archivoAdjunto)
         {
             string idUsuario = User.Identity.GetUserId();
 
@@ -71,56 +73,10 @@ namespace ThomasSalon.UI.Controllers
                 return Json(new { success = false, message = "El carrito está vacío." });
             }
 
-            var productosSinStock = new List<object>();
+           
 
-            foreach (var item in carrito)
-            {
-                var stockEnSucursalSeleccionada = _elContexto.InventarioSucursalTabla
-                    .Where(s => s.IdProducto == item.IdProducto && s.IdSucursal == idSucursal)
-                    .Select(s => s.Cantidad)
-                    .FirstOrDefault();
-
-                if (stockEnSucursalSeleccionada < item.Cantidad)
-                {
-                    var producto = _elContexto.ProductosTabla
-                        .Where(p => p.IdProducto == item.IdProducto)
-                        .Select(p => new { p.Nombre, p.IdProducto })
-                        .FirstOrDefault();
-
-                    var stockOtrasSucursales = _elContexto.InventarioSucursalTabla
-                        .Where(s => s.IdProducto == item.IdProducto && s.IdSucursal != idSucursal)
-                        .Select(s => new
-                        {
-                            Sucursal = _elContexto.SucursalesTabla
-                                .Where(suc => suc.IdSucursal == s.IdSucursal)
-                                .Select(suc => suc.Nombre)
-                                .FirstOrDefault(),
-                            Cantidad = s.Cantidad
-                        })
-                        .Where(s => s.Cantidad > 0)
-                        .ToList();
-
-                    productosSinStock.Add(new
-                    {
-                        Nombre = producto.Nombre,
-                        StockDisponible = stockEnSucursalSeleccionada,
-                        Requerido = item.Cantidad,
-                        StockOtrasSucursales = stockOtrasSucursales
-                    });
-                }
-            }
-
-            if (productosSinStock.Any())
-            {
-                return Json(new
-                {
-                    success = false,
-                    productos = productosSinStock
-                });
-            }
-
-            // Si todo está bien, seguir con la compra
             decimal subtotal = carrito.Sum(c => c.Cantidad * c.PrecioUnitario);
+            decimal ivaTotal = subtotal * 0.13m;
             decimal costoEnvio = 0;
 
             var tipoEntregaDomicilio = _elContexto.TipoDeEntregaTabla
@@ -136,7 +92,24 @@ namespace ThomasSalon.UI.Controllers
                     .FirstOrDefault();
             }
 
-            decimal montoTotal = subtotal + costoEnvio;
+            decimal montoTotal = subtotal + ivaTotal + costoEnvio;
+
+            Guid? idAdjunto = null;
+            if (archivoAdjunto != null && archivoAdjunto.ContentLength > 0)
+            {
+                using (var binaryReader = new BinaryReader(archivoAdjunto.InputStream))
+                {
+                    var adjunto = new AdjuntosPedidosTabla
+                    {
+                        IdAdjuntos = Guid.NewGuid(),
+                        Adjunto = binaryReader.ReadBytes(archivoAdjunto.ContentLength)
+                    };
+
+                    _elContexto.AdjuntosPedidosTabla.Add(adjunto);
+                    _elContexto.SaveChanges();
+                    idAdjunto = adjunto.IdAdjuntos;
+                }
+            }
 
             var nuevoPedido = new PedidosTabla
             {
@@ -150,7 +123,9 @@ namespace ThomasSalon.UI.Controllers
                 DireccionExacta = direccionExacta,
                 Comentario = comentario,
                 Fecha = DateTime.Now,
-                MontoTotal = montoTotal
+                MontoTotal = montoTotal,
+                MontoIVA = ivaTotal,
+                IdAdjuntos = idAdjunto
             };
 
             _elContexto.PedidosTabla.Add(nuevoPedido);
@@ -158,6 +133,7 @@ namespace ThomasSalon.UI.Controllers
 
             foreach (var item in carrito)
             {
+
                 var detallePedido = new DetallePedidoTabla
                 {
                     IdDetallePedido = Guid.NewGuid(),
@@ -165,7 +141,7 @@ namespace ThomasSalon.UI.Controllers
                     IdProducto = item.IdProducto,
                     Cantidad = item.Cantidad,
                     PrecioUnitario = item.PrecioUnitario,
-                    Subtotal = item.Cantidad * item.PrecioUnitario
+                    Subtotal = subtotal
                 };
 
                 _elContexto.DetallePedidoTabla.Add(detallePedido);
@@ -184,6 +160,51 @@ namespace ThomasSalon.UI.Controllers
 
             return Json(new { success = true, message = "Pedido realizado con éxito.", idPedido = nuevoPedido.IdPedido });
         }
+
+
+        public async Task<ActionResult> ObtenerCarritoProductos(Guid? idProvincia, Guid? idTipoEntrega)
+        {
+            string idUsuario = User.Identity.GetUserId();
+            decimal costoEnvio = 0;
+            decimal ivaTotal = 0; // Variable para almacenar el IVA total
+
+            // Obtener ID real del tipo de entrega "Domicilio"
+            var tipoEntregaDomicilio = _elContexto.TipoDeEntregaTabla
+                .Where(t => t.Nombre == "Domicilio")
+                .Select(t => t.IdTipoEntrega)
+                .FirstOrDefault();
+
+            var carrito = (from c in _elContexto.CarritoTemporalTabla
+                           join p in _elContexto.ProductosTabla on c.IdProducto equals p.IdProducto
+                           where c.IdUsuario == idUsuario
+                           select new
+                           {
+                               c.IdProducto,
+                               Nombre = p.Nombre,
+                               LinkImagen = p.LinkImagen,
+                               c.Cantidad,
+                               c.PrecioUnitario
+                           }).ToList();
+
+            decimal subtotal = carrito.Sum(c => c.Cantidad * c.PrecioUnitario);
+            ivaTotal = subtotal * 0.13m; // Calcular IVA total sobre el subtotal
+
+            // Validar si el envío aplica
+            if (idProvincia.HasValue && idTipoEntrega.HasValue && idTipoEntrega == tipoEntregaDomicilio)
+            {
+                costoEnvio = _elContexto.ProvinciasTabla
+                    .Where(p => p.IdProvincia == idProvincia)
+                    .Select(p => p.PrecioEntrega)
+                    .FirstOrDefault();
+            }
+
+            decimal total = subtotal + ivaTotal + costoEnvio; // Agregar el IVA total al cálculo final
+
+            return Json(new { carrito, subtotal, ivaTotal, costoEnvio, total }, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
 
 
@@ -234,43 +255,57 @@ namespace ThomasSalon.UI.Controllers
             return Json(carrito, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<ActionResult> ObtenerCarritoProductos(Guid? idProvincia, Guid? idTipoEntrega)
+        [HttpPost]
+        public ActionResult VerificarStock(int idSucursal)
         {
             string idUsuario = User.Identity.GetUserId();
-            decimal costoEnvio = 0;
+            var carrito = _elContexto.CarritoTemporalTabla.Where(c => c.IdUsuario == idUsuario).ToList();
 
-            // Obtener ID real del tipo de entrega "Domicilio"
-            var tipoEntregaDomicilio = _elContexto.TipoDeEntregaTabla
-                .Where(t => t.Nombre == "Domicilio") // Asegúrate de que "Domicilio" es el nombre correcto
-                .Select(t => t.IdTipoEntrega)
-                .FirstOrDefault();
+            var productosSinStock = new List<object>();
 
-            var carrito = (from c in _elContexto.CarritoTemporalTabla
-                           join p in _elContexto.ProductosTabla on c.IdProducto equals p.IdProducto
-                           where c.IdUsuario == idUsuario
-                           select new
-                           {
-                               c.IdProducto,
-                               Nombre = p.Nombre,
-                               LinkImagen = p.LinkImagen,
-                               c.Cantidad,
-                               c.PrecioUnitario
-                           }).ToList();
-
-            decimal subtotal = carrito.Sum(c => c.Cantidad * c.PrecioUnitario);
-
-            // Validar si el envío aplica
-            if (idProvincia.HasValue && idTipoEntrega.HasValue && idTipoEntrega == tipoEntregaDomicilio)
+            foreach (var item in carrito)
             {
-                costoEnvio = _elContexto.ProvinciasTabla
-                    .Where(p => p.IdProvincia == idProvincia)
-                    .Select(p => p.PrecioEntrega)
-                    .FirstOrDefault(); // Si no hay coincidencias, costoEnvio será 0
+                var stockEnSucursalSeleccionada = _elContexto.InventarioSucursalTabla
+                    .Where(s => s.IdProducto == item.IdProducto && s.IdSucursal == idSucursal)
+                    .Select(s => s.Cantidad)
+                    .FirstOrDefault();
+
+                if (stockEnSucursalSeleccionada < item.Cantidad)
+                {
+                    var producto = _elContexto.ProductosTabla
+                        .Where(p => p.IdProducto == item.IdProducto)
+                        .Select(p => new { p.Nombre, p.IdProducto })
+                        .FirstOrDefault();
+
+                    var stockOtrasSucursales = _elContexto.InventarioSucursalTabla
+                        .Where(s => s.IdProducto == item.IdProducto && s.IdSucursal != idSucursal)
+                        .Select(s => new
+                        {
+                            Sucursal = _elContexto.SucursalesTabla
+                                .Where(suc => suc.IdSucursal == s.IdSucursal)
+                                .Select(suc => suc.Nombre)
+                                .FirstOrDefault(),
+                            Cantidad = s.Cantidad
+                        })
+                        .Where(s => s.Cantidad > 0)
+                        .ToList();
+
+                    productosSinStock.Add(new
+                    {
+                        Nombre = producto.Nombre,
+                        StockDisponible = stockEnSucursalSeleccionada,
+                        Requerido = item.Cantidad,
+                        StockOtrasSucursales = stockOtrasSucursales
+                    });
+                }
             }
 
-            decimal total = subtotal + costoEnvio;
+            if (productosSinStock.Any())
+            {
+                return Json(new { success = false, productos = productosSinStock });
+            }
 
-            return Json(new { carrito, subtotal, costoEnvio, total }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true });
         }
 
 

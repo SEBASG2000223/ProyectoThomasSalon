@@ -21,5 +21,7 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
         public decimal PrecioUnitario { get; set; }
         public decimal Subtotal { get; set; }
 
+    
+
     }
 }

@@ -12,13 +12,14 @@
                 <th>Imagen</th>
                 <th>Producto</th>
                 <th>Cantidad</th>
-                <th>Total</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody id="carrito-body"></tbody>
     </table>
-
+    <h5 class="text-right">IVA Total: <span id="iva-total">₡0.00</span></h5>
     <h5 class="text-right">Subtotal: <span id="subtotal">₡0.00</span></h5>
     <h5 class="text-right">Costo de Envío: <span id="costo-envio">₡0.00</span></h5>
     <h4 class="text-right font-weight-bold">Total a Pagar: <span id="total-pago">₡0.00</span></h4>
@@ -28,28 +29,47 @@
 
         <div class="form-group">
             <label for="tipoEntrega">Tipo de Entrega:</label>
-            @Html.DropDownList("tipoEntrega", ViewBag.TiposEntrega as SelectList, "Seleccione un tipo de entrega", new { @class = "form-control" })
+            @Html.DropDownList("tipoEntrega", ViewBag.TiposEntrega as SelectList, "Seleccione un tipo de entrega", new { @class = "form-control", id = "tipoEntrega" })
         </div>
 
-        <div class="form-group" id="direccion-group">
+        <div class="form-group" id="direccion-group" style="display: none;">
             <label for="direccion">Dirección Exacta:</label>
             <input type="text" id="direccion" class="form-control" placeholder="Ingrese su dirección">
         </div>
+
 
         <div class="form-group">
             <label for="IdSucursal">Seleccione Sucursal:</label>
             @Html.DropDownList("IdSucursal", ViewBag.Sucursales as SelectList, "Seleccione una sucursal", new { @class = "form-control" })
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="provincia-group" style="display: none;">
             <label for="provincia">Provincia:</label>
             @Html.DropDownList("provincia", ViewBag.Provincias as SelectList, "Seleccione una provincia", new { @class = "form-control" })
         </div>
-
         <div class="form-group">
-            <label for="metodoPago">Método de Pago:</label>
-            @Html.DropDownList("metodoPago", ViewBag.MetodosPago as SelectList, "Seleccione un método de pago", new { @class = "form-control" })
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" class="form-control" placeholder="Agregue detalles adicionales..."></textarea>
         </div>
+        <button id="realizarPago" class="btn btn-primary btn-block mt-3">💳 Realizar Pago</button>
+
+        <div id="seccionPago" style="display: none;">
+            <div class="form-group">
+                <label for="metodoPago">Método de Pago:</label>
+                @Html.DropDownList("metodoPago", ViewBag.MetodosPago as SelectList, "Seleccione un método de pago", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="archivoAdjunto">Adjuntar Archivo:</label>
+                <input type="file" id="archivoAdjunto" class="form-control">
+            </div>
+            <button id="finalizarPedido" class="btn btn-success btn-block mt-3" disabled>✅ Finalizar Pedido</button>
+        </div>
+
+
+
+
+
+
         <div class="modal fade" id="modalStockInsuficiente" tabindex="-1" aria-labelledby="tituloModalStock" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -68,13 +88,6 @@
             </div>
         </div>
 
-
-        <div class="form-group">
-            <label for="comentario">Comentario:</label>
-            <textarea id="comentario" class="form-control" placeholder="Agregue detalles adicionales..."></textarea>
-        </div>
-
-        <button id="finalizarPedido" class="btn btn-success btn-block mt-3">✅ Finalizar Pedido</button>
     </div>
 </div>
 
@@ -82,112 +95,187 @@
 
 @section scripts {
     <script>
-        $(document).ready(function () {
-            function cargarCarrito() {
-                var idProvincia = $("#provincia").val();
-                var idTipoEntrega = $("#tipoEntrega").val();
+    $(document).ready(function () {
 
-                $.get('@Url.Action("ObtenerCarritoProductos", "Carrito")', { idProvincia, idTipoEntrega }, function (response) {
-                    var tbody = $("#carrito-body").empty();
+        function cargarCarrito() {
+            var idProvincia = $("#provincia").val();
+            var idTipoEntrega = $("#tipoEntrega").val();
 
-                    if (!response.carrito || response.carrito.length === 0) {
-                        tbody.append(`<tr><td colspan="5" class="text-center">Tu carrito está vacío 🛒</td></tr>`);
-                        $("#subtotal").text("₡0.00");
-                        $("#costo-envio").text("₡0.00");
-                        $("#total-pago").text("₡0.00");
-                        return;
-                    }
+            $.get('@Url.Action("ObtenerCarritoProductos", "Carrito")', { idProvincia, idTipoEntrega }, function (response) {
+                var tbody = $("#carrito-body").empty();
 
-                    response.carrito.forEach(function (item) {
-                        var totalPorProducto = item.Cantidad * item.PrecioUnitario;
-                        tbody.append(`
-                            <tr>
-                                <td><img src="${item.LinkImagen}" alt="${item.Nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"></td>
-                                <td>${item.Nombre}</td>
-                                <td><input type="number" class="cantidad form-control" data-id="${item.IdProducto}" value="${item.Cantidad}" min="1"></td>
-                                <td class="total-producto">₡${totalPorProducto.toFixed(2)}</td>
-                                <td><button class="btn btn-danger btn-sm eliminar" data-id="${item.IdProducto}">🗑️</button></td>
-                            </tr>
-                        `);
-                    });
-
-                    actualizarTotales(response.subtotal, response.costoEnvio, response.total);
-                }).fail(function () {
-                    alert("Error al cargar el carrito. Inténtalo de nuevo.");
-                });
-            }
-
-            function actualizarTotales(subtotal, costoEnvio, total) {
-                $("#subtotal").text(`₡${subtotal.toFixed(2)}`);
-                $("#costo-envio").text(`₡${costoEnvio.toFixed(2)}`);
-                $("#total-pago").text(`₡${total.toFixed(2)}`);
-            }
-
-            $(document).on("change", ".cantidad", function () {
-                var idProducto = $(this).data("id");
-                var nuevaCantidad = parseInt($(this).val());
-
-                if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
-                    nuevaCantidad = 1;
-                    $(this).val(1);
+                if (!response.carrito || response.carrito.length === 0) {
+                    tbody.append(`<tr><td colspan="7" class="text-center">Tu carrito está vacío 🛒</td></tr>`);
+                    $("#subtotal, #iva-total, #costo-envio, #total-pago").text("₡0.00");
+                    return;
                 }
 
-                $.post('@Url.Action("ActualizarCantidad", "Carrito")', { idProducto, cantidad: nuevaCantidad })
-                    .done(cargarCarrito)
-                    .fail(() => alert("No se pudo actualizar la cantidad."));
+                response.carrito.forEach(function (item) {
+                    var totalPorProducto = item.Cantidad * item.PrecioUnitario;
+
+                    tbody.append(`
+                        <tr>
+                            <td><img src="${item.LinkImagen}" alt="${item.Nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"></td>
+                            <td>${item.Nombre}</td>
+                            <td><input type="number" class="cantidad form-control" data-id="${item.IdProducto}" value="${item.Cantidad}" min="1"></td>
+                            <td>₡${item.PrecioUnitario.toFixed(2)}</td>
+                            <td class="total-producto">₡${totalPorProducto.toFixed(2)}</td>
+                            <td><button class="btn btn-danger btn-sm eliminar" data-id="${item.IdProducto}">🗑️</button></td>
+                        </tr>
+                    `);
+                });
+
+                actualizarTotales(response.subtotal, response.costoEnvio, response.total, response.ivaTotal);
+                // Cerrar sección de pago y habilitar "Realizar Pago"
+                $("#seccionPago").slideUp();
+                $("#realizarPago").prop("disabled", false);
+                $("#finalizarPedido").prop("disabled", true);
+            }).fail(function () {
+                alert("Error al cargar el carrito. Inténtalo de nuevo.");
             });
-
-            $(document).on("click", ".eliminar", function () {
-                var idProducto = $(this).data("id");
-
-                if (!confirm("¿Seguro que quieres eliminar este producto?")) return;
-
-                $.post('@Url.Action("EliminarDelCarrito", "Carrito")', { idProducto })
-                    .done(response => {
-                        alert(response.mensaje);
-                        cargarCarrito();
-                    })
-                    .fail(() => alert("No se pudo eliminar el producto."));
-            });
-
-            $(document).on("change", "#tipoEntrega, #provincia", function () {
-                cargarCarrito();
-            });
-$("#finalizarPedido").click(function () {
-    var pedido = {
-        idMetodoPago: $("#metodoPago").val(),
-        idTipoEntrega: $("#tipoEntrega").val(),
-        direccionExacta: $("#direccion").val(),
-        idSucursal: $("#IdSucursal").val(),
-        idProvincia: $("#provincia").val(),
-        comentario: $("#comentario").val()
-    };
-
-    $.post('@Url.Action("RealizarCompra", "Carrito")', pedido, function (response) {
-        if (response.success) {
-            alert("Pedido realizado con éxito.");
-            window.location.href = '@Url.Action("ResumenPedido", "Carrito")' + '?idPedido=' + response.idPedido;
-        } else if (response.productos) {
-            let listaHtml = "";
-            response.productos.forEach(producto => {
-                let stockOtras = producto.StockOtrasSucursales.length > 0
-                    ? producto.StockOtrasSucursales.map(s => `${s.Sucursal}: ${s.Cantidad}`).join(", ")
-                    : "No disponible en otras sucursales";
-
-                listaHtml += `<li><strong>${producto.Nombre}</strong> - Disponibles en sucursal: ${producto.StockDisponible}, Requeridos: ${producto.Requerido}. <br><span style="color:gray;">Stock en otras sucursales: ${stockOtras}</span></li>`;
-            });
-
-            $("#listaProductosStockModal").html(listaHtml);
-            $("#modalStockInsuficiente").modal("show");
-        } else {
-            alert(response.message);
         }
-    }).fail(() => alert("No se pudo completar el pedido."));
-});
+
+        function actualizarTotales(subtotal, costoEnvio, total, ivaTotal) {
+            $("#subtotal").text(`₡${subtotal.toFixed(2)}`);
+            $("#iva-total").text(`₡${ivaTotal.toFixed(2)}`);
+            $("#costo-envio").text(`₡${costoEnvio.toFixed(2)}`);
+            $("#total-pago").text(`₡${total.toFixed(2)}`);
+        }
+
+        function toggleAddressFields() {
+            var selectedValue = $("#tipoEntrega").val(); // Captura el valor seleccionado del dropdown
+
+            if (selectedValue === "1ea24953-078c-4438-93b1-10e146d8e84b") {
+                $("#direccion-group, #provincia-group").show(); // Mostramos correctamente los divs completos
+            } else {
+                $("#direccion-group, #provincia-group").hide(); // Ocultamos los divs completos
+
+                // Limpiar los valores de los campos dentro de los divs ocultados
+                $("#direccion-group input, #provincia-group input, #direccion-group select, #provincia-group select").val("");
+            }
+        }
+
+        // Ejecutar la función al cargar la página para establecer el estado inicial
+        toggleAddressFields();
+
+        // Agregar evento de cambio al dropdown para detectar cambios en tiempo real
+        $("#tipoEntrega").on("change", function () {
+            toggleAddressFields();
+        });
+
+
+        $(document).on("change", ".cantidad", function () {
+            var idProducto = $(this).data("id");
+            var nuevaCantidad = parseInt($(this).val());
+
+            if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
+                nuevaCantidad = 1;
+                $(this).val(1);
+            }
+
+            $.post('@Url.Action("ActualizarCantidad", "Carrito")', { idProducto, cantidad: nuevaCantidad })
+                .done(cargarCarrito)
+                .fail(() => alert("No se pudo actualizar la cantidad."));
+        });
+
+        $(document).on("click", ".eliminar", function () {
+            var idProducto = $(this).data("id");
+
+            if (!confirm("¿Seguro que quieres eliminar este producto?")) return;
+
+            $.post('@Url.Action("EliminarDelCarrito", "Carrito")', { idProducto })
+                .done(response => {
+                    alert(response.mensaje);
+                    cargarCarrito();
+                })
+                .fail(() => alert("No se pudo eliminar el producto."));
+        });
 
 
 
+      function verificarStock() {
+        var idSucursal = $("#IdSucursal").val();
+
+        $.post('@Url.Action("VerificarStock", "Carrito")', { idSucursal }, function (response) {
+            if (response.success) {
+                $("#seccionPago").slideDown();
+                $("#realizarPago").prop("disabled", true);
+                $("#finalizarPedido").prop("disabled", false);
+            } else {
+                let listaHtml = response.productos.map(p => {
+                    let stockOtrasSucursales = p.StockOtrasSucursales.length > 0
+                        ? p.StockOtrasSucursales.map(s => `${s.Sucursal}: ${s.Cantidad}`).join("<br>")
+                        : "No disponible en otras sucursales";
+
+                    return `
+                        <li>
+                            <strong>${p.Nombre}</strong> - Disponibles en sucursal seleccionada: ${p.StockDisponible}, Requeridos: ${p.Requerido}.
+                            <br><span style="color:gray;">Stock en otras sucursales:</span><br> ${stockOtrasSucursales}
+                        </li>`;
+                }).join("");
+
+                $("#listaProductosStockModal").html(listaHtml);
+                $("#modalStockInsuficiente").modal("show");
+            }
+        }).fail(() => alert("Error al verificar stock."));
+    }
+
+    $("#realizarPago").click(function () {
+        verificarStock();
+    });
+
+        $(document).on("change", "#tipoEntrega, #provincia", function () {
             cargarCarrito();
         });
+
+        $("#finalizarPedido").click(function () {
+            var formData = new FormData();
+            formData.append("idMetodoPago", $("#metodoPago").val());
+            formData.append("idTipoEntrega", $("#tipoEntrega").val());
+            formData.append("direccionExacta", $("#direccion").val());
+            formData.append("idSucursal", $("#IdSucursal").val());
+            formData.append("idProvincia", $("#provincia").val());
+            formData.append("comentario", $("#comentario").val());
+
+            var archivo = $("#archivoAdjunto")[0].files[0];
+            if (archivo) {
+                formData.append("archivoAdjunto", archivo);
+            }
+
+            $.ajax({
+                url: '@Url.Action("RealizarCompra", "Carrito")',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        alert("Pedido realizado con éxito.");
+                        window.location.href = '@Url.Action("ListarPedidosCliente", "Pedidos")';
+                    } else if (response.productos) {
+                        let listaHtml = response.productos.map(producto => {
+                            let stockOtras = producto.StockOtrasSucursales.length > 0
+                                ? producto.StockOtrasSucursales.map(s => `${s.Sucursal}: ${s.Cantidad}`).join(", ")
+                                : "No disponible en otras sucursales";
+
+                            return `<li><strong>${producto.Nombre}</strong> - Disponibles en sucursal: ${producto.StockDisponible}, Requeridos: ${producto.Requerido}. <br><span style="color:gray;">Stock en otras sucursales: ${stockOtras}</span></li>`;
+                        }).join("");
+
+                        $("#listaProductosStockModal").html(listaHtml);
+                        $("#modalStockInsuficiente").modal("show");
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("No se pudo completar el pedido.");
+                }
+            });
+        });
+
+        // Llamamos a la función para cargar el carrito al iniciar
+        cargarCarrito();
+    });
     </script>
+
 }

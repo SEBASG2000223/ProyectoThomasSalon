@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Pedidos.PedidosDto>
 
 @{
+
     ViewBag.Title = "Listar Pedidos";
 }
 
@@ -11,6 +12,7 @@
         <table id="myTable" class="table table-bordered table-hover">
             <thead class="table-dark">
                 <tr>
+                    <th>imagen</th>
                     <th>@Html.DisplayNameFor(model => model.EstadoPedido)</th>
                     <th>@Html.DisplayNameFor(model => model.Sucursal)</th>
                     <th>@Html.DisplayNameFor(model => model.Usuario)</th>
@@ -28,6 +30,10 @@
                 @foreach (var pedido in Model)
                 {
                     <tr>
+                        <td>
+                            <!-- Botón para abrir el modal -->
+                            <button class="btn btn-info ver-comprobante" data-id="@pedido.IdPedido">Ver Comprobante</button>
+                        </td>
                         <td>@Html.DisplayFor(modelItem => pedido.EstadoPedido)</td>
                         <td>@Html.DisplayFor(modelItem => pedido.Sucursal)</td>
                         <td>@Html.DisplayFor(modelItem => pedido.Usuario)</td>
@@ -40,11 +46,43 @@
                         <td>@Html.DisplayFor(modelItem => pedido.MontoTotal)</td>
                         <td>
                             <a href="@Url.Action("Detalles", "Pedidos", new { id = pedido.IdPedido })" class="btn btn-info btn-sm">Detalles</a>
-
-                            <button class="btn btn-danger rechazar-pedido" data-id="@pedido.IdPedido">❌ Rechazar</button>
+                            @if (pedido.EstadoPedido == "Pendiente")
+                            {
+                                <button class="btn btn-success aceptar-pedido" data-id="@pedido.IdPedido">✔ Aceptar</button>
+                                <button class="btn btn-danger rechazar-pedido" data-id="@pedido.IdPedido">❌ Rechazar</button>
+                            }
+                            else if (pedido.EstadoPedido == "En transcurso")
+                            {
+                                <button class="btn btn-primary entregar-pedido" data-id="@pedido.IdPedido">📦 Entregado</button>
+                            }
+                            else if (pedido.EstadoPedido == "Rechazado")
+                            {
+                                <span class="badge bg-danger">Rechazado</span>
+                            }
+                            else if (pedido.EstadoPedido == "Entregado")
+                            {
+                                <span class="badge bg-success">Entregado</span>
+                            }
                         </td>
                     </tr>
                 }
+                <!-- Modal -->
+                <div class="modal fade" id="modalComprobante" tabindex="-1" role="dialog" aria-labelledby="modalComprobanteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalComprobanteLabel">Comprobante del Pedido</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Aquí se cargará la imagen -->
+                                <img id="imgComprobante" src="" alt="Comprobante" style="width: 100%; max-height: 500px; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </tbody>
         </table>
     </div>
@@ -52,26 +90,64 @@
 
 @section scripts {
     <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable();
+            });
+
+            $(document).on("click", ".aceptar-pedido", function () {
+                var idPedido = $(this).data("id");
+                $.post('@Url.Action("AceptarPedido", "Pedidos")', { idPedido: idPedido }, function (response) {
+                    alert(response.message);
+                    location.reload();
+                }).fail(() => alert("Error al aceptar el pedido."));
+            });
+
+            $(document).on("click", ".rechazar-pedido", function () {
+                var idPedido = $(this).data("id");
+                if (!confirm("¿Seguro que deseas rechazar este pedido?")) return;
+                $.post('@Url.Action("RechazarPedido", "Pedidos")', { idPedido: idPedido }, function (response) {
+                    alert(response.message);
+                    location.reload();
+                }).fail(() => alert("Error al rechazar el pedido."));
+            });
+
+            $(document).on("click", ".entregar-pedido", function () {
+                var idPedido = $(this).data("id");
+                $.post('@Url.Action("EntregarPedido", "Pedidos")', { idPedido: idPedido }, function (response) {
+                    alert(response.message);
+                    location.reload();
+                }).fail(() => alert("Error al entregar el pedido."));
+            });
         $(document).ready(function () {
-            $('#myTable').DataTable();
-        });
+    $(".ver-comprobante").click(function () {
+        var idPedido = $(this).data("id");
 
-        $(document).on("click", ".rechazar-pedido", function () {
-            var idPedido = $(this).data("id");
+        $.ajax({
+            url: "/Pedidos/ObtenerImagen",
+            type: "GET",
+            data: { idPedido: idPedido },
+            success: function (response) {
+                console.log("Respuesta del servidor:", response); // Para depuración
 
-            if (!confirm("¿Seguro que deseas rechazar este pedido? Esta acción restaurará el stock.")) {
-                return;
-            }
-
-            $.post('@Url.Action("RechazarPedido", "Pedidos")', { idPedido: idPedido }, function (response) {
-                if (response.success) {
-                    alert(response.message);
-                    location.reload(); // Recargar la página para actualizar la lista de pedidos
-                } else {
-                    alert(response.message);
+                if (response && response.error) {
+                    alert(response.error);
+                    return;
                 }
-            }).fail(() => alert("Error al rechazar el pedido."));
+
+                if (response && response.length > 0) {
+                    $("#imgComprobante").attr("src", "data:image/jpeg;base64," + response);
+                    $("#modalComprobante").modal("show");
+                } else {
+                    alert("No se encontró el comprobante.");
+                }
+            },
+            error: function () {
+                alert("Error al cargar la imagen.");
+            }
         });
+    });
+});
+
+
     </script>
 }
-

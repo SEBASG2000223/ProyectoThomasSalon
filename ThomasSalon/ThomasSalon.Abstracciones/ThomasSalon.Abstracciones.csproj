@@ -143,6 +143,7 @@
     <Compile Include="LN\Interfaces\Usuarios\Listar\IListarUsuariosLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosLN.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\AdjuntosPedidosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CarritoTemporalTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CitasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\DetallePedidoTabla.cs" />

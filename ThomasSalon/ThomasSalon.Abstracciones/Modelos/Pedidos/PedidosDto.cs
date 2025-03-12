@@ -11,6 +11,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Pedidos
     public class PedidosDto
     {
         public Guid IdPedido { get; set; }
+        public Guid? IdAdjuntos { get; set; }
         public string EstadoPedido { get; set; }
         public string Sucursal { get; set; }
         public string Usuario { get; set; }
@@ -21,8 +22,10 @@ namespace ThomasSalon.Abstracciones.Modelos.Pedidos
         public string Comentario { get; set; }
         public DateTime Fecha { get; set; }
         public decimal MontoTotal { get; set; }
+        public decimal MontoIVA { get; set; }
 
-     
+
+
 
     }
 }

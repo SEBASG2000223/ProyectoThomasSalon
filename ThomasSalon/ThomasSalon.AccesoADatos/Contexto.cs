@@ -46,6 +46,8 @@ namespace ThomasSalon.AccesoADatos
 
             modelBuilder.Entity<EstadoDePedidoTabla>().ToTable("ESTADO_PEDIDO");
 
+            modelBuilder.Entity<AdjuntosPedidosTabla>().ToTable("ADJUNTOS_PEDIDOS");
+
 
 
 
@@ -53,6 +55,7 @@ namespace ThomasSalon.AccesoADatos
 
 
         }
+        public DbSet<AdjuntosPedidosTabla> AdjuntosPedidosTabla { get; set; }
         public DbSet<EstadoDePedidoTabla> EstadoDePedidoTabla { get; set; }
 
         public DbSet<PedidosTabla> PedidosTabla { get; set; }

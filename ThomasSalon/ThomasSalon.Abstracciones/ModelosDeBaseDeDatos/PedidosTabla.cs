@@ -43,6 +43,9 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
 
         [Required]
         public decimal MontoTotal { get; set; }
+        public decimal MontoIVA { get; set; }
+
+        public Guid? IdAdjuntos { get; set; }
 
 
 

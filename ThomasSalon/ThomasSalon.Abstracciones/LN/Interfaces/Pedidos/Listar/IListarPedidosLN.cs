@@ -11,6 +11,7 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.Pedidos.Listar
     public interface IListarPedidosLN
     {
         List<PedidosDto> Listar();
+        List<PedidosDto> ListarPedidosCliente(String idUsuario);
 
     }
 }
