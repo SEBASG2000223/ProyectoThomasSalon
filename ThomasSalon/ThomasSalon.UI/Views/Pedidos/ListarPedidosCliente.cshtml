@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Pedidos.PedidosDto>
+
+@{
+    ViewBag.Title = "Mis Pedidos";
+}
+
+<div class="container pt-5" style="max-width: 1300px;">
+    <h2 class="mb-4 text-center">Mis Pedidos</h2>
+
+    <div class="d-flex flex-column gap-3">
+        @foreach (var pedido in Model)
+        {
+            <div class="card shadow-sm border-0 rounded">
+                <div class="card-header bg-primary text-white">
+                    Pedido #@pedido.IdPedido - @pedido.Fecha.ToString("dd/MM/yyyy")
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Estado: @pedido.EstadoPedido</h5>
+                    <p class="card-text"><strong>Sucursal:</strong> @pedido.Sucursal</p>
+                    <p class="card-text"><strong>Método de Pago:</strong> @pedido.MetodoPago</p>
+                    <p class="card-text"><strong>Tipo de Entrega:</strong> @pedido.TipoEntrega</p>
+                    <p class="card-text"><strong>Provincia:</strong> @pedido.Provincia</p>
+                    <p class="card-text"><strong>Dirección:</strong> @pedido.DireccionExacta</p>
+                    <p class="card-text"><strong>Comentario:</strong> @pedido.Comentario</p>
+                    <p class="card-text"><strong>Monto Total:</strong> $@pedido.MontoTotal.ToString("N2")</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        // Aquí puedes agregar interactividad si es necesario
+    </script>
+}

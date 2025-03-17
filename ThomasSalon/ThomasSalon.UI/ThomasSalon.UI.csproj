@@ -323,11 +323,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioGeneralController.cs" />
     <Compile Include="Controllers\InventarioSucursalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ColaboradoresController.cs" />
@@ -635,19 +637,15 @@
     <Content Include="Views\Productos\servicios\Servicios.cshtml" />
     <Content Include="Views\Productos\servicios\_Servicios.cshtml" />
     <Content Include="Views\InventarioSucursal\ActualizarInventario.cshtml" />
-
     <Content Include="Views\Sucursales\_Sucursales.cshtml" />
     <Content Include="Views\Sucursales\Sucursales.cshtml" />
-
-
     <Content Include="Views\Citas\ListarAgendas.cshtml" />
     <Content Include="Views\Shared\_DropdownSucursalesAgendas.cshtml" />
-
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Productos\Productos.cshtml" />
-    <Content Include="Views\Productos\VerCarrito.cshtml" />
-
-
+    <Content Include="Views\Carrito\VerCarrito.cshtml" />
+    <Content Include="Views\Pedidos\ListarPedidos.cshtml" />
+    <Content Include="Views\Pedidos\ListarPedidosCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
