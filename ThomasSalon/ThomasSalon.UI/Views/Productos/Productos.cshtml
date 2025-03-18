@@ -3,51 +3,179 @@
 @{
     ViewBag.Title = "Productos";
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<link rel="stylesheet" href="~/Content/css/estilo.css">
+<style>
+    #btnCarrito {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        border-radius: 50px;
+        padding: 15px 20px;
+        font-size: 18px;
+    }
+
+    #asideCarrito {
+        position: fixed;
+        top: 0;
+        right: -550px;
+        width: 550px;
+        height: 100vh;
+        background: white;
+        box-shadow: -3px 0px 10px rgba(0, 0, 0, 0.2);
+        transition: right 0.3s ease-in-out;
+        z-index: 1050;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+        #asideCarrito.active {
+            right: 0;
+        }
+
+    #cerrarCarrito {
+        cursor: pointer;
+        font-size: 20px;
+    }
+</style>
 
 <h2 class="text-center">Productos</h2>
 
+<button id="btnCarrito" class="btn btn-primary">
+    🛒 Carrito (<span id="contadorCarrito">0</span>)
+</button>
 
-
-<section class="contenedor">
-    <!-- Contenedor de elementos -->
-    <div class="contenedor-items">
+<div class="container">
+    <div class="row justify-content-center">
         @foreach (var item in Model)
         {
-            <div class="item">
-                <span class="titulo-item">@item.Nombre</span>
-                @if (!string.IsNullOrEmpty(item.LinkImagen))
-                {
-                    <img src="@item.LinkImagen" alt="@item.Nombre" class="img-item">
-                }
-            <span class="precio-item text-dark">@item.Precio</span>
-                <button class="boton-item">Agregar al Carrito</button>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card">
+                    @if (!string.IsNullOrEmpty(item.LinkImagen))
+                    {
+                        <img class="card-img-top" src="@item.LinkImagen" alt="@item.Nombre">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Nombre</h5>
+                        <p class="card-text">₡@item.Precio</p>
+                        <button class="btn btn-primary boton-agregar" data-id="@item.IdProducto">
+                            <i class="fas fa-cart-plus"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
             </div>
         }
     </div>
+</div>
 
-    <!-- Carrito de Compras -->
-    <div class="carrito" id="carrito">
-        <div class="header-carrito">
-            <h2 class="text-light">Tu Carrito</h2>
-        </div>
-
-        <div class="carrito-items">
-            <!-- Aquí se llenará dinámicamente con JavaScript -->
-        </div>
-
-        <div class="carrito-total">
-            <div class="fila">
-                <strong>Tu Total</strong>
-                <span class="carrito-precio-total">₡0.00</span>
-            </div>
-            <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i></button>
-        </div>
+<div id="asideCarrito">
+    <div>
+        <span id="cerrarCarrito">&times; Cerrar</span>
+        <h4>🛒 Mi Carrito</h4>
     </div>
-</section>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="carrito-body"></tbody>
+    </table>
+    <h5 class="text-right">Subtotal: <span id="subtotal">₡0.00</span></h5>
+
+    <a href="/Carrito/VerCarrito" class="btn btn-success">Finalizar Pedido</a>
+
+</div>
 
 @section scripts {
-    <script src="~/Scripts/Carrito/app.js"></script>
+    <script>
+ $(document).ready(function () {
+    $(".boton-agregar").click(function () {
+        var idProducto = $(this).data("id");
+        var cantidad = 1;
+        var precioUnitario = parseFloat($(this).closest('.card-body').find('.card-text:first').text().replace('₡', '').trim());
+
+        $.post('@Url.Action("AgregarAlCarrito", "Carrito")', { idProducto, cantidad, precioUnitario }, function (response) {
+            alert(response.mensaje);
+            cargarCarrito();
+        });
+    });
+
+    $("#btnCarrito").click(function () {
+        $("#asideCarrito").addClass("active");
+        cargarCarrito();
+    });
+
+    $("#cerrarCarrito").click(function () {
+        $("#asideCarrito").removeClass("active");
+    });
+
+    // Cerrar el aside si se hace clic fuera de él
+    $(document).mouseup(function (e) {
+        var aside = $("#asideCarrito");
+        if (!aside.is(e.target) && aside.has(e.target).length === 0 && aside.hasClass("active")) {
+            aside.removeClass("active");
+        }
+    });
+
+    function cargarCarrito() {
+        $.get('@Url.Action("ObtenerCarrito", "Carrito")', function (data) {
+            var tbody = $("#carrito-body").empty();
+            var totalProductos = 0;
+            var subtotal = 0;
+
+            data.forEach(function (item) {
+                totalProductos += item.Cantidad;
+                var totalPorProducto = parseFloat(item.Cantidad) * parseFloat(item.PrecioUnitario);
+                subtotal += totalPorProducto; // Sumar correctamente el subtotal
+
+                tbody.append(`
+                    <tr>
+                        <td>${item.Nombre}</td>
+                        <td><input type="number" class="cantidad" data-id="${item.IdProducto}" value="${item.Cantidad}" min="1"></td>
+                        <td class="total-producto">₡${totalPorProducto.toFixed(2)}</td>
+                        <td><button class="btn btn-danger btn-sm eliminar" data-id="${item.IdProducto}">🗑️</button></td>
+                    </tr>
+                `);
+            });
+
+            // Mostrar subtotal correctamente
+            $("#subtotal").text(`₡${subtotal.toFixed(2)}`);
+
+            // Actualizar contador del carrito
+            $("#contadorCarrito").text(totalProductos);
+        });
+    }
+
+    // Evento para eliminar productos del carrito
+    $(document).on("click", ".eliminar", function () {
+        var idProducto = $(this).data("id");
+
+        $.post('@Url.Action("EliminarDelCarrito", "Carrito")', { idProducto: idProducto }, function (response) {
+            alert(response.mensaje);
+            cargarCarrito();
+        });
+    });
+
+    // Evento para actualizar cantidad de productos
+    $(document).on("change", ".cantidad", function () {
+        var idProducto = $(this).data("id");
+        var nuevaCantidad = parseInt($(this).val());
+        if (nuevaCantidad < 1 || isNaN(nuevaCantidad)) {
+            nuevaCantidad = 1;
+            $(this).val(1);
+        }
+
+        $.post('@Url.Action("ActualizarCantidad", "Carrito")', { idProducto: idProducto, cantidad: nuevaCantidad }, function (response) {
+            cargarCarrito();
+        });
+    });
+
+});
+
+
+    </script>
 }
