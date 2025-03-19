@@ -365,6 +365,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\ComponentesExternos\DataTable\dataTables.dataTables.min.css" />
     <Content Include="Content\css\estilo.css" />
+    <Content Include="Content\css\LayoutAdministrador\styles.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\img\about.jpg" />
@@ -506,6 +507,11 @@
     <Content Include="Content\scss\bootstrap\scss\utilities\_visibility.scss" />
     <Content Include="Content\scss\bootstrap\scss\vendor\_rfs.scss" />
     <Content Include="Content\scss\style.scss" />
+    <Content Include="Scripts\assets\demo\chart-area-demo.js" />
+    <Content Include="Scripts\assets\demo\chart-bar-demo.js" />
+    <Content Include="Scripts\assets\demo\chart-pie-demo.js" />
+    <Content Include="Scripts\assets\demo\datatables-demo.js" />
+    <Content Include="Scripts\assets\img\error-404-monochrome.svg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -531,6 +537,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\LayoutAdministrador\datatables-simple-demo.js" />
+    <Content Include="Scripts\LayoutAdministrador\scripts.js" />
     <Content Include="Scripts\lib\counterup\counterup.min.js" />
     <Content Include="Scripts\lib\easing\easing.js" />
     <Content Include="Scripts\lib\easing\easing.min.js" />
@@ -646,6 +654,8 @@
     <Content Include="Views\Carrito\VerCarrito.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidos.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidosCliente.cshtml" />
+    <Content Include="Views\Admin\AdminIndex.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
