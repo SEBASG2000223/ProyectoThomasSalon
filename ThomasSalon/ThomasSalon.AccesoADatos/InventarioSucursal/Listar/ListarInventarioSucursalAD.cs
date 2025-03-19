@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ThomasSalon.Abstracciones.AccesoADatos.InventarioSucursal;
 using ThomasSalon.Abstracciones.Modelos.InventarioSucursal;
@@ -39,6 +40,36 @@ namespace ThomasSalon.AccesoADatos.InventarioSucursal.Listar
                                                              }).ToList();
             return laListaInventario;
         }
+
+
+        public List<InventarioSucursalDto> DetallesInventario(Guid IdInventarioSucursal)
+        {
+            List<InventarioSucursalDto> laListaInventario = (from Inventario in _elContexto.InventarioSucursalTabla
+                                                             join sucursal in _elContexto.SucursalesTabla
+                                                             on Inventario.IdSucursal equals sucursal.IdSucursal
+                                                             join elProducto in _elContexto.ProductosTabla
+                                                             on Inventario.IdProducto equals elProducto.IdProducto
+                                                             join elProveedor in _elContexto.ProveedoresTabla
+                                                             on elProducto.IdProveedor equals elProveedor.IdProveedor
+                                                             join elEstado in _elContexto.EstadoDisponibilidadTabla
+                                                             on elProducto.IdEstado equals elEstado.IdEstado
+                                                             where Inventario.IdInventarioSucursal == IdInventarioSucursal
+                                                             select new InventarioSucursalDto
+                                                             {
+                                                                 IdInventarioSucursal = Inventario.IdInventarioSucursal,
+                                                                 IdProducto = Inventario.IdProducto,
+                                                                 NombreProducto = elProducto.Nombre,
+                                                                 Precio = elProducto.Precio,
+                                                                 NombreProveedor = elProveedor.Nombre,
+                                                                 IdEstado = Inventario.IdEstado,
+                                                                 Descripcion = elProducto.Descripcion,
+                                                                 UnidadMedida = elProducto.UnidadMedida,
+                                                                 
+
+                                                             }).ToList();
+            return laListaInventario;
+        }
+
 
         public List<ProductosDto> ListarProductosActivos(int idSucursal)
         {

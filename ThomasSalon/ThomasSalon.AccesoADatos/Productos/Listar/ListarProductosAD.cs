@@ -36,32 +36,13 @@ namespace ThomasSalon.AccesoADatos.Productos.Listar
                                                          LinkImagen = elProducto.LinkImagen,
                                                          UnidadMedida = elProducto.UnidadMedida,
                                                          IdEstado = elProducto.IdEstado,
-                                                         NombreEstado = elEstado.Nombre 
                                                      }).ToList();
             return laListaDeProductos;
 
 
         }
 
-       
-
-        public Dictionary<int, string> ObtenerProveedoresPorProducto()
-        {
-            var proveedores = (from producto in _elContexto.ProductosTabla
-                               join proveedor in _elContexto.ProveedoresTabla
-                               on producto.IdProveedor equals proveedor.IdProveedor
-                               select new
-                               {
-                                   proveedor.IdProveedor,
-                                   proveedor.Nombre
-                               }).ToList() 
-                                 .GroupBy(p => p.IdProveedor) 
-                                 .Select(g => g.FirstOrDefault()) 
-                                 .ToList(); 
-
-            return proveedores.ToDictionary(p => p.IdProveedor, p => p.Nombre);
-        }
-
+      
 
         public List<ProductosDto> ProductosActivos()
         {
@@ -82,7 +63,6 @@ namespace ThomasSalon.AccesoADatos.Productos.Listar
                                                          LinkImagen = elProducto.LinkImagen,
                                                          UnidadMedida = elProducto.UnidadMedida,
                                                          IdEstado = elProducto.IdEstado,
-                                                         NombreEstado = elEstado.Nombre
                                                      }).ToList();
             return laListaDeProductos;
         }
