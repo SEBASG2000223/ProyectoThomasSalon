@@ -73,6 +73,7 @@
     <Compile Include="InventarioSucursal\Editar\EditarInventarioSucursalLN.cs" />
     <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalLN.cs" />
     <Compile Include="InventarioSucursal\ObtenerPorId\ObtenerInventarioSucursalPorIdLN.cs" />
+    <Compile Include="Pedidos\Listar\ListarPedidosLN.cs" />
     <Compile Include="Personas\Editar\EditarPersonasLN.cs" />
     <Compile Include="Personas\Listar\ListarPersonasLN.cs" />
     <Compile Include="Personas\ObtenerPorId\ObtenerPersonasPorIdLN.cs" />

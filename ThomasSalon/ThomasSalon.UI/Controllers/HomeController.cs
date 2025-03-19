@@ -38,10 +38,25 @@ namespace ThomasSalon.UI.Controllers
             return PartialView("_DropdownSucursalesAgendas", sucursales);
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+      
+            public ActionResult Index()
+            {
+                if (User.IsInRole("Administrador") || User.IsInRole("Gerente"))
+                {
+                    return RedirectToAction("Dashboard");
+                }
+
+                return View();
+            }
+
+            public ActionResult Dashboard()
+            {
+                return View();
+            }
+
+
+
+      
 
 
         public ActionResult About()

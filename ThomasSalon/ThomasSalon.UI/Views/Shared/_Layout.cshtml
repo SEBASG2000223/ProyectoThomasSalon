@@ -9,7 +9,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/ComponentesExternos/DataTable/dataTables.dataTables.min.css" rel="stylesheet" />
-  
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -68,7 +68,7 @@
 
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
-            <a href="index.html" class="navbar-brand ml-lg-3">
+            <a href="~/" class="navbar-brand ml-lg-3">
                 <h1 class="m-0 text-primary"><span class="text-dark">Thomas</span> Beauty</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -76,29 +76,12 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <li>@Html.ActionLink("Sucursales", "ListarSucursales", "Sucursales", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Productos", "ListarProductos", "Productos", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Usuarios
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Usuarios", "ListarSoloUsuarios", "Usuarios", null, new { @class = "dropdown-item" })</li>
-                            <li>@Html.ActionLink("Gerentes", "ListarGerentes", "Usuarios", null, new { @class = "dropdown-item" })</li>
-                            <li>@Html.ActionLink("Administradores", "ListarAdministradores", "Usuarios", null, new { @class = "dropdown-item" })</li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>@Html.ActionLink("Todos los usuarios", "ListarUsuarios", "Usuarios", null, new { @class = "dropdown-item" })</li>
-                        </ul>
-                    </li>
-                    <li>@Html.ActionLink("Proveedores", "ListarProveedores", "Proveedores", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Servicios", "ListarServicios", "Servicios", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Colaboradores", "ListarColaboradores", "Colaboradores", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Inventario", "ListarInventarioGeneral", "InventarioGeneral", new { area = "" }, new { @class = "nav-link" })</li>
+                    @Html.ActionLink("Productos", "Productos", "Productos", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("Servicios", "Servicios", "Servicios", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("Mis pedidos", "ListarPedidosCliente", "Pedidos", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("Carrito", "VerCarrito", "Carrito", new { area = "" }, new { @class = "nav-link" })
 
 
-                    @Html.Action("CargarSucursalesInventarios", "Home")
-
-                    @Html.Action("CargarSucursalesAgendas", "Home")
 
 
 
