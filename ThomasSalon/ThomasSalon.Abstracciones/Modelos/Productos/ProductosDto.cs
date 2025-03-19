@@ -41,7 +41,5 @@ namespace ThomasSalon.Abstracciones.Modelos.Productos
         public string LinkImagen { get; set; }
 
         public string NombreProveedor { get; set; }
-
-        public string NombreEstado { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ThomasSalon.Abstracciones.AccesoADatos.InventarioSucursal;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal;
 using ThomasSalon.Abstracciones.Modelos.InventarioSucursal;
@@ -19,6 +20,13 @@ namespace ThomasSalon.LN.InventarioSucursal.Listar
         {
             List<InventarioSucursalDto> laListaDeInventario = _listarInventarioSucursalAD.Listar(idSucursal);
             return laListaDeInventario;
+        }
+
+        public List<InventarioSucursalDto> DetallesInventario(Guid IdInventarioSucursal)
+        {
+
+            List<InventarioSucursalDto> laListaInventario = _listarInventarioSucursalAD.DetallesInventario(IdInventarioSucursal);
+            return laListaInventario;
         }
 
         public List<ProductosDto> ListarProductosActivos(int idSucursal)

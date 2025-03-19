@@ -1,63 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Citas;
-using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Servicios.ObtenerPorId;
+using System.Text;
+using System.Threading.Tasks;
+using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Citas.ObtenerPorId;
 using ThomasSalon.Abstracciones.Modelos.Citas;
+using ThomasSalon.Abstracciones.ModelosDeBaseDeDatos;
 
-namespace ThomasSalon.AccesoADatos.Citas.Listar
+namespace ThomasSalon.AccesoADatos.Citas.ObtenerPorId
 {
-    public class ListarCitasAD : IListarCitasAD
+    public class ObtenerCitaPorIdAD : IObtenerCitaPorIdAD
     {
         Contexto _elContexto;
 
-        public ListarCitasAD()
+        public ObtenerCitaPorIdAD()
         {
             _elContexto = new Contexto();
         }
 
-        public List<CitasDto> ListarAgendas(int idSucursal)
+        public List<CitasDto> DetallesCita(Guid IdCita)
         {
             List<CitasDto> laListaCitas = (from cita in _elContexto.CitasTabla
                                            join sucursal in _elContexto.SucursalesTabla
                                            on cita.IdSucursal equals sucursal.IdSucursal
-
                                            join servicio in _elContexto.ServiciosTabla
                                            on cita.IdServicio equals servicio.IdServicio
-
                                            join persona in _elContexto.PersonasTabla
                                            on cita.IdPersona equals persona.IdPersona
-
-                                           join colaborador in _elContexto.ColaboradoresTabla
-                                           on cita.IdColaborador equals colaborador.IdColaborador into colabGroup
-                                           from colaborador in colabGroup.DefaultIfEmpty() // LEFT JOIN
-
-                                           join colaboradorPersona in _elContexto.PersonasTabla
-                                           on colaborador.IdPersona equals colaboradorPersona.IdPersona into colabPersonaGroup
-                                           from colaboradorPersona in colabPersonaGroup.DefaultIfEmpty() // LEFT JOIN
-
                                            join estado in _elContexto.EstadoCitaTabla
                                            on cita.IdEstadoCita equals estado.IdEstadoCita
-
-                                           where cita.IdSucursal == idSucursal
-
+                                           where cita.IdCita == IdCita
                                            select new CitasDto
                                            {
                                                IdCita = cita.IdCita,
                                                IdServicio = cita.IdServicio,
                                                IdSucursal = cita.IdSucursal,
                                                IdPersona = cita.IdPersona,
-                                               IdColaborador = cita.IdColaborador, // Ahora es nullable
                                                IdEstadoCita = cita.IdEstadoCita,
                                                FechaHora = cita.FechaHora,
                                                Comentario = cita.Comentario,
                                                nombreServicio = servicio.Nombre,
                                                nombrePersona = persona.Nombre,
-                                               nombreColaborador = colaboradorPersona.Nombre,
                                                DuracionServicio = servicio.Duracion
                                            }).ToList();
-
             return laListaCitas;
         }
-
     }
 }

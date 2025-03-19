@@ -4,4 +4,7 @@
     $("#llamarAMiAlerta").on("click", function () {
         Swal.fire("SweetAlert2 is working!", "Hola mundo!", "success");
     });
+
+   
 });
+

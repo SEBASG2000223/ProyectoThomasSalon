@@ -9,6 +9,7 @@ using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal.Editar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.Listar;
 using ThomasSalon.Abstracciones.LN.Interfaces.Productos.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.Listar;
+using ThomasSalon.Abstracciones.Modelos.Citas;
 using ThomasSalon.Abstracciones.Modelos.InventarioSucursal;
 using ThomasSalon.AccesoADatos;
 using ThomasSalon.LN.InventarioSucursal.Crear;
@@ -59,19 +60,12 @@ namespace ThomasSalon.UI.Controllers
 
 
         // GET: Productos/Details/5
-        public ActionResult DetallesProducto(int id)
+        public ActionResult DetallesProducto(Guid IdInventario)
         {
-            var producto = _listarProductos.Listar().FirstOrDefault(p => p.IdProducto == id);
-            if (producto == null)
-            {
-                return HttpNotFound("El producto no existe");
-            }
+            InventarioSucursalDto inventario = _listarInventarioSucursal.DetallesInventario(IdInventario).FirstOrDefault();
             var idSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
-            var proveedores = _listarProductos.ObtenerProveedoresPorProducto();
 
-            ViewBag.Proveedores = proveedores;
-
-            return View(producto);
+            return View(inventario);
         }
 
 
