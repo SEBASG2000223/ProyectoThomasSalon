@@ -323,6 +323,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BoletinController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -646,6 +647,7 @@
     <Content Include="Views\Carrito\VerCarrito.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidos.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidosCliente.cshtml" />
+    <Content Include="Views\Shared\_Boletin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
