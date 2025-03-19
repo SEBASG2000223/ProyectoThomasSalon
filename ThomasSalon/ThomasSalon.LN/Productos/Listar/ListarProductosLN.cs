@@ -19,12 +19,7 @@ namespace ThomasSalon.LN.Productos.Listar
             List<ProductosDto> laListaDeProductos = _listarProductosAD.Listar();
             return laListaDeProductos;
         }
-        public Dictionary<int, string> ObtenerProveedoresPorProducto()
-        {
-            Dictionary<int, string> DiccionarioProveedores = _listarProductosAD.ObtenerProveedoresPorProducto();
-            return DiccionarioProveedores;
-
-        }
+   
         public List<ProductosDto> ProductosActivos()
         {
             List<ProductosDto> laListaDeProductos = _listarProductosAD.ProductosActivos();

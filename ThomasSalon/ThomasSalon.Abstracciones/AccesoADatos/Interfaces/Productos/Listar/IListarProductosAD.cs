@@ -11,7 +11,6 @@ namespace ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Productos.Listar
     public interface IListarProductosAD
     {
         List<ProductosDto> Listar();
-        Dictionary<int, string> ObtenerProveedoresPorProducto();
 
         List<ProductosDto> ProductosActivos();
     }

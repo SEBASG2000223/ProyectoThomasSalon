@@ -29,10 +29,16 @@ namespace ThomasSalon.Abstracciones.Modelos.InventarioSucursal
         [Display(Name = "Precio", Description = "Precio del producto")]
         public decimal Precio { get; set; }
 
+        [Display(Name = "Descripción", Description = "Descripción")]
+        public string Descripcion { get; set; }
+
         [Display(Name = "Nombre del producto", Description = "Nombre del producto")]
         public string NombreProducto { get; set; }
         [Display(Name = "Nombre del proveedor", Description = "Nombre del proveedor")]
         public string NombreProveedor { get; set; }
+
+        [Display(Name = "Unidad de Medida", Description = "Unidad de Medida")]
+        public int UnidadMedida { get; set; }
 
 
     }

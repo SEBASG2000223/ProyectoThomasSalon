@@ -51,13 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccesoADatos\Interfaces\Citas\IListarCitasAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Citas\Listar\IListarCitasAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Citas\ObtenerPorId\IObtenerCitaPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Editar\IEditarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Listar\IListarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresAD.cs" />
-    <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\IInventarioGeneralAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\Listar\IInventarioGeneralAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\ObtenerPorId\IObtenerInventarioPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Crear\ICrearInventarioSucursalAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Editar\IEditarInventarioSucursalAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Listar\IListarInventarioSucursalAD.cs" />
@@ -93,7 +95,8 @@
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Listar\IListarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosAD.cs" />
-    <Compile Include="LN\Interfaces\Citas\IListarCitasLN.cs" />
+    <Compile Include="LN\Interfaces\Citas\Listar\IListarCitasLN.cs" />
+    <Compile Include="LN\Interfaces\Citas\ObtenerPorId\IObtenerCitaPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\Editar\IEditarColaboradoresLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\Listar\IListarColaboradoresLN.cs" />
@@ -107,7 +110,8 @@
     <Compile Include="LN\Interfaces\General\Conversiones\Servicios\IConvertirAServiciosTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Sucursales\IConvertirASucursalesTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Usuarios\IConvertirAUsuariosTabla.cs" />
-    <Compile Include="LN\Interfaces\InventarioGeneral\IInventarioGeneralLN.cs" />
+    <Compile Include="LN\Interfaces\InventarioGeneral\Listar\IInventarioGeneralLN.cs" />
+    <Compile Include="LN\Interfaces\InventarioGeneral\ObtenerPorId\IObtenerInventarioPorIdLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\Crear\ICrearInventarioSucursalLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\Editar\IEditarInventarioSucursalLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\IObtenerInventarioSucursalPorIdLN.cs" />
