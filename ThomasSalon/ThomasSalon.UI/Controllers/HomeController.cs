@@ -43,18 +43,18 @@ namespace ThomasSalon.UI.Controllers
             return View();
         }
 
-
-        public ActionResult About()
+        public ActionResult SobreNosotros()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult PoliticasServicio()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult Contacto()
+        {
             return View();
         }
     }
