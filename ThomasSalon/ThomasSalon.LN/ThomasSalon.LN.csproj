@@ -114,6 +114,7 @@
     <Compile Include="Ventas\RegistrarVentaProducto\RegistrarVentaProductoLN.cs" />
     <Compile Include="Ventas\RegistrarVentaServicio\RegistrarVentaServicioLN.cs" />
     <Compile Include="Ventas\ResgistroGastos\RegistroGastoLN.cs" />
+    <Compile Include="Ventas\Resumen\ResumenVentaLN.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">
