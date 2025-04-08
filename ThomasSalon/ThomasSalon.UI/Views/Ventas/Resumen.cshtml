@@ -1,0 +1,56 @@
+﻿@model List<ThomasSalon.Abstracciones.Modelos.Ventas.Resumen.ResumenVentasDTO>
+
+@{
+    ViewBag.Title = "Resumen de Ventas";
+}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Resumen de Ventas</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped shadow-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id Venta</th>
+                    <th>Fecha</th>
+                    <th>Monto Total</th>
+                    <th>Cliente</th>
+                    <th>Teléfono</th>
+                    <th>Identificación</th>
+                    <th>Colaborador</th>
+                    <th>Método de Pago</th>
+                    <th>Sucursal</th>
+                    <th>Monto Día</th>
+                    <th>Transferencias</th>
+                    <th>Sinpe</th>
+                    <th>Tarjeta</th>
+                    <th>Efectivo</th>
+                    <th>Gastos</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var venta in Model)
+                {
+                    <tr>
+                        <td>@venta.IdVenta</td>
+                        <td>@venta.Fecha.ToString("dd/MM/yyyy")</td>
+                        <td class="text-success">@venta.MontoTotal.ToString("C")</td>
+                        <td>@venta.NombreCliente</td>
+                        <td>@venta.Telefono</td>
+                        <td>@venta.Identificacion</td>
+                        <td>@venta.NombreColaborador</td>
+                        <td>@venta.MetodoPago</td>
+                        <td>@venta.NombreSucursal</td>
+                        <td class="text-primary">@venta.MontoTotalDia.ToString("C")</td>
+                        <td class="text-info">@venta.MontoTotalTransferencias.ToString("C")</td>
+                        <td class="text-info">@venta.MontoTotalSinpe.ToString("C")</td>
+                        <td class="text-warning">@venta.MontoTotalTarjeta.ToString("C")</td>
+                        <td class="text-danger">@venta.MontoTotalEfectivo.ToString("C")</td>
+                        <td class="text-muted">@venta.MontoTotalGastos.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

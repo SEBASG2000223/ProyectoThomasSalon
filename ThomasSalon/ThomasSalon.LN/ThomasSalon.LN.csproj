@@ -51,12 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="AsistenciaColaboradores\AgregarAsistencia\AgregarAsistenciaLN.cs" />
-
     <Compile Include="Citas\Agendar\AgendarCitasLN.cs" />
     <Compile Include="Citas\CambiarEstado\CambiarEstadoCitaLN.cs" />
-
     <Compile Include="Citas\Listar\ListarCitasLN.cs" />
     <Compile Include="Citas\ObtenerPorId\ObtenerCitaPorIdLN.cs" />
     <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresLN.cs" />
@@ -114,6 +111,7 @@
     <Compile Include="Ventas\RegistrarVentaProducto\RegistrarVentaProductoLN.cs" />
     <Compile Include="Ventas\RegistrarVentaServicio\RegistrarVentaServicioLN.cs" />
     <Compile Include="Ventas\ResgistroGastos\RegistroGastoLN.cs" />
+    <Compile Include="Ventas\Resumen\ResumenVentaLN.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">

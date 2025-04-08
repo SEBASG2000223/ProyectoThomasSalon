@@ -81,6 +81,11 @@
                             Productos
                         </a>
 
+                        <a class="nav-link" href="@Url.Action("Resumen", "Ventas")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                            Ventas Resumen
+                        </a>
+
 
 
 
@@ -97,10 +102,11 @@
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseGastos" aria-expanded="false" aria-controls="collapseGastos">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-wallet"></i></div>
                             Gastos
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
+
                         <div class="collapse" id="collapseGastos" aria-labelledby="headingVentas" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 @Html.ActionLink("Registrar Gasto", "RegistroGasto", "RegistroGasto", null, new { @class = "nav-link" })
@@ -109,10 +115,11 @@
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseVentas" aria-expanded="false" aria-controls="collapseVentas">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                             Ventas
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
+
                         <div class="collapse" id="collapseVentas" aria-labelledby="headingVentas" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 @Html.ActionLink("Venta Servicio", "RegistrarVentaServicio", "Ventas", null, new { @class = "nav-link" })

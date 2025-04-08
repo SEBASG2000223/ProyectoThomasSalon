@@ -24,6 +24,8 @@ using ThomasSalon.LN.Productos.Listar;
 using ThomasSalon.LN.Usuarios.ObtenerPorId;
 using ThomasSalon.LN.Ventas.RegistrarVentaProducto;
 using ThomasSalon.LN.Ventas.RegistrarVentaServicio;
+using ThomasSalon.Abstracciones.LN.Interfaces.Ventas.Resumen;
+using ThomasSalon.LN.Ventas.Resumen;
 
 namespace ThomasSalon.UI.Controllers
 {
@@ -37,6 +39,7 @@ namespace ThomasSalon.UI.Controllers
         IListarServiciosLN _listarServicios;
         IRegistrarVentaProductoLN _registrarVentaProducto;
         IListarProductosLN _listarProductos;
+        IResumenVentaLN _listarVentasLN;
 
 
 
@@ -50,7 +53,20 @@ namespace ThomasSalon.UI.Controllers
             _registrarVentaProducto = new RegistrarVentaProductoLN();
             _listarServicios = new ListarServiciosLN();
             _listarProductos = new ListarProductosLN();
+            _listarVentasLN = new ResumenVentaLN();
         }
+        public async Task<ActionResult> Resumen()
+        {
+            var resumenVentas = await _listarVentasLN.Listar();
+            return View(resumenVentas);
+        }
+
+        public async Task<ActionResult> CierreCaja()
+        {
+            var resumenVentas = await _listarVentasLN.Listar();
+            return View(resumenVentas);
+        }
+
 
         // GET: Ventas
         public ActionResult Index()
@@ -160,7 +176,7 @@ namespace ThomasSalon.UI.Controllers
             _elContexto.SaveChanges();
 
             // Redirigir o mostrar mensaje de éxito
-            return RedirectToAction("Index");
+            return RedirectToAction("Resumen");
         }
 
         private async Task CargarViewBags()
@@ -296,7 +312,7 @@ namespace ThomasSalon.UI.Controllers
                 if (resultado < 0)
                 {
                     TempData["Mensaje"] = "Venta registrada exitosamente.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Resumen");
                 }
                 else
                 {
@@ -369,6 +385,40 @@ namespace ThomasSalon.UI.Controllers
             {
                 return View();
             }
+        }
+        // Acción para mostrar el resumen de ventas
+        // Acción para mostrar el resumen de ventas
+        // Acción para mostrar el resumen de ventas
+        public async Task<ActionResult> ResumenCaja()
+        {
+            var hoy = DateTime.Today;
+
+            // Traer todas las ventas desde la base de datos
+            var resumenVentas = await _listarVentasLN.Listar();
+
+            // Filtrar las ventas del día en memoria
+            var resumenVentasDia = resumenVentas.Where(v => v.Fecha.Date == hoy).ToList();
+
+            // Pasar los datos al ViewBag (si es necesario mostrar algún resumen)
+            ViewBag.MontoDia = resumenVentasDia.Sum(v => v.MontoTotal);
+
+            // Retornar la vista con las ventas del día
+            return View(resumenVentasDia);
+        }
+
+
+        // Acción para cerrar la caja
+        [HttpPost]
+        public ActionResult CerrarCaja()
+        {
+            // Aquí se debe incluir la lógica para cerrar la caja (por ejemplo, actualizar la base de datos)
+            // Se puede registrar el cierre de caja, generar reportes, etc.
+
+            // Simulación de cierre de caja
+            TempData["Mensaje"] = "La caja ha sido cerrada correctamente.";
+
+            // Redirigir a la vista de resumen de cierre
+            return RedirectToAction("ResumenCaja");
         }
     }
 }

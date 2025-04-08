@@ -122,6 +122,7 @@
     <Compile Include="AccesoADatos\Interfaces\Ventas\RegistrarVentaProducto\IRegistrarVentaProductoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Ventas\RegistrarVentaServicio\IRegistrarVentaServicioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Ventas\ResgistroGastos\IRegistroGastoAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Ventas\Resumen\IResumenVentaAD.cs" />
     <Compile Include="LN\Interfaces\AsistenciaColaboradores\AgregarAsistencia\IAgregarAsistenciaLN.cs" />
     <Compile Include="LN\Interfaces\Citas\Agendar\IAgendarCitasLN.cs" />
     <Compile Include="LN\Interfaces\Citas\CambiarEstado\ICambiarEstadoCitaLN.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="LN\Interfaces\Ventas\RegistrarVentaProducto\IRegistrarVentaProductoLN.cs" />
     <Compile Include="LN\Interfaces\Ventas\RegistrarVentaServicio\IRegistrarVentaServicioLN.cs" />
     <Compile Include="LN\Interfaces\Ventas\ResgistroGastos\IRegistroGastoLN.cs" />
+    <Compile Include="LN\Interfaces\Ventas\Resumen\IResumenVentaLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\AdjuntosPedidosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\AsistenciaColaboradorTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CarritoTemporalTabla.cs" />
@@ -226,6 +228,7 @@
     <Compile Include="Modelos\Ventas\RegistrarVentaProducto\RegistrarVentaProductoDTO.cs" />
     <Compile Include="Modelos\Ventas\RegistrarVentaServicio\RegistrarVentaServicioDto.cs" />
     <Compile Include="Modelos\Ventas\ResgistroGastos\RegistroGastoDTO.cs" />
+    <Compile Include="Modelos\Ventas\Resumen\ResumenVentasDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

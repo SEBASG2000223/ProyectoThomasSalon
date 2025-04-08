@@ -1,0 +1,61 @@
+﻿@model List<ThomasSalon.Abstracciones.Modelos.Ventas.Resumen.ResumenVentasDTO>
+
+@{
+    ViewBag.Title = "Resumen de Ventas";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Resumen de Ventas</h2>
+
+   
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Resumen del Cierre del Día</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped shadow-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id Venta</th>
+                        <th>Fecha</th>
+                        <th>Monto Total</th>
+                        <th>Cliente</th>
+                        <th>Colaborador</th>
+                        <th>Método de Pago</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var venta in Model)
+                    {
+                        <tr>
+                            <td>@venta.IdVenta</td>
+                            <td>@venta.Fecha.ToString("dd/MM/yyyy")</td>
+                            <td class="text-success">@venta.MontoTotal.ToString("C")</td>
+                            <td>@venta.NombreCliente</td>
+                            <td>@venta.NombreColaborador</td>
+                            <td>@venta.MetodoPago</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="text-center">Resumen General del Cierre</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Total Ventas del Día:</strong> <span class="text-success">@ViewBag.MontoDia.ToString("C")</span></p>
+                        <p><strong>En caja:</strong> <span class="text-success">₡30.000</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
