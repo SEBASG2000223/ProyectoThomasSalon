@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Deducciones.DeduccionesDto>
+
+@{
+    ViewBag.Title = "Cuentas del Trabajador";
+    var idColaborador = Model.FirstOrDefault()?.IdColaborador;
+}
+
+<div class="container mt-4">
+    <h2>@ViewBag.Title</h2>
+
+    <!-- Alerta si no hay deducciones -->
+    @if (ViewBag.NoDeducciones != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            @ViewBag.NoDeducciones
+        </div>
+    }
+
+    <!-- Botones de acción -->
+    <div class="mb-3">
+        <!-- Aquí se pasa el IdColaborador y verificamos si ya tiene deducción -->
+        <a href="@Url.Action("Agregar", "Deducciones", new { idColaborador = idColaborador })" class="btn btn-success btn-sm me-2">
+            Agregar Deducción
+        </a>
+        <a href="@Url.Action("HistorialCuenta", "Deducciones", new { idColaborador = ViewBag.IdColaborador })" class="btn btn-info btn-sm">
+            Historial de Cuenta
+        </a>
+    </div>
+
+    <!-- Tabla de deducciones -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.nombreColaborador)</th>
+                <th>@Html.DisplayNameFor(model => model.MontoSemanal)</th>
+                <th>@Html.DisplayNameFor(model => model.TotalSaldo)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var deduccion in Model)
+            {
+                <tr>
+                    <td>@deduccion.nombreColaborador</td>
+                    <td>@deduccion.MontoSemanal</td>
+                    <td>@deduccion.TotalSaldo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

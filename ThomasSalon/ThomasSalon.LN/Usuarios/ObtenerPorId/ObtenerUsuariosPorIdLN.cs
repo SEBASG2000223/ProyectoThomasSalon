@@ -34,7 +34,6 @@ namespace ThomasSalon.LN.Usuarios.ObtenerPorId
                 IdPersona = elUsuarioEnDb.IdPersona,
                 IdSucursal = elUsuarioEnDb.IdSucursal,
                 Email = elUsuarioEnDb.Email,
-                IdSucursal=elUsuarioEnDb.IdSucursal
              
          
               
