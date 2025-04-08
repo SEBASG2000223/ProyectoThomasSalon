@@ -11,23 +11,26 @@ namespace ThomasSalon.Abstracciones.Modelos.Citas
     {
         [Required(ErrorMessage = "La propiedad IdCita es requerida")]
         [Display(Name = "Identificador", Description = "Id Cita")]
-
         public Guid IdCita { get; set; }
 
         [Required(ErrorMessage = "La propiedad IdServicio es requerida")]
         [Display(Name = "Id Servicio", Description = "Id Servicio")]
         public int IdServicio { get; set; }
 
-        [Required(ErrorMessage = "La propiedad IdSucursal es requerida")]
-        [Display(Name = "Id Sucursal", Description = "Id Sucursal")]
+        [Required(ErrorMessage = "La propiedad Sucursal es requerida")]
+        [Display(Name = "Sucursal", Description = "Id Sucursal")]
         public int IdSucursal { get; set; }
 
-        [Required(ErrorMessage = "La propiedad IdUsuario es requerida")]
-        [Display(Name = "Id Usuario", Description = "Id Usuario")]
-        public string IdUsuario { get; set; }
+        [Required(ErrorMessage = "La propiedad IdPersona es requerida")]
+        [Display(Name = "Id Persona", Description = "Id Persona")]
+        public int IdPersona { get; set; }
+
+        [Required(ErrorMessage = "La propiedad Colaborador es requerida")]
+        [Display(Name = "Colaborador", Description = "Id Colaborador")]
+        public int? IdColaborador { get; set; }
 
         [Required(ErrorMessage = "La propiedad IdEstadoCita es requerida")]
-        [Display(Name = "Estado cita", Description = "Id EstadoCita")]
+        [Display(Name = "IdEstadoCita", Description = "Id EstadoCita")]
         public Guid IdEstadoCita { get; set; }
 
         [Required(ErrorMessage = "La propiedad FechaHora es requerida")]
@@ -37,11 +40,26 @@ namespace ThomasSalon.Abstracciones.Modelos.Citas
         [Display(Name = "Comentario", Description = "Comentario")]
         public string Comentario { get; set; }
 
-        [Display(Name = "Usuario", Description = "Nombre Usuario")]
-        public string nombreUsuario { get; set; }
+        [Display(Name = "Persona", Description = "Nombre Persona")]
+        public string nombrePersona { get; set; }
 
         [Display(Name = "Servicio", Description = "Nombre Servicio")]
         public string nombreServicio { get; set; }
+
+
+        [Display(Name = "Colaborador", Description = "Nombre Colaborador")]
+        public string nombreColaborador { get; set; }
+        [Display(Name = "Estado cita", Description = "Estado cita")]
+        public string nombreEstadoCita { get; set; }
+
+
+        [Required(ErrorMessage = "La propiedad identificación es requerida")]
+        [Display(Name = "Identificación", Description = "Identificación cliente")]
+        public string Identificacion { get; set; }
+
+
+        [Display(Name = "Duración del servicio", Description = "Duracion Servicio")]
+        public TimeSpan DuracionServicio { get; set; }
 
 
     }

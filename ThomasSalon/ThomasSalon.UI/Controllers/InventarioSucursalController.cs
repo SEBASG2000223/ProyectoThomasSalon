@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Usuarios.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal.Crear;
 using ThomasSalon.Abstracciones.LN.Interfaces.InventarioSucursal.Editar;
@@ -11,6 +13,7 @@ using ThomasSalon.Abstracciones.LN.Interfaces.Productos.ObtenerPorId;
 using ThomasSalon.Abstracciones.LN.Interfaces.Sucursales.Listar;
 using ThomasSalon.Abstracciones.Modelos.InventarioSucursal;
 using ThomasSalon.AccesoADatos;
+using ThomasSalon.AccesoADatos.Usuarios.ObtenerPorId;
 using ThomasSalon.LN.InventarioSucursal.Crear;
 using ThomasSalon.LN.InventarioSucursal.Editar;
 using ThomasSalon.LN.InventarioSucursal.Listar;
@@ -30,6 +33,7 @@ namespace ThomasSalon.UI.Controllers
         IListarProductosLN _listarProductos;
         IEditarInventarioSucursalLN _editarInventarioSucursal;
         IObtenerInventarioSucursalPorIdLN _obtenerInventarioSucursal;
+        IObtenerUsuariosPorIdAD _obtenerUsuarioPorId;
         Contexto _elContexto;
 
         public InventarioSucursalController()
@@ -39,6 +43,7 @@ namespace ThomasSalon.UI.Controllers
             _obtenerProductosPorId = new ObtenerProductosPorIdLN();
             _sucursalesListar = new ListarSucursalesLN();
             _listarProductos = new ListarProductosLN();
+            _obtenerUsuarioPorId = new ObtenerUsuariosPorIdAD();
             _editarInventarioSucursal = new EditarInventarioSucursalLN();
             _obtenerInventarioSucursal = new ObtenerInventarioSucursalPorIdLN();
             _elContexto = new Contexto();
@@ -47,31 +52,49 @@ namespace ThomasSalon.UI.Controllers
         // GET: InventarioSucursal
         public ActionResult ListarInventarioSucursal(int idSucursal)
         {
-            TempData["IdSucursalSeleccionada"] = idSucursal;
-            List<InventarioSucursalDto> inventarios = _listarInventarioSucursal.Listar(idSucursal);
-            if (inventarios == null || !inventarios.Any())
+            try
             {
-                ViewBag.Mensaje = "No hay productos en el inventario.";
-            }
+                TempData["IdSucursalSeleccionada"] = idSucursal;
+                var userId = User.Identity.GetUserId();
+                var usuarioActual = _obtenerUsuarioPorId.Obtener(userId);
 
-            return View(inventarios);
+
+                if (usuarioActual == null)
+                {
+                    throw new Exception("Usuario no encontrado.");
+                }
+
+                if (User.IsInRole("Administrador") && usuarioActual.IdSucursal != idSucursal)
+                {
+                    return View("~/Views/Home/AccesoDenegado.cshtml");
+
+
+
+                }
+
+                List<InventarioSucursalDto> inventarios = _listarInventarioSucursal.Listar(idSucursal);
+                if (inventarios == null || !inventarios.Any())
+                {
+                    ViewBag.Mensaje = "No hay productos en el inventario.";
+                }
+
+                return View(inventarios);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Ocurrió un error al cargar el inventario.";
+                return RedirectToAction("Error", "Home");
+            }
         }
 
 
         // GET: Productos/Details/5
-        public ActionResult DetallesProducto(int id)
+        public ActionResult DetallesProducto(Guid IdInventario)
         {
-            var producto = _listarProductos.Listar().FirstOrDefault(p => p.IdProducto == id);
-            if (producto == null)
-            {
-                return HttpNotFound("El producto no existe");
-            }
+            InventarioSucursalDto inventario = _listarInventarioSucursal.DetallesInventario(IdInventario).FirstOrDefault();
             var idSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
-            var proveedores = _listarProductos.ObtenerProveedoresPorProducto();
 
-            ViewBag.Proveedores = proveedores;
-
-            return View(producto);
+            return View(inventario);
         }
 
 
@@ -87,6 +110,7 @@ namespace ThomasSalon.UI.Controllers
             {
                 IdSucursal = idSucursal
             };
+            TempData.Keep("IdSucursalSeleccionada");
 
             return View(modelo);
         }
@@ -137,6 +161,7 @@ namespace ThomasSalon.UI.Controllers
                 IdProducto = id,
                 Cantidad = elInventario.Cantidad
             };
+            TempData.Keep("IdSucursalSeleccionada");
             return View(modelo);
         }
 
@@ -146,7 +171,6 @@ namespace ThomasSalon.UI.Controllers
         {
             try
             {
-                // Si IdSucursal no viene en el modelo, lo obtenemos de TempData
                 if (modelo.IdSucursal == 0)
                 {
                     modelo.IdSucursal = Convert.ToInt32(TempData["IdSucursalSeleccionada"] ?? 0);
@@ -154,6 +178,7 @@ namespace ThomasSalon.UI.Controllers
 
 
                 int cantidadDeDatosEditados = await _editarInventarioSucursal.Editar(modelo);
+                TempData.Keep("IdSucursalSeleccionada");
 
                 return RedirectToAction("ListarInventarioSucursal", new { idSucursal = modelo.IdSucursal });
             }
@@ -164,32 +189,6 @@ namespace ThomasSalon.UI.Controllers
                 return View(modelo);
             }
         }
-
-
-        // GET: InventarioSucursal/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: InventarioSucursal/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-                return RedirectToAction("ListarInventarioSucursal");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-
-
 
 
     }

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Citas.CitasDto>
+
+@{
+    ViewBag.Title = "Listado de citas";
+}
+<div class="container">
+
+    <p>
+        <a href="@Url.Action("Servicios", "Servicios")" class="btn btn-dark btn-md">
+            Agendar nueva cita
+        </a>
+    </p>
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCita)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreServicio)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreColaborador)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaHora)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.DuracionServicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comentario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreEstadoCita)
+                    </th>
+                    @{ if (Model.Any(c => c.nombreEstadoCita == "Agendada"))
+                        {
+                            <th>Acciones</th>
+                        } }
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdCita)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreServicio)
+                        </td>
+                        <td>
+                            @{
+                                var colaborador = "";
+                                if (item.nombreColaborador == null)
+                                {
+                                    colaborador = "No especifíca";
+
+                                }
+                                else
+                                {
+                                    colaborador = item.nombreColaborador;
+
+                                }
+                            }
+                            @Html.DisplayFor(model => colaborador)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaHora)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DuracionServicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comentario)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreEstadoCita)
+                        </td>
+
+
+                        @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                        @{if (item.nombreEstadoCita == "Agendada")
+                            {
+                                <td>
+                                    <a href="@Url.Action("CancelarUsuario", "Citas", new { id = item.IdCita })" class="btn btn-primary btn-sm">
+                                        Cancelar
+                                    </a>
+                                </td>
+                            } }
+
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+@section scripts
+  {
+    <script src="~/Scripts/ScriptsFront/Citas/ListaDataTableCitas.js"></script>
+}
