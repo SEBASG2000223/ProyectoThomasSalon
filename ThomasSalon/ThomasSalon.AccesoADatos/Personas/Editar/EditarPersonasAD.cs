@@ -27,7 +27,6 @@ namespace ThomasSalon.AccesoADatos.Personas.Editar
             laPersonaEnDB.Genero = laPersonaParaEditar.Genero;
             laPersonaEnDB.Direccion = laPersonaParaEditar.Direccion;
             laPersonaEnDB.Edad = laPersonaParaEditar.Edad;
-            laPersonaEnDB.Identificacion = laPersonaParaEditar.Identificacion;
 
             EntityState estado = _elContexto.Entry(laPersonaEnDB).State = System.Data.Entity.EntityState.Modified;
             int cantidadDeDatosGuardados = await _elContexto.SaveChangesAsync();

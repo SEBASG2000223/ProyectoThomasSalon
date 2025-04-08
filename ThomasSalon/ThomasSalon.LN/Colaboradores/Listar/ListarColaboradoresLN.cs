@@ -27,9 +27,11 @@ namespace ThomasSalon.LN.Colaboradores.Listar
             return _listarColaboradoresAD.ListarDisponibles();
         }
 
-        //public List<ColaboradoresDto> ObtenerColaboradores()
-        //{
-        //    return _listarColaboradoresAD.ObtenerColaboradores();
-        //}
+        public List<ColaboradoresDto> ListarActivos()
+        {
+            return _listarColaboradoresAD.ListarActivos();
+        }
+
+
     }
 }

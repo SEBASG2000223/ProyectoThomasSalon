@@ -1,0 +1,164 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.Citas.CitasDto
+
+
+
+<div class="container">
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCita)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombrePersona)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreServicio)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreColaborador)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaHora)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.DuracionServicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comentario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreEstadoCita)
+                    </th>
+                    @{if (Model.nombreEstadoCita == "Agendada")
+                        {
+                            <th>Acciones</th>
+                        } }
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>@Html.DisplayFor(model => model.IdCita)</td>
+                    <td>@Html.DisplayFor(model => model.nombrePersona)</td>
+                    <td>@Html.DisplayFor(model => model.nombreServicio)</td>
+                    <td>
+                        @{
+                            var colaborador = "";
+                            if (Model.nombreColaborador == null)
+                            {
+                                colaborador = "No especifíca";
+
+                            }
+                            else
+                            {
+                                colaborador = Model.nombreColaborador;
+
+                            }
+                        }
+                        @Html.DisplayFor(model => colaborador)
+                    </td>
+                    <td>@Html.DisplayFor(model => model.FechaHora)</td>
+                    <td>@Html.DisplayFor(model => model.DuracionServicio)</td>
+                    <td>@Html.DisplayFor(model => model.Comentario)</td>
+                    <td>@Html.DisplayFor(model => model.nombreEstadoCita)</td>
+
+                    @{if (Model.nombreEstadoCita == "Agendada")
+                        {
+                            <td>
+
+
+                                <a href="@Url.Action("Cancelar", "Citas", new { id = Model.IdCita })" class="btn btn-primary btn-sm">
+                                    Cancelar
+                                </a>
+                            </td>
+
+
+                        } }
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts
+{
+
+
+    <script>
+        //$(document).on("click", ".cancelar-cita", function (e) {
+        //    e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+
+        //    let idCita = $(this).data("id"); // Obtener el ID de la cita
+        //    console.log("ID Cita: " + idCita);  // Asegúrate de que el ID se está obteniendo correctamente
+
+        //    // Mostrar SweetAlert para confirmar la cancelación
+        //    Swal.fire({
+        //        title: "¿Estás seguro?",
+        //        text: "Esta acción cancelará la cita.",
+        //        icon: "warning",
+        //        showCancelButton: true,
+        //        confirmButtonColor: "#d33",
+        //        cancelButtonColor: "#3085d6",
+        //        confirmButtonText: "Sí, cancelar",
+        //        cancelButtonText: "No",
+        //        backdrop: true,  // Asegura que el modal de Bootstrap no se cierre automáticamente
+        //    }).then((result) => {
+        //        if (result.isConfirmed) {
+        //            console.log("Confirmado cancelación de cita");
+        //            // Enviar la petición AJAX para cancelar la cita
+        //            $.ajax({
+        //                url: "/Citas/Cancelar/" + idCita,
+        //                type: "POST",
+        //                success: function (response) {
+        //                    console.log("Cita cancelada con éxito");
+        //                    Swal.fire({
+        //                        title: "¡Cancelado!",
+        //                        text: "La cita ha sido cancelada correctamente.",
+        //                        icon: "success",
+        //                    }).then(() => {
+        //                        // Refrescar los detalles de la cita en el modal
+        //                        $.ajax({
+        //                            url: '/Citas/DetallesCita',
+        //                            type: 'GET',
+        //                            data: { IdCita: idCita },
+        //                            success: function (response) {
+        //                                // Cargar los detalles actualizados en el modal
+        //                                $('#modalDetallesCitaBody').html(response);
+        //                            },
+        //                            error: function (xhr, status, error) {
+        //                                alert('Error al actualizar los detalles de la cita: ' + error);
+        //                            }
+        //                        });
+
+        //                        // Puedes cerrar el modal después de la cancelación si lo prefieres
+        //                        // $('#modalDetallesCita').modal('hide');
+        //                    });
+        //                },
+        //                error: function () {
+        //                    Swal.fire({
+        //                        title: "Error",
+        //                        text: "No se pudo cancelar la cita. Intenta nuevamente.",
+        //                        icon: "error",
+        //                    });
+        //                }
+        //            });
+        //        }
+        //    });
+        //});
+    </script>
+}
+
+
+
+
+

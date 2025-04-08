@@ -12,7 +12,6 @@ namespace ThomasSalon.LN.InventarioSucursal.Crear
     {
 
         ICrearInventarioSucursalAD _crearInventarioAD;
-        IConvertirAInventarioSucursalTabla _convertir;
 
         public CrearInventarioSucursalLN()
         {

@@ -21,5 +21,11 @@ namespace ThomasSalon.LN.Citas.Listar
             return laListaDeCitas;
         }
 
+        public List<CitasDto> ListarCitasUsuario(int idPersona)
+        {
+            List<CitasDto> laListaDeCitas = _listarCitasAD.ListarCitasUsuario(idPersona);
+            return laListaDeCitas;
+        }
+
     }
 }

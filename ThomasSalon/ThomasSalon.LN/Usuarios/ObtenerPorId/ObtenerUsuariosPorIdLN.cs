@@ -31,6 +31,8 @@ namespace ThomasSalon.LN.Usuarios.ObtenerPorId
             return new UsuariosDto
             {
                 Id = elUsuarioEnDb.Id,
+                IdPersona = elUsuarioEnDb.IdPersona,
+                IdSucursal = elUsuarioEnDb.IdSucursal,
                 Email = elUsuarioEnDb.Email,
                 IdSucursal=elUsuarioEnDb.IdSucursal
              

@@ -40,6 +40,7 @@ namespace ThomasSalon.AccesoADatos.Citas.ObtenerPorId
                                                FechaHora = cita.FechaHora,
                                                Comentario = cita.Comentario,
                                                nombreServicio = servicio.Nombre,
+                                               nombreEstadoCita = estado.Nombre,
                                                nombrePersona = persona.Nombre,
                                                DuracionServicio = servicio.Duracion
                                            }).ToList();

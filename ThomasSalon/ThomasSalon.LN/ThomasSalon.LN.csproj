@@ -51,7 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+
     <Compile Include="AsistenciaColaboradores\AgregarAsistencia\AgregarAsistenciaLN.cs" />
+
+    <Compile Include="Citas\Agendar\AgendarCitasLN.cs" />
+    <Compile Include="Citas\CambiarEstado\CambiarEstadoCitaLN.cs" />
+
     <Compile Include="Citas\Listar\ListarCitasLN.cs" />
     <Compile Include="Citas\ObtenerPorId\ObtenerCitaPorIdLN.cs" />
     <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresLN.cs" />
@@ -120,10 +125,7 @@
       <Name>ThomasSalon.AccesoADatos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Citas\Agregar\" />
-    <Folder Include="Citas\CambiarEstado\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

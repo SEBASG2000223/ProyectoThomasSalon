@@ -6,5 +6,6 @@ namespace ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Citas
     public interface IListarCitasAD
     {
         List<CitasDto> ListarAgendas(int idSucursal);
+        List<CitasDto> ListarCitasUsuario(int idPersona);
     }
 }
