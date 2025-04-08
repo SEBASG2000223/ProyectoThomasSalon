@@ -34,7 +34,7 @@ namespace ThomasSalon.UI.Controllers
         // GET: Productos
         public async Task<ActionResult> VerCarrito()
         {
-            var sucursales = _listarSucursales.Listar();
+            var sucursales = _listarSucursales.ListarSucursalesActivas();
             ViewBag.Sucursales = new SelectList(sucursales, "IdSucursal", "Nombre");
 
             var metodosPago = await _elContexto.MetodosDePagoTabla.ToListAsync();

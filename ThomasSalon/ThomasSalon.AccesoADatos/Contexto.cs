@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.Modelos.Personas;
 using ThomasSalon.Abstracciones.ModelosDeBaseDeDatos;
+using ThomasSalon.AccesoADatos.Ventas.ResgistroGastos;
 
 namespace ThomasSalon.AccesoADatos
 {
@@ -39,7 +40,7 @@ namespace ThomasSalon.AccesoADatos
 
             modelBuilder.Entity<CarritoTemporalTabla>().ToTable("CarritoTemporal");
 
-           
+
             modelBuilder.Entity<MetodosDePagoTabla>().ToTable("METODOS_PAGO");
             modelBuilder.Entity<ProvinciasTabla>().ToTable("PROVINCIAS");
             modelBuilder.Entity<TipoDeEntregaTabla>().ToTable("TIPOS_ENTREGA");
@@ -48,6 +49,21 @@ namespace ThomasSalon.AccesoADatos
 
             modelBuilder.Entity<AdjuntosPedidosTabla>().ToTable("ADJUNTOS_PEDIDOS");
 
+            modelBuilder.Entity<AsistenciaColaboradorTabla>().ToTable("ASISTENCIA_COLABORADORES");
+
+            modelBuilder.Entity<TipoJornadaTabla>().ToTable("TIPOS_JORNADA");
+
+            modelBuilder.Entity<RegistroGastosTabla>().ToTable("REGISTRO_GASTOS");
+
+            modelBuilder.Entity<IngresosDiariosTabla>().ToTable("INGRESOS_DIARIOS");
+
+
+
+
+
+
+
+
 
 
 
@@ -55,6 +71,10 @@ namespace ThomasSalon.AccesoADatos
 
 
         }
+        public DbSet<IngresosDiariosTabla> IngresosDiariosTabla { get; set; }
+        public DbSet<RegistroGastosTabla> RegistroGastosTabla { get; set; }
+        public DbSet<TipoJornadaTabla> TipoJornadaTabla { get; set; }
+        public DbSet<AsistenciaColaboradorTabla> AsistenciaColaboradorTabla { get; set; }
         public DbSet<AdjuntosPedidosTabla> AdjuntosPedidosTabla { get; set; }
         public DbSet<EstadoDePedidoTabla> EstadoDePedidoTabla { get; set; }
 

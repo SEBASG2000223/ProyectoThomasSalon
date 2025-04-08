@@ -1,0 +1,217 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.Ventas.RegistrarVentaServicio.RegistrarVentaServicioDTO
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "Registrar Venta de Servicios";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Registrar Venta de Servicios</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="card p-4 shadow-sm">
+                    <h4 class="mb-4">Datos de la Venta</h4>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <!-- Colaborador -->
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.IdColaborador, new { @class = "col-md-4 col-form-label" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.IdColaborador, ViewBag.Asistencia as SelectList, "-- Selecciona un colaborador --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdColaborador, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- Método de Pago -->
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.IdMetodoPago, new { @class = "col-md-4 col-form-label" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.IdMetodoPago, ViewBag.MetodosPago as SelectList, "-- Selecciona un método de pago --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdMetodoPago, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- Cédula -->
+                    <div class="form-group row">
+                        @Html.Label("Cédula", new { @class = "col-md-4 col-form-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Cedula, new { @class = "form-control", id = "txtCedula" })
+                        </div>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="form-group row">
+                        @Html.Label("Nombre", new { @class = "col-md-4 col-form-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.NombrePersona, new { @class = "form-control", id = "txtNombre", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(model => model.IdPersona)
+
+                    <!-- Servicios dinámicos -->
+                    <h4 class="mt-4">Servicios</h4>
+                    <table class="table table-bordered" id="tablaServicios">
+                        <thead>
+                            <tr>
+                                <th>Servicio</th>
+                                <th>Precio</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-outline-primary" id="btnAgregarServicio">Agregar Servicio</button>
+
+                    <!-- Total, Pago y Devolución -->
+                    <div class="form-group row mt-4">
+                        <label for="total" class="col-md-4 col-form-label">Total:</label>
+                        <div class="col-md-8">
+                            <input type="text" id="total" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="montoPagado" class="col-md-4 col-form-label">Monto Pagado:</label>
+                        <div class="col-md-8">
+                            <input type="number" id="montoPagado" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="devolucion" class="col-md-4 col-form-label">Devolución:</label>
+                        <div class="col-md-8">
+                            <input type="text" id="devolucion" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <!-- Botón de enviar -->
+                    <div class="form-group row mt-4">
+                        <div class="col-md-8 offset-md-4">
+                            <input type="submit" value="Registrar Venta" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="text-center mt-3">
+                @Html.ActionLink("Volver", "Index", new { @class = "btn btn-link" })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var servicios = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Servicios));
+
+        function crearFilaServicio(index) {
+            var fila = `
+                <tr>
+                    <td>
+                        <select name="Servicios[${index}].IdServicio" class="form-control servicio-dropdown">
+                            <option value="">-- Selecciona --</option>
+                            ${servicios.map(s => `<option value="${s.Value}" data-precio="${s.Text.split('|')[1]}">${s.Text.split('|')[0]}</option>`).join('')}
+                        </select>
+                    </td>
+                    <td>
+                        <input name="Servicios[${index}].Precio" class="form-control precio-input" readonly />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btnEliminarFila">Eliminar</button>
+                    </td>
+                </tr>`;
+            return fila;
+        }
+
+        function renumerarIndices() {
+            $('#tablaServicios tbody tr').each(function (i) {
+                $(this).find('select, input').each(function () {
+                    var name = $(this).attr('name');
+                    if (name) {
+                        var nuevoName = name.replace(/\[\d+\]/, `[${i}]`);
+                        $(this).attr('name', nuevoName);
+                    }
+                });
+            });
+        }
+
+        function calcularTotal() {
+            var total = 0;
+            $('#tablaServicios tbody tr').each(function () {
+                var precio = $(this).find('.precio-input').val();
+                if (precio) {
+                    total += parseFloat(precio);
+                }
+            });
+            $('#total').val(total.toFixed(2));
+            calcularDevolucion();
+        }
+
+        function calcularDevolucion() {
+            var total = parseFloat($('#total').val()) || 0;
+            var montoPagado = parseFloat($('#montoPagado').val()) || 0;
+            var devolucion = montoPagado - total;
+            $('#devolucion').val(devolucion.toFixed(2));
+        }
+
+        $(document).ready(function () {
+            // Buscar persona
+            $('#txtCedula').on('change', function () {
+                var cedula = $(this).val();
+
+                if (cedula.length > 0) {
+                    $.ajax({
+                        url: '@Url.Action("BuscarPersonaPorCedula", "Ventas")',
+                        type: 'GET',
+                        data: { cedula: cedula },
+                        success: function (data) {
+                            if (data && data.idPersona > 0) {
+                                $('#txtNombre').val(data.nombre);
+                                $('#IdPersona').val(data.idPersona);
+                            } else {
+                                $('#txtNombre').val("No encontrada");
+                                $('#IdPersona').val("");
+                            }
+                        },
+                        error: function () {
+                            alert("Error al buscar persona.");
+                        }
+                    });
+                }
+            });
+
+            // Agregar servicio
+            $('#btnAgregarServicio').click(function () {
+                var index = $('#tablaServicios tbody tr').length;
+                $('#tablaServicios tbody').append(crearFilaServicio(index));
+            });
+
+            // Eliminar servicio
+            $(document).on('click', '.btnEliminarFila', function () {
+                $(this).closest('tr').remove();
+                renumerarIndices();
+                calcularTotal();
+            });
+
+            // Auto-cargar precio del servicio
+            $(document).on('change', '.servicio-dropdown', function () {
+                var precio = $(this).find(':selected').data('precio');
+                $(this).closest('tr').find('.precio-input').val(precio || "");
+                calcularTotal();
+            });
+
+            // Calcular devoluciones
+            $('#montoPagado').on('input', function () {
+                calcularDevolucion();
+            });
+        });
+    </script>
+}

@@ -323,6 +323,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsistenciaColaboradorController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -334,9 +335,11 @@
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ColaboradoresController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\RegistroGastoController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SucursalesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -650,19 +653,21 @@
     <Content Include="Views\Shared\_DropdownSucursalesAgendas.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Productos\Productos.cshtml" />
-
     <Content Include="Views\Carrito\VerCarrito.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidos.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidosCliente.cshtml" />
     <Content Include="Views\Admin\AdminIndex.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
-
     <Content Include="Views\Productos\VerCarrito.cshtml" />
     <Content Include="Views\Citas\DetallesCita.cshtml" />
     <Content Include="Views\InventarioSucursal\DetallesProducto.cshtml" />
     <Content Include="Views\InventarioGeneral\DetallesProducto.cshtml" />
     <Content Include="Views\Citas\AgendarUsuario.cshtml" />
-
+    <Content Include="Views\Ventas\RegistrarVentaServicio.cshtml" />
+    <Content Include="Views\AsistenciaColaborador\AgregarAsistencia.cshtml" />
+    <Content Include="Views\Ventas\RegistrarVentaProducto.cshtml" />
+    <Content Include="Views\RegistroGasto\RegistroGasto.cshtml" />
+    <Content Include="Views\RegistroGasto\Gastos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
