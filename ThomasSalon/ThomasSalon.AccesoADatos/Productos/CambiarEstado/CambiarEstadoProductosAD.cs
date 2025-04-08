@@ -25,11 +25,9 @@ namespace ThomasSalon.AccesoADatos.Productos.CambiarEstado
 
             if (producto != null)
             {
-                // Actualizar estado en la tabla de Productos
                 producto.IdEstado = nuevoEstado;
                 _elContexto.Entry(producto).State = EntityState.Modified;
 
-                // Actualizar estado en la tabla de Inventarios para todos los registros con ese producto
                 var inventariosGenerales = await _elContexto.InventarioGeneralTabla
                     .Where(inventarioGeneral => inventarioGeneral.IdProducto == IdProducto)
                     .ToListAsync();

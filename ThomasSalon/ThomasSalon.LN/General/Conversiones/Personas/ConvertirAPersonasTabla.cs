@@ -21,7 +21,6 @@ namespace ThomasSalon.LN.General.Conversiones.Personas
                 Genero = laPersona.Genero,
                 Direccion = laPersona.Direccion,
                 Edad = laPersona.Edad,
-                Identificacion = laPersona.Identificacion
               
             };
         }

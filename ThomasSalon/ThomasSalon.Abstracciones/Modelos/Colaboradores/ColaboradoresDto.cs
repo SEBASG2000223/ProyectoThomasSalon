@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
@@ -12,7 +13,9 @@ namespace ThomasSalon.Abstracciones.Modelos.Colaboradores
 {
     public class ColaboradoresDto
     {
-        public int IdColaborador { get; set; }
+        [Display(Name = "Colaborador", Description = "Id Colaborador")]
+        [Required(ErrorMessage = "La propiedad colaborador es requerida.")]
+        public int? IdColaborador { get; set; }
 
         public decimal SalarioDia { get; set; }
 

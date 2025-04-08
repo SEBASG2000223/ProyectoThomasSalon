@@ -87,7 +87,10 @@
                             @Html.DisplayFor(modelItem => item.Identificacion)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.IdPersona })
+
+                            <a href="@Url.Action("Edit", "Personas", new { id = item.IdPersona })" class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
                         </td>
                     </tr>
                 }

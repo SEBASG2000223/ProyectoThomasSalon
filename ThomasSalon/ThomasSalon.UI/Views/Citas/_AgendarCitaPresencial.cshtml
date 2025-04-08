@@ -1,0 +1,69 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.Citas.CitasDto
+
+@using (Html.BeginForm("AgendarCitaPresencial", "Citas", FormMethod.Post, new { id = "formAgendarCita" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="IdPersona" name="IdPersona" />
+
+    <div class="container mt-5">
+        <form class="row g-3">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Servicio -->
+            <div class="col-12 mb-3">
+                <label class="form-label" id="servicioEscogido">@Html.DisplayNameFor(model => model.IdServicio)</label>
+                @Html.DropDownListFor(model => model.IdServicio, (SelectList)ViewBag.servicios, "Seleccione un servicio", new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.IdServicio, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Colaborador -->
+            <div class="col-12 mb-3">
+                <label class="form-label">@Html.DisplayNameFor(model => model.IdColaborador)</label>
+                @Html.DropDownListFor(model => model.IdColaborador, new SelectList(ViewBag.colaboradores, "Value", "Text"), "Seleccione un colaborador", new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.IdColaborador, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Identificación -->
+            <div class="col-12 mb-3">
+                <label class="form-label">@Html.DisplayNameFor(model => model.Identificacion)</label>
+                @Html.TextBoxFor(model => model.Identificacion, new { @class = "form-control", @id = "txtCedula" })
+                @Html.ValidationMessageFor(model => model.Identificacion, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Nombre Persona (autocompletado) -->
+            <div class="col-12 mb-3">
+                <label class="form-label">Nombre</label>
+                @Html.TextBox("NombrePersona", null, new { @class = "form-control", @id = "txtNombre", @readonly = "readonly" })
+            </div>
+
+            @Html.HiddenFor(model => model.IdPersona)
+
+            <!-- Fecha y hora -->
+            <div class="col-12 mb-3">
+                <label for="fechaHora" class="form-label">Seleccionar fecha y hora</label>
+                <input class="form-control" id="fechaHora" name="fechaHora" readonly />
+                @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
+            </div>
+
+
+
+            <!-- Comentario -->
+            <div class="col-12 mb-3">
+                <label class="form-label">@Html.DisplayNameFor(model => model.Comentario)</label>
+                @Html.TextAreaFor(model => model.Comentario, new { @class = "form-control", rows = "3" })
+                @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Botón -->
+            <div class="col-12 d-flex justify-content-center mb-4">
+                <input type="submit" value="Agendar Cita" class="btn btn-primary" />
+            </div>
+
+
+        </form>
+    </div>
+
+}
+
+

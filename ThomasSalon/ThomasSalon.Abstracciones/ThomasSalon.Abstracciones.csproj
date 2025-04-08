@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\Interfaces\Citas\Agendar\IAgendarCitasAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Citas\CambiarEstado\ICambiarEstadoCitaAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Citas\Listar\IListarCitasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Citas\ObtenerPorId\IObtenerCitaPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresAD.cs" />
@@ -95,6 +97,8 @@
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Listar\IListarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosAD.cs" />
+    <Compile Include="LN\Interfaces\Citas\Agendar\IAgendarCitasLN.cs" />
+    <Compile Include="LN\Interfaces\Citas\CambiarEstado\ICambiarEstadoCitaLN.cs" />
     <Compile Include="LN\Interfaces\Citas\Listar\IListarCitasLN.cs" />
     <Compile Include="LN\Interfaces\Citas\ObtenerPorId\IObtenerCitaPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresLN.cs" />

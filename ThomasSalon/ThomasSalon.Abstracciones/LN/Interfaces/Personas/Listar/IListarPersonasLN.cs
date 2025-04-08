@@ -11,5 +11,7 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.Personas.Listar
     public interface IListarPersonasLN
     {
         List<PersonasDto> Listar();
+        List<PersonasDto> ListarClientes();
+
     }
 }
