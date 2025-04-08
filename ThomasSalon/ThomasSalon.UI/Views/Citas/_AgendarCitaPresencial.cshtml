@@ -42,7 +42,7 @@
             <!-- Fecha y hora -->
             <div class="col-12 mb-3">
                 <label for="fechaHora" class="form-label">Seleccionar fecha y hora</label>
-                <input class="form-control" id="fechaHora" name="fechaHora" readonly />
+                <input class="form-control" id="fechaHora" name="fechaHora" />
                 @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
             </div>
 
