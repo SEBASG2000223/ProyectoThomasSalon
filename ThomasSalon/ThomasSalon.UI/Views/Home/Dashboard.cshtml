@@ -40,6 +40,15 @@
         </div>
     </div>
 
+    <!-- Cerrar Caja Button -->
+    <div class="d-flex justify-content-center mt-4">
+        <form method="post" action="@Url.Action("ResumenCaja", "Ventas")">
+            <button type="submit" class="btn btn-danger btn-lg" onclick="return confirm('¿Estás seguro de que deseas cerrar la caja de este día?')">
+                Cerrar Caja
+            </button>
+        </form>
+    </div>
+
     <!-- Modal para tipo de venta -->
     <div class="modal fade" id="ventasModal" tabindex="-1" aria-labelledby="ventasModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -62,6 +71,7 @@
         </div>
     </div>
 </main>
+
 
 @section scripts
 {
