@@ -251,6 +251,12 @@ namespace ThomasSalon.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterUsuarioColaborador(RegisterViewModel model, int? id)
         {
+            var rolesDisponibles = await _elContexto.RolesTabla
+                        .Where(r => r.Name == "Administrador" || r.Name == "Gerente")
+                        .Select(r => r.Name)
+                        .ToListAsync();
+
+            ViewBag.Roles = new SelectList(rolesDisponibles, model.Rol);
             if (ModelState.IsValid)
             {
                 try

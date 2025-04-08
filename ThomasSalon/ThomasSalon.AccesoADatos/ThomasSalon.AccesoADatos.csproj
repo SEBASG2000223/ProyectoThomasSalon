@@ -53,8 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+
+    <Compile Include="AsistenciaColaboradores\AgregarAsistencia\AgregarAsistenciaAD.cs" />
+
     <Compile Include="Citas\Agendar\AgendarCitasAD.cs" />
     <Compile Include="Citas\CambiarEstado\CambiarEstadoCitaAD.cs" />
+
     <Compile Include="Citas\Listar\ListarCitasAD.cs" />
     <Compile Include="Citas\ObtenerPorId\ObtenerCitaPorIdAD.cs" />
     <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresAD.cs" />
@@ -101,6 +105,9 @@
     <Compile Include="Usuarios\Listar\ListarUsuariosAD.cs" />
     <Compile Include="Usuarios\ObtenerPorId\ObtenerUsuariosPorIdAD.cs" />
     <Compile Include="Usuarios\QuitarUsuarios\QuitarUsuariosAD.cs" />
+    <Compile Include="Ventas\RegistrarVentaProducto\RegistrarVentaProductoAD.cs" />
+    <Compile Include="Ventas\RegistrarVentaServicio\RegistrarVentaServicioAD.cs" />
+    <Compile Include="Ventas\ResgistroGastos\RegistroGastoAD.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">

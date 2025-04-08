@@ -10,7 +10,12 @@ namespace ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Colaboradores.Listar
     public interface IListarColaboradoresAD
     {
         List<ColaboradoresDto> Listar();
+
+        List<ColaboradoresDto> ListarDisponibles();
+     
+
         List<ColaboradoresDto> ListarActivos();
+
     }
 }
 

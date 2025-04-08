@@ -323,6 +323,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsistenciaColaboradorController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -334,9 +335,11 @@
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ColaboradoresController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\RegistroGastoController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SucursalesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -660,12 +663,20 @@
     <Content Include="Views\InventarioSucursal\DetallesProducto.cshtml" />
     <Content Include="Views\InventarioGeneral\DetallesProducto.cshtml" />
     <Content Include="Views\Citas\AgendarUsuario.cshtml" />
+
+    <Content Include="Views\Ventas\RegistrarVentaServicio.cshtml" />
+    <Content Include="Views\AsistenciaColaborador\AgregarAsistencia.cshtml" />
+    <Content Include="Views\Ventas\RegistrarVentaProducto.cshtml" />
+    <Content Include="Views\RegistroGasto\RegistroGasto.cshtml" />
+    <Content Include="Views\RegistroGasto\Gastos.cshtml" />
+
     <Content Include="Views\Home\AccesoDenegado.cshtml" />
     <Content Include="Views\Citas\_DetallesCita.cshtml" />
     <Content Include="Views\Citas\ListarCitasUsuario.cshtml" />
     <Content Include="Views\Citas\_AgendarCitaPresencial.cshtml" />
     <Content Include="Views\Personas\ListarClientes.cshtml" />
     <Content Include="Views\Citas\_AgendarCitaLinea.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

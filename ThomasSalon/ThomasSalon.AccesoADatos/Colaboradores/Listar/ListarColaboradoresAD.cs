@@ -45,6 +45,36 @@ namespace ThomasSalon.AccesoADatos.Colaboradores.Listar
                                                              }).ToList();
             return laListaDeColaboradores;
         }
+        public List<ColaboradoresDto> ListarDisponibles()
+        {
+            List<ColaboradoresDto> laListaDeColaboradores = (from c in _elContexto.ColaboradoresTabla
+                                                             join p in _elContexto.PersonasTabla
+                                                             on c.IdPersona equals p.IdPersona
+                                                             join e in _elContexto.EstadoDisponibilidadTabla
+                                                             on c.IdEstado equals e.IdEstado
+                                                             join u in _elContexto.UsuariosTabla
+                                                             on c.IdPersona equals u.IdPersona into usuarios
+                                                             from u in usuarios.DefaultIfEmpty()
+                                                             where c.IdEstado == 1
+                                                             select new ColaboradoresDto
+                                                             {
+                                                                 IdColaborador = c.IdColaborador,
+                                                                 IdPersona = p.IdPersona,
+                                                                 IdEstado = c.IdEstado,
+                                                                 NombreEstado = e.Nombre,
+                                                                 Nombre = p.Nombre,
+                                                                 SalarioDia = c.SalarioDia,
+                                                                 Telefono = p.Telefono,
+                                                                 Genero = p.Genero,
+                                                                 Direccion = p.Direccion,
+                                                                 Edad = p.Edad,
+                                                                 Identificacion = p.Identificacion,
+                                                                 TieneUsuario = u != null
+                                                             }).ToList();
+
+            return laListaDeColaboradores;
+        }
+
 
         public List<ColaboradoresDto> ListarActivos()
         {

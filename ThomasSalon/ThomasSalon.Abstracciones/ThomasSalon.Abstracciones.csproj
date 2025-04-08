@@ -40,9 +40,30 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,8 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+
+    <Compile Include="AccesoADatos\Interfaces\AsistenciaColaboradores\AgregarAsistencia\IAgregarAsistenciaAD.cs" />
+
     <Compile Include="AccesoADatos\Interfaces\Citas\Agendar\IAgendarCitasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Citas\CambiarEstado\ICambiarEstadoCitaAD.cs" />
+
     <Compile Include="AccesoADatos\Interfaces\Citas\Listar\IListarCitasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Citas\ObtenerPorId\IObtenerCitaPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresAD.cs" />
@@ -97,8 +122,15 @@
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Listar\IListarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosAD.cs" />
+
+    <Compile Include="AccesoADatos\Interfaces\Ventas\RegistrarVentaProducto\IRegistrarVentaProductoAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Ventas\RegistrarVentaServicio\IRegistrarVentaServicioAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Ventas\ResgistroGastos\IRegistroGastoAD.cs" />
+    <Compile Include="LN\Interfaces\AsistenciaColaboradores\AgregarAsistencia\IAgregarAsistenciaLN.cs" />
+
     <Compile Include="LN\Interfaces\Citas\Agendar\IAgendarCitasLN.cs" />
     <Compile Include="LN\Interfaces\Citas\CambiarEstado\ICambiarEstadoCitaLN.cs" />
+
     <Compile Include="LN\Interfaces\Citas\Listar\IListarCitasLN.cs" />
     <Compile Include="LN\Interfaces\Citas\ObtenerPorId\IObtenerCitaPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresLN.cs" />
@@ -151,13 +183,18 @@
     <Compile Include="LN\Interfaces\Usuarios\Listar\IListarUsuariosLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosLN.cs" />
+    <Compile Include="LN\Interfaces\Ventas\RegistrarVentaProducto\IRegistrarVentaProductoLN.cs" />
+    <Compile Include="LN\Interfaces\Ventas\RegistrarVentaServicio\IRegistrarVentaServicioLN.cs" />
+    <Compile Include="LN\Interfaces\Ventas\ResgistroGastos\IRegistroGastoLN.cs" />
     <Compile Include="ModelosDeBaseDeDatos\AdjuntosPedidosTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\AsistenciaColaboradorTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CarritoTemporalTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CitasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\DetallePedidoTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoCitaTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoDePedidoTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoDisponibilidadTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\IngresosDiariosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\InventarioGeneralTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\InventarioSucursalTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\MetodosDePagoTabla.cs" />
@@ -167,16 +204,20 @@
     <Compile Include="ModelosDeBaseDeDatos\ColaboradoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProveedoresTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProvinciasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\RegistroGastosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\RolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\TipoDeEntregaTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\TipoJornadaTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\TipoServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UserRolesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\UsuariosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ServiciosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\SucursalesTabla.cs" />
+    <Compile Include="Modelos\AsistenciaColaboradores\AgregarAsistencia\AsistenciaColaboradorDTO.cs" />
     <Compile Include="Modelos\Citas\CitasDto.cs" />
     <Compile Include="Modelos\Colaboradores\ColaboradoresDto.cs" />
+    <Compile Include="Modelos\Gastos\ResumenGasto\GastoResumenDTO.cs" />
     <Compile Include="Modelos\InventarioGeneral\InventarioGeneralDto.cs" />
     <Compile Include="Modelos\InventarioSucursal\InventarioSucursalDto.cs" />
     <Compile Include="Modelos\Pedidos\PedidosDto.cs" />
@@ -187,6 +228,9 @@
     <Compile Include="Modelos\Sucursales\SucursalesDto.cs" />
     <Compile Include="Modelos\TiposServicios\TiposServiciosDto.cs" />
     <Compile Include="Modelos\Usuarios\UsuariosDto.cs" />
+    <Compile Include="Modelos\Ventas\RegistrarVentaProducto\RegistrarVentaProductoDTO.cs" />
+    <Compile Include="Modelos\Ventas\RegistrarVentaServicio\RegistrarVentaServicioDto.cs" />
+    <Compile Include="Modelos\Ventas\ResgistroGastos\RegistroGastoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
