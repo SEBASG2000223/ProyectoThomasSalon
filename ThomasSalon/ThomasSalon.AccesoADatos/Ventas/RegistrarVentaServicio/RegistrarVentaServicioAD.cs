@@ -43,7 +43,7 @@ namespace ThomasSalon.AccesoADatos.Ventas.RegistrarVentaServicio
                 };
 
                 var resultado = await _elContexto.Database.ExecuteSqlCommandAsync(
-                    "EXEC sp_RegistrarVentaServicioss @IdColaborador, @IdMetodoPago, @IdPersona, @IdSucursal, @Servicios",
+                    "EXEC sp_RegistrarVentaServicios @IdColaborador, @IdMetodoPago, @IdPersona, @IdSucursal, @Servicios",
                     paramColaborador, paramMetodoPago, paramPersona, paramSucursal, paramServicios
                 );
 

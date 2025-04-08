@@ -39,10 +39,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.nombreEstadoCita)
                     </th>
-                    @{ if (Model.Any(c => c.nombreEstadoCita == "Agendada"))
-                        {
+                
                             <th>Acciones</th>
-                        } }
+                       
 
                 </tr>
             </thead>
@@ -90,16 +89,24 @@
                         </td>
 
 
-                        @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                        @{if (item.nombreEstadoCita == "Agendada")
-                            {
-                                <td>
+
+                        <td>
+                            @{ if (item.nombreEstadoCita == "Activa")
+                                {
                                     <a href="@Url.Action("CancelarUsuario", "Citas", new { id = item.IdCita })" class="btn btn-primary btn-sm">
                                         Cancelar
                                     </a>
-                                </td>
-                            } }
+                                }
+                                else
+                                {
+                                    var mensaje = "No hay acciones disponibles";
+                                    @Html.DisplayFor(modelItem => mensaje)
+                                }
+
+                            }
+
+                        </td>
+
 
 
                     </tr>
