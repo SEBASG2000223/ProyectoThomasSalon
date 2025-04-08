@@ -56,6 +56,8 @@ namespace ThomasSalon.AccesoADatos
             modelBuilder.Entity<RegistroGastosTabla>().ToTable("REGISTRO_GASTOS");
 
             modelBuilder.Entity<IngresosDiariosTabla>().ToTable("INGRESOS_DIARIOS");
+            modelBuilder.Entity<DeduccionesTabla>().ToTable("DEDUCCIONES");
+            modelBuilder.Entity<PagosTabla>().ToTable("PAGOS");
 
 
 
@@ -105,6 +107,8 @@ namespace ThomasSalon.AccesoADatos
         public DbSet<TipoDeEntregaTabla> TipoDeEntregaTabla { get; set; }
         public DbSet<ProvinciasTabla> ProvinciasTabla { get; set; }
         public DbSet<MetodosDePagoTabla> MetodosDePagoTabla { get; set; }
+        public DbSet<DeduccionesTabla> DeduccionesTabla { get; set; }
+        public DbSet<PagosTabla> PagosTabla { get; set; }
 
 
 

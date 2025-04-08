@@ -53,12 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="AsistenciaColaboradores\AgregarAsistencia\AgregarAsistenciaAD.cs" />
-
     <Compile Include="Citas\Agendar\AgendarCitasAD.cs" />
     <Compile Include="Citas\CambiarEstado\CambiarEstadoCitaAD.cs" />
-
     <Compile Include="Citas\Listar\ListarCitasAD.cs" />
     <Compile Include="Citas\ObtenerPorId\ObtenerCitaPorIdAD.cs" />
     <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresAD.cs" />
@@ -67,12 +64,15 @@
     <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresAD.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="Deducciones\Agregar\AgregarDeduccionAD.cs" />
+    <Compile Include="Deducciones\Listar\ListarDeduccionesAD.cs" />
     <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralAD.cs" />
     <Compile Include="InventarioGeneral\ObtenerPorId\ObtenerInventarioPorIdAD.cs" />
     <Compile Include="InventarioSucursal\Crear\CrearInventarioSucursalAD.cs" />
     <Compile Include="InventarioSucursal\Editar\EditarInventarioSucursalAD.cs" />
     <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalAD.cs" />
     <Compile Include="InventarioSucursal\ObtenerPorId\ObtenerInventarioSucursalPorIdAD.cs" />
+    <Compile Include="Pagos\ListarPagosAD.cs" />
     <Compile Include="Pedidos\Listar\ListarPedidosAD.cs" />
     <Compile Include="Personas\Editar\EditarPersonasAD.cs" />
     <Compile Include="Personas\Listar\ListarPersonasAD.cs" />

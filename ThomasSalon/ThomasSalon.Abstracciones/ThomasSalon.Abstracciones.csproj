@@ -72,12 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="AccesoADatos\Interfaces\AsistenciaColaboradores\AgregarAsistencia\IAgregarAsistenciaAD.cs" />
-
     <Compile Include="AccesoADatos\Interfaces\Citas\Agendar\IAgendarCitasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Citas\CambiarEstado\ICambiarEstadoCitaAD.cs" />
-
     <Compile Include="AccesoADatos\Interfaces\Citas\Listar\IListarCitasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Citas\ObtenerPorId\IObtenerCitaPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresAD.cs" />
@@ -85,12 +82,15 @@
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Listar\IListarColaboradoresAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Deducciones\Agendar\IAgregarDeduccion.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Deducciones\Listar\IListarDeduccionesAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\Listar\IInventarioGeneralAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioGeneral\ObtenerPorId\IObtenerInventarioPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Crear\ICrearInventarioSucursalAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Editar\IEditarInventarioSucursalAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\Listar\IListarInventarioSucursalAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\InventarioSucursal\ObtenerPorId\IObtenerInventarioSucursalPorIdAD.cs" />
+    <Compile Include="AccesoADatos\Interfaces\Pagos\IListarPagosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Pedidos\Listar\IListarPedidosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Personas\Editar\IEditarPersonasAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Personas\Listar\IListarPersonasAD.cs" />
@@ -122,15 +122,12 @@
     <Compile Include="AccesoADatos\Interfaces\Usuarios\Listar\IListarUsuariosAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\ObtenerPorId\IObtenerUsuariosPorIdAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Usuarios\QuitarUsuarios\IQuitarUsuariosAD.cs" />
-
     <Compile Include="AccesoADatos\Interfaces\Ventas\RegistrarVentaProducto\IRegistrarVentaProductoAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Ventas\RegistrarVentaServicio\IRegistrarVentaServicioAD.cs" />
     <Compile Include="AccesoADatos\Interfaces\Ventas\ResgistroGastos\IRegistroGastoAD.cs" />
     <Compile Include="LN\Interfaces\AsistenciaColaboradores\AgregarAsistencia\IAgregarAsistenciaLN.cs" />
-
     <Compile Include="LN\Interfaces\Citas\Agendar\IAgendarCitasLN.cs" />
     <Compile Include="LN\Interfaces\Citas\CambiarEstado\ICambiarEstadoCitaLN.cs" />
-
     <Compile Include="LN\Interfaces\Citas\Listar\IListarCitasLN.cs" />
     <Compile Include="LN\Interfaces\Citas\ObtenerPorId\IObtenerCitaPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\CambiarEstado\ICambiarEstadoColaboradoresLN.cs" />
@@ -138,6 +135,8 @@
     <Compile Include="LN\Interfaces\Colaboradores\Listar\IListarColaboradoresLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\ObtenerPorId\IObtenerColaboradoresPorIdLN.cs" />
     <Compile Include="LN\Interfaces\Colaboradores\Registrar\IRegistrarColaboradoresLN.cs" />
+    <Compile Include="LN\Interfaces\Deducciones\Agregar\IAgregarDeduccionLN.cs" />
+    <Compile Include="LN\Interfaces\Deducciones\Listar\IListarDeduccionesLN.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Colaboradores\IConvertirAColaboradoresTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\InventarioSucursal\IConvertirAInventarioSucursalTabla.cs" />
     <Compile Include="LN\Interfaces\General\Conversiones\Personas\IConvertirAPersonasTabla.cs" />
@@ -152,6 +151,7 @@
     <Compile Include="LN\Interfaces\InventarioSucursal\Editar\IEditarInventarioSucursalLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\IObtenerInventarioSucursalPorIdLN.cs" />
     <Compile Include="LN\Interfaces\InventarioSucursal\Listar\IListarInventarioSucursalLN.cs" />
+    <Compile Include="LN\Interfaces\Pagos\Listar\IListarPagosLN.cs" />
     <Compile Include="LN\Interfaces\Pedidos\Listar\IListarPedidosLN.cs" />
     <Compile Include="LN\Interfaces\Personas\Editar\IEditarPersonasLN.cs" />
     <Compile Include="LN\Interfaces\Personas\Listar\IListarPersonasLN.cs" />
@@ -190,6 +190,7 @@
     <Compile Include="ModelosDeBaseDeDatos\AsistenciaColaboradorTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CarritoTemporalTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\CitasTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\DeduccionesTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\DetallePedidoTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoCitaTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\EstadoDePedidoTabla.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="ModelosDeBaseDeDatos\InventarioGeneralTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\InventarioSucursalTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\MetodosDePagoTabla.cs" />
+    <Compile Include="ModelosDeBaseDeDatos\PagosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\PedidosTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\PersonasTabla.cs" />
     <Compile Include="ModelosDeBaseDeDatos\ProductosTabla.cs" />
@@ -217,9 +219,11 @@
     <Compile Include="Modelos\AsistenciaColaboradores\AgregarAsistencia\AsistenciaColaboradorDTO.cs" />
     <Compile Include="Modelos\Citas\CitasDto.cs" />
     <Compile Include="Modelos\Colaboradores\ColaboradoresDto.cs" />
+    <Compile Include="Modelos\Deducciones\DeduccionesDto.cs" />
     <Compile Include="Modelos\Gastos\ResumenGasto\GastoResumenDTO.cs" />
     <Compile Include="Modelos\InventarioGeneral\InventarioGeneralDto.cs" />
     <Compile Include="Modelos\InventarioSucursal\InventarioSucursalDto.cs" />
+    <Compile Include="Modelos\Pagos\PagosDto.cs" />
     <Compile Include="Modelos\Pedidos\PedidosDto.cs" />
     <Compile Include="Modelos\Personas\PersonasDto.cs" />
     <Compile Include="Modelos\Productos\ProductosDto.cs" />
