@@ -663,20 +663,18 @@
     <Content Include="Views\InventarioSucursal\DetallesProducto.cshtml" />
     <Content Include="Views\InventarioGeneral\DetallesProducto.cshtml" />
     <Content Include="Views\Citas\AgendarUsuario.cshtml" />
-
     <Content Include="Views\Ventas\RegistrarVentaServicio.cshtml" />
     <Content Include="Views\AsistenciaColaborador\AgregarAsistencia.cshtml" />
     <Content Include="Views\Ventas\RegistrarVentaProducto.cshtml" />
     <Content Include="Views\RegistroGasto\RegistroGasto.cshtml" />
     <Content Include="Views\RegistroGasto\Gastos.cshtml" />
-
     <Content Include="Views\Home\AccesoDenegado.cshtml" />
     <Content Include="Views\Citas\_DetallesCita.cshtml" />
     <Content Include="Views\Citas\ListarCitasUsuario.cshtml" />
     <Content Include="Views\Citas\_AgendarCitaPresencial.cshtml" />
     <Content Include="Views\Personas\ListarClientes.cshtml" />
     <Content Include="Views\Citas\_AgendarCitaLinea.cshtml" />
-
+    <Content Include="Views\AsistenciaColaborador\AsistenciaLista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

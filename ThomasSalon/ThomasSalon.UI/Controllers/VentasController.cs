@@ -88,7 +88,8 @@ namespace ThomasSalon.UI.Controllers
             ViewBag.Sucursales = new SelectList(sucursales, "IdSucursal", "Nombre");
 
             var productos = _listarProductos.ProductosActivos()
-                .Select(p => new {
+                .Select(p => new
+                {
                     IdProducto = p.IdProducto,
                     Nombre = p.Nombre,
                     Precio = p.Precio
@@ -163,38 +164,39 @@ namespace ThomasSalon.UI.Controllers
         }
 
         private async Task CargarViewBags()
-{
-    ViewBag.MetodosPago = new SelectList(await _elContexto.MetodosDePagoTabla.ToListAsync(), "IdMetodoPago", "Nombre");
+        {
+            ViewBag.MetodosPago = new SelectList(await _elContexto.MetodosDePagoTabla.ToListAsync(), "IdMetodoPago", "Nombre");
 
-    var hoy = DateTime.Today;
-    var asistenciaConNombre = (from ac in _elContexto.AsistenciaColaboradorTabla
-                               join colab in _elContexto.ColaboradoresTabla on ac.IdColaborador equals colab.IdColaborador
-                               join per in _elContexto.PersonasTabla on colab.IdPersona equals per.IdPersona
-                               where DbFunctions.TruncateTime(ac.Fecha) == hoy
-                               select new
-                               {
-                                   IdColaborador = ac.IdColaborador,
-                                   Nombre = per.Nombre
-                               }).Distinct().ToList();
+            var hoy = DateTime.Today;
+            var asistenciaConNombre = (from ac in _elContexto.AsistenciaColaboradorTabla
+                                       join colab in _elContexto.ColaboradoresTabla on ac.IdColaborador equals colab.IdColaborador
+                                       join per in _elContexto.PersonasTabla on colab.IdPersona equals per.IdPersona
+                                       where DbFunctions.TruncateTime(ac.Fecha) == hoy
+                                       select new
+                                       {
+                                           IdColaborador = ac.IdColaborador,
+                                           Nombre = per.Nombre
+                                       }).Distinct().ToList();
 
-    ViewBag.Asistencia = new SelectList(asistenciaConNombre, "IdColaborador", "Nombre");
+            ViewBag.Asistencia = new SelectList(asistenciaConNombre, "IdColaborador", "Nombre");
 
-    var sucursales = _listarSucursales.ListarSucursalesActivas();
-    ViewBag.Sucursales = new SelectList(sucursales, "IdSucursal", "Nombre");
+            var sucursales = _listarSucursales.ListarSucursalesActivas();
+            ViewBag.Sucursales = new SelectList(sucursales, "IdSucursal", "Nombre");
 
-    var productos = _listarProductos.ProductosActivos()
-        .Select(p => new {
-            IdProducto = p.IdProducto,
-            Nombre = p.Nombre,
-            Precio = p.Precio
-        }).ToList();
+            var productos = _listarProductos.ProductosActivos()
+                .Select(p => new
+                {
+                    IdProducto = p.IdProducto,
+                    Nombre = p.Nombre,
+                    Precio = p.Precio
+                }).ToList();
 
-    ViewBag.Productos = productos.Select(p => new SelectListItem
-    {
-        Value = p.IdProducto.ToString(),
-        Text = $"{p.Nombre} | {p.Precio:0.00}"
-    }).ToList();
-}
+            ViewBag.Productos = productos.Select(p => new SelectListItem
+            {
+                Value = p.IdProducto.ToString(),
+                Text = $"{p.Nombre} | {p.Precio:0.00}"
+            }).ToList();
+        }
 
 
         // GET: Ventas/Create
@@ -224,7 +226,8 @@ namespace ThomasSalon.UI.Controllers
             ViewBag.Sucursales = new SelectList(sucursales, "IdSucursal", "Nombre");
 
             var servicios = _listarServicios.ListarActivos()
-      .Select(s => new {
+      .Select(s => new
+      {
           IdServicio = s.IdServicio,
           Nombre = s.Nombre,
           Precio = s.Precio
