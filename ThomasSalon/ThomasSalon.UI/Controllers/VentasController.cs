@@ -151,11 +151,32 @@ namespace ThomasSalon.UI.Controllers
 
                 if (stockProducto == null || stockProducto.Cantidad < producto.Cantidad)
                 {
-                    TempData["Error"] = $"No hay suficiente stock del producto {producto.IdProducto}. Solo quedan {stockProducto?.Cantidad ?? 0} unidades disponibles en la sucursal.";
+                    var stockOtrasSucursales = (from inv in _elContexto.InventarioSucursalTabla
+                                                join suc in _elContexto.SucursalesTabla on inv.IdSucursal equals suc.IdSucursal
+                                                where inv.IdProducto == producto.IdProducto && inv.Cantidad > 0 && inv.IdSucursal != productoDto.IdSucursal
+                                                select new
+                                                {
+                                                    suc.Nombre,
+                                                    inv.Cantidad
+                                                }).ToList();
+
+                    string mensajeStock = $"No hay suficiente stock del producto ID {producto.IdProducto} en esta sucursal. ";
+                    if (stockOtrasSucursales.Any())
+                    {
+                        mensajeStock += "Disponible en:\n" + string.Join("\n", stockOtrasSucursales.Select(s => $"- {s.Nombre}: {s.Cantidad} unidades"));
+                    }
+                    else
+                    {
+                        mensajeStock += "Tampoco hay stock en otras sucursales.";
+                    }
+
+                    TempData["Error"] = mensajeStock;
+
                     await CargarViewBags();
-                    return View(productoDto);
+                    return RedirectToAction("RegistrarVentaProducto");
                 }
             }
+
 
             // Si todo está bien, se registra la venta
             var resultado = await _registrarVentaProducto.RegistrarVentaProducto(productoDto);

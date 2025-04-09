@@ -7,6 +7,15 @@
 <div class="container">
     <h2>Registrar Venta de Productos</h2>
 
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Html.Raw(TempData["Error"].ToString().Replace("\n", "<br/>"))
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    }
+
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -111,30 +120,60 @@
     <script>
         var productos = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Productos));
 
+        function getProductosDisponibles() {
+            const productosSeleccionados = $('.producto-dropdown').map(function () {
+                return $(this).val();
+            }).get();
+
+            return productos.filter(p => !productosSeleccionados.includes(p.Value));
+        }
+
         function crearFilaProducto(index) {
+            const disponibles = getProductosDisponibles();
             var fila = `
-                <tr>
-                    <td>
-                        <select name="Productos[${index}].IdProducto" class="form-control producto-dropdown">
-                            <option value="">-- Selecciona --</option>
-                            ${productos.map(p => `<option value="${p.Value}" data-precio="${p.Text.split('|')[1]}">${p.Text.split('|')[0]}</option>`).join('')}
-                        </select>
-                    </td>
-                    <td>
-                        <input name="Productos[${index}].PrecioUnitario" class="form-control precio-input" readonly />
-                    </td>
-                    <td>
-                        <input name="Productos[${index}].Cantidad" class="form-control cantidad-input" type="number" value="1" min="1"/>
-                    </td>
-                    <td>
-                        <input class="form-control total-linea" readonly />
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btnEliminarFila">Eliminar</button>
-                    </td>
-                </tr>`;
+        <tr>
+            <td>
+                <select name="Productos[${index}].IdProducto" class="form-control producto-dropdown">
+                    <option value="">-- Selecciona --</option>
+                    ${disponibles.map(p => `<option value="${p.Value}" data-precio="${p.Text.split('|')[1]}">${p.Text.split('|')[0]}</option>`).join('')}
+                </select>
+            </td>
+            <td>
+                <input name="Productos[${index}].PrecioUnitario" class="form-control precio-input" readonly />
+            </td>
+            <td>
+                <input name="Productos[${index}].Cantidad" class="form-control cantidad-input" type="number" value="1" min="1"/>
+            </td>
+            <td>
+                <input class="form-control total-linea" readonly />
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btnEliminarFila">Eliminar</button>
+            </td>
+        </tr>`;
             return fila;
         }
+
+        function actualizarDropdowns() {
+            const productosSeleccionados = $('.producto-dropdown').map(function () {
+                return $(this).val();
+            }).get();
+
+            $('.producto-dropdown').each(function () {
+                const currentValue = $(this).val();
+                const select = $(this);
+                const parentTd = select.closest('td');
+                const index = select.attr('name').match(/\[(\d+)\]/)[1];
+
+                const optionsHtml = productos
+                    .filter(p => !productosSeleccionados.includes(p.Value) || p.Value === currentValue)
+                    .map(p => `<option value="${p.Value}" data-precio="${p.Text.split('|')[1]}" ${p.Value === currentValue ? 'selected' : ''}>${p.Text.split('|')[0]}</option>`)
+                    .join('');
+
+                select.html(`<option value="">-- Selecciona --</option>${optionsHtml}`);
+            });
+        }
+
 
         function renumerarIndices() {
             $('#tablaProductos tbody tr').each(function (i) {
@@ -198,6 +237,7 @@
             $('#btnAgregarProducto').click(function () {
                 const index = $('#tablaProductos tbody tr').length;
                 $('#tablaProductos tbody').append(crearFilaProducto(index));
+                actualizarDropdowns();
             });
 
             // Eliminar producto
@@ -205,14 +245,17 @@
                 $(this).closest('tr').remove();
                 renumerarIndices();
                 calcularTotales();
+                actualizarDropdowns();
             });
 
-            // Precio y cálculo dinámico
+            // Cuando se selecciona producto
             $(document).on('change', '.producto-dropdown', function () {
                 const precio = $(this).find(':selected').data('precio');
                 $(this).closest('tr').find('.precio-input').val(precio || "");
                 calcularTotales();
+                actualizarDropdowns();
             });
+
 
             $(document).on('input', '.cantidad-input', function () {
                 calcularTotales();
