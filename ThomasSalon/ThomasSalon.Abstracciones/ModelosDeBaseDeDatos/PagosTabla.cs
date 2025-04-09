@@ -13,6 +13,7 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
         public int IdPago { get; set; }
         public int IdColaborador { get; set; }
         public DateTime FechaInicioSemana { get; set; }
+        public DateTime FechaPago { get; set; }
         public DateTime FechaFinSemana { get; set; }
         public int DiasCompletos { get; set; }
         public int DiasMedioTiempos { get; set; }

@@ -33,6 +33,9 @@ namespace ThomasSalon.Abstracciones.Modelos.Colaboradores
         public string Genero { get; set; }
         public string Identificacion { get; set; }
 
+        public DateTime? FechaUltimoPago { get; set; }
+
+
 
         public PersonasDto Persona { get; set; }
         public bool TieneUsuario { get; set; }

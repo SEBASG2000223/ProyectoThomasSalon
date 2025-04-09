@@ -31,6 +31,7 @@ namespace ThomasSalon.LN.Colaboradores.Listar
         {
             return _listarColaboradoresAD.ListarActivos();
         }
+    
 
 
     }

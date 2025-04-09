@@ -69,9 +69,12 @@ namespace ThomasSalon.UI.Controllers
 
         public async Task<ActionResult> ListarPagos(int idColaborador)
         {
-            List<PagosDto> laListaDeColaboradores = await _listarPagosLN.ListarPagos(idColaborador);
-            return View(laListaDeColaboradores); // Retornamos la lista a la vista
+            List<PagosDto> laListaDePagos = await _listarPagosLN.ListarPagos(idColaborador);
+            
+
+            return View(laListaDePagos);
         }
+
 
         // Acción para confirmar el pago del colaborador
         [HttpPost]
