@@ -5,23 +5,23 @@
 }
 
 <div class="container mt-4">
-<h2>Agregar Deducción</h2>
+    <h2>Agregar Deducción</h2>
 
-<form asp-action="Agregar" method="post">
-    <!-- MontoAgregado -->
-    <div class="form-group">
-        <label for="MontoAgregado">Monto Agregado</label>
-        <input type="number" class="form-control" id="MontoAgregado" name="MontoAgregado" required />
-    </div>
+    <form asp-action="Agregar" method="post">
+        <!-- MontoAgregado -->
+        <div class="form-group">
+            <label for="MontoAgregado">Monto Agregado</label>
+            <input type="number" class="form-control" id="MontoAgregado" name="MontoAgregado" required />
+        </div>
 
-    <!-- Descripción -->
-    <div class="form-group">
-        <label for="Descripcion">Descripción</label>
-        <textarea class="form-control" id="Descripcion" name="Descripcion" required></textarea>
-    </div>
-    <br>
+        <!-- Descripción -->
+        <div class="form-group">
+            <label for="Descripcion">Descripción</label>
+            <textarea class="form-control" id="Descripcion" name="Descripcion" required></textarea>
+        </div>
+        <br>
 
-    <button type="submit" class="btn btn-success">Agregar Deducción</button>
-    <a href="@Url.Action("ListarColaboradores", "Deducciones")" class="btn btn-secondary">Volver</a>
-</form>
+        <button type="submit" class="btn btn-success">Agregar Deducción</button>
+        <a href="@Url.Action("ListarColaboradores", "Deducciones")" class="btn btn-secondary">Volver</a>
+    </form>
 </div>

@@ -13,7 +13,7 @@ namespace ThomasSalon.Abstracciones.LN.Interfaces.Colaboradores.Listar
         List<ColaboradoresDto> Listar();
 
         List<ColaboradoresDto> ListarDisponibles();
-
+   
 
         List<ColaboradoresDto> ListarActivos();
 

@@ -56,9 +56,19 @@
                                 <a href="@Url.Action("ListarDeduccionesColaborador", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-primary btn-sm">
                                     Deducciones
                                 </a>
-                                <a href="@Url.Action("ListarPagos", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-primary btn-sm">
-                                    Pagar
-                                </a>
+
+                                @if (item.FechaUltimoPago.HasValue && item.FechaUltimoPago >= DateTime.Now.AddDays(-5))
+                                {
+                                    <button type="button" class="btn btn-success btn-sm" disabled>Pago Realizado</button>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ListarPagos", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-primary btn-sm">
+                                        Pagar
+                                    </a>
+                                }
+
+
                             </td>
                         </tr>
                     }
