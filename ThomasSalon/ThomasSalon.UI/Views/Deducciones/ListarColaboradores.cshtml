@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "ListarColaboradores";
+}
+
+
+@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Colaboradores.ColaboradoresDto>
+
+@{
+    ViewBag.Title = "ListarColaboradores";
+}
+<div class="container pt-5">
+    <h2>Listar Colaboradores</h2>
+    <hr>
+
+        <div class="table-responsive">
+            <table id="myTable" class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                      
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Identificacion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Telefono)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SalarioDia)
+                        </th>
+
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                          
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Identificacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SalarioDia)
+                            </td>
+
+                            <td>
+                                <a href="@Url.Action("ListarDeduccionesColaborador", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-primary btn-sm">
+                                    Deducciones
+                                </a>
+                                <a href="@Url.Action("ListarPagos", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-primary btn-sm">
+                                    Pagar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</div>
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/ScriptsFront/Colaboradores/ListaDataTableColaboradores.js"></script>
+
+
+  
+}
+

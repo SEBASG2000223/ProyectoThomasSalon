@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Pagos.PagosDto>
+
+@{
+    ViewBag.Title = "Listado de Pagos";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Listado de Pagos</h2>
+
+    <!-- Tabla de pagos -->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Colaborador</th>
+                <th>Días Completos</th>
+                <th>Días Medio Tiempo</th>
+                <th>Total Comisiones</th>
+                <th>Total Deducciones</th>
+                <th>Total Gastos</th>
+                <th>Total Pago</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.IdColaborador)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DiasCompletos)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DiasMedioTiempos)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalComision)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalDeducciones)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalGastos)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalPago)</td>
+                    <td>
+                        <!-- Formulario para confirmar pago -->
+                        @using (Html.BeginForm("ConfirmarPago", "Deducciones", new { idColaborador = item.IdColaborador }, FormMethod.Post))
+                        {
+                            <button type="submit" class="btn btn-success btn-sm">Finalizar Pago</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
