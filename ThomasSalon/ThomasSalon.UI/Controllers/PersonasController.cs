@@ -68,7 +68,7 @@ namespace ThomasSalon.UI.Controllers
                 int cantidadDeDatosGuardados = await _registrarPersonasLN.Registrar(modelo);
 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarClientes");
             }
             catch
             {
