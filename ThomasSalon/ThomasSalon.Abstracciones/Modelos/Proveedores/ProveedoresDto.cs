@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ThomasSalon.Abstracciones.Modelos.Proveedores
 {
@@ -19,14 +12,18 @@ namespace ThomasSalon.Abstracciones.Modelos.Proveedores
         public string Nombre { get; set; }
 
         [Display(Name = "Descripción", Description = "Descripción")]
+        [StringLength(250, ErrorMessage = "La descripción no debe exceder los 250 caracteres.")]
         [Required]
         public string Descripcion { get; set; }
 
         [Display(Name = "Teléfono", Description = "Teléfono")]
+        [Phone(ErrorMessage = "Ingrese un número de teléfono válido.")]
+        [StringLength(20, ErrorMessage = "El teléfono no debe exceder los 20 caracteres.")]
         [Required]
         public string Telefono { get; set; }
 
         [Display(Name = "Dirección", Description = "Dirección")]
+        [StringLength(200, ErrorMessage = "La dirección no debe exceder los 200 caracteres.")]
         [Required]
         public string Direccion { get; set; }
 

@@ -663,7 +663,6 @@
     <Content Include="Views\Productos\VerCarrito.cshtml" />
     <Content Include="Views\InventarioSucursal\DetallesProducto.cshtml" />
     <Content Include="Views\InventarioGeneral\DetallesProducto.cshtml" />
-    <Content Include="Views\Citas\AgendarUsuario.cshtml" />
     <Content Include="Views\Ventas\RegistrarVentaServicio.cshtml" />
     <Content Include="Views\AsistenciaColaborador\AgregarAsistencia.cshtml" />
     <Content Include="Views\Ventas\RegistrarVentaProducto.cshtml" />
@@ -675,16 +674,13 @@
     <Content Include="Views\Citas\_AgendarCitaPresencial.cshtml" />
     <Content Include="Views\Personas\ListarClientes.cshtml" />
     <Content Include="Views\Citas\_AgendarCitaLinea.cshtml" />
-
     <Content Include="Views\AsistenciaColaborador\AsistenciaLista.cshtml" />
     <Content Include="Views\Ventas\Resumen.cshtml" />
     <Content Include="Views\Ventas\ResumenCaja.cshtml" />
-
     <Content Include="Views\Deducciones\ListarColaboradores.cshtml" />
     <Content Include="Views\Deducciones\ListarDeduccionesColaborador.cshtml" />
     <Content Include="Views\Deducciones\Agregar.cshtml" />
     <Content Include="Views\Deducciones\ListarPagos.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
