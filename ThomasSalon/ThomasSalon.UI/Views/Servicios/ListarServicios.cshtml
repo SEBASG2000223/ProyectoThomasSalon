@@ -5,10 +5,11 @@
 }
 <div class="container pt-5">
     <h2 class="text-center">Lista de Servicios</h2>
-
-    <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
-        Registrar Servicio
-    </a>
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+            Registrar Servicio
+        </a>
+    </p>
 
     <div class="table-responsive">
         <table id="myTable" class="table table-bordered table-hover">
@@ -21,7 +22,7 @@
                     <th>@Html.DisplayNameFor(model => model.Duracion)</th>
                     <th>@Html.DisplayNameFor(model => model.NombreEstado)</th>
                     <th>@Html.DisplayNameFor(model => model.IdTipoServicios)</th>
-                    <th></th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +57,7 @@
                             {
                                 tipoServicio = "Estética";
                             }
-                            
+
                         }
 
                         <td>@Html.DisplayFor(modelItem => tipoServicio)</td>
