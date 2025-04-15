@@ -39,7 +39,7 @@
     }
 </style>
 
-<h2 class="text-center">Productos</h2>
+<h2 class="text-center mb-4">Productos</h2>
 
 <button id="btnCarrito" class="btn btn-primary">
     🛒 Carrito (<span id="contadorCarrito">0</span>)
@@ -98,10 +98,17 @@
         var cantidad = 1;
         var precioUnitario = parseFloat($(this).closest('.card-body').find('.card-text:first').text().replace('₡', '').trim());
 
-        $.post('@Url.Action("AgregarAlCarrito", "Carrito")', { idProducto, cantidad, precioUnitario }, function (response) {
-            alert(response.mensaje);
-            cargarCarrito();
-        });
+      $.post('@Url.Action("AgregarAlCarrito", "Carrito")', { idProducto, cantidad, precioUnitario }, function (response) {
+    if (response.redirectTo) {
+        window.location.href = response.redirectTo;
+    } else if (response.error) {
+        alert(response.error);
+    } else {
+        alert(response.mensaje);
+        cargarCarrito();
+    }
+});
+
     });
 
     $("#btnCarrito").click(function () {

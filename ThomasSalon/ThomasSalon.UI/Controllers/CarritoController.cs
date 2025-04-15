@@ -212,7 +212,10 @@ namespace ThomasSalon.UI.Controllers
         public ActionResult AgregarAlCarrito(int idProducto, int cantidad, decimal precioUnitario)
         {
             string idUsuario = User.Identity.GetUserId();
-
+            if (string.IsNullOrEmpty(idUsuario))
+            {
+                return Json(new { redirectTo = Url.Action("Login", "Account") });
+            }
             var itemExistente = _elContexto.CarritoTemporalTabla
                 .FirstOrDefault(c => c.IdUsuario == idUsuario && c.IdProducto == idProducto);
 
