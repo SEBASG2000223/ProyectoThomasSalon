@@ -40,28 +40,26 @@
         <div class="row py-2 px-lg-5">
             <div class="col-lg-6 text-left mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
+
                     <small><i class="fa fa-phone-alt mr-2"></i>+506 7012-9621</small>
+
                     <small class="px-3">|</small>
                     <small><i class="fa fa-envelope mr-2"></i>infothomassalon@gmail.com</small>
                 </div>
             </div>
             <div class="col-lg-6 text-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-primary px-2" href="">
+                    <a class="text-primary px-2" href="https://www.facebook.com/ThomasBeautyCenter" target="_blank">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a class="text-primary px-2" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-primary px-2" href="">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-primary px-2" href="">
+
+                    <a class="text-primary px-2" href="https://www.instagram.com/thomasbeautycenter/" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a class="text-primary pl-2" href="">
-                        <i class="fab fa-youtube"></i>
-                    </a>
+
+                  
+
+
                 </div>
             </div>
         </div>
@@ -79,14 +77,17 @@
                 <div class="navbar-nav m-auto py-0">
                     @Html.ActionLink("Productos", "Productos", "Productos", new { area = "" }, new { @class = "nav-link" })
                     @Html.ActionLink("Servicios", "Servicios", "Servicios", new { area = "" }, new { @class = "nav-link" })
-                    @Html.ActionLink("Mis pedidos", "ListarPedidosCliente", "Pedidos", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("Sucursales", "Sucursales", "Sucursales", new { area = "" }, new { @class = "nav-link" })
 
                     @if (User.Identity.IsAuthenticated)
                     {
                         @Html.ActionLink("Mis citas", "ListarCitasUsuario", "Citas", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Mis pedidos", "ListarPedidosCliente", "Pedidos", new { area = "" }, new { @class = "nav-link" })
+
+                        @Html.ActionLink("Carrito", "VerCarrito", "Carrito", new { area = "" }, new { @class = "nav-link" })
                     }
 
-                    @Html.ActionLink("Carrito", "VerCarrito", "Carrito", new { area = "" }, new { @class = "nav-link" })
+
 
 
 
@@ -119,14 +120,16 @@
                             <h1 class="mb-3 text-white"><span class="text-primary">Thomas</span> Beauty</h1>
                         </a>
                         <p>En Thomas Beauty nos dedicamos a ofrecerte los mejores tratamientos de belleza. Nuestro equipo de expertos está aquí para brindarte una experiencia única y rejuvenecedora en cada visita. ¡Déjate consentir con nosotros!</p>
-                        <p><i class="fa fa-map-marker-alt mr-2"></i>123 Avenida Principal, Ciudad, País</p>
-                        <p><i class="fa fa-phone-alt mr-2"></i>+111111111</p>
+                        <p>
+                            <i class="fa fa-map-marker-alt mr-2"></i>San Antonio, Desamparados:
+                            Frente al perimercado jumbo, sala de belleza Thomas Beauty Center.
+                        </p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>7012-9621</p>
                         <p><i class="fa fa-envelope mr-2"></i>info@thomasbeauty.com</p>
                         <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://www.facebook.com/ThomasBeautyCenter" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://www.instagram.com/thomasbeautycenter/" target="_blank"><i class="fab fa-instagram"></i></a>
+
                         </div>
                     </div>
                     <div class="col-lg-6 pl-lg-5">
@@ -134,11 +137,8 @@
                             <div class="col-sm-6 mb-5">
                                 <h5 class="text-white text-uppercase mb-4">Enlaces Rápidos</h5>
                                 <div class="d-flex flex-column justify-content-start">
-                                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Inicio</a>
                                     <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Sobre Nosotros</a>
-                                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Nuestros Servicios</a>
-                                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Planes de Precios</a>
-                                    <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contacto</a>
+                                 
                                 </div>
                             </div>
 
