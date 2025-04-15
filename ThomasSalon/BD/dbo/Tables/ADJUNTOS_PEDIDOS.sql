@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[ADJUNTOS_PEDIDOS] (
+    [IdAdjuntos] UNIQUEIDENTIFIER NOT NULL,
+    [Adjunto]    VARBINARY (MAX)  NULL,
+    PRIMARY KEY CLUSTERED ([IdAdjuntos] ASC)
+);
+

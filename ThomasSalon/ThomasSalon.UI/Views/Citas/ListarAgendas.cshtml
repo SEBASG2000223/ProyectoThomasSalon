@@ -43,10 +43,10 @@
 @section scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var idSucursal = calendarEl.getAttribute('data-idsucursal');
+            const calendarEl = document.getElementById('calendar');
+            const idSucursal = calendarEl.getAttribute('data-idsucursal');
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 locale: 'es',
                 headerToolbar: {
@@ -59,15 +59,37 @@
                         text: 'Añadir Cita',
                         click: function () {
                             console.log("Botón de añadir cita clickeado");
+
+                            // Obtener el formulario para agendar la cita
                             $.get('/Citas/AgendarCitaPresencial', function (html) {
                                 $('#modalAgendarCita .modal-content').html(html);
                                 $('#modalAgendarCita').modal('show');
 
-                                var idSucursal = $('#modalAgendarCita').data('idsucursal');
+                                // Espera a que el modal se muestre completamente
+                                $('#modalAgendarCita').on('shown.bs.modal', function () {
+                                    // Verifica que el campo exista
+                                    const config = {
+                                        enableTime: true,
+                                        dateFormat: "Y-m-d H:i K",
+                                        time_24hr: false,
+                                        minDate: "today",
+                                        maxDate: new Date().fp_incr(365),
+                                        minuteIncrement: 30,
+                                        defaultHour: 9,
+                                        defaultMinute: 30,
+                                        minTime: "09:30",
+                                        
+                                    }
+                                    if (document.querySelector("#fechaHora")) {
+                                        flatpickr("#fechaHora", config);
+                                    } else {
+                                        console.error("No se encontró el input #fechaHora");
+                                    }
+                                });
 
-                                // Buscar persona por cédula (mover esta lógica aquí también)
-                                $(document).on('change', '#txtCedula', function () {
-                                    var cedula = $(this).val();
+                                // Buscar persona por cédula
+                                $(document).off('change', '#txtCedula').on('change', '#txtCedula', function () {
+                                    const cedula = $(this).val();
 
                                     if (cedula.length > 0) {
                                         $.ajax({
@@ -90,39 +112,7 @@
                                     }
                                 });
 
-                                $('#servicioEscogido').change(function () {
-                                    var IdServicio = $(this).val();
-                                    if (IdServicio && idSucursal) {
-                                        console.log("Realizando la solicitud AJAX...");
-                                        $.get("/Citas/ObtenerHorariosDisponibles", { idServicio: 1, idSucursal: 1 })
-                                            .done(function (horarios) {
-                                                console.log(horarios);
-                                            })
-                                            .fail(function (jqXHR, textStatus, errorThrown) {
-                                                console.log("Error en la solicitud: " + textStatus + ", " + errorThrown);
-                                                console.log(horarios);
-                                                if (horarios && horarios.length > 0) {
-                                                    const config = {
-                                                        enableTime: true,
-                                                        dateFormat: "Y-m-d H:i K",
-                                                        time_24hr: false,
-                                                        minDate: "today",
-                                                        maxDate: new Date().fp_incr(365),
-                                                        minuteIncrement: 30,
-                                                        defaultHour: 9,
-                                                        defaultMinute: 30,
-                                                        minTime: "09:30",
-                                                        disable: horarios
-                                                    };
-                                                    flatpickr("#fechaHora", config);
-                                                } else {
-                                                    alert("No hay horarios disponibles para este servicio y sucursal.");
-                                                }
-                                            });
-                                    } else {
-                                        alert("Por favor, seleccione un servicio y sucursal.");
-                                    }
-                                });
+                                
                             });
                         }
                     }
@@ -134,7 +124,8 @@
                         .catch(error => failureCallback(error));
                 },
                 eventClick: function (info) {
-                    var eventId = info.event.id;
+                    const eventId = info.event.id;
+
                     if (eventId) {
                         $.ajax({
                             url: '/Citas/DetallesCita',
@@ -154,9 +145,9 @@
                 }
             });
 
+            // Enviar formulario para agendar cita
             $(document).on('submit', '#formAgendarCita', function (e) {
                 e.preventDefault();
-
                 const form = $(this);
 
                 $.ajax({
@@ -180,6 +171,7 @@
             calendar.render();
         });
     </script>
+
 
 
 
