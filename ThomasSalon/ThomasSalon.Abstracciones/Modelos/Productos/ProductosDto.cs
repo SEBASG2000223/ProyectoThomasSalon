@@ -17,6 +17,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Productos
         public string Nombre { get; set; }
 
         [Display(Name = "Descripción", Description = "Descripción")]
+        [StringLength(200, ErrorMessage = "La Descripcion no debe exceder los 200 caracteres.")]
         [Required]
         public string Descripcion { get; set; }
 
@@ -30,13 +31,15 @@ namespace ThomasSalon.Abstracciones.Modelos.Productos
 
         [Display(Name = "Unidad de Medida", Description = "Unidad de Medida")]
         [Required]
+        [Range(1, 5000, ErrorMessage = "La unidad de medida debe estar entre 1 y 5000 mililitros.")]
         public int UnidadMedida { get; set; }
 
         [Display(Name = "Estado", Description = "Estado")]
         [Required]
         public int IdEstado { get; set; }
 
-        [Display(Name = "Link Imagen", Description = "Link Imagen")]
+        [Display(Name = "Imagen de referencia", Description = "Link de la imagen")]
+        [Url(ErrorMessage = "Debe ingresar una URL válida.")]
         [Required]
         public string LinkImagen { get; set; }
 

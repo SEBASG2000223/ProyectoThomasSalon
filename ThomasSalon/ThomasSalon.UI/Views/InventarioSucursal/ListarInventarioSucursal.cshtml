@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "ListarInventarioSucursal";
 }
-<div class="container">
+<div class="container pt-5">
 
 
 
-    <h2>Inventario de la sucursal</h2>
+    <h2 class="text-center">Inventario de la sucursal</h2>
 
     @if (ViewBag.Mensaje != null)
     {
@@ -88,7 +88,7 @@
                         <td>
 
 
-                            <a href="@Url.Action("DetallesProducto", "InventarioSucursal", new { IdInventario = item.IdInventarioSucursal })" class="btn btn-info btn-sm">
+                            <a href="@Url.Action("DetallesProducto", "InventarioSucursal", new { IdInventario = item.IdInventarioSucursal })" class="btn btn-warning btn-sm">
                                 Detalles del producto
                             </a>
 

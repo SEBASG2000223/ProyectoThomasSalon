@@ -3,91 +3,91 @@
 @{
     ViewBag.Title = "DetallesProducto";
 }
+<div class="container mt-4">
 
-<h2>DetallesProducto</h2>
+    <h2 class="text-center mb-4">Detalles del producto</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdProducto)
-        </dt>
+    <div class="border rounded p-4 shadow w-50 mx-auto bg-light">
+        <dl class="row" ">
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.IdProducto)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdProducto)
-        </dd>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.IdProducto)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreProducto)
-        </dt>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.NombreProducto)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NombreProducto)
-        </dd>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.NombreProducto)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.Precio)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Precio)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreProveedor)
-        </dt>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.NombreProveedor)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NombreProveedor)
-        </dd>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.NombreProveedor)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UnidadMedida)
-        </dt>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.UnidadMedida)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnidadMedida)
-        </dd>
-      
-        <dt>
-            @Html.DisplayNameFor(model => model.IdEstado)
-        </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.UnidadMedida)
+            </dd>
 
-        <dd>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.IdEstado)
+            </dt>
 
-            @{
-                string estado = "";
-                if (Model.IdEstado == 1)
-                {
-                    estado = "Activo";
-                    @Html.DisplayFor(model => estado)
+            <dd class="col-sm-7">
+
+                @{
+                    string estado = "";
+                    if (Model.IdEstado == 1)
+                    {
+                        estado = "Activo";
+                        @Html.DisplayFor(model => estado)
+                    }
+                    else
+                    {
+                        estado = "Inactivo";
+                        @Html.DisplayFor(model => estado)
+                    }
+
                 }
-                else
-                {
-                    estado = "Inactivo";
-                    @Html.DisplayFor(model => estado)
-                }
 
-            }
-            
-        </dd>
+            </dd>
+
+        </dl>
+    </div>
 
 
+    <div class="text-center mt-4">
+        <a href="@Url.Action("ListarInventarioSucursal", "InventarioSucursal", new { idSucursal = TempData["IdSucursalSeleccionada"] })" class="btn btn-dark btn-sm">
+            Volver al inventario
+        </a>
+    </div>
 
-
-
-    </dl>
 </div>
-<p>
-    <a href="@Url.Action("ListarInventarioSucursal", "InventarioSucursal", new { idSucursal = TempData["IdSucursalSeleccionada"] })" class="btn btn-primary btn-sm" ">
-        Volver al inventario
-    </a>
-</p>
