@@ -3,40 +3,42 @@
 @{
     ViewBag.Title = "Actualizar Inventario";
 }
+<div class="container pt-5">
 
-<h2>Actualizar el Inventario</h2>
+    <h2 class="text-center mb-4">Actualizar el inventario</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
+                <div class="form-horizontal border p-4 rounded shadow-sm bg-light">
 
-    <!-- Campo oculto para IdSucursal -->
-    @Html.HiddenFor(model => model.IdSucursal)
+                    @Html.HiddenFor(model => model.IdSucursal)
 
-    <!-- Campo oculto para IdProducto -->
-    @Html.HiddenFor(model => model.IdProducto)
+                    @Html.HiddenFor(model => model.IdProducto)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Guardar" class="btn btn-dark btn-md" />
+                    <div class="form-group text-center">
+                        <input type="submit" value="Guardar" class="btn btn-primary btn-md" />
+                        <a href="@Request.UrlReferrer" class="btn btn-dark px-4 ms-2">Volver al inventario</a>
+                    </div>
+                </div>
+
+
+            }
         </div>
     </div>
 </div>
-}
 
-<a href="@Url.Action("ListarInventarioSucursal", "InventarioSucursal", new { idSucursal = TempData["IdSucursalSeleccionada"] })" class="btn btn-primary btn-sm" ">
-    Volver al inventario de la sucursal
-</a>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
