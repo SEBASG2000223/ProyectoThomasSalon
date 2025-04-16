@@ -9703,3 +9703,77 @@ h6,
   padding: 0;
   list-style-type: none;
 }
+
+.newsletter {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+}
+
+    .newsletter .input-group {
+        display: flex;
+        align-items: center;
+        border: 2px solid #ff9b8a;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .newsletter input {
+        flex: 1;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        background: #fff;
+        color: #333;
+    }
+
+    .newsletter .btn {
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #ff9b8a;
+        border: none;
+        color: white;
+        transition: background 0.3s ease-in-out;
+    }
+
+        .newsletter .btn:hover {
+            background-color: #ff6f5e;
+        }
+.contact-form {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+    .contact-form .form-control {
+        height: 50px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .contact-form textarea.form-control {
+        height: auto;
+        resize: none;
+    }
+
+    .contact-form button {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        background-color: #ff9b8a;
+        border: none;
+        color: white;
+        font-weight: bold;
+        transition: background 0.3s ease-in-out;
+    }
+
+        .contact-form button:hover {
+            background-color:   #ff6f5e;
+        }

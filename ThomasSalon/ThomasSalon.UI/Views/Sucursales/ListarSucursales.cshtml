@@ -1,10 +1,44 @@
 ﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Sucursales.SucursalesDto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Nuestras Sucursales";
 }
 <div class="container pt-5">
+
     <h2 class="text-center">Lista de sucursales</h2>
+
+    <h2>Nuestras Sucursales</h2>
+
+    <div class="row">
+        @foreach (var sucursal in Model)
+        {
+            <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                <div class="card shadow-sm w-100">
+                    <img src="@sucursal.LinkImagen" class="card-img-top" alt="Imagen de @sucursal.Nombre" style="height: 200px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@sucursal.Nombre</h5>
+                        <p class="card-text flex-grow-1">
+                            <strong>Teléfono:</strong> @sucursal.Telefono
+                        </p>
+                        <p class="card-text">
+                            <strong>Dirección:</strong>
+                        </p>
+                        @{
+                            string coordenadas = sucursal.LinkDireccion.Replace("https://www.google.com/maps?q=", "");
+                        }
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBp1oeMETRS7Ygop4QgC_u-tnx1YxQL9jw&q=@coordenadas"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
     <p>
         <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
             Registrar sucursal
@@ -81,15 +115,8 @@
         </table>
     </div>
 </div>
-    @functions{
-        public string SaberEstado(int estado)
-        {
-            if (estado == 2) return "Inactivo";
-            if (estado == 1) return "Activo";
-            return "Estado invalido";
-        }
-    }
-    @section scripts
-    {
-        <script src="~/Scripts/ScriptsFront/Sucursales/ListaDataTableSucursales.js"></script>
-    }
+
+@section scripts
+{
+    <script src="~/Scripts/ScriptsFront/Sucursales/ListaDataTableSucursales.js"></script>
+}

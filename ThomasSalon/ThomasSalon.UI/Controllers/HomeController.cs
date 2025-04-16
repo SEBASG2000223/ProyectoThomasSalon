@@ -125,6 +125,11 @@ namespace ThomasSalon.UI.Controllers
             return View();
         }
 
+
+        public ActionResult SobreNosotros() {
+            return View();
+        }
+
         public ActionResult Dashboard()
         {
             return View();
@@ -136,16 +141,18 @@ namespace ThomasSalon.UI.Controllers
 
 
         public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
+        {
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult PoliticasServicio()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult Contacto()
+        {
             return View();
         }
     }

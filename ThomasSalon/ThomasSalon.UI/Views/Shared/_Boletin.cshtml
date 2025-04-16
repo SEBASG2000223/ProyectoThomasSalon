@@ -1,0 +1,30 @@
+﻿<div class="newsletter">
+    <form id="boletinForm">
+        <div class="input-group">
+            <input type="email" id="emailBoletin" class="form-control" placeholder="Tu Dirección de Correo Electrónico" required>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Suscribirse</button>
+            </div>
+        </div>
+    </form>
+    <div id="mensajeBoletin" class="mt-2 text-white"></div>
+</div>
+
+<script>
+    document.getElementById("boletinForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let email = document.getElementById("emailBoletin").value;
+
+        fetch("/Boletin/Suscribirse", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "correo=" + encodeURIComponent(email)
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("mensajeBoletin").innerText = data.message;
+            });
+    });
+</script>
+
+
