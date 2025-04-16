@@ -4,90 +4,65 @@
     ViewBag.Title = "Detalles del producto";
 }
 
-<h2>Detalles del producto</h2>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Detalles del producto</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdProducto)
-        </dt>
+    <div class="border rounded p-4 shadow w-50 mx-auto bg-light">
+        <dl class="row">
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.IdProducto)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.IdProducto)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdProducto)
-        </dd>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.NombreProducto)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.NombreProducto)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreProducto)
-        </dt>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NombreProducto)
-        </dd>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.Precio)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Precio)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.NombreProveedor)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.NombreProveedor)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
+            <dt class="col-sm-5 text-end fw-bold">
+                @Html.DisplayNameFor(model => model.UnidadMedida)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.UnidadMedida)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
+            <dt class="col-sm-5 text-end fw-bold">
+                Estado
+            </dt>
+            <dd class="col-sm-7">
+                @(Model.IdEstado == 1 ? "Activo" : "Inactivo")
+            </dd>
+        </dl>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreProveedor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NombreProveedor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UnidadMedida)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UnidadMedida)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdEstado)
-        </dt>
-
-        <dd>
-
-            @{
-                string estado = "";
-                if (Model.IdEstado == 1)
-                {
-                    estado = "Activo";
-                    @Html.DisplayFor(model => estado)
-                }
-                else
-                {
-                    estado = "Inactivo";
-                    @Html.DisplayFor(model => estado)
-                }
-
-            }
-
-        </dd>
-
-
-
-
-
-    </dl>
+    <div class="text-center mt-4">
+        <a href="@Url.Action("ListarInventarioGeneral", "InventarioGeneral")" class="btn btn-dark btn-sm">
+            Volver al inventario
+        </a>
+    </div>
 </div>
-<p>
-    <a href="@Url.Action("ListarInventarioGeneral", "InventarioGeneral") "class="btn btn-primary btn-sm"">
-        Volver al inventario
-    </a>
-</p>

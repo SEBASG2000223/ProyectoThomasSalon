@@ -19,7 +19,7 @@
     {
         @Html.AntiForgeryToken()
     }
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #7e7055; ">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="~/Home/Dashboard">Administración</a>
         <!-- Sidebar Toggle-->
@@ -27,8 +27,7 @@
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+              
             </div>
         </form>
         <!-- Navbar-->
@@ -47,122 +46,125 @@
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion" id="sidenavAccordion" style="background-color: #7e7055; ">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="@Url.Action("ListarProveedores", "Proveedores")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
+                        <div class="sb-sidenav-menu-heading"></div>
+                        <a class="nav-link" href="@Url.Action("ListarProveedores", "Proveedores")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck" style="color: white;"></i></div>
                             Proveedores
                         </a>
 
-                        <a class="nav-link" href="@Url.Action("ListarServicios", "Servicios")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-concierge-bell"></i></div>
+
+                        <a class="nav-link" href="@Url.Action("ListarServicios", "Servicios")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-concierge-bell" style="color: white;"></i></div>
                             Servicios
                         </a>
 
-                        <a class="nav-link" href="@Url.Action("ListarColaboradores", "Colaboradores")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                        <a class="nav-link" href="@Url.Action("ListarColaboradores", "Colaboradores")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users" style="color: white;"></i></div>
                             Colaboradores
                         </a>
 
-                        <a class="nav-link" href="@Url.Action("ListarInventarioGeneral", "InventarioGeneral")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+                        <a class="nav-link" href="@Url.Action("ListarInventarioGeneral", "InventarioGeneral")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-boxes" style="color: white;"></i></div>
                             Inventario
                         </a>
 
-                        <a class="nav-link" href="@Url.Action("ListarSucursales", "Sucursales")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <a class="nav-link" href="@Url.Action("ListarSucursales", "Sucursales")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-map-marker-alt" style="color: white;"></i></div>
                             Sucursales
                         </a>
 
-                        <a class="nav-link" href="@Url.Action("ListarProductos", "Productos")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                        <a class="nav-link" href="@Url.Action("ListarProductos", "Productos")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-box" style="color: white;"></i></div>
                             Productos
                         </a>
 
-                        <a class="nav-link" href="@Url.Action("Resumen", "Ventas")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                        <a class="nav-link" href="@Url.Action("Resumen", "Ventas")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-box" style="color: white;"></i></div>
                             Ventas Resumen
                         </a>
 
-
-
-
-
-
-                        <a class="nav-link" href="@Url.Action("ListarPedidos", "Pedidos")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                        <a class="nav-link" href="@Url.Action("ListarPedidos", "Pedidos")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-box" style="color: white;"></i></div>
                             Pedidos
                         </a>
-                        <a class="nav-link" href="@Url.Action("ListarClientes", "Personas")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+
+                        <a class="nav-link" href="@Url.Action("ListarClientes", "Personas")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-box" style="color: white;"></i></div>
                             Clientes
                         </a>
 
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseGastos" aria-expanded="false" aria-controls="collapseGastos">
-                            <div class="sb-nav-link-icon"><i class="fas fa-wallet"></i></div>
+
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseGastos" aria-expanded="false" aria-controls="collapseGastos" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-wallet" style="color: white;"></i></div>
                             Gastos
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down" style="color: white;"></i></div>
                         </a>
 
                         <div class="collapse" id="collapseGastos" aria-labelledby="headingVentas" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                @Html.ActionLink("Registrar Gasto", "RegistroGasto", "RegistroGasto", null, new { @class = "nav-link" })
-                                @Html.ActionLink("Lista de Gastos", "ResumenGastos", "RegistroGasto", null, new { @class = "nav-link" })
-
+                                @Html.ActionLink("Registrar Gasto", "RegistroGasto", "RegistroGasto", null, new { @class = "nav-link", style = "color: white;" })
+                                @Html.ActionLink("Lista de Gastos", "ResumenGastos", "RegistroGasto", null, new { @class = "nav-link", style = "color: white;" })
                             </nav>
                         </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseVentas" aria-expanded="false" aria-controls="collapseVentas">
-                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseVentas" aria-expanded="false" aria-controls="collapseVentas" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart" style="color: white;"></i></div>
                             Ventas
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down" style="color: white;"></i></div>
                         </a>
 
                         <div class="collapse" id="collapseVentas" aria-labelledby="headingVentas" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                @Html.ActionLink("Venta Servicio", "RegistrarVentaServicio", "Ventas", null, new { @class = "nav-link" })
-                                @Html.ActionLink("Venta Producto", "RegistrarVentaProducto", "Ventas", null, new { @class = "nav-link" })
-
+                                @Html.ActionLink("Venta Servicio", "RegistrarVentaServicio", "Ventas", null, new { @class = "nav-link", style = "color: white;" })
+                                @Html.ActionLink("Venta Producto", "RegistrarVentaProducto", "Ventas", null, new { @class = "nav-link", style = "color: white;" })
                             </nav>
                         </div>
-                        <a class="nav-link" href="@Url.Action("ListarColaboradores", "Deducciones")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+
+                        <a class="nav-link" href="@Url.Action("ListarColaboradores", "Deducciones")" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-box" style="color: white;"></i></div>
                             Pagos
                         </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseUsuarios">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseUsuarios" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users" style="color: white;"></i></div>
                             Usuarios
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down" style="color: white;"></i></div>
                         </a>
+
                         <div class="collapse" id="collapseUsuarios" aria-labelledby="headingUsuarios" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                @Html.ActionLink("Usuarios", "ListarSoloUsuarios", "Usuarios", null, new { @class = "nav-link" })
-                                @Html.ActionLink("Gerentes", "ListarGerentes", "Usuarios", null, new { @class = "nav-link" })
-                                @Html.ActionLink("Administradores", "ListarAdministradores", "Usuarios", null, new { @class = "nav-link" })
+                                @Html.ActionLink("Usuarios", "ListarSoloUsuarios", "Usuarios", null, new { @class = "nav-link", style = "color: white;" })
+                                @Html.ActionLink("Gerentes", "ListarGerentes", "Usuarios", null, new { @class = "nav-link", style = "color: white;" })
+                                @Html.ActionLink("Administradores", "ListarAdministradores", "Usuarios", null, new { @class = "nav-link", style = "color: white;" })
                                 <hr class="dropdown-divider">
-                                @Html.ActionLink("Todos los usuarios", "ListarUsuarios", "Usuarios", null, new { @class = "nav-link" })
+                                @Html.ActionLink("Todos los usuarios", "ListarUsuarios", "Usuarios", null, new { @class = "nav-link", style = "color: white;" })
                             </nav>
                         </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventarioSucursales" aria-expanded="false" aria-controls="collapseInventarioSucursales">
-                            <div class="sb-nav-link-icon"><i class="fas fa-warehouse"></i></div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventarioSucursales" aria-expanded="false" aria-controls="collapseInventarioSucursales" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-warehouse" style="color: white;"></i></div>
                             Inventario Sucursales
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down" style="color: white;"></i></div>
                         </a>
+
                         <div class="collapse" id="collapseInventarioSucursales" aria-labelledby="headingInventarioSucursales" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
+                            <nav class="sb-sidenav-menu-nested nav" style="color: white;">
                                 @Html.Action("CargarSucursalesInventarios", "Home")
                             </nav>
                         </div>
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAgendasSucursales" aria-expanded="false" aria-controls="collapseAgendasSucursales">
-                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAgendasSucursales" aria-expanded="false" aria-controls="collapseAgendasSucursales" style="color: white;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt" style="color: white;"></i></div>
                             Agendas Sucursales
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down" style="color: white;"></i></div>
                         </a>
+
                         <div class="collapse" id="collapseAgendasSucursales" aria-labelledby="headingAgendasSucursales" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
+                            <nav class="sb-sidenav-menu-nested nav" style="color: white;">
                                 @Html.Action("CargarSucursalesAgendas", "Home")
                             </nav>
                         </div>
@@ -172,9 +174,10 @@
 
 
 
+
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
+                <div class="sb-sidenav-footer" style="color: white; border-top: 1px solid #ccc; padding-top: 10px;">
                     <div class="small">Logged in as:</div>
                     @User.Identity.GetUserName()
                 </div>
@@ -196,7 +199,7 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                        <div class="text-muted">Copyright &copy; Thomas Beauty Center 2025</div>
                         <div>
                             <a href="#">Privacy Policy</a>
                             &middot;

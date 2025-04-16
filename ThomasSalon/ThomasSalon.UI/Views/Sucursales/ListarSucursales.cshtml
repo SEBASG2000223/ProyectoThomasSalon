@@ -4,6 +4,9 @@
     ViewBag.Title = "Nuestras Sucursales";
 }
 <div class="container pt-5">
+
+    <h2 class="text-center">Lista de sucursales</h2>
+
     <h2>Nuestras Sucursales</h2>
 
     <div class="row">
@@ -35,8 +38,11 @@
         }
     </div>
 
+
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+            Registrar sucursal
+        </a>
     </p>
     <div class="table-responsive">
         <table id="myTable" class="table table-bordered table-hover">
@@ -86,8 +92,10 @@
                             @Html.DisplayFor(modelItem => item.NombreEstado)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.IdSucursal }) |
-
+                            
+                            <a href="@Url.Action("Edit", "Sucursales", new { id = item.IdSucursal })" class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
                             @if (item.IdEstado == 1)
                             {
                                 <a href="@Url.Action("Inactivar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-danger btn-sm">

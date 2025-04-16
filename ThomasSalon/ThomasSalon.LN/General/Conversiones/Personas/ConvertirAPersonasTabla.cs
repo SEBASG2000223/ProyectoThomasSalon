@@ -18,6 +18,7 @@ namespace ThomasSalon.LN.General.Conversiones.Personas
                 IdPersona = laPersona.IdPersona,
                 Nombre = laPersona.Nombre,
                 Telefono = laPersona.Telefono,
+                Identificacion=laPersona.Identificacion,
                 Genero = laPersona.Genero,
                 Direccion = laPersona.Direccion,
                 Edad = laPersona.Edad,

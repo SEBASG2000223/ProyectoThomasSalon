@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "ListarInventarioGeneral";
 }
-<div class="container">
+<div class="container pt-5">
 
 
-    <h2>Inventario General</h2>
+    <h2 class="text-center">Inventario General</h2>
+    <br>
 
     @if (ViewBag.Mensaje != null)
     {
@@ -52,7 +53,7 @@
                         }
                         <td>@Html.DisplayFor(modelItem => @estado)</td>
                         <td>
-                            <a href="@Url.Action("DetallesProducto", "InventarioGeneral", new { IdInventarioGeneral = item.IdInventarioGeneral })" class="btn btn-info btn-sm">
+                            <a href="@Url.Action("DetallesProducto", "InventarioGeneral", new { IdInventarioGeneral = item.IdInventarioGeneral })" class="btn btn-warning btn-sm">
                                 Detalles del producto
                             </a>
                         </td>
