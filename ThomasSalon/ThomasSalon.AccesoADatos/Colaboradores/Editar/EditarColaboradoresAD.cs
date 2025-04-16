@@ -28,6 +28,9 @@ namespace ThomasSalon.AccesoADatos.Colaboradores.Editar
             elColaboradorEnBD.SalarioDia = elColaboradorParaEditar.SalarioDia;
             elColaboradorEnBD.IdEstado = elColaboradorParaEditar.IdEstado;
 
+
+
+
             _elContexto.Entry(elColaboradorEnBD).State = EntityState.Modified;
             int cantidadDeDatosGuardados = await _elContexto.SaveChangesAsync();
             return cantidadDeDatosGuardados;

@@ -61,14 +61,18 @@
                             }
                             else
                             {
-                                <span class="badge badge-success">Usuario Asignado</span>
+                                <span class="btn btn-success btn-sm disabled" style="pointer-events:none;">
+                                    ✅ Usuario Asignado
+                                </span>
+
                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmDeleteModal" data-id="@item.IdPersona">
                                     Quitar Usuario
                                 </button>
                             }
 
-                            @Html.ActionLink("Edit", "Edit", new { id = item.IdColaborador }) |
-
+                            <a href="@Url.Action("Edit", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
                             @if (item.IdEstado == 1)
                             {
                                 <a href="@Url.Action("Inactivar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-danger btn-sm">
