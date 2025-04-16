@@ -323,7 +323,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+
+    <Compile Include="Controllers\BoletinController.cs" />
+
     <Compile Include="Controllers\AsistenciaColaboradorController.cs" />
+
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\DeduccionesController.cs" />
@@ -584,8 +588,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\SobreNosotros.cshtml" />
+    <Content Include="Views\Home\Contacto.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Sucursales\Create.cshtml" />
     <Content Include="Views\Sucursales\ListarSucursales.cshtml" />
@@ -658,6 +662,10 @@
     <Content Include="Views\Carrito\VerCarrito.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidos.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidosCliente.cshtml" />
+
+    <Content Include="Views\Shared\_Boletin.cshtml" />
+    <Content Include="Views\Home\PoliticasServicio.cshtml" />
+
     <Content Include="Views\Admin\AdminIndex.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Productos\VerCarrito.cshtml" />
@@ -681,6 +689,7 @@
     <Content Include="Views\Deducciones\ListarDeduccionesColaborador.cshtml" />
     <Content Include="Views\Deducciones\Agregar.cshtml" />
     <Content Include="Views\Deducciones\ListarPagos.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -34,6 +34,8 @@
         }
     </style>
 </head>
+
+
 <body>
 
     <div class="container-fluid bg-light d-none d-lg-block">
@@ -42,6 +44,10 @@
                 <div class="d-inline-flex align-items-center">
 
                     <small><i class="fa fa-phone-alt mr-2"></i>+506 7012-9621</small>
+
+
+                    <small><i class="fa fa-phone-alt mr-2"></i>+506 7012-9621</small>
+
 
                     <small class="px-3">|</small>
                     <small><i class="fa fa-envelope mr-2"></i>infothomassalon@gmail.com</small>
@@ -53,11 +59,16 @@
                         <i class="fab fa-facebook-f"></i>
                     </a>
 
+                    <a class="text-primary px-2" href="">
+                        <i class="fab fa-instagram"></i>
+
+
                     <a class="text-primary px-2" href="https://www.instagram.com/thomasbeautycenter/" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
 
                   
+
 
 
                 </div>
@@ -120,6 +131,14 @@
                             <h1 class="mb-3 text-white"><span class="text-primary">Thomas</span> Beauty</h1>
                         </a>
                         <p>En Thomas Beauty nos dedicamos a ofrecerte los mejores tratamientos de belleza. Nuestro equipo de expertos está aquí para brindarte una experiencia única y rejuvenecedora en cada visita. ¡Déjate consentir con nosotros!</p>
+
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>San Antonio, Desamparados, Costa Rica</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>+506 7012-9621</p>
+                        <p><i class="fa fa-envelope mr-2"></i>infothomassalon@gmail.com</p>
+                        <div class="d-flex justify-content-start mt-4">
+                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
+
                         <p>
                             <i class="fa fa-map-marker-alt mr-2"></i>San Antonio, Desamparados:
                             Frente al perimercado jumbo, sala de belleza Thomas Beauty Center.
@@ -130,6 +149,7 @@
                             <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://www.facebook.com/ThomasBeautyCenter" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://www.instagram.com/thomasbeautycenter/" target="_blank"><i class="fab fa-instagram"></i></a>
 
+
                         </div>
                     </div>
                     <div class="col-lg-6 pl-lg-5">
@@ -137,22 +157,34 @@
                             <div class="col-sm-6 mb-5">
                                 <h5 class="text-white text-uppercase mb-4">Enlaces Rápidos</h5>
                                 <div class="d-flex flex-column justify-content-start">
+
+                                    <a class="text-white-50 mb-2" href="@Url.Action("Index", "Home")">
+                                        <i class="fa fa-angle-right mr-2"></i>Inicio
+                                    </a>
+                                    <a class="text-white-50 mb-2" href="@Url.Action("SobreNosotros", "Home")">
+                                        <i class="fa fa-angle-right mr-2"></i>Sobre Nosotros
+                                    </a>
+                                    <a class="text-white-50 mb-2" href="@Url.Action("PoliticasServicio", "Home")">
+                                        <i class="fa fa-angle-right mr-2"></i>Políticas de Servicios
+                                    </a>
+                                    <a class="text-white-50 mb-2" href="@Url.Action("Contacto", "Home")">
+                                        <i class="fa fa-angle-right mr-2"></i>Contacto
+                                    </a>
+
+
                                     <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Sobre Nosotros</a>
                                  
+
                                 </div>
                             </div>
 
                             <div class="col-sm-12 mb-5">
                                 <h5 class="text-white text-uppercase mb-4">Boletín</h5>
                                 <div class="w-100">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Tu Dirección de Correo Electrónico">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary px-4">Suscribirse</button>
-                                        </div>
-                                    </div>
+                                    @Html.Partial("_Boletin")
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
