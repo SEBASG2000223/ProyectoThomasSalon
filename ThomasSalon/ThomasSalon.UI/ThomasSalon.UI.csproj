@@ -323,8 +323,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsistenciaColaboradorController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
+    <Compile Include="Controllers\DeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioGeneralController.cs" />
     <Compile Include="Controllers\InventarioSucursalController.cs" />
@@ -334,9 +336,11 @@
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ColaboradoresController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\RegistroGastoController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SucursalesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -558,6 +562,7 @@
     <Content Include="Scripts\nicepage.js" />
     <Content Include="Scripts\ScriptsFront\Citas\ListaDataTableCitas.js" />
     <Content Include="Scripts\ScriptsFront\Colaboradores\ListaDataTableColaboradores.js" />
+    <Content Include="Scripts\ScriptsFront\Personas\ListaDataTablePersonas.js" />
     <Content Include="Scripts\ScriptsFront\Productos\ListaDataTableProductos.js" />
     <Content Include="Scripts\ScriptsFront\Proveedores\ListaDataTableProveedores.js" />
     <Content Include="Scripts\ScriptsFront\Servicios\ListaDataTableServicios.js" />
@@ -650,23 +655,37 @@
     <Content Include="Views\Shared\_DropdownSucursalesAgendas.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Productos\Productos.cshtml" />
-
     <Content Include="Views\Carrito\VerCarrito.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidos.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidosCliente.cshtml" />
     <Content Include="Views\Admin\AdminIndex.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
-
     <Content Include="Views\Productos\VerCarrito.cshtml" />
-    <Content Include="Views\Citas\DetallesCita.cshtml" />
     <Content Include="Views\InventarioSucursal\DetallesProducto.cshtml" />
     <Content Include="Views\InventarioGeneral\DetallesProducto.cshtml" />
-    <Content Include="Views\Citas\AgendarUsuario.cshtml" />
-
+    <Content Include="Views\Ventas\RegistrarVentaServicio.cshtml" />
+    <Content Include="Views\AsistenciaColaborador\AgregarAsistencia.cshtml" />
+    <Content Include="Views\Ventas\RegistrarVentaProducto.cshtml" />
+    <Content Include="Views\RegistroGasto\RegistroGasto.cshtml" />
+    <Content Include="Views\RegistroGasto\Gastos.cshtml" />
+    <Content Include="Views\Home\AccesoDenegado.cshtml" />
+    <Content Include="Views\Citas\_DetallesCita.cshtml" />
+    <Content Include="Views\Citas\ListarCitasUsuario.cshtml" />
+    <Content Include="Views\Citas\_AgendarCitaPresencial.cshtml" />
+    <Content Include="Views\Personas\ListarClientes.cshtml" />
+    <Content Include="Views\Citas\_AgendarCitaLinea.cshtml" />
+    <Content Include="Views\AsistenciaColaborador\AsistenciaLista.cshtml" />
+    <Content Include="Views\Ventas\Resumen.cshtml" />
+    <Content Include="Views\Ventas\ResumenCaja.cshtml" />
+    <Content Include="Views\Deducciones\ListarColaboradores.cshtml" />
+    <Content Include="Views\Deducciones\ListarDeduccionesColaborador.cshtml" />
+    <Content Include="Views\Deducciones\Agregar.cshtml" />
+    <Content Include="Views\Deducciones\ListarPagos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\Carrito\" />
+    <Folder Include="Views\Pagos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">

@@ -1,0 +1,269 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.Ventas.RegistrarVentaProducto.RegistrarVentaProductoDTO
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "Registrar Venta de Productos";
+}
+
+<div class="container">
+    <h2>Registrar Venta de Productos</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Html.Raw(TempData["Error"].ToString().Replace("\n", "<br/>"))
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    }
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Datos de la Venta</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Colaborador -->
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdColaborador, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.IdColaborador, ViewBag.Asistencia as SelectList, "-- Selecciona un colaborador --", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdColaborador, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Método de Pago -->
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdMetodoPago, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.IdMetodoPago, ViewBag.MetodosPago as SelectList, "-- Selecciona un método de pago --", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdMetodoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Cédula -->
+            <div class="form-group">
+                @Html.Label("Cédula", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Cedula, new { @class = "form-control", id = "txtCedula" })
+                </div>
+            </div>
+
+            <!-- Nombre -->
+            <div class="form-group">
+                @Html.Label("Nombre", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.NombrePersona, new { @class = "form-control", id = "txtNombre", @readonly = "readonly" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.IdPersona)
+
+            <!-- Productos dinámicos -->
+            <h4>Productos</h4>
+            <table class="table" id="tablaProductos">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio Unitario</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" id="btnAgregarProducto">Agregar Producto</button>
+
+            <!-- Total, Pago y Devolución -->
+            <div class="form-group mt-3">
+                <div class="col-md-offset-2 col-md-10">
+                    <label for="total">Total: </label>
+                    <input type="text" id="total" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <label for="montoPagado">Monto Pagado: </label>
+                    <input type="number" id="montoPagado" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <label for="devolucion">Devolución: </label>
+                    <input type="text" id="devolucion" class="form-control" readonly />
+                </div>
+            </div>
+
+            <!-- Botón de enviar -->
+            <div class="form-group mt-3">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Registrar Venta" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Volver", "Index")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var productos = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Productos));
+
+        function getProductosDisponibles() {
+            const productosSeleccionados = $('.producto-dropdown').map(function () {
+                return $(this).val();
+            }).get();
+
+            return productos.filter(p => !productosSeleccionados.includes(p.Value));
+        }
+
+        function crearFilaProducto(index) {
+            const disponibles = getProductosDisponibles();
+            var fila = `
+        <tr>
+            <td>
+                <select name="Productos[${index}].IdProducto" class="form-control producto-dropdown">
+                    <option value="">-- Selecciona --</option>
+                    ${disponibles.map(p => `<option value="${p.Value}" data-precio="${p.Text.split('|')[1]}">${p.Text.split('|')[0]}</option>`).join('')}
+                </select>
+            </td>
+            <td>
+                <input name="Productos[${index}].PrecioUnitario" class="form-control precio-input" readonly />
+            </td>
+            <td>
+                <input name="Productos[${index}].Cantidad" class="form-control cantidad-input" type="number" value="1" min="1"/>
+            </td>
+            <td>
+                <input class="form-control total-linea" readonly />
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btnEliminarFila">Eliminar</button>
+            </td>
+        </tr>`;
+            return fila;
+        }
+
+        function actualizarDropdowns() {
+            const productosSeleccionados = $('.producto-dropdown').map(function () {
+                return $(this).val();
+            }).get();
+
+            $('.producto-dropdown').each(function () {
+                const currentValue = $(this).val();
+                const select = $(this);
+                const parentTd = select.closest('td');
+                const index = select.attr('name').match(/\[(\d+)\]/)[1];
+
+                const optionsHtml = productos
+                    .filter(p => !productosSeleccionados.includes(p.Value) || p.Value === currentValue)
+                    .map(p => `<option value="${p.Value}" data-precio="${p.Text.split('|')[1]}" ${p.Value === currentValue ? 'selected' : ''}>${p.Text.split('|')[0]}</option>`)
+                    .join('');
+
+                select.html(`<option value="">-- Selecciona --</option>${optionsHtml}`);
+            });
+        }
+
+
+        function renumerarIndices() {
+            $('#tablaProductos tbody tr').each(function (i) {
+                $(this).find('select, input').each(function () {
+                    var name = $(this).attr('name');
+                    if (name) {
+                        var nuevoName = name.replace(/\[\d+\]/, `[${i}]`);
+                        $(this).attr('name', nuevoName);
+                    }
+                });
+            });
+        }
+
+        function calcularTotales() {
+            let total = 0;
+            $('#tablaProductos tbody tr').each(function () {
+                const precio = parseFloat($(this).find('.precio-input').val()) || 0;
+                const cantidad = parseInt($(this).find('.cantidad-input').val()) || 0;
+                const subtotal = precio * cantidad;
+                $(this).find('.total-linea').val(subtotal.toFixed(2));
+                total += subtotal;
+            });
+            $('#total').val(total.toFixed(2));
+            calcularDevolucion();
+        }
+
+        function calcularDevolucion() {
+            const total = parseFloat($('#total').val()) || 0;
+            const pagado = parseFloat($('#montoPagado').val()) || 0;
+            const devolucion = pagado - total;
+            $('#devolucion').val(devolucion.toFixed(2));
+        }
+
+        $(document).ready(function () {
+            // Buscar persona
+            $('#txtCedula').on('change', function () {
+                const cedula = $(this).val();
+
+                if (cedula.length > 0) {
+                    $.ajax({
+                        url: '@Url.Action("BuscarPersonaPorCedula", "Ventas")',
+                        type: 'GET',
+                        data: { cedula: cedula },
+                        success: function (data) {
+                            if (data && data.idPersona > 0) {
+                                $('#txtNombre').val(data.nombre);
+                                $('#IdPersona').val(data.idPersona);
+                            } else {
+                                $('#txtNombre').val("No encontrada");
+                                $('#IdPersona').val("");
+                            }
+                        },
+                        error: function () {
+                            alert("Error al buscar persona.");
+                        }
+                    });
+                }
+            });
+
+            // Agregar producto
+            $('#btnAgregarProducto').click(function () {
+                const index = $('#tablaProductos tbody tr').length;
+                $('#tablaProductos tbody').append(crearFilaProducto(index));
+                actualizarDropdowns();
+            });
+
+            // Eliminar producto
+            $(document).on('click', '.btnEliminarFila', function () {
+                $(this).closest('tr').remove();
+                renumerarIndices();
+                calcularTotales();
+                actualizarDropdowns();
+            });
+
+            // Cuando se selecciona producto
+            $(document).on('change', '.producto-dropdown', function () {
+                const precio = $(this).find(':selected').data('precio');
+                $(this).closest('tr').find('.precio-input').val(precio || "");
+                calcularTotales();
+                actualizarDropdowns();
+            });
+
+
+            $(document).on('input', '.cantidad-input', function () {
+                calcularTotales();
+            });
+
+            $('#montoPagado').on('input', function () {
+                calcularDevolucion();
+            });
+        });
+    </script>
+}

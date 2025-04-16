@@ -1,0 +1,108 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Personas.PersonasDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container mt-4">
+    <h2>Lista de personas</h2>
+
+    <p>
+
+        <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+            Registrar Persona
+        </a>
+
+    </p>
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdPersona)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Direccion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Edad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Identificacion)
+                    </th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdPersona)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @{ var genero = "";
+                                if (item.Genero == "O")
+                                {
+                                    genero = "Otro";
+
+                                }
+                                else if (item.Genero == "M")
+                                {
+                                    genero = "Masculino";
+                                }
+                                else
+                                {
+                                    genero = "Femenino";
+                                }
+
+
+
+                            }
+
+                            @Html.DisplayFor(modelItem => genero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Direccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Edad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Identificacion)
+                        </td>
+                        <td>
+
+                            <a href="@Url.Action("Edit", "Personas", new { id = item.IdPersona })" class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+@section scripts
+  {
+    <script src="~/Scripts/ScriptsFront/Personas/ListaDataTablePersonas.js"></script>
+}
+
+

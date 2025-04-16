@@ -23,6 +23,7 @@
     <link href="~/Content/lib/animate/animate.min.css" rel="stylesheet" />
     <link href="~/Content/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="~/Content/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="~/Content/css/style.css" rel="stylesheet">
     <style>
@@ -39,28 +40,26 @@
         <div class="row py-2 px-lg-5">
             <div class="col-lg-6 text-left mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</small>
+
+                    <small><i class="fa fa-phone-alt mr-2"></i>+506 7012-9621</small>
+
                     <small class="px-3">|</small>
-                    <small><i class="fa fa-envelope mr-2"></i>info@example.com</small>
+                    <small><i class="fa fa-envelope mr-2"></i>infothomassalon@gmail.com</small>
                 </div>
             </div>
             <div class="col-lg-6 text-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-primary px-2" href="">
+                    <a class="text-primary px-2" href="https://www.facebook.com/ThomasBeautyCenter" target="_blank">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a class="text-primary px-2" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-primary px-2" href="">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-primary px-2" href="">
+
+                    <a class="text-primary px-2" href="https://www.instagram.com/thomasbeautycenter/" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a class="text-primary pl-2" href="">
-                        <i class="fab fa-youtube"></i>
-                    </a>
+
+                  
+
+
                 </div>
             </div>
         </div>
@@ -78,8 +77,17 @@
                 <div class="navbar-nav m-auto py-0">
                     @Html.ActionLink("Productos", "Productos", "Productos", new { area = "" }, new { @class = "nav-link" })
                     @Html.ActionLink("Servicios", "Servicios", "Servicios", new { area = "" }, new { @class = "nav-link" })
-                    @Html.ActionLink("Mis pedidos", "ListarPedidosCliente", "Pedidos", new { area = "" }, new { @class = "nav-link" })
-                    @Html.ActionLink("Carrito", "VerCarrito", "Carrito", new { area = "" }, new { @class = "nav-link" })
+                    @Html.ActionLink("Sucursales", "Sucursales", "Sucursales", new { area = "" }, new { @class = "nav-link" })
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Mis citas", "ListarCitasUsuario", "Citas", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Mis pedidos", "ListarPedidosCliente", "Pedidos", new { area = "" }, new { @class = "nav-link" })
+
+                        @Html.ActionLink("Carrito", "VerCarrito", "Carrito", new { area = "" }, new { @class = "nav-link" })
+                    }
+
+
 
 
 
@@ -92,47 +100,6 @@
         </nav>
     </div>
 
-    @*En este momento no se necesita, mas adelante se borra*@
-
-    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-            <div class="container">
-                @Html.ActionLink("Thomas Beauty Center", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li>@Html.ActionLink("Sucursales", "ListarSucursales", "Sucursales", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Productos", "ListarProductos", "Productos", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Usuarios", "ListarUsuarios", "Usuarios", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Usuarios
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Usuarios", "ListarSoloUsuarios", "Usuarios", null, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("Gerentes", "ListarGerentes", "Usuarios", null, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("Administradores", "ListarAdministradores", "Usuarios", null, new { @class = "dropdown-item" })</li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>@Html.ActionLink("Todos los usuarios", "ListarUsuarios", "Usuarios", null, new { @class = "dropdown-item" })</li>
-                            </ul>
-                        </li>
-                        <li>@Html.ActionLink("Proveedores", "ListarProveedores", "Proveedores", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Servicios", "ListarServicios", "Servicios", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Colaboradores", "ListarColaboradores", "Colaboradores", new { area = "" }, new { @class = "nav-link" })</li>
-
-
-                        <li>@Html.ActionLink("Inventario", "ListarInventarioGeneral", "InventarioGeneral", new { area = "" }, new { @class = "nav-link" })</li>
-
-                        @Html.Action("CargarSucursales", "Home")
-
-
-                    </ul>
-                </div>
-
-            </div>
-        </nav>*@
 
     <div>
         @RenderBody()
@@ -153,14 +120,16 @@
                             <h1 class="mb-3 text-white"><span class="text-primary">Thomas</span> Beauty</h1>
                         </a>
                         <p>En Thomas Beauty nos dedicamos a ofrecerte los mejores tratamientos de belleza. Nuestro equipo de expertos está aquí para brindarte una experiencia única y rejuvenecedora en cada visita. ¡Déjate consentir con nosotros!</p>
-                        <p><i class="fa fa-map-marker-alt mr-2"></i>123 Avenida Principal, Ciudad, País</p>
-                        <p><i class="fa fa-phone-alt mr-2"></i>+111111111</p>
+                        <p>
+                            <i class="fa fa-map-marker-alt mr-2"></i>San Antonio, Desamparados:
+                            Frente al perimercado jumbo, sala de belleza Thomas Beauty Center.
+                        </p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>7012-9621</p>
                         <p><i class="fa fa-envelope mr-2"></i>info@thomasbeauty.com</p>
                         <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://www.facebook.com/ThomasBeautyCenter" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="https://www.instagram.com/thomasbeautycenter/" target="_blank"><i class="fab fa-instagram"></i></a>
+
                         </div>
                     </div>
                     <div class="col-lg-6 pl-lg-5">
@@ -168,11 +137,8 @@
                             <div class="col-sm-6 mb-5">
                                 <h5 class="text-white text-uppercase mb-4">Enlaces Rápidos</h5>
                                 <div class="d-flex flex-column justify-content-start">
-                                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Inicio</a>
                                     <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Sobre Nosotros</a>
-                                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Nuestros Servicios</a>
-                                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Planes de Precios</a>
-                                    <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contacto</a>
+                                 
                                 </div>
                             </div>
 
@@ -212,6 +178,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="~/Scripts/ComponentesExternos/DataTable/dataTables.min.js"></script>
+    <script src="~/Scripts/ComponentesExternos/SweetAlert/sweetalert2@11.js"></script>
 
 
 
@@ -231,6 +198,8 @@
     <script src="~/Scripts/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="~/Scripts/ScriptsFront/Servicios/ObtenerVistaParcialServicios.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+
+
     @*<script src="~/Scripts/ScriptsFront/Usuarios/ObtenerVistaParcialAdministradores.js"></script>
         <script src="~/Scripts/ScriptsFront/Usuarios/ObtenerVistaParcialGerentes.js"></script>
 
@@ -240,6 +209,8 @@
 
 
     <!-- Contact Javascript File -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"><!-- Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="~/Scripts/mail/jqBootstrapValidation.min.js"></script>
     <script src="~/Scripts/mail/contact.js"></script>
 

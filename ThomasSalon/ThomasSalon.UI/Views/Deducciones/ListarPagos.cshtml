@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Pagos.PagosDto>
+
+@{
+    ViewBag.Title = "Listado de Pagos";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Listado de Pagos</h2>
+
+    <!-- Tabla de pagos -->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Días Completos</th>
+                <th>Días Medio Tiempo</th>
+                <th>Total Comisiones</th>
+                <th>Total Deducciones</th>
+                <th>Total Gastos</th>
+                <th>Total Pago</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DiasCompletos)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DiasMedioTiempos)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalComision)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalDeducciones)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalGastos)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalPago)</td>
+                    <td>
+                       
+                            <form action="@Url.Action("ConfirmarPago", "Deducciones", new { idColaborador = item.IdColaborador })" method="post" id="form-@item.IdColaborador">
+                                <button type="submit" class="btn btn-success btn-sm" onclick="confirmarPago(event, @item.IdColaborador)">Finalizar Pago</button>
+                            </form>
+                        
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Función para mostrar SweetAlert
+    function confirmarPago(event, idColaborador) {
+        event.preventDefault();  // Evitar el envío del formulario inmediatamente
+
+        // Mostrar el SweetAlert
+        Swal.fire({
+            icon: 'success',
+            title: 'Pago Finalizado',
+            text: 'El pago para el colaborador ha sido finalizado correctamente.',
+            showConfirmButton: false,
+            timer: 2000
+        }).then(function () {
+            // Después de mostrar el SweetAlert, enviar el formulario
+            var form = document.getElementById('form-' + idColaborador);
+            form.submit();
+        });
+    }
+</script>

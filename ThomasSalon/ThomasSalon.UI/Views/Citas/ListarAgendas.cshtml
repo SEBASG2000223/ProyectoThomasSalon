@@ -2,63 +2,180 @@
 
 @{
     ViewBag.Title = "Listar Agendas";
-    var idSucursal = TempData["IdSucursalSeleccionada"] ?? 0; // Se obtiene idSucursal o 0 si es null
+    var idSucursal = TempData["IdSucursalSeleccionada"] ?? 0;
 }
 
+<div class="container pt-2" style="width:170%; margin-top: 20px;">
+    <div id='calendar' data-idsucursal="@idSucursal"></div>
+</div>
 
 
-<div id='calendar'></div>
+<!-- Modal para mostrar detalles de la cita -->
+<div class="modal fade" id="modalDetallesCita" tabindex="-1" aria-labelledby="modalDetallesCitaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDetallesCitaLabel">Detalles de la Cita</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" id="modalDetallesCitaBody">
+                <!-- Aquí se cargarán los detalles de la cita -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para mostrar agregat la cita presencial -->
+<div id="modalAgendarCita" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Aquí se carga el contenido vía AJAX -->
+        </div>
+    </div>
+</div>
 
 
 
-@section scripts
- {
+
+@section scripts {
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+            const idSucursal = calendarEl.getAttribute('data-idsucursal');
 
-        // Obtén el idSucursal desde TempData o pasa un valor directamente si es necesario
-        var idSucursal = @TempData["IdSucursalSeleccionada"];
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'addEventButton,dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                customButtons: {
+                    addEventButton: {
+                        text: 'Añadir Cita',
+                        click: function () {
+                            console.log("Botón de añadir cita clickeado");
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'es',
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'addEventButton,dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            customButtons: {
-                addEventButton: {
-                    text: 'Agendar cita',
-                    click: function () {
-                        var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-                        var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+                            // Obtener el formulario para agendar la cita
+                            $.get('/Citas/AgendarCitaPresencial', function (html) {
+                                $('#modalAgendarCita .modal-content').html(html);
+                                $('#modalAgendarCita').modal('show');
 
-                        if (!isNaN(date.valueOf())) { // valid?
-                            calendar.addEvent({
-                                title: 'dynamic event',
-                                start: date,
-                                allDay: true
+                                // Espera a que el modal se muestre completamente
+                                $('#modalAgendarCita').on('shown.bs.modal', function () {
+                                    // Verifica que el campo exista
+                                    const config = {
+                                        enableTime: true,
+                                        dateFormat: "Y-m-d H:i K",
+                                        time_24hr: false,
+                                        minDate: "today",
+                                        maxDate: new Date().fp_incr(365),
+                                        minuteIncrement: 30,
+                                        defaultHour: 9,
+                                        defaultMinute: 30,
+                                        minTime: "09:30",
+                                        maxTime: "5:30"
+                                        
+                                    }
+                                    if (document.querySelector("#fechaHora")) {
+                                        flatpickr("#fechaHora", config);
+                                    } else {
+                                        console.error("No se encontró el input #fechaHora");
+                                    }
+                                });
+
+                                // Buscar persona por cédula
+                                $(document).off('change', '#txtCedula').on('change', '#txtCedula', function () {
+                                    const cedula = $(this).val();
+
+                                    if (cedula.length > 0) {
+                                        $.ajax({
+                                            url: '/Citas/BuscarPersonaPorCedula',
+                                            type: 'GET',
+                                            data: { cedula: cedula },
+                                            success: function (data) {
+                                                if (data && data.idPersona > 0) {
+                                                    $('#txtNombre').val(data.nombre);
+                                                    $('#IdPersona').val(data.idPersona);
+                                                } else {
+                                                    $('#txtNombre').val("No encontrada");
+                                                    $('#IdPersona').val("");
+                                                }
+                                            },
+                                            error: function () {
+                                                alert("Error al buscar persona.");
+                                            }
+                                        });
+                                    }
+                                });
+
+                                
                             });
-                            alert('Great. Now, update your database...');
-                        } else {
-                            alert('Invalid date.');
                         }
                     }
-                }
-            },
-            // Aquí están los eventos que se deben cargar desde el servidor
-            events: function (fetchInfo, successCallback, failureCallback) {
-                fetch('/Citas/ObtenerEventos?idSucursal=' + idSucursal)
-                    .then(response => response.json())
-                    .then(data => successCallback(data))
-                    .catch(error => failureCallback(error));
-            }
-        });
+                },
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    fetch('/Citas/ObtenerEventos?idSucursal=' + idSucursal)
+                        .then(response => response.json())
+                        .then(data => successCallback(data))
+                        .catch(error => failureCallback(error));
+                },
+                eventClick: function (info) {
+                    const eventId = info.event.id;
 
-        calendar.render();
-    });
+                    if (eventId) {
+                        $.ajax({
+                            url: '/Citas/DetallesCita',
+                            type: 'GET',
+                            data: { IdCita: eventId },
+                            success: function (response) {
+                                $('#modalDetallesCitaBody').html(response);
+                                $('#modalDetallesCita').modal('show');
+                            },
+                            error: function (xhr, status, error) {
+                                alert('Error al obtener los detalles de la cita: ' + error);
+                            }
+                        });
+                    } else {
+                        alert('No se pudo obtener el IdCita.');
+                    }
+                }
+            });
+
+            // Enviar formulario para agendar cita
+            $(document).on('submit', '#formAgendarCita', function (e) {
+                e.preventDefault();
+                const form = $(this);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize(),
+                    success: function (result) {
+                        if (typeof result === 'object' && result.success) {
+                            $('#modalAgendarCita').modal('hide');
+                            calendar.refetchEvents();
+                        } else {
+                            $('#modalAgendarCita .modal-content').html(result);
+                        }
+                    },
+                    error: function () {
+                        alert('Error al procesar la cita. Intenta nuevamente.');
+                    }
+                });
+            });
+
+            calendar.render();
+        });
     </script>
+
+
+
+
+
 
 }

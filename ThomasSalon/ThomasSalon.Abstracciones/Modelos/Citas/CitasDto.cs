@@ -17,20 +17,20 @@ namespace ThomasSalon.Abstracciones.Modelos.Citas
         [Display(Name = "Id Servicio", Description = "Id Servicio")]
         public int IdServicio { get; set; }
 
-        [Required(ErrorMessage = "La propiedad IdSucursal es requerida")]
-        [Display(Name = "Id Sucursal", Description = "Id Sucursal")]
+        [Required(ErrorMessage = "La propiedad Sucursal es requerida")]
+        [Display(Name = "Sucursal", Description = "Id Sucursal")]
         public int IdSucursal { get; set; }
 
         [Required(ErrorMessage = "La propiedad IdPersona es requerida")]
         [Display(Name = "Id Persona", Description = "Id Persona")]
         public int IdPersona { get; set; }
 
-        [Required(ErrorMessage = "La propiedad IdColaborador es requerida")]
-        [Display(Name = "Id Colaborador", Description = "Id Colaborador")]
+        [Required(ErrorMessage = "La propiedad Colaborador es requerida")]
+        [Display(Name = "Colaborador", Description = "Id Colaborador")]
         public int? IdColaborador { get; set; }
 
         [Required(ErrorMessage = "La propiedad IdEstadoCita es requerida")]
-        [Display(Name = "Estado cita", Description = "Id EstadoCita")]
+        [Display(Name = "IdEstadoCita", Description = "Id EstadoCita")]
         public Guid IdEstadoCita { get; set; }
 
         [Required(ErrorMessage = "La propiedad FechaHora es requerida")]
@@ -49,6 +49,13 @@ namespace ThomasSalon.Abstracciones.Modelos.Citas
 
         [Display(Name = "Colaborador", Description = "Nombre Colaborador")]
         public string nombreColaborador { get; set; }
+        [Display(Name = "Estado cita", Description = "Estado cita")]
+        public string nombreEstadoCita { get; set; }
+
+
+        [Required(ErrorMessage = "La propiedad identificación es requerida")]
+        [Display(Name = "Identificación", Description = "Identificación cliente")]
+        public string Identificacion { get; set; }
 
 
         [Display(Name = "Duración del servicio", Description = "Duracion Servicio")]

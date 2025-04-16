@@ -40,6 +40,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -52,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsistenciaColaboradores\AgregarAsistencia\AgregarAsistenciaAD.cs" />
+    <Compile Include="Citas\Agendar\AgendarCitasAD.cs" />
+    <Compile Include="Citas\CambiarEstado\CambiarEstadoCitaAD.cs" />
     <Compile Include="Citas\Listar\ListarCitasAD.cs" />
     <Compile Include="Citas\ObtenerPorId\ObtenerCitaPorIdAD.cs" />
     <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresAD.cs" />
@@ -60,12 +64,15 @@
     <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdAD.cs" />
     <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresAD.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="Deducciones\Agregar\AgregarDeduccionAD.cs" />
+    <Compile Include="Deducciones\Listar\ListarDeduccionesAD.cs" />
     <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralAD.cs" />
     <Compile Include="InventarioGeneral\ObtenerPorId\ObtenerInventarioPorIdAD.cs" />
     <Compile Include="InventarioSucursal\Crear\CrearInventarioSucursalAD.cs" />
     <Compile Include="InventarioSucursal\Editar\EditarInventarioSucursalAD.cs" />
     <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalAD.cs" />
     <Compile Include="InventarioSucursal\ObtenerPorId\ObtenerInventarioSucursalPorIdAD.cs" />
+    <Compile Include="Pagos\ListarPagosAD.cs" />
     <Compile Include="Pedidos\Listar\ListarPedidosAD.cs" />
     <Compile Include="Personas\Editar\EditarPersonasAD.cs" />
     <Compile Include="Personas\Listar\ListarPersonasAD.cs" />
@@ -98,6 +105,10 @@
     <Compile Include="Usuarios\Listar\ListarUsuariosAD.cs" />
     <Compile Include="Usuarios\ObtenerPorId\ObtenerUsuariosPorIdAD.cs" />
     <Compile Include="Usuarios\QuitarUsuarios\QuitarUsuariosAD.cs" />
+    <Compile Include="Ventas\RegistrarVentaProducto\RegistrarVentaProductoAD.cs" />
+    <Compile Include="Ventas\RegistrarVentaServicio\RegistrarVentaServicioAD.cs" />
+    <Compile Include="Ventas\ResgistroGastos\RegistroGastoAD.cs" />
+    <Compile Include="Ventas\Resumen\ResumenVentaAD.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">
@@ -109,10 +120,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Citas\Agregar\" />
-    <Folder Include="Citas\CambiarEstado\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -38,9 +38,85 @@
             <h2 class="fw-bold display-6">@Html.DisplayFor(model => model.Nombre)</h2>
             <h1 class="fw-bold text-custom display-6">₡@Html.DisplayFor(model => model.Precio)</h1>
             <p class="text-muted fs-6">@Html.DisplayFor(model => model.Descripcion)</p>
-            <a href="#" class="btn btn-dark w-100 fs-5 py-2" style="border-radius: 10px;">Agendar</a>
+            <button type="button" class="btn btn-dark w-100 fs-5 py-2" style="border-radius: 10px;" id="agendarCitaBtn" data-id-servicio="@Model.IdServicio">Agendar </button>
+
         </div>
     </div>
 </div>
+
+
+<!-- Modal para mostrar agregat la cita en línea -->
+<div id="modalAgendarCitaLinea" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Aquí se carga el contenido vía AJAX -->
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+        // Mostrar el modal al hacer clic en el botón
+        $(document).on('click', '#agendarCitaBtn', function () {
+            var idServicio = $(this).data('id-servicio');
+            $.get('/Citas/AgendarCitaLinea', { idServicio: idServicio }, function (html) {
+                $('#modalAgendarCitaLinea .modal-content').html(html);
+                $('#modalAgendarCitaLinea').modal('show');
+
+                // Configuración de flatpickr para el campo de fecha y hora
+                const config = {
+                    enableTime: true,
+                    dateFormat: "Y-m-d H:i K",
+                    time_24hr: false,
+                    minDate: "today",
+                    maxDate: new Date().fp_incr(365),
+                    minuteIncrement: 30,
+                    defaultHour: 9,
+                    defaultMinute: 30,
+                    minTime: "09:30",
+                    maxTime:  "5:30"
+
+                  
+
+     
+                };
+
+                flatpickr("#fechaHora", config);
+            }).fail(function () {
+                alert("Error al cargar la vista para agendar cita.");
+            });
+        });
+
+        // Manejar el submit del formulario dentro del modal
+        $(document).on('submit', '#agendarCitaForm', function (e) {
+            e.preventDefault();
+
+            const form = $(this);
+
+            $.ajax({
+                url: form.attr('action'),
+                method: form.attr('method'),
+                data: form.serialize(),
+                success: function (result) {
+                    if (typeof result === 'object' && result.success) {
+                        // Redirige a Servicios si fue exitoso
+                        window.location.href = "/Servicios/Servicios";
+                    } else {
+                        // Si hay validaciones, recarga el HTML del modal
+                        $('#modalAgendarCitaLinea .modal-content').html(result);
+                    }
+                },
+                error: function () {
+                    alert('Error al procesar la cita. Intenta nuevamente.');
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
 
 

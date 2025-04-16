@@ -7,7 +7,9 @@
     <h2>Listar Colaboradores</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+            Registrar Colaborador
+        </a>
     </p>
     <div class="table-responsive">
         <table id="myTable" class="table table-bordered table-hover">
@@ -28,7 +30,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.IdEstado)
                     </th>
-                    <th></th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -120,13 +122,15 @@
 @section scripts
 {
     <script src="~/Scripts/ScriptsFront/Colaboradores/ListaDataTableColaboradores.js"></script>
+
+
     <script>
-      
+
         $('#confirmDeleteModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
-            var idPersona = button.data('id'); 
+            var idPersona = button.data('id');
 
-            
+
             var deleteUrl = '@Url.Action("QuitarUsuario", "Account", new { idUsuario = "__idPersona__" })'.replace('__idPersona__', idPersona);
             $('#confirmDeleteButton').attr('href', deleteUrl);
         });

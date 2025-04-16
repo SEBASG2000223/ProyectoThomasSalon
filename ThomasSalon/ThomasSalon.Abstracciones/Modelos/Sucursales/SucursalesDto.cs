@@ -9,7 +9,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Sucursales
 {
     public class SucursalesDto
     {
-        [Display(Name = "Id Sucursal", Description = "Id Sucursal")]
+        [Display(Name = "Sucursal", Description = "Id Sucursal")]
         [Required]
         public int IdSucursal { get; set; }
 

@@ -34,7 +34,7 @@ namespace ThomasSalon.UI.Controllers
         // GET: Productos
         public async Task<ActionResult> VerCarrito()
         {
-            var sucursales = _listarSucursales.Listar();
+            var sucursales = _listarSucursales.ListarSucursalesActivas();
             ViewBag.Sucursales = new SelectList(sucursales, "IdSucursal", "Nombre");
 
             var metodosPago = await _elContexto.MetodosDePagoTabla.ToListAsync();
@@ -212,7 +212,10 @@ namespace ThomasSalon.UI.Controllers
         public ActionResult AgregarAlCarrito(int idProducto, int cantidad, decimal precioUnitario)
         {
             string idUsuario = User.Identity.GetUserId();
-
+            if (string.IsNullOrEmpty(idUsuario))
+            {
+                return Json(new { redirectTo = Url.Action("Login", "Account") });
+            }
             var itemExistente = _elContexto.CarritoTemporalTabla
                 .FirstOrDefault(c => c.IdUsuario == idUsuario && c.IdProducto == idProducto);
 
