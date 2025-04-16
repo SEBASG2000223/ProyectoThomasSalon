@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Pedidos.PedidosDto>
+﻿﻿@model IEnumerable<ThomasSalon.Abstracciones.Modelos.Pedidos.PedidosDto>
 
 @{
 
@@ -89,6 +89,7 @@
 </div>
 
 @section scripts {
+    <script src="~/Scripts/ScriptsFront/Productos/ListaDataTableProductos.js"></script>
     <script>
             $(document).ready(function () {
                 $('#myTable').DataTable();

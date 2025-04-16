@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BD</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{0909c51a-dbba-41b5-8368-99d3c5412fd1}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BD</RootNamespace>
+    <AssemblyName>BD</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\User Defined Types\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\VENTAS.sql" />
+    <Build Include="dbo\Tables\TIPOS_SERVICIOS.sql" />
+    <Build Include="dbo\Tables\TIPOS_JORNADA.sql" />
+    <Build Include="dbo\Tables\TIPOS_ENTREGA.sql" />
+    <Build Include="dbo\Tables\SUCURSALES.sql" />
+    <Build Include="dbo\Tables\SERVICIOS.sql" />
+    <Build Include="dbo\Tables\REGISTRO_TIPO_PAGOS.sql" />
+    <Build Include="dbo\Tables\REGISTRO_GASTOS.sql" />
+    <Build Include="dbo\Tables\PROVINCIAS.sql" />
+    <Build Include="dbo\Tables\PROVEEDORES.sql" />
+    <Build Include="dbo\Tables\PRODUCTOS.sql" />
+    <Build Include="dbo\Tables\Personas.sql" />
+    <Build Include="dbo\Tables\PEDIDOS.sql" />
+    <Build Include="dbo\Tables\PagosTemporales.sql" />
+    <Build Include="dbo\Tables\PAGOS.sql" />
+    <Build Include="dbo\Tables\METODOS_PAGO.sql" />
+    <Build Include="dbo\Tables\INVENTARIO_SUCURSAL.sql" />
+    <Build Include="dbo\Tables\INVENTARIO_GENERAL.sql" />
+    <Build Include="dbo\Tables\INGRESOS_DIARIOS.sql" />
+    <Build Include="dbo\Tables\ESTADO_PEDIDO.sql" />
+    <Build Include="dbo\Tables\ESTADO_DISPONIBILIDAD.sql" />
+    <Build Include="dbo\Tables\ESTADO_CITA.sql" />
+    <Build Include="dbo\Tables\DETALLE_SERVICIOS_VENTAS.sql" />
+    <Build Include="dbo\Tables\DETALLE_PRODUCTOS_VENTAS.sql" />
+    <Build Include="dbo\Tables\DETALLE_PEDIDOS.sql" />
+    <Build Include="dbo\Tables\DETALLE_DEDUCCION.sql" />
+    <Build Include="dbo\Tables\DEDUCCIONES.sql" />
+    <Build Include="dbo\Tables\COLABORADORES.sql" />
+    <Build Include="dbo\Tables\CITAS.sql" />
+    <Build Include="dbo\Tables\CarritoTemporal.sql" />
+    <Build Include="dbo\Tables\BITACORA_DEDUCCIONES.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\ASISTENCIA_COLABORADORES.sql" />
+    <Build Include="dbo\Tables\ADJUNTOS_PEDIDOS.sql" />
+    <Build Include="dbo\Stored Procedures\sp_ResumenVentas.sql" />
+    <Build Include="dbo\Stored Procedures\sp_RegistrarVentaServicios.sql" />
+    <Build Include="dbo\Stored Procedures\sp_RegistrarVentaProductos.sql" />
+    <Build Include="dbo\Stored Procedures\sp_RegistrarGasto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertarInventarioSucursalGerente.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertarCitaPresencial.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertarCitaEnLinea.sql" />
+    <Build Include="dbo\Stored Procedures\SP_ActualizarInventarioSucursalGerente.sql" />
+    <Build Include="dbo\Stored Procedures\InsertarAsistenciaColaborador.sql" />
+    <Build Include="dbo\Stored Procedures\GENERAR_PAGO_TEMPORAL_SP.sql" />
+    <Build Include="dbo\Stored Procedures\CONFIRMAR_PAGO_SP.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarCuentaDeduccion.sql" />
+    <Build Include="dbo\User Defined Types\Tipo_ServicioVenta.sql" />
+    <Build Include="dbo\User Defined Types\Tipo_ProductoVenta.sql" />
+  </ItemGroup>
+</Project>

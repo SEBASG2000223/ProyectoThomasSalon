@@ -10,7 +10,7 @@ namespace ThomasSalon.Abstracciones.ModelosDeBaseDeDatos
     public class ColaboradoresTabla
     {
         [Key]
-        public int IdColaborador { get; set; }
+        public int? IdColaborador { get; set; }
 
         public decimal SalarioDia { get; set; }
 

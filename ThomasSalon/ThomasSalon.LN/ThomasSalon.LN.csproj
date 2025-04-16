@@ -51,12 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsistenciaColaboradores\AgregarAsistencia\AgregarAsistenciaLN.cs" />
+    <Compile Include="Citas\Agendar\AgendarCitasLN.cs" />
+    <Compile Include="Citas\CambiarEstado\CambiarEstadoCitaLN.cs" />
     <Compile Include="Citas\Listar\ListarCitasLN.cs" />
+    <Compile Include="Citas\ObtenerPorId\ObtenerCitaPorIdLN.cs" />
     <Compile Include="Colaboradores\CambiarEstado\CambiarEstadoColaboradoresLN.cs" />
     <Compile Include="Colaboradores\Editar\EditarColaboradoresLN.cs" />
     <Compile Include="Colaboradores\Listar\ListarColaboradoresLN.cs" />
     <Compile Include="Colaboradores\ObtenerPorId\ObtenerColaboradoresPorIdLN.cs" />
     <Compile Include="Colaboradores\Registrar\RegistrarColaboradoresLN.cs" />
+    <Compile Include="Deducciones\Agregar\AgregarDeduccionLN.cs" />
+    <Compile Include="Deducciones\Listar\ListarDeduccionesLN.cs" />
     <Compile Include="General\Conversiones\Colaboradores\ConvertirAColaboradoresTabla.cs" />
     <Compile Include="General\Conversiones\Fecha.cs" />
     <Compile Include="General\Conversiones\InventarioSucursal\ConvertirAInventarioSucursalTabla.cs" />
@@ -67,10 +73,12 @@
     <Compile Include="General\Conversiones\Sucursales\ConvertirASucursalesTabla.cs" />
     <Compile Include="General\Conversiones\Usuarios\ConvertirAUsuariosTabla.cs" />
     <Compile Include="InventarioGeneral\Listar\ListarInventarioGeneralLN.cs" />
+    <Compile Include="InventarioGeneral\ObtenerPorId\ObtenerInventarioPorIdLN.cs" />
     <Compile Include="InventarioSucursal\Crear\CrearInventarioSucursalLN.cs" />
     <Compile Include="InventarioSucursal\Editar\EditarInventarioSucursalLN.cs" />
     <Compile Include="InventarioSucursal\Listar\ListarInventarioSucursalLN.cs" />
     <Compile Include="InventarioSucursal\ObtenerPorId\ObtenerInventarioSucursalPorIdLN.cs" />
+    <Compile Include="Pagos\ListarPagosLN.cs" />
     <Compile Include="Pedidos\Listar\ListarPedidosLN.cs" />
     <Compile Include="Personas\Editar\EditarPersonasLN.cs" />
     <Compile Include="Personas\Listar\ListarPersonasLN.cs" />
@@ -103,6 +111,10 @@
     <Compile Include="Usuarios\Listar\ListarUsuariosLN.cs" />
     <Compile Include="Usuarios\ObtenerPorId\ObtenerUsuariosPorIdLN.cs" />
     <Compile Include="Usuarios\QuitarUsuarios\QuitarUsuariosLN.cs" />
+    <Compile Include="Ventas\RegistrarVentaProducto\RegistrarVentaProductoLN.cs" />
+    <Compile Include="Ventas\RegistrarVentaServicio\RegistrarVentaServicioLN.cs" />
+    <Compile Include="Ventas\ResgistroGastos\RegistroGastoLN.cs" />
+    <Compile Include="Ventas\Resumen\ResumenVentaLN.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">
@@ -114,10 +126,7 @@
       <Name>ThomasSalon.AccesoADatos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Citas\Agregar\" />
-    <Folder Include="Citas\CambiarEstado\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

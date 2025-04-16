@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Administración";
+}
+
+<main class="container py-5">
+    <h1 class="text-center mb-5">Panel de Administración</h1>
+
+    <div class="row justify-content-center g-4">
+        <!-- Card: Ventas -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#ventasModal">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 40px;">💸</div>
+                    <h5 class="card-title">Ventas</h5>
+                    <p class="card-text text-muted">Registrar ventas de productos o servicios.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Gastos -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="window.location.href='@Url.Action("RegistroGasto", "RegistroGasto")'">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 40px;">📊</div>
+                    <h5 class="card-title">Gastos</h5>
+                    <p class="card-text text-muted">Registrar egresos operativos o administrativos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Asistencia -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="window.location.href='@Url.Action("AgregarAsistencia", "AsistenciaColaborador")'">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 40px;">👨‍💻</div>
+                    <h5 class="card-title">Asistencia</h5>
+                    <p class="card-text text-muted">Registrar la asistencia del personal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cerrar Caja Button -->
+    <div class="d-flex justify-content-center mt-4">
+        <form method="post" action="@Url.Action("ResumenCaja", "Ventas")">
+            <button type="submit" class="btn btn-danger btn-lg" onclick="return confirm('¿Estás seguro de que deseas cerrar la caja de este día?')">
+                Cerrar Caja
+            </button>
+        </form>
+    </div>
+
+    <!-- Modal para tipo de venta -->
+    <div class="modal fade" id="ventasModal" tabindex="-1" aria-labelledby="ventasModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ventasModalLabel">Seleccionar Tipo de Venta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-success btn-lg" onclick="window.location.href='@Url.Action("RegistrarVentaServicio", "Ventas")'">
+                            💼 Venta de Servicio
+                        </button>
+                        <button class="btn btn-warning btn-lg" onclick="window.location.href='@Url.Action("RegistrarVentaProducto", "Ventas")'">
+                            📦 Venta de Producto
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+@section scripts
+{
+    <script>
+        // Puedes agregar scripts personalizados aquí
+    </script>
+}

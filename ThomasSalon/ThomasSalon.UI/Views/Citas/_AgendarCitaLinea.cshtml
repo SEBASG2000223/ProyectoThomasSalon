@@ -1,0 +1,57 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.Citas.CitasDto
+
+@using (Html.BeginForm("AgendarCitaLinea", "Citas", FormMethod.Post, new { id = "agendarCitaForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="w-100" style="max-width: 300px;">
+            <form class="g-3">
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+                @Html.HiddenFor(model => model.IdServicio)
+                @Html.HiddenFor(model => model.IdPersona)
+
+                <!-- Sucursal -->
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-semibold">@Html.DisplayNameFor(m => m.IdSucursal)</label>
+                    @Html.DropDownListFor(m => m.IdSucursal, new SelectList(ViewBag.sucursales, "Value", "Text"), "Seleccione una sucursal", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(m => m.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Colaborador -->
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-semibold">@Html.DisplayNameFor(m => m.IdColaborador)</label>
+                    @Html.DropDownListFor(m => m.IdColaborador, new SelectList(ViewBag.colaboradores, "Value", "Text"), "Seleccione un colaborador", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(m => m.IdColaborador, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Fecha y hora -->
+                <div class="col-12 mb-3">
+                    <label for="fechaHora" class="form-label fw-semibold">Seleccionar fecha y hora</label>
+                    <input type="text" class="form-control" id="fechaHora" name="fechaHora" placeholder="dd/mm/yyyy hh:mm" />
+                    @Html.ValidationMessageFor(m => m.FechaHora, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Comentario -->
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-semibold">@Html.DisplayNameFor(m => m.Comentario)</label>
+                    @Html.TextAreaFor(m => m.Comentario, new { @class = "form-control", rows = 3 })
+                    @Html.ValidationMessageFor(m => m.Comentario, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Botón -->
+                <div class="col-12 d-flex justify-content-center mb-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle me-1"></i> Confirmar Cita
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+}

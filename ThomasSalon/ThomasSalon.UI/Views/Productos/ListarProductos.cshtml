@@ -62,7 +62,22 @@
                             @Html.DisplayFor(modelItem => item.UnidadMedida)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NombreEstado)
+                            @{
+                                var estado = "";
+                                if (item.IdEstado == 1)
+                                {
+                                    estado = "Activo";
+
+                                }
+                                else
+                                {
+                                    estado = "Inactivo";
+                                }
+
+
+
+                            }
+                            @Html.DisplayFor(modelItem => estado)
                         </td>
                         <td>
                             <a href="@Url.Action("Edit", "Productos", new { id = item.IdProducto })" class="btn btn-primary btn-sm">

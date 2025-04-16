@@ -124,8 +124,15 @@ namespace ThomasSalon.UI.Controllers
                 var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
                 switch (result)
                 {
+                    
                     case SignInStatus.Success:
+                        var user = await UserManager.FindByEmailAsync(model.Email);
+                        if (user != null && UserManager.IsInRole(user.Id, "Administrador") || UserManager.IsInRole(user.Id, "Gerente"))
+                        {
+                            return RedirectToAction("Dashboard", "Home"); 
+                        }
                         return RedirectToLocal(returnUrl);
+
                     case SignInStatus.LockedOut:
                         return View("Lockout");
                     case SignInStatus.RequiresVerification:
@@ -244,6 +251,12 @@ namespace ThomasSalon.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterUsuarioColaborador(RegisterViewModel model, int? id)
         {
+            var rolesDisponibles = await _elContexto.RolesTabla
+                        .Where(r => r.Name == "Administrador" || r.Name == "Gerente")
+                        .Select(r => r.Name)
+                        .ToListAsync();
+
+            ViewBag.Roles = new SelectList(rolesDisponibles, model.Rol);
             if (ModelState.IsValid)
             {
                 try

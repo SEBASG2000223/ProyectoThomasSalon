@@ -19,6 +19,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Servicios
         public string Nombre { get; set; }
 
         [Display(Name = "Descripción", Description = "Descripción del Servicio")]
+        [StringLength(200, ErrorMessage = "La Descripcion no debe exceder los 200 caracteres.")]
         [Required]
         public string Descripcion { get; set; }
 
@@ -38,6 +39,9 @@ namespace ThomasSalon.Abstracciones.Modelos.Servicios
         [Required]
         public int IdTipoServicios { get; set; }
 
+        [Display(Name = "Imagen de referencia", Description = "Link de la imagen")]
+        [Url(ErrorMessage = "Debe ingresar una URL válida.")]
+        [Required]
         public string LinkImagen { get; set; }
         public string NombreEstado { get; set; }
     }

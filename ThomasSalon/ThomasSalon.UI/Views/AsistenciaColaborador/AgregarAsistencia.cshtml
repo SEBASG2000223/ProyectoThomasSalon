@@ -1,0 +1,54 @@
+﻿@model ThomasSalon.Abstracciones.Modelos.AsistenciaColaboradores.AgregarAsistencia.AsistenciaColaboradorDTO
+
+@{
+    ViewBag.Title = "Agregar Asistencia";
+
+}
+
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Registro de Asistencia</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.IdColaborador, "Colaborador", new { @class = "form-label fw-bold" })
+                            @Html.DropDownListFor(model => model.IdColaborador, ViewBag.Colaboradores as SelectList, "-- Selecciona un colaborador --", new { @class = "form-select" })
+                            @Html.ValidationMessageFor(model => model.IdColaborador, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.IdTipoJornada, "Tipo de Jornada", new { @class = "form-label fw-bold" })
+                            @Html.DropDownListFor(model => model.IdTipoJornada, ViewBag.TipoJornada as SelectList, "-- Selecciona la jornada --", new { @class = "form-select" })
+                            @Html.ValidationMessageFor(model => model.IdTipoJornada, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.HiddenFor(model => model.IdSucursal)
+
+                        <div class="text-end mt-4">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="bi bi-check-circle me-1"></i> Guardar Asistencia
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                @Html.ActionLink("← Volver al listado", "Index", null, new { @class = "btn btn-outline-secondary" })
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

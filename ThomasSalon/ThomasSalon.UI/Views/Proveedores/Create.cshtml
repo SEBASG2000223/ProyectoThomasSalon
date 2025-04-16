@@ -6,80 +6,66 @@
 <div class="container pt-5">
     @if (TempData["Error"] != null)
     {
-        <div class="alert alert-danger">@TempData["Error"]</div>
+        <div class="alert alert-danger text-center">@TempData["Error"]</div>
     }
 
     @if (TempData["Mensaje"] != null)
     {
-        <div class="alert alert-success">@TempData["Mensaje"]</div>
+        <div class="alert alert-success text-center">@TempData["Mensaje"]</div>
     }
 
+    <h2 class="text-center mb-4">Registro de proveedores</h2>
 
-    <h2 class="text-center">Registro de proveedores</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Este div centra el formulario -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
+                <div class="form-horizontal border p-4 rounded shadow-sm bg-light">
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+                    
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger text-center" })
+                    @Html.HiddenFor(model => model.IdProveedor)
 
-        <div class="form-horizontal">
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
 
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.HiddenFor(model => model.IdProveedor)
-            </div>
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group text-center">
+
+                        <input type="submit" value="Registrar proveedor" class="btn btn-primary px-4" />
+                        <a href="@Request.UrlReferrer" class="btn btn-dark px-4 ms-2">Volver a la lista</a>
+
+                    </div>
+
                 </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-         
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Registrar proveedor" class="btn btn-primary" />
-                        
-                </div>
-
-            </div>
-
-
+            }
         </div>
-    }
-  
-    <div>
-        <a href="@Request.UrlReferrer" class="btn btn-dark btn-md">Volver a la lista</a>
     </div>
 </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

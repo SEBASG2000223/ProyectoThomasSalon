@@ -1,103 +1,93 @@
-﻿@model ThomasSalon.Abstracciones.Modelos.Productos.ProductosDto
+﻿@model ThomasSalon.Abstracciones.Modelos.InventarioSucursal.InventarioSucursalDto
 
 @{
-    ViewBag.Title = "Detalles de producto";
+    ViewBag.Title = "DetallesProducto";
 }
-<div class="container">
-    <h2>Detalles del producto</h2>
 
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.IdProducto)
-            </dt>
+<h2>DetallesProducto</h2>
 
-            <dd>
-                @Html.DisplayFor(model => model.IdProducto)
-            </dd>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProducto)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdProducto)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Nombre)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreProducto)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreProducto)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Descripcion)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Precio)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Precio)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreProveedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreProveedor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnidadMedida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnidadMedida)
+        </dd>
+      
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEstado)
+        </dt>
+
+        <dd>
 
             @{
-                var proveedores = ViewBag.Proveedores as Dictionary<int, string>;
-                string nombreProveedor = "Proveedor desconocido";
-
-                if (proveedores != null && Model != null)
+                string estado = "";
+                if (Model.IdEstado == 1)
                 {
-                    if (proveedores.ContainsKey(Model.IdProveedor))
-                    {
-                        nombreProveedor = proveedores[Model.IdProveedor];
-                    }
+                    estado = "Activo";
+                    @Html.DisplayFor(model => estado)
                 }
+                else
+                {
+                    estado = "Inactivo";
+                    @Html.DisplayFor(model => estado)
+                }
+
             }
-
-            <dt>Proveedor</dt>
-            <dd>@nombreProveedor</dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.UnidadMedida)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.UnidadMedida)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.IdEstado)
-            </dt>
-
-            <dd>
-                @{
-                    string estado = "";
-                    if (Model.IdEstado == 1)
-                    {
-                        estado = "Activo";
-                    }
-                    else
-                    {
-                        estado = "Inactivo";
-                    }
-
-                }
-                @estado
-            </dd>
+            
+        </dd>
 
 
 
 
 
-        </dl>
-    </div>
-    <p>
-
-
-        <a href="@Url.Action("ListarInventarioSucursal", "InventarioSucursal", new { idSucursal = TempData["IdSucursalSeleccionada"] })" class="btn btn-primary btn-sm" ">
-            Volver al inventario de la sucursal
-        </a>
-
-    </p>
-    </p>
+    </dl>
 </div>
+<p>
+    <a href="@Url.Action("ListarInventarioSucursal", "InventarioSucursal", new { idSucursal = TempData["IdSucursalSeleccionada"] })" class="btn btn-primary btn-sm" ">
+        Volver al inventario
+    </a>
+</p>

@@ -144,8 +144,8 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -323,9 +323,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+
     <Compile Include="Controllers\BoletinController.cs" />
+
+    <Compile Include="Controllers\AsistenciaColaboradorController.cs" />
+
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
+    <Compile Include="Controllers\DeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioGeneralController.cs" />
     <Compile Include="Controllers\InventarioSucursalController.cs" />
@@ -335,9 +340,11 @@
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ColaboradoresController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\RegistroGastoController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SucursalesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -365,7 +372,9 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\ComponentesExternos\DataTable\dataTables.dataTables.min.css" />
+    <Content Include="Content\css\Citas\citas.css" />
     <Content Include="Content\css\estilo.css" />
+    <Content Include="Content\css\LayoutAdministrador\styles.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\img\about.jpg" />
@@ -507,6 +516,11 @@
     <Content Include="Content\scss\bootstrap\scss\utilities\_visibility.scss" />
     <Content Include="Content\scss\bootstrap\scss\vendor\_rfs.scss" />
     <Content Include="Content\scss\style.scss" />
+    <Content Include="Scripts\assets\demo\chart-area-demo.js" />
+    <Content Include="Scripts\assets\demo\chart-bar-demo.js" />
+    <Content Include="Scripts\assets\demo\chart-pie-demo.js" />
+    <Content Include="Scripts\assets\demo\datatables-demo.js" />
+    <Content Include="Scripts\assets\img\error-404-monochrome.svg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -532,6 +546,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\LayoutAdministrador\datatables-simple-demo.js" />
+    <Content Include="Scripts\LayoutAdministrador\scripts.js" />
     <Content Include="Scripts\lib\counterup\counterup.min.js" />
     <Content Include="Scripts\lib\easing\easing.js" />
     <Content Include="Scripts\lib\easing\easing.min.js" />
@@ -550,6 +566,7 @@
     <Content Include="Scripts\nicepage.js" />
     <Content Include="Scripts\ScriptsFront\Citas\ListaDataTableCitas.js" />
     <Content Include="Scripts\ScriptsFront\Colaboradores\ListaDataTableColaboradores.js" />
+    <Content Include="Scripts\ScriptsFront\Personas\ListaDataTablePersonas.js" />
     <Content Include="Scripts\ScriptsFront\Productos\ListaDataTableProductos.js" />
     <Content Include="Scripts\ScriptsFront\Proveedores\ListaDataTableProveedores.js" />
     <Content Include="Scripts\ScriptsFront\Servicios\ListaDataTableServicios.js" />
@@ -621,11 +638,9 @@
     <Content Include="Views\Usuarios\_ListarSoloUsuarios.cshtml" />
     <Content Include="Views\Usuarios\_ListarGerentes.cshtml" />
     <Content Include="Views\Usuarios\ListarSoloUsuarios.cshtml" />
-    <Content Include="Views\InventarioGeneral\DetallesProducto.cshtml" />
     <Content Include="Views\InventarioGeneral\ListarInventarioGeneral.cshtml" />
     <Content Include="Views\InventarioSucursal\ListarInventarioSucursal.cshtml" />
     <Content Include="Views\InventarioSucursal\AgregarInventarioSucursal.cshtml" />
-    <Content Include="Views\InventarioSucursal\DetallesProducto.cshtml" />
     <Content Include="Views\Shared\_DropdownSucursalesInventarios.cshtml" />
     <Content Include="Views\Personas\Index.cshtml" />
     <Content Include="Views\Personas\Create.cshtml" />
@@ -647,12 +662,39 @@
     <Content Include="Views\Carrito\VerCarrito.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidos.cshtml" />
     <Content Include="Views\Pedidos\ListarPedidosCliente.cshtml" />
+
     <Content Include="Views\Shared\_Boletin.cshtml" />
     <Content Include="Views\Home\PoliticasServicio.cshtml" />
+
+    <Content Include="Views\Admin\AdminIndex.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Productos\VerCarrito.cshtml" />
+    <Content Include="Views\InventarioSucursal\DetallesProducto.cshtml" />
+    <Content Include="Views\InventarioGeneral\DetallesProducto.cshtml" />
+    <Content Include="Views\Ventas\RegistrarVentaServicio.cshtml" />
+    <Content Include="Views\AsistenciaColaborador\AgregarAsistencia.cshtml" />
+    <Content Include="Views\Ventas\RegistrarVentaProducto.cshtml" />
+    <Content Include="Views\RegistroGasto\RegistroGasto.cshtml" />
+    <Content Include="Views\RegistroGasto\Gastos.cshtml" />
+    <Content Include="Views\Home\AccesoDenegado.cshtml" />
+    <Content Include="Views\Citas\_DetallesCita.cshtml" />
+    <Content Include="Views\Citas\ListarCitasUsuario.cshtml" />
+    <Content Include="Views\Citas\_AgendarCitaPresencial.cshtml" />
+    <Content Include="Views\Personas\ListarClientes.cshtml" />
+    <Content Include="Views\Citas\_AgendarCitaLinea.cshtml" />
+    <Content Include="Views\AsistenciaColaborador\AsistenciaLista.cshtml" />
+    <Content Include="Views\Ventas\Resumen.cshtml" />
+    <Content Include="Views\Ventas\ResumenCaja.cshtml" />
+    <Content Include="Views\Deducciones\ListarColaboradores.cshtml" />
+    <Content Include="Views\Deducciones\ListarDeduccionesColaborador.cshtml" />
+    <Content Include="Views\Deducciones\Agregar.cshtml" />
+    <Content Include="Views\Deducciones\ListarPagos.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\Carrito\" />
+    <Folder Include="Views\Pagos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThomasSalon.Abstracciones\ThomasSalon.Abstracciones.csproj">
@@ -729,10 +771,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

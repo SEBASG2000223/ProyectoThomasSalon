@@ -40,6 +40,13 @@ namespace ThomasSalon.UI.Controllers
             return View(laListaDePersonas);
         }
 
+        public ActionResult ListarClientes()
+        {
+            List<PersonasDto> laListaDeClientes = _listarPersonasLN.ListarClientes();
+            return View(laListaDeClientes);
+        }
+
+
         // GET: Personas/Details/5
         public ActionResult Details(int id)
         {
@@ -61,7 +68,7 @@ namespace ThomasSalon.UI.Controllers
                 int cantidadDeDatosGuardados = await _registrarPersonasLN.Registrar(modelo);
 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarClientes");
             }
             catch
             {
@@ -84,7 +91,7 @@ namespace ThomasSalon.UI.Controllers
             {
                 int cantidadDeDatosEditados = await _editarPersonasLN.Editar(laPersona);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarClientes");
             }
             catch
             {
