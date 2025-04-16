@@ -24,6 +24,7 @@ namespace ThomasSalon.AccesoADatos.Personas.Editar
             laPersonaEnDB.IdPersona = laPersonaParaEditar.IdPersona;
             laPersonaEnDB.Nombre = laPersonaParaEditar.Nombre;
             laPersonaEnDB.Telefono = laPersonaParaEditar.Telefono;
+            laPersonaEnDB.Identificacion = laPersonaParaEditar.Identificacion;
             laPersonaEnDB.Genero = laPersonaParaEditar.Genero;
             laPersonaEnDB.Direccion = laPersonaParaEditar.Direccion;
             laPersonaEnDB.Edad = laPersonaParaEditar.Edad;
