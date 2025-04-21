@@ -9,8 +9,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Registro de Asistencia</h4>
+                <div class="card-header bg-cloud">
+                    <h4 class="admin-title">Registro de Asistencia</h4>
                 </div>
                 <div class="card-body">
                     @using (Html.BeginForm())
@@ -34,7 +34,7 @@
                         @Html.HiddenFor(model => model.IdSucursal)
 
                         <div class="text-end mt-4">
-                            <button type="submit" class="btn btn-success px-4">
+                            <button type="submit" class="btn btn-highlight px-4">
                                 <i class="bi bi-check-circle me-1"></i> Guardar Asistencia
                             </button>
                         </div>
@@ -43,7 +43,7 @@
             </div>
 
             <div class="text-center mt-4">
-                @Html.ActionLink("← Volver al listado", "Index", null, new { @class = "btn btn-outline-secondary" })
+                @Html.ActionLink("← Volver al listado", "Index", null, new { @class = "btn btn-admin" })
             </div>
         </div>
     </div>

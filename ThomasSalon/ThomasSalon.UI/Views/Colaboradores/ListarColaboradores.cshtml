@@ -4,16 +4,16 @@
     ViewBag.Title = "ListarColaboradores";
 }
 <div class="container pt-5">
-    <h2>Listar Colaboradores</h2>
+    <h2 class="admin-title">Listar Colaboradores</h2>
 
     <p>
-        <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+        <a href="@Url.Action("Create")" class="btn btn-admin btn-md">
             Registrar Colaborador
         </a>
     </p>
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover">
-            <thead class="table-dark">
+        <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead  >
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.IdColaborador)
@@ -55,33 +55,33 @@
                         <td>
                             @if (item.TieneUsuario == false)
                             {
-                                <a href="@Url.Action("RegisterUsuarioColaborador", "Account", new { id = item.IdPersona })" class="btn btn-primary btn-sm">
+                                <a href="@Url.Action("RegisterUsuarioColaborador", "Account", new { id = item.IdPersona })" class="btn btn-stormy btn-sm">
                                     Crear Usuario
                                 </a>
                             }
                             else
                             {
-                                <span class="btn btn-success btn-sm disabled" style="pointer-events:none;">
+                                <span class="btn btn-highlight btn-sm disabled" style="pointer-events:none;">
                                     ✅ Usuario Asignado
                                 </span>
 
-                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmDeleteModal" data-id="@item.IdPersona">
+                                <button class="btn btn-sunset btn-sm" data-toggle="modal" data-target="#confirmDeleteModal" data-id="@item.IdPersona">
                                     Quitar Usuario
                                 </button>
                             }
 
-                            <a href="@Url.Action("Edit", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-primary btn-sm">
+                            <a href="@Url.Action("Edit", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-stormy btn-sm">
                                 Editar
                             </a>
                             @if (item.IdEstado == 1)
                             {
-                                <a href="@Url.Action("Inactivar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-danger btn-sm">
+                                <a href="@Url.Action("Inactivar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-sunset btn-sm">
                                     Inactivar
                                 </a>
                             }
                             @if (item.IdEstado == 2)
                             {
-                                <a href="@Url.Action("Activar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-success btn-sm">
+                                <a href="@Url.Action("Activar", "Colaboradores", new { id = item.IdColaborador })" class="btn btn-highlight btn-sm">
                                     Activar
                                 </a>
                             }
@@ -108,7 +108,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <a id="confirmDeleteButton" href="#" class="btn btn-danger">Eliminar</a>
+                <a id="confirmDeleteButton" href="#" class="btn btn-sunset">Eliminar</a>
             </div>
         </div>
     </div>
