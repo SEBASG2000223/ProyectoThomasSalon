@@ -4,19 +4,19 @@
     ViewBag.Title = "Index";
 }
 <div class="container pt-5">
-    <h2 class="text-center">Lista de personas</h2>
+    <h2 class="admin-title">Lista de personas</h2>
 
     <p>
 
-        <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
+        <a href="@Url.Action("Create")" class="btn btn-admin btn-md">
             Registrar Persona
         </a>
 
     </p>
 
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover shadow rounded">
-            <thead class="table-dark">
+        <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead  >
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.IdPersona)
@@ -89,7 +89,7 @@
                         </td>
                         <td>
 
-                            <a href="@Url.Action("Edit", "Personas", new { id = item.IdPersona })" class="btn btn-primary btn-sm">
+                            <a href="@Url.Action("Edit", "Personas", new { id = item.IdPersona })" class="btn btn-stormy btn-sm">
                                 Editar
                             </a>
                         </td>

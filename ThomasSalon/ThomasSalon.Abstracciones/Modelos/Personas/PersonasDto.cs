@@ -16,6 +16,11 @@ namespace ThomasSalon.Abstracciones.Modelos.Personas
 
         [Required(ErrorMessage = "El teléfono es requerido.")]
         [RegularExpression(@"^\d{8}$", ErrorMessage = "El número de teléfono debe tener exactamente 8 dígitos.")]
+
+
+        [Phone]
+
+
         public string Telefono { get; set; }
 
         [Required(ErrorMessage = "La propiedad Genero es requerida")]

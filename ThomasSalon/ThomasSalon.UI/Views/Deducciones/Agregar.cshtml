@@ -5,7 +5,7 @@
 }
 
 <div class="container mt-4">
-    <h2>Agregar Deducción</h2>
+    <h2 class="admin-title">Agregar Deducción</h2>
 
     <form asp-action="Agregar" method="post">
         <!-- MontoAgregado -->
@@ -21,7 +21,7 @@
         </div>
         <br>
 
-        <button type="submit" class="btn btn-success">Agregar Deducción</button>
-        <a href="@Url.Action("ListarColaboradores", "Deducciones")" class="btn btn-secondary">Volver</a>
+        <button type="submit" class="btn btn-highlight">Agregar Deducción</button>
+        <a href="@Url.Action("ListarColaboradores", "Deducciones")" class="btn btn-admin">Volver</a>
     </form>
 </div>

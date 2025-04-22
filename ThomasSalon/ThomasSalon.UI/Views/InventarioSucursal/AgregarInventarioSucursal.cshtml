@@ -4,7 +4,7 @@
     ViewBag.Title = "Agregar Producto";
 }
 <div class="container pt-5">
-    <h2 class="text-center mb-4">Agregar productos al inventario</h2>
+    <h2 class="admin-title">Agregar productos al inventario</h2>
 
     @if (ViewBag.Mensaje != null)
     {
@@ -38,8 +38,8 @@
                     </div>
 
                     <div class="text-center mt-4">
-                        <input type="submit" value="Agregar al inventario" class="btn btn-primary px-4" />
-                        <a href="@Request.UrlReferrer" class="btn btn-dark px-4 ms-2">Volver a la lista</a>
+                        <input type="submit" value="Agregar al inventario" class="btn btn-stormy px-4" />
+                        <a href="@Request.UrlReferrer" class="btn btn-admin px-4 ms-2">Volver a la lista</a>
                     </div>
                 </div>
             }

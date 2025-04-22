@@ -8,18 +8,18 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
 
-            <h2 class="text-center mb-4">@ViewBag.Title</h2>
+            <h2 class="admin-title">@ViewBag.Title</h2>
 
             <div class="row justify-content-center mb-3">
                 <div class="col-md-auto">
-                    <a href="@Url.Action("ListarColaboradores", "Deducciones")" class="btn btn-dark btn-sm">
+                    <a href="@Url.Action("ListarColaboradores", "Deducciones")" class="btn btn-admin btn-sm">
                         <i class="bi bi-arrow-left-circle"></i> Volver a la lista de colaboradores
                     </a>
                 </div>
             </div>
 
             <div class="table-responsive">
-                <table class="table table-hover table-bordered text-center shadow rounded">
+                <table class="table table-bordered table-hover shadow rounded table-admin">
                     <thead class="table-dark">
                         <tr>
                             <th>Días Completos</th>
@@ -43,7 +43,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.TotalPago)</td>
                                 <td>
                                     <form action="@Url.Action("ConfirmarPago", "Deducciones", new { idColaborador = item.IdColaborador })" method="post" id="form-@item.IdColaborador">
-                                        <button type="submit" class="btn btn-success btn-sm" onclick="confirmarPago(event, @item.IdColaborador)">
+                                        <button type="submit" class="btn btn-highlight btn-sm" onclick="confirmarPago(event, @item.IdColaborador)">
                                             <i class="bi bi-cash-coin"></i> Finalizar Pago
                                         </button>
                                     </form>

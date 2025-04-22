@@ -6,7 +6,7 @@
 <div class="container pt-5">
 
 
-    <h2 class="text-center">Inventario General</h2>
+    <h2 class="admin-title">Inventario General</h2>
     <br>
 
     @if (ViewBag.Mensaje != null)
@@ -17,8 +17,8 @@
     }
 
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover">
-            <thead class="table-dark">
+                <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.IdProducto)</th>
                     <th>@Html.DisplayNameFor(model => model.NombreProducto)</th>

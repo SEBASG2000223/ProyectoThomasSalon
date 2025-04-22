@@ -4,16 +4,15 @@
     ViewBag.Title = "ListarProveedores";
 }
 <div class="container pt-5">
-    <h2 class="text-center">Lista de proveedores</h2>
+    <h2 class="admin-title">Listado de Proveedores</h2>
 
-    <p>
-        <a href="@Url.Action("Create")" class="btn btn-dark btn-md">
-            Registrar proveedor
-        </a>
-    </p>
+    <div class="mb-3 text-start">
+        <a href="@Url.Action("Create", "Proveedores")" class="btn btn-admin">Registrar proveedor</a>
+    </div>
+
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover">
-            <thead class="table-dark">
+        <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead>
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.IdProveedor)
@@ -60,18 +59,18 @@
                         </td>
                         <td>
 
-                            <a href="@Url.Action("Edit", "Proveedores", new { id = item.IdProveedor })" class="btn btn-primary btn-sm">
+                            <a href="@Url.Action("Edit", "Proveedores", new { id = item.IdProveedor })" class="btn btn-stormy">
                                 Editar
                             </a>
                             @if (item.IdEstado == 1)
                             {
-                                <a href="@Url.Action("Inactivar", "Proveedores", new { id = item.IdProveedor })" class="btn btn-danger btn-sm">
+                                <a href="@Url.Action("Inactivar", "Proveedores", new { id = item.IdProveedor })" class="btn btn-sunset">
                                     Inactivar
                                 </a>
                             }
                             @if (item.IdEstado == 2)
                             {
-                                <a href="@Url.Action("Activar", "Proveedores", new { id = item.IdProveedor })" class="btn btn-success btn-sm">
+                                <a href="@Url.Action("Activar", "Proveedores", new { id = item.IdProveedor })" class="btn btn-highlight">
                                     Activar
                                 </a>
                             }

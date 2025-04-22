@@ -39,7 +39,6 @@
 
 
 
-
 @section scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -58,19 +57,20 @@
                     addEventButton: {
                         text: 'Añadir Cita',
                         click: function () {
-                            console.log("Botón de añadir cita clickeado");
-
-                            // Obtener el formulario para agendar la cita
                             $.get('/Citas/AgendarCitaPresencial', function (html) {
                                 $('#modalAgendarCita .modal-content').html(html);
                                 $('#modalAgendarCita').modal('show');
 
-                                // Espera a que el modal se muestre completamente
-                                $('#modalAgendarCita').on('shown.bs.modal', function () {
-                                    // Verifica que el campo exista
+                                $('#modalAgendarCita').off('shown.bs.modal').on('shown.bs.modal', function () {
+                                    const flatpickrInput = document.querySelector("#fechaHora");
+                                    if (!flatpickrInput) {
+                                        console.error("No se encontró el input #fechaHora");
+                                        return;
+                                    }
+
                                     const config = {
                                         enableTime: true,
-                                        dateFormat: "Y-m-d H:i K",
+                                        dateFormat: "Y-m-d h:i K",
                                         time_24hr: false,
                                         minDate: "today",
                                         maxDate: new Date().fp_incr(365),
@@ -78,71 +78,84 @@
                                         defaultHour: 9,
                                         defaultMinute: 30,
                                         minTime: "09:30",
-                                        maxTime: "5:30"
-                                        
-                                    }
-                                    if (document.querySelector("#fechaHora")) {
-                                        flatpickr("#fechaHora", config);
-                                    } else {
-                                        console.error("No se encontró el input #fechaHora");
-                                    }
+                                        maxTime: "17:30",
+                                        allowInput: false,
+                                        disable: [
+                                            function (date) {
+                                                const day = date.getDate();
+                                                const month = date.getMonth();
+                                                return (day === 25 && month === 11) || (day === 1 && month === 0);
+                                            }
+                                        ],
+                                        onChange: function (selectedDates, dateStr, instance) {
+                                            const selectedDay = selectedDates[0].getDay();
+                                            if (selectedDay === 0) {
+                                                instance.set("maxTime", "13:30");
+                                            } else {
+                                                instance.set("maxTime", "17:30");
+                                            }
+                                        }
+                                    };
+
+                                    flatpickr(flatpickrInput, config);
                                 });
 
                                 // Buscar persona por cédula
                                 $(document).off('change', '#txtCedula').on('change', '#txtCedula', function () {
-                                    const cedula = $(this).val();
+                                    const cedula = $(this).val().trim();
+                                    if (cedula.length === 0) return;
 
-                                    if (cedula.length > 0) {
-                                        $.ajax({
-                                            url: '/Citas/BuscarPersonaPorCedula',
-                                            type: 'GET',
-                                            data: { cedula: cedula },
-                                            success: function (data) {
-                                                if (data && data.idPersona > 0) {
-                                                    $('#txtNombre').val(data.nombre);
-                                                    $('#IdPersona').val(data.idPersona);
-                                                } else {
-                                                    $('#txtNombre').val("No encontrada");
-                                                    $('#IdPersona').val("");
-                                                }
-                                            },
-                                            error: function () {
-                                                alert("Error al buscar persona.");
+                                    $.ajax({
+                                        url: '/Citas/BuscarPersonaPorCedula',
+                                        type: 'GET',
+                                        data: { cedula: cedula },
+                                        success: function (data) {
+                                            if (data && data.idPersona > 0) {
+                                                $('#txtNombre').val(data.nombre);
+                                                $('#IdPersona').val(data.idPersona);
+                                            } else {
+                                                $('#txtNombre').val("No encontrada");
+                                                $('#IdPersona').val("");
                                             }
-                                        });
-                                    }
+                                        },
+                                        error: function () {
+                                            alert("Error al buscar persona.");
+                                        }
+                                    });
                                 });
-
-                                
                             });
                         }
                     }
                 },
                 events: function (fetchInfo, successCallback, failureCallback) {
-                    fetch('/Citas/ObtenerEventos?idSucursal=' + idSucursal)
+                    fetch(`/Citas/ObtenerEventos?idSucursal=${idSucursal}`)
                         .then(response => response.json())
                         .then(data => successCallback(data))
-                        .catch(error => failureCallback(error));
+                        .catch(error => {
+                            console.error("Error al cargar eventos:", error);
+                            failureCallback(error);
+                        });
                 },
                 eventClick: function (info) {
                     const eventId = info.event.id;
 
-                    if (eventId) {
-                        $.ajax({
-                            url: '/Citas/DetallesCita',
-                            type: 'GET',
-                            data: { IdCita: eventId },
-                            success: function (response) {
-                                $('#modalDetallesCitaBody').html(response);
-                                $('#modalDetallesCita').modal('show');
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Error al obtener los detalles de la cita: ' + error);
-                            }
-                        });
-                    } else {
+                    if (!eventId) {
                         alert('No se pudo obtener el IdCita.');
+                        return;
                     }
+
+                    $.ajax({
+                        url: '/Citas/DetallesCita',
+                        type: 'GET',
+                        data: { IdCita: eventId },
+                        success: function (response) {
+                            $('#modalDetallesCitaBody').html(response);
+                            $('#modalDetallesCita').modal('show');
+                        },
+                        error: function (xhr, status, error) {
+                            alert('Error al obtener los detalles de la cita: ' + error);
+                        }
+                    });
                 }
             });
 
@@ -172,8 +185,6 @@
             calendar.render();
         });
     </script>
-
-
 
 
 

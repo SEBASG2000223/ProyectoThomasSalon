@@ -8,7 +8,7 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 class="text-center mb-4">Registrar Venta de productos</h2>
+            <h2 class="admin-title">Registrar Venta de productos</h2>
 
             @if (TempData["Error"] != null)
             {
@@ -65,7 +65,7 @@
 
                     <!-- Productos dinámicos -->
                     <h4 class="mt-4">Productos</h4>
-                    <table class="table table-bordered" id="tablaProductos">
+                    <table class="table table-bordered table-hover shadow rounded table-admin" id="tablaProductos">
                         <thead>
                             <tr>
                                 <th>Producto</th>
@@ -78,7 +78,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <button type="button" class="btn btn-primary" id="btnAgregarProducto">Agregar Producto</button>
+                    <button type="button" class="btn btn-stormy" id="btnAgregarProducto">Agregar Producto</button>
 
                     <!-- Total, Pago y Devolución -->
                     <div class="form-group row mt-4">
@@ -107,8 +107,8 @@
 
                     <!-- Botón de enviar -->
                     <div class="form-group row mt-4">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Registrar Venta" class="btn btn-success" />
+                        <div class="col-md-8 offset-md-4">
+                            <input type="submit" value="Registrar Venta" class="btn btn-highlight" />
                         </div>
                     </div>
                 </div>

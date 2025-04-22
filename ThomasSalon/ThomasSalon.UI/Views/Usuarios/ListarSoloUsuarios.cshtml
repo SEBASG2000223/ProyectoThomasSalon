@@ -4,12 +4,12 @@
     ViewBag.Title = "ListarUsuarios";
 }
 <div class="container pt-5">
-    <h2>ListarUsuarios</h2>
+    <h2 class="admin-title">Listar Usuarios</h2>
 
 
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover">
-            <thead class="table-dark">
+        <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead>
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Email)
@@ -78,17 +78,18 @@
                             @Html.DisplayFor(modelItem => item.NombreRol)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
-
+                            <a href="@Url.Action("EditAdmin", "Account", new { id = item.Id })" class="btn btn-stormy btn-sm">
+                                Editar
+                            </a>
                             @if (item.IdEstado == 1)
                             {
-                                <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-danger btn-sm">
+                                <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-sunset btn-sm">
                                     Inactivar
                                 </a>
                             }
                             @if (item.IdEstado == 2)
                             {
-                                <a href="@Url.Action("Activar", "Usuarios", new { id = item.Id })" class="btn btn-success btn-sm">
+                                <a href="@Url.Action("Activar", "Usuarios", new { id = item.Id })" class="btn btn-highlight btn-sm">
                                     Activar
                                 </a>
                             }

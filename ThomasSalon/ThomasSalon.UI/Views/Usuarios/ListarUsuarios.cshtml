@@ -5,9 +5,9 @@
 }
 <div class="container pt-5" style="max-width: 1300px;">
 
-    <h2>Listar Usuarios</h2>
+    <h2 class="admin-title">Listar Usuarios</h2>
     <p>
-        <a href="@Url.Action("RegisterAdmin", "Account")" class="btn btn-dark btn-md">
+        <a href="@Url.Action("RegisterAdmin", "Account")" class="btn btn-admin btn-md">
             Registrar usuario
         </a>
     </p>
@@ -15,8 +15,8 @@
 
 
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover">
-            <thead class="table-dark">
+        <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead  >
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Email)
@@ -80,15 +80,16 @@
 
                             @if (item.NombreEstado == "Activo")
                             {
-                                @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
-
-                                <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-danger btn-sm">
+                                <a href="@Url.Action("EditAdmin", "Account", new { id = item.Id })" class="btn btn-stormy btn-sm">
+                                    Editar
+                                </a>
+                                <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-sunset btn-sm">
                                     Inactivar
                                 </a>
                             }
                             @if (item.NombreEstado == "Inactivo")
                             {
-                                <a href="@Url.Action("Activar", "Usuarios", new { id = item.Id })" class="btn btn-success btn-sm">
+                                <a href="@Url.Action("Activar", "Usuarios", new { id = item.Id })" class="btn btn-highlight btn-sm">
                                     Activar
                                 </a>
                             }
