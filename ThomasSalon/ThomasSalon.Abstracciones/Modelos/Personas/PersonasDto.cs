@@ -17,7 +17,9 @@ namespace ThomasSalon.Abstracciones.Modelos.Personas
         [Required(ErrorMessage = "El teléfono es requerido.")]
         [RegularExpression(@"^\d{8}$", ErrorMessage = "El número de teléfono debe tener exactamente 8 dígitos.")]
 
+
         [Phone]
+
 
         public string Telefono { get; set; }
 
@@ -30,8 +32,8 @@ namespace ThomasSalon.Abstracciones.Modelos.Personas
         [Range(15, 100, ErrorMessage = "Edad debe estar entre 15 y 100 años")]
         public int Edad { get; set; }
         [Required(ErrorMessage = "La propiedad Identificacion es requerida")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(9)]
+        [MinLength(9)]
         public string Identificacion { get; set; }
     }
 }
