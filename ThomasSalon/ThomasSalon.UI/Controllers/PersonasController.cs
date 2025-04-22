@@ -18,6 +18,7 @@ using ThomasSalon.LN.Personas.Registrar;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente,Administrador")]
     public class PersonasController : Controller
     {
 
@@ -34,12 +35,13 @@ namespace ThomasSalon.UI.Controllers
             _obtenerPersonasPorIdLN = new ObtenerPersonasPorIdLN();
         }
         // GET: Personas
+        [Authorize(Roles = "Gerente,Administrador")]
         public ActionResult Index()
         {
             List<PersonasDto> laListaDePersonas = _listarPersonasLN.Listar();
             return View(laListaDePersonas);
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         public ActionResult ListarClientes()
         {
             List<PersonasDto> laListaDeClientes = _listarPersonasLN.ListarClientes();
@@ -58,7 +60,7 @@ namespace ThomasSalon.UI.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         // POST: Personas/Create
         [HttpPost]
         public async Task<ActionResult> Create(PersonasDto modelo)
@@ -75,14 +77,14 @@ namespace ThomasSalon.UI.Controllers
                 return View();
             }
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         // GET: Personas/Edit/5
         public ActionResult Edit(int id)
         {
             PersonasDto laPersona = _obtenerPersonasPorIdLN.Obtener(id);
             return View(laPersona);
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         // POST: Personas/Edit/5
         [HttpPost]
         public async Task<ActionResult> Edit(PersonasDto laPersona)

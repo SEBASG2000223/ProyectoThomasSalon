@@ -20,6 +20,7 @@ using ThomasSalon.LN.TipoServicios.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente,Administrador")]
     public class ServiciosController : Controller
     {
         IListarServiciosLN _listarServicios;
@@ -40,6 +41,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Servicios
+
         public ActionResult ListarServicios()
         {
             List<ServiciosDto> laListaDeServicios = _listarServicios.Listar();
@@ -70,6 +72,7 @@ namespace ThomasSalon.UI.Controllers
 
 
         // GET: Servicios/Create
+        [Authorize(Roles = "Gerente")]
         public ActionResult Create()
         {
             var listaTiposServicio = _listarTipoServicios.Listar();
@@ -78,6 +81,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // POST: Servicios/Create
+        [Authorize(Roles = "Gerente")]
         [HttpPost]
         public async Task<ActionResult> Create(ServiciosDto modelo)
         {
@@ -97,6 +101,7 @@ namespace ThomasSalon.UI.Controllers
 
 
         // GET: Servicios/Edit/5
+        [Authorize(Roles = "Gerente")]
         public ActionResult Edit(int id)
         {
             ServiciosDto elServicio = _obtenerServiciosPorId.Obtener(id);
@@ -107,7 +112,7 @@ namespace ThomasSalon.UI.Controllers
             return View(elServicio);
         }
 
-
+        [Authorize(Roles = "Gerente")]
         // POST: Servicios/Edit/5
         [HttpPost]
         public async Task<ActionResult> Edit(ServiciosDto elServicio)
@@ -128,13 +133,13 @@ namespace ThomasSalon.UI.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Gerente")]
         public async Task<ActionResult> Activar(int id)
         {
             int resultado = await _cambiarEstado.CambiarEstado(id, 1); // Cambiar a estado "Activo"
             return RedirectToAction("ListarServicios");
         }
-
+        [Authorize(Roles = "Gerente")]
         public async Task<ActionResult> Inactivar(int id)
         {
             int resultado = await _cambiarEstado.CambiarEstado(id, 2); // Cambiar a estado "Inactivo"

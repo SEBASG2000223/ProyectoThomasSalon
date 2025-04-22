@@ -27,6 +27,7 @@ using ThomasSalon.LN.Usuarios.QuitarUsuarios;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente")]
     public class ColaboradoresController : Controller
     {
         IListarColaboradoresLN _listarColaboradores;

@@ -16,6 +16,7 @@ using ThomasSalon.LN.Deducciones.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente")]
     public class DeduccionesController : Controller
     {
         IListarColaboradoresLN _listarColaboradores;

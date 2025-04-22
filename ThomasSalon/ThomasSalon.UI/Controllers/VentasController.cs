@@ -29,6 +29,7 @@ using ThomasSalon.LN.Ventas.Resumen;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Administrador")]
 
     public class VentasController : Controller
     {
@@ -55,12 +56,13 @@ namespace ThomasSalon.UI.Controllers
             _listarProductos = new ListarProductosLN();
             _listarVentasLN = new ResumenVentaLN();
         }
+        [Authorize(Roles = "Gerente,Administrador")]
         public async Task<ActionResult> Resumen()
         {
             var resumenVentas = await _listarVentasLN.Listar();
             return View(resumenVentas);
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         public async Task<ActionResult> CierreCaja()
         {
             var resumenVentas = await _listarVentasLN.Listar();
@@ -80,7 +82,7 @@ namespace ThomasSalon.UI.Controllers
 
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
         public async Task<ActionResult> RegistrarVentaProducto()
         {
             var metodosPago = await _elContexto.MetodosDePagoTabla.ToListAsync();
@@ -119,7 +121,7 @@ namespace ThomasSalon.UI.Controllers
 
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegistrarVentaProducto(RegistrarVentaProductoDTO productoDto)
@@ -199,7 +201,7 @@ namespace ThomasSalon.UI.Controllers
             // Redirigir o mostrar mensaje de éxito
             return RedirectToAction("Resumen");
         }
-
+        [Authorize(Roles = "Administrador")]
         private async Task CargarViewBags()
         {
             ViewBag.MetodosPago = new SelectList(await _elContexto.MetodosDePagoTabla.ToListAsync(), "IdMetodoPago", "Nombre");
@@ -237,6 +239,7 @@ namespace ThomasSalon.UI.Controllers
 
 
         // GET: Ventas/Create
+        [Authorize(Roles = "Administrador")]
         public async Task<ActionResult> RegistrarVentaServicio()
         {
             var metodosPago = await _elContexto.MetodosDePagoTabla.ToListAsync();
@@ -283,7 +286,7 @@ namespace ThomasSalon.UI.Controllers
 
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegistrarVentaServicio(RegistrarVentaServicioDTO ventaDto)
@@ -407,9 +410,8 @@ namespace ThomasSalon.UI.Controllers
                 return View();
             }
         }
-        // Acción para mostrar el resumen de ventas
-        // Acción para mostrar el resumen de ventas
-        // Acción para mostrar el resumen de ventas
+    
+        [Authorize(Roles = "Gerente,Administrador")]
         public async Task<ActionResult> ResumenCaja()
         {
             var hoy = DateTime.Today;
@@ -427,8 +429,7 @@ namespace ThomasSalon.UI.Controllers
             return View(resumenVentasDia);
         }
 
-
-        // Acción para cerrar la caja
+        [Authorize(Roles = "Gerente,Administrador")]
         [HttpPost]
         public ActionResult CerrarCaja()
         {

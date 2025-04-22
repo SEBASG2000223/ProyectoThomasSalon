@@ -17,6 +17,7 @@ using ThomasSalon.LN.Proveedores.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente,Administrador")]
     public class ProductosController : Controller
     {
         IListarProductosLN _listarProductos;
@@ -57,6 +58,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Productos/Create
+        [Authorize(Roles = "Gerente")]
         public ActionResult Create()
         {
             var proveedores = _proveedores.ListarActivos();
@@ -66,6 +68,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // POST: Productos/Create
+        [Authorize(Roles = "Gerente")]
         [HttpPost]
         public async Task<ActionResult> Create(ProductosDto modelo)
         {
@@ -83,6 +86,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Productos/Edit/5
+        [Authorize(Roles = "Gerente")]
         public ActionResult Edit(int id)
         {
             var proveedores = _proveedores.ListarActivos();
@@ -94,6 +98,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // POST: Productos/Edit/5
+        [Authorize(Roles = "Gerente")]
         [HttpPost]
         public async Task<ActionResult> Edit(ProductosDto elProducto)
         {
@@ -110,12 +115,14 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Productos/Delete/5
+        [Authorize(Roles = "Gerente")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         // POST: Productos/Delete/5
+        [Authorize(Roles = "Gerente")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -130,6 +137,7 @@ namespace ThomasSalon.UI.Controllers
                 return View();
             }
         }
+        [Authorize(Roles = "Gerente")]
         public async Task<ActionResult> Activar(int id)
         {
 
@@ -141,7 +149,7 @@ namespace ThomasSalon.UI.Controllers
 
 
         }
-
+        [Authorize(Roles = "Gerente")]
         public async Task<ActionResult> Inactivar(int id)
         {
 

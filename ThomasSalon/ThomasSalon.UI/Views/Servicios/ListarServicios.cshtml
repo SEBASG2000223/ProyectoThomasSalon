@@ -5,15 +5,19 @@
 }
 <div class="container pt-5">
     <h2 class="admin-title">Lista de Servicios</h2>
-    <p>
-        <a href="@Url.Action("Create")" class="btn btn-admin btn-md">
-            Registrar Servicio
-        </a>
-    </p>
+    @if (User.IsInRole("Gerente"))
+    {
+        <p>
+            <a href="@Url.Action("Create")" class="btn btn-admin btn-md">
+                Registrar Servicio
+            </a>
+        </p>
+    }
+
 
     <div class="table-responsive">
         <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
-            <thead  >
+            <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.IdServicio)</th>
                     <th>@Html.DisplayNameFor(model => model.Nombre)</th>
@@ -22,6 +26,7 @@
                     <th>@Html.DisplayNameFor(model => model.Duracion)</th>
                     <th>@Html.DisplayNameFor(model => model.NombreEstado)</th>
                     <th>@Html.DisplayNameFor(model => model.IdTipoServicios)</th>
+
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -62,22 +67,28 @@
 
                         <td>@Html.DisplayFor(modelItem => tipoServicio)</td>
                         <td>
-                            <a href="@Url.Action("Edit", "Servicios", new { id = item.IdServicio })" class="btn btn-stormy">
-                                Editar
-                            </a>
-                            @if (item.IdEstado == 1)
+                            @if (User.IsInRole("Gerente"))
                             {
-                                <a href="@Url.Action("Inactivar", "Servicios", new { id = item.IdServicio })" class="btn btn-sunset">
-                                    Inactivar
+                                <a href="@Url.Action("Edit", "Servicios", new { id = item.IdServicio })" class="btn btn-stormy">
+                                    Editar
                                 </a>
-                            }
-                            @if (item.IdEstado == 2)
-                            {
-                                <a href="@Url.Action("Activar", "Servicios", new { id = item.IdServicio })" class="btn btn-highlight">
-                                    Activar
-                                </a>
+                                if (item.IdEstado == 1)
+                                {
+                                    <a href="@Url.Action("Inactivar", "Servicios", new { id = item.IdServicio })" class="btn btn-sunset">
+                                        Inactivar
+                                    </a>
+                                }
+                                else if (item.IdEstado == 2)
+                                {
+                                    <a href="@Url.Action("Activar", "Servicios", new { id = item.IdServicio })" class="btn btn-highlight">
+                                        Activar
+                                    </a>
+                                }
                             }
                         </td>
+
+
+
                     </tr>
                 }
             </tbody>

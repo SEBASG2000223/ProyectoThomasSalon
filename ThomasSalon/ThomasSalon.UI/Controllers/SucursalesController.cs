@@ -18,6 +18,7 @@ using ThomasSalon.LN.Sucursales.Registrar;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente,Administrador")]
     public class SucursalesController : Controller
     {
         IListarSucursalesLN _listarSucursales;
@@ -63,12 +64,14 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Sucursales/Create
+        [Authorize(Roles = "Gerente")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Sucursales/Create
+        [Authorize(Roles = "Gerente")]
         [HttpPost]
         public async Task<ActionResult> Create(SucursalesDto modelo)
         {
@@ -86,6 +89,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Sucursales/Edit/5
+        [Authorize(Roles = "Gerente")]
         public ActionResult Edit(int id)
         {
             SucursalesDto laSucursal = _obtenerSucursalesPorId.Obtener(id);
@@ -93,6 +97,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // POST: Sucursales/Edit/5
+        [Authorize(Roles = "Gerente")]
         [HttpPost]
         public async Task<ActionResult> Edit(SucursalesDto laSucursal)
         {
@@ -110,12 +115,14 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Sucursales/Delete/5
+        [Authorize(Roles = "Gerente")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         // POST: Sucursales/Delete/5
+        [Authorize(Roles = "Gerente")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -130,6 +137,7 @@ namespace ThomasSalon.UI.Controllers
                 return View();
             }
         }
+        [Authorize(Roles = "Gerente")]
         public async Task<ActionResult> Activar(int id)
         {
             
@@ -142,6 +150,7 @@ namespace ThomasSalon.UI.Controllers
           
         }
 
+        [Authorize(Roles = "Gerente")]
         public async Task<ActionResult> Inactivar(int id)
         {
             

@@ -16,6 +16,7 @@ using ThomasSalon.LN.Sucursales.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente,Administrador")]
     public class PedidosController : Controller
     {
         private readonly Contexto _elContexto;
@@ -31,20 +32,20 @@ namespace ThomasSalon.UI.Controllers
         }
         // GET: Pedidos
 
-
+        [Authorize(Roles = "Gerente,Administrador")]
         public ActionResult ListarPedidos()
         {
             List<PedidosDto> laListaDePedidos = _listarPedidos.Listar();
             return View(laListaDePedidos);
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         public ActionResult ListarPedidosCliente()
         {
             String idUsuario = User.Identity.GetUserId();
             List<PedidosDto> laListaDePedidos = _listarPedidos.ListarPedidosCliente(idUsuario);
             return View(laListaDePedidos);
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         [HttpPost]
         public ActionResult RechazarPedido(Guid idPedido)
         {
@@ -78,7 +79,7 @@ namespace ThomasSalon.UI.Controllers
 
             return Json(new { success = true, message = "Pedido rechazado y stock restaurado correctamente." });
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         [HttpPost]
         public ActionResult AceptarPedido(Guid idPedido)
         {
@@ -135,7 +136,7 @@ namespace ThomasSalon.UI.Controllers
 
 
 
-
+        [Authorize(Roles = "Gerente,Administrador")]
         [HttpPost]
         public ActionResult EntregarPedido(Guid idPedido)
         {

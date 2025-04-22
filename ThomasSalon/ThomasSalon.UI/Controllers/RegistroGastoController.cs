@@ -16,6 +16,7 @@ using ThomasSalon.LN.Ventas.ResgistroGastos;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente,Administrador")]
     public class RegistroGastoController : Controller
     {
         private readonly Contexto _elContexto;
@@ -45,6 +46,7 @@ namespace ThomasSalon.UI.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "Gerente,Administrador")]
         public ActionResult Gastos()
         {
             var hoy = DateTime.Today;
@@ -64,7 +66,7 @@ namespace ThomasSalon.UI.Controllers
 
             return View("Gastos", gastos);
         }
-
+        [Authorize(Roles = "Gerente,Administrador")]
         public ActionResult ResumenGastos(DateTime? fechaFiltro)
         {
             var fechaSeleccionada = fechaFiltro ?? DateTime.Today;
@@ -91,6 +93,7 @@ namespace ThomasSalon.UI.Controllers
 
 
         // GET: RegistroGasto/Create
+        [Authorize(Roles = "Administrador")]
         public ActionResult RegistroGasto()
         {
             var hoy = DateTime.Today;
@@ -110,6 +113,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // POST: RegistroGasto/Create
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<ActionResult> RegistroGasto(RegistroGastoDTO registroGasto)
         {

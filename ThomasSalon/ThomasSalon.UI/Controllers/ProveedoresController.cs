@@ -21,6 +21,7 @@ using ThomasSalon.LN.Proveedores.Registrar;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente")]
     public class ProveedoresController : Controller
     {
         IListarProveedoresLN _listarProveedores;
@@ -37,6 +38,7 @@ namespace ThomasSalon.UI.Controllers
             _obtenerProveedoresPorId = new ObtenerProveedoresPorIdLN();
 
         }
+       
         // GET: Proveedores
         public ActionResult ListarProveedores()
         {

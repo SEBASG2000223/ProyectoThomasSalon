@@ -46,12 +46,13 @@
                         <td>@Html.DisplayFor(modelItem => pedido.MontoTotal)</td>
                         <td>
                             <div class="d-flex gap-2 flex-wrap align-items-center">
+
                                 @if (pedido.EstadoPedido == "Pendiente")
                                 {
-                                    <button class="btn btn-success aceptar-pedido" data-id="@pedido.IdPedido">
+                                    <button class="btn btn-success aceptar-pedido" style="background-color: #198754; border-color: #198754; color: white;" data-id="@pedido.IdPedido">
                                         ✔ Aceptar
                                     </button>
-                                    <button class="btn btn-danger rechazar-pedido" data-id="@pedido.IdPedido">
+                                    <button class="btn btn-danger rechazar-pedido" style="background-color: #dc3545; border-color: #dc3545; color: white;" data-id="@pedido.IdPedido">
                                         ❌ Rechazar
                                     </button>
                                 }

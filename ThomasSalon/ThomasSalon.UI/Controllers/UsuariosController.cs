@@ -32,6 +32,7 @@ using ThomasSalon.LN.Usuarios.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
+    [Authorize(Roles = "Gerente")]
     public class UsuariosController : Controller
     {
 
