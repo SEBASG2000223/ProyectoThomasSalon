@@ -172,6 +172,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Citas/Create
+        [Authorize(Roles = "Gerente")]
         public ActionResult AgendarCitaPresencial()
         {
             var idSucursal = TempData["IdSucursalSeleccionada"] != null ? Convert.ToInt32(TempData["IdSucursalSeleccionada"]) : 0;
@@ -201,6 +202,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // POST: Citas/Create
+        [Authorize(Roles = "Gerente")]
         [HttpPost]
         public async Task<ActionResult> AgendarCitaPresencial(CitasDto modelo)
         {
@@ -237,9 +239,9 @@ namespace ThomasSalon.UI.Controllers
 
         }
 
- 
+
         // GET: Citas/Create
-        [Authorize]
+        [Authorize(Roles = "Usuario")]
         public ActionResult AgendarCitaLinea(int idServicio)
         {
             var servicio = _obtenerServicioPorId.Obtener(idServicio);
@@ -273,7 +275,7 @@ namespace ThomasSalon.UI.Controllers
 
 
         // POST: Citas/Create
-        [Authorize]
+        [Authorize(Roles = "Usuario")]
         [HttpPost]
         public async Task<ActionResult> AgendarCitaLinea(CitasDto modelo)
         {
@@ -316,7 +318,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
 
-
+        [Authorize(Roles = "Gerente,Administrador, Usuario")]
         public async Task<ActionResult> Cancelar(Guid id)
         {
             var idSucursal = TempData["IdSucursalSeleccionada"] != null ? Convert.ToInt32(TempData["IdSucursalSeleccionada"]) : 0;

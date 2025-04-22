@@ -13,88 +13,93 @@
             </a>
         </p>
     }
-        <div class="table-responsive">
-            <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IdSucursal)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.LinkDireccion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.LinkImagen)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Telefono)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IdEstado)
-                        </th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
+    <div class="table-responsive">
+        <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdSucursal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LinkDireccion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LinkImagen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdEstado)
+                    </th>
+                    @if (User.IsInRole("Gerente"))
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IdSucursal)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LinkDireccion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LinkImagen)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Telefono)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NombreEstado)
-                            </td>
-                            <td>
-                                @if (User.IsInRole("Gerente"))
-                                {
-                                    <a href="@Url.Action("Edit", "Sucursales", new { id = item.IdSucursal })" class="btn btn-stormy btn-sm">
-                                        Editar
-                                    </a>
-                                    if (item.IdEstado == 1)
-                                    {
-                                        <a href="@Url.Action("Inactivar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-sunset btn-sm">
-                                            Inactivar
-                                        </a>
-                                    }
-                                    else if (item.IdEstado == 2)
-                                    {
-                                        <a href="@Url.Action("Activar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-highlight btn-sm">
-                                            Activar
-                                        </a>
-                                        }
-                                    }
-                                </td>
-                        </tr>
+                        <th>Acciones</th>
                     }
-                </tbody>
-            </table>
-        </div>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdSucursal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LinkDireccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LinkImagen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreEstado)
+                        </td>
+                        @if (User.IsInRole("Gerente"))
+                        {
+                            <td>
+
+                                <a href="@Url.Action("Edit", "Sucursales", new { id = item.IdSucursal })" class="btn btn-stormy btn-sm">
+                                    Editar
+                                </a>
+                                if (item.IdEstado == 1)
+                                {
+                                <a href="@Url.Action("Inactivar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-sunset btn-sm">
+                                    Inactivar
+                                </a>
+                                }
+                                else if (item.IdEstado == 2)
+                                {
+                                <a href="@Url.Action("Activar", "Sucursales", new { id = item.IdSucursal })" class="btn btn-highlight btn-sm">
+                                    Activar
+                                </a>
+                                }
+
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    @functions{
-        public string SaberEstado(int estado)
-        {
-            if (estado == 2) return "Inactivo";
-            if (estado == 1) return "Activo";
-            return "Estado invalido";
-        }
-    }
-    @section scripts
+</div>
+@functions{
+    public string SaberEstado(int estado)
     {
-        <script src="~/Scripts/ScriptsFront/Sucursales/ListaDataTableSucursales.js"></script>
+        if (estado == 2) return "Inactivo";
+        if (estado == 1) return "Activo";
+        return "Estado invalido";
     }
+}
+@section scripts
+    {
+    <script src="~/Scripts/ScriptsFront/Sucursales/ListaDataTableSucursales.js"></script>
+}

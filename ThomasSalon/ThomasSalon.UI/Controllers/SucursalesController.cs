@@ -18,7 +18,6 @@ using ThomasSalon.LN.Sucursales.Registrar;
 
 namespace ThomasSalon.UI.Controllers
 {
-    [Authorize(Roles = "Gerente,Administrador")]
     public class SucursalesController : Controller
     {
         IListarSucursalesLN _listarSucursales;

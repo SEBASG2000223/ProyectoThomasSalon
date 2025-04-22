@@ -17,7 +17,6 @@ using ThomasSalon.LN.Proveedores.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
-    [Authorize(Roles = "Gerente,Administrador")]
     public class ProductosController : Controller
     {
         IListarProductosLN _listarProductos;

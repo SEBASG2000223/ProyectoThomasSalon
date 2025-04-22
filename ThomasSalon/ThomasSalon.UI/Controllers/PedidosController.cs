@@ -16,7 +16,7 @@ using ThomasSalon.LN.Sucursales.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
-    [Authorize(Roles = "Gerente,Administrador")]
+    [Authorize(Roles = "Gerente,Administrador, Usuario")]
     public class PedidosController : Controller
     {
         private readonly Contexto _elContexto;
@@ -38,7 +38,7 @@ namespace ThomasSalon.UI.Controllers
             List<PedidosDto> laListaDePedidos = _listarPedidos.Listar();
             return View(laListaDePedidos);
         }
-        [Authorize(Roles = "Gerente,Administrador")]
+        [Authorize(Roles = "Usuario")]
         public ActionResult ListarPedidosCliente()
         {
             String idUsuario = User.Identity.GetUserId();

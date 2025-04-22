@@ -20,7 +20,6 @@ using ThomasSalon.LN.TipoServicios.Listar;
 
 namespace ThomasSalon.UI.Controllers
 {
-    [Authorize(Roles = "Gerente,Administrador")]
     public class ServiciosController : Controller
     {
         IListarServiciosLN _listarServicios;
