@@ -118,7 +118,6 @@ namespace ThomasSalon.UI.Models
         [Display(Name = "Sucursal")]
         public int? IdSucursal { get; set; }
 
-        // Campos adicionales que desees para la persona
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
