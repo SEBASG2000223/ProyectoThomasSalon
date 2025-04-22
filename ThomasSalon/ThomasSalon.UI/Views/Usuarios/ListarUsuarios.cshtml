@@ -80,8 +80,9 @@
 
                             @if (item.NombreEstado == "Activo")
                             {
-                                @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
-
+                                <a href="@Url.Action("EditAdmin", "Account", new { id = item.Id })" class="btn btn-stormy btn-sm">
+                                    Editar
+                                </a>
                                 <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-sunset btn-sm">
                                     Inactivar
                                 </a>

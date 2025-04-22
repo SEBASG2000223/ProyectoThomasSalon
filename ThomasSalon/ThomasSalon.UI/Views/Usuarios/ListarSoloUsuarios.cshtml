@@ -6,9 +6,7 @@
 <div class="container pt-5">
     <h2 class="admin-title">Listar Usuarios</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "RegisterAdmin", "Account")
-    </p>
+  
 
     <div class="table-responsive">
         <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
@@ -81,8 +79,9 @@
                             @Html.DisplayFor(modelItem => item.NombreRol)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
-
+                            <a href="@Url.Action("EditAdmin", "Account", new { id = item.Id })" class="btn btn-stormy btn-sm">
+                                Editar
+                            </a>
                             @if (item.IdEstado == 1)
                             {
                                 <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-sunset btn-sm">

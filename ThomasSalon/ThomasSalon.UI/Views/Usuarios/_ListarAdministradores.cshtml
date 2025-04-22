@@ -72,8 +72,9 @@
                         @Html.DisplayFor(modelItem => item.NombreRol)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "EditAdmin", "Account", new { id = item.Id }, null)
-
+                        <a href="@Url.Action("EditAdmin", "Account", new { id = item.Id })" class="btn btn-stormy btn-sm">
+                            Editar
+                        </a>
                         @if (item.IdEstado == 1)
                         {
                             <a href="@Url.Action("Inactivar", "Usuarios", new { id = item.Id })" class="btn btn-danger btn-sm">
