@@ -32,7 +32,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Sucursales
         [Display(Name = "Estado", Description = "Estado")]
         [Required]
         public int IdEstado { get; set; }
-
+        [Display(Name = "Estado", Description = "Estado")]
         public string NombreEstado { get; set; }
 
     }

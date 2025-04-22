@@ -101,6 +101,9 @@ namespace ThomasSalon.UI.Models
     }
     public class EditViewModel
     {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo")]
         public string Email { get; set; }
 
         [Display(Name = "Rol")]
@@ -123,6 +126,8 @@ namespace ThomasSalon.UI.Models
 
         [Display(Name = "Género")]
         public string Genero { get; set; }
+        [Required]
+        [RegularExpression(@"^\d{8}$", ErrorMessage = "El teléfono debe tener exactamente 8 dígitos.")]
         public string Telefono { get; set; }
 
         [Display(Name = "Dirección")]
@@ -131,7 +136,9 @@ namespace ThomasSalon.UI.Models
         [Display(Name = "Edad")]
         public int Edad { get; set; }
 
-        [Display(Name = "Identificación")]
+        [Required(ErrorMessage = "La propiedad Identificacion es requerida")]
+        [MaxLength(9)]
+        [MinLength(9)]
         public string Identificacion { get; set; }
         public decimal Salario { get; set; }
     }
