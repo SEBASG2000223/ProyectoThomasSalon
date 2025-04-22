@@ -1,5 +1,4 @@
-﻿-- Insertar la cita en linea
-CREATE PROCEDURE SP_InsertarCitaEnLinea
+﻿CREATE PROCEDURE SP_InsertarCitaEnLinea
     @IdServicio INT,
     @IdSucursal INT,
 	@IdColaborador INT,
