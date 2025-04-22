@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ThomasSalon.Abstracciones.AccesoADatos.Interfaces.Ventas.ResgistroGastos;
 using ThomasSalon.Abstracciones.Modelos.Ventas.ResgistroGastos;
+using System.Reflection;
 
 namespace ThomasSalon.AccesoADatos.Ventas.ResgistroGastos
 {
@@ -22,7 +23,7 @@ namespace ThomasSalon.AccesoADatos.Ventas.ResgistroGastos
         {
             try
             {
-                var paramColaborador = new SqlParameter("@IdColaborador", SqlDbType.Int) { Value = registroGasto.IdColaborador };
+                var paramColaborador = new SqlParameter("@IdColaborador", SqlDbType.Int) { Value = (object)registroGasto.IdColaborador ?? DBNull.Value };
                 var paramSucursal = new SqlParameter("@IdSucursal", SqlDbType.Int) { Value = registroGasto.IdSucursal };
                 var paramDescripcion = new SqlParameter("@Descripcion", SqlDbType.VarChar, 100)
                 {

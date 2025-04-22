@@ -71,24 +71,27 @@ namespace ThomasSalon.UI.Controllers
         {
             var fechaSeleccionada = fechaFiltro ?? DateTime.Today;
 
-            // Obtener los gastos filtrados por la fecha seleccionada
             var gastos = (from g in _elContexto.RegistroGastosTabla
-                          join c in _elContexto.ColaboradoresTabla on g.IdColaborador equals c.IdColaborador
-                          join p in _elContexto.PersonasTabla on c.IdPersona equals p.IdPersona
+                          join c in _elContexto.ColaboradoresTabla on g.IdColaborador equals c.IdColaborador into colaboradorJoin
+                          from c in colaboradorJoin.DefaultIfEmpty() 
+
+                          join p in _elContexto.PersonasTabla on c.IdPersona equals p.IdPersona into personaJoin
+                          from p in personaJoin.DefaultIfEmpty()
+
                           where DbFunctions.TruncateTime(g.Fecha) == DbFunctions.TruncateTime(fechaSeleccionada)
                           select new GastoResumenDTO
                           {
                               Fecha = g.Fecha,
-                              NombreColaborador = p.Nombre, // Obtener el nombre de la persona relacionada
+                              NombreColaborador = p != null ? p.Nombre : "Sin colaborador",
                               Descripcion = g.Descripcion,
                               Monto = g.Monto
                           }).ToList();
 
-            // Pasar la fecha seleccionada a la vista
             ViewBag.FechaFiltro = fechaSeleccionada.ToString("yyyy-MM-dd");
 
             return View("Gastos", gastos);
         }
+
 
 
 

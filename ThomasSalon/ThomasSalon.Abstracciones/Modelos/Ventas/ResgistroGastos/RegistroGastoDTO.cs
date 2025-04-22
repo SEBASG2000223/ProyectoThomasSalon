@@ -9,8 +9,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Ventas.ResgistroGastos
 {
     public class RegistroGastoDTO
     {
-        [Required]
-        public int IdColaborador { get; set; }
+        public int? IdColaborador { get; set; }
         [Required]
 
         public int IdSucursal { get; set; }
