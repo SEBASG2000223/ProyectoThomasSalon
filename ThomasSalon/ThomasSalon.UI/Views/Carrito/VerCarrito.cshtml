@@ -58,10 +58,11 @@
                 <label for="metodoPago">Método de Pago:</label>
                 @Html.DropDownList("metodoPago", ViewBag.MetodosPago as SelectList, "Seleccione un método de pago", new { @class = "form-control" })
             </div>
-            <div class="form-group">
+            <div class="form-group" id="adjunto-group" style="display: none;">
                 <label for="archivoAdjunto">Adjuntar Archivo:</label>
                 <input type="file" id="archivoAdjunto" class="form-control">
             </div>
+
             <button id="finalizarPedido" class="btn btn-success btn-block mt-3" disabled>✅ Finalizar Pedido</button>
         </div>
 
@@ -134,6 +135,21 @@
                 alert("Error al cargar el carrito. Inténtalo de nuevo.");
             });
         }
+
+        $("#metodoPago").on("change", function () {
+            const metodo = $(this).val();
+
+            // GUID de EFECTIVO y TARJETA (en minúsculas)
+            if (metodo !== "ac6f1b83-1a54-476c-97f0-e66410853be1" && metodo !== "36a632cd-5544-4482-a4a1-2f48b2755243") {
+                $("#adjunto-group").slideDown();
+            } else {
+                $("#adjunto-group").slideUp();
+                $("#archivoAdjunto").val(""); // Limpia si se oculta
+            }
+        });
+
+
+
 
         function actualizarTotales(subtotal, costoEnvio, total, ivaTotal) {
             $("#subtotal").text(`₡${subtotal.toFixed(2)}`);
