@@ -6,11 +6,11 @@
 }
 
 <div class="container pt-5" style="max-width: 1300px;">
-    <h2>Listar Pedidos</h2>
+    <h2 class="admin-title">Listar Pedidos</h2>
 
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover">
-            <thead class="table-dark">
+        <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead  >
                 <tr>
                     <th>imagen</th>
                     <th>@Html.DisplayNameFor(model => model.EstadoPedido)</th>
@@ -45,25 +45,33 @@
                         <td>@Html.DisplayFor(modelItem => pedido.Fecha)</td>
                         <td>@Html.DisplayFor(modelItem => pedido.MontoTotal)</td>
                         <td>
-                            <a href="@Url.Action("Detalles", "Pedidos", new { id = pedido.IdPedido })" class="btn btn-info btn-sm">Detalles</a>
-                            @if (pedido.EstadoPedido == "Pendiente")
-                            {
-                                <button class="btn btn-success aceptar-pedido" data-id="@pedido.IdPedido">✔ Aceptar</button>
-                                <button class="btn btn-danger rechazar-pedido" data-id="@pedido.IdPedido">❌ Rechazar</button>
-                            }
-                            else if (pedido.EstadoPedido == "En transcurso")
-                            {
-                                <button class="btn btn-primary entregar-pedido" data-id="@pedido.IdPedido">📦 Entregado</button>
-                            }
-                            else if (pedido.EstadoPedido == "Rechazado")
-                            {
-                                <span class="badge bg-danger">Rechazado</span>
-                            }
-                            else if (pedido.EstadoPedido == "Entregado")
-                            {
-                                <span class="badge bg-success">Entregado</span>
-                            }
+                            <div class="d-flex gap-2 flex-wrap align-items-center">
+                                @if (pedido.EstadoPedido == "Pendiente")
+                                {
+                                    <button class="btn btn-success aceptar-pedido" data-id="@pedido.IdPedido">
+                                        ✔ Aceptar
+                                    </button>
+                                    <button class="btn btn-danger rechazar-pedido" data-id="@pedido.IdPedido">
+                                        ❌ Rechazar
+                                    </button>
+                                }
+                                else if (pedido.EstadoPedido == "En transcurso")
+                                {
+                                    <button class="btn btn-primary entregar-pedido" data-id="@pedido.IdPedido">
+                                        📦 Entregado
+                                    </button>
+                                }
+                                else if (pedido.EstadoPedido == "Rechazado")
+                                {
+                                    <span class="badge bg-danger">Rechazado</span>
+                                }
+                                else if (pedido.EstadoPedido == "Entregado")
+                                {
+                                    <span class="badge bg-success">Entregado</span>
+                                }
+                            </div>
                         </td>
+
                     </tr>
                 }
                 <!-- Modal -->

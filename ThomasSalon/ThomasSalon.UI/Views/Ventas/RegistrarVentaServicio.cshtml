@@ -7,7 +7,7 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 class="text-center mb-4">Registrar Venta de Servicios</h2>
+            <h2 class="admin-title">Registrar Venta de Servicios</h2>
 
             @using (Html.BeginForm())
             {
@@ -55,7 +55,7 @@
 
                     <!-- Servicios dinámicos -->
                     <h4 class="mt-4">Servicios</h4>
-                    <table class="table table-bordered" id="tablaServicios">
+                    <table class="table table-bordered table-hover shadow rounded table-admin" id="tablaServicios">
                         <thead>
                             <tr>
                                 <th>Servicio</th>
@@ -66,7 +66,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <button type="button" class="btn btn-outline-primary" id="btnAgregarServicio">Agregar Servicio</button>
+                    <button type="button" class="btn btn-stormy" id="btnAgregarServicio">Agregar Servicio</button>
 
                     <!-- Total, Pago y Devolución -->
                     <div class="form-group row mt-4">
@@ -93,15 +93,13 @@
                     <!-- Botón de enviar -->
                     <div class="form-group row mt-4">
                         <div class="col-md-8 offset-md-4">
-                            <input type="submit" value="Registrar Venta" class="btn btn-success" />
+                            <input type="submit" value="Registrar Venta" class="btn btn-highlight" />
                         </div>
                     </div>
                 </div>
             }
 
-            <div class="text-center mt-3">
-                @Html.ActionLink("Volver", "Index", new { @class = "btn btn-link" })
-            </div>
+          
         </div>
     </div>
 </div>

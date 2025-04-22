@@ -4,120 +4,124 @@
     ViewBag.Title = "Registrar Venta de Productos";
 }
 
-<div class="container">
-    <h2>Registrar Venta de Productos</h2>
 
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            @Html.Raw(TempData["Error"].ToString().Replace("\n", "<br/>"))
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="admin-title">Registrar Venta de productos</h2>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @Html.Raw(TempData["Error"].ToString().Replace("\n", "<br/>"))
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                </div>
+            }
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="card p-4 shadow-sm">
+                    <h4 class="mb-4">Datos de la Venta</h4>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <!-- Colaborador -->
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.IdColaborador, new { @class = "col-md-4 col-form-label" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.IdColaborador, ViewBag.Asistencia as SelectList, "-- Selecciona un colaborador --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdColaborador, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- Método de Pago -->
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.IdMetodoPago, new { @class = "col-md-4 col-form-label" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.IdMetodoPago, ViewBag.MetodosPago as SelectList, "-- Selecciona un método de pago --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdMetodoPago, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- Cédula -->
+                    <div class="form-group row">
+                        @Html.Label("Cédula", new { @class = "col-md-4 col-form-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Cedula, new { @class = "form-control", id = "txtCedula" })
+                        </div>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="form-group row">
+                        @Html.Label("Nombre", new { @class = "col-md-4 col-form-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.NombrePersona, new { @class = "form-control", id = "txtNombre", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(model => model.IdPersona)
+
+                    <!-- Productos dinámicos -->
+                    <h4 class="mt-4">Productos</h4>
+                    <table class="table table-bordered table-hover shadow rounded table-admin" id="tablaProductos">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio Unitario</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-stormy" id="btnAgregarProducto">Agregar Producto</button>
+
+                    <!-- Total, Pago y Devolución -->
+                    <div class="form-group row mt-4">
+                        <label for="total" class="col-md-4 col-form-label">Total: </label>
+                        <div class="col-md-8">
+
+                            <input type="text" id="total" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="montoPagado" class="col-md-4 col-form-label">Monto Pagado: </label>
+                        <div class="col-md-8">
+
+                            <input type="number" id="montoPagado" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="devolucion" class="col-md-4 col-form-label">Devolución: </label>
+                        <div class="col-md-8">
+
+                            <input type="text" id="devolucion" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <!-- Botón de enviar -->
+                    <div class="form-group row mt-4">
+                        <div class="col-md-8 offset-md-4">
+                            <input type="submit" value="Registrar Venta" class="btn btn-highlight" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+         
+
         </div>
-    }
 
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Datos de la Venta</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            <!-- Colaborador -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdColaborador, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.IdColaborador, ViewBag.Asistencia as SelectList, "-- Selecciona un colaborador --", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.IdColaborador, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <!-- Método de Pago -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdMetodoPago, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.IdMetodoPago, ViewBag.MetodosPago as SelectList, "-- Selecciona un método de pago --", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.IdMetodoPago, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <!-- Cédula -->
-            <div class="form-group">
-                @Html.Label("Cédula", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Cedula, new { @class = "form-control", id = "txtCedula" })
-                </div>
-            </div>
-
-            <!-- Nombre -->
-            <div class="form-group">
-                @Html.Label("Nombre", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.NombrePersona, new { @class = "form-control", id = "txtNombre", @readonly = "readonly" })
-                </div>
-            </div>
-
-            @Html.HiddenFor(model => model.IdPersona)
-
-            <!-- Productos dinámicos -->
-            <h4>Productos</h4>
-            <table class="table" id="tablaProductos">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio Unitario</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-primary" id="btnAgregarProducto">Agregar Producto</button>
-
-            <!-- Total, Pago y Devolución -->
-            <div class="form-group mt-3">
-                <div class="col-md-offset-2 col-md-10">
-                    <label for="total">Total: </label>
-                    <input type="text" id="total" class="form-control" readonly />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <label for="montoPagado">Monto Pagado: </label>
-                    <input type="number" id="montoPagado" class="form-control" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <label for="devolucion">Devolución: </label>
-                    <input type="text" id="devolucion" class="form-control" readonly />
-                </div>
-            </div>
-
-            <!-- Botón de enviar -->
-            <div class="form-group mt-3">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Registrar Venta" class="btn btn-success" />
-                </div>
-            </div>
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Volver", "Index")
-    </div>
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script>
+            <script>
         var productos = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Productos));
 
         function getProductosDisponibles() {
@@ -265,5 +269,5 @@
                 calcularDevolucion();
             });
         });
-    </script>
-}
+            </script>
+        }

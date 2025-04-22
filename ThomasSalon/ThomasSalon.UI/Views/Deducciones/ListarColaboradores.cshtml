@@ -6,12 +6,12 @@
 
 
 <div class="container pt-5">
-    <h2 class="text-center">Listar Colaboradores</h2>
+    <h2 class="admin-title">Listar Colaboradores</h2>
     <hr>
 
     <div class="table-responsive">
-        <table id="myTable" class="table table-bordered table-hover shadow rounded">
-            <thead class="table-dark">
+        <table id="myTable" class="table table-bordered table-hover shadow rounded table-admin">
+            <thead>
                 <tr>
 
                     <th>
@@ -49,17 +49,17 @@
                         </td>
 
                         <td>
-                            <a href="@Url.Action("ListarDeduccionesColaborador", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-warning btn-sm">
+                            <a href="@Url.Action("ListarDeduccionesColaborador", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-cloud btn-sm">
                                 Deducciones
                             </a>
 
                             @if (item.FechaUltimoPago.HasValue && item.FechaUltimoPago >= DateTime.Now.AddDays(-5))
                             {
-                                <button type="button" class="btn btn-success btn-sm" disabled>Pago Realizado</button>
+                                <button type="button" class="btn btn-highlight btn-sm" disabled>Pago Realizado</button>
                             }
                             else
                             {
-                                <a href="@Url.Action("ListarPagos", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-primary btn-sm">
+                                <a href="@Url.Action("ListarPagos", "Deducciones", new { idColaborador = item.IdColaborador })" class="btn btn-stormy btn-sm">
                                     Pagar
                                 </a>
                             }

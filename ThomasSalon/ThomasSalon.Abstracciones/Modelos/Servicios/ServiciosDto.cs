@@ -43,6 +43,7 @@ namespace ThomasSalon.Abstracciones.Modelos.Servicios
         [Url(ErrorMessage = "Debe ingresar una URL válida.")]
         [Required]
         public string LinkImagen { get; set; }
+        [Display(Name = "Estado", Description = "Estado")]
         public string NombreEstado { get; set; }
     }
 }

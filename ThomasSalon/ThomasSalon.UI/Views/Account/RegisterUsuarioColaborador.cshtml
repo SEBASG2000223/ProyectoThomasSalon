@@ -4,74 +4,76 @@
 @{
     ViewBag.Title = "Registro de Usuario";
 }
-<div class="container">
-    <h2>Registro de Usuario</h2>
+<div class="container pt-5">
+    <h2 class="admin-title">Registro de usuario para colaborador</h2>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Registrar Usuario</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <!-- Email -->
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-horizontal border p-4 rounded shadow-sm bg-light">
+                <!-- Email -->
+                <div class="form-group mb-3">
+
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                </div>
+
+                <!-- Password -->
+                <div class="form-group mb-3">
+
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group mb-3">
+
+                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+
+
+                <!-- Rol -->
+                <div class="form-group mb-3">
+
+                    @Html.LabelFor(model => model.Rol, new { @class = "control-label col-md-2" })
+                    @Html.DropDownListFor(model => model.Rol, (SelectList)ViewBag.Roles, new { @class = "form-control", id = "rolDropdown" })
+                    @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="form-group mb-3" id="sucursalesField" style="display: none;">
+                    @Html.LabelFor(model => model.IdSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DropDownListFor(model => model.IdSucursal,
+                        ViewBag.Sucursales != null ? ViewBag.Sucursales as SelectList : new SelectList(new List<SelectListItem>()),
+                        new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group text-center">
+
+                    <input type="submit" value="Registrar usuario" class="btn btn-stormy" />
+                    <a href="@Request.UrlReferrer" class="btn btn-admin">Volver a la lista</a>
+
+                </div>
+
+            </div>
+            }
+
         </div>
-    </div>
-
-    <!-- Password -->
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!-- Confirm Password -->
-    <div class="form-group">
-        @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!-- Rol -->
-    <div class="form-group">
-        @Html.LabelFor(model => model.Rol, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Rol, (SelectList)ViewBag.Roles, new { @class = "form-control", id = "rolDropdown" })
-            @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" id="sucursalesField" style="display: none;">
-        @Html.LabelFor(model => model.IdSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.IdSucursal,
-                ViewBag.Sucursales != null ? ViewBag.Sucursales as SelectList : new SelectList(new List<SelectListItem>()),
-                new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Registrar" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-    }
-
-    <div>
-        @Html.ActionLink("Volver al Inicio", "Index", "Home")
     </div>
 </div>
 @section Scripts {
@@ -83,7 +85,7 @@
 
         var fields = {
             "sucursalesField": ["Administrador"]
-          
+
         };
 
         function toggleFields() {
@@ -95,7 +97,7 @@
             });
         }
 
-        toggleFields(); 
-        rolDropdown.addEventListener("change", toggleFields); 
+        toggleFields();
+        rolDropdown.addEventListener("change", toggleFields);
     });
 </script>

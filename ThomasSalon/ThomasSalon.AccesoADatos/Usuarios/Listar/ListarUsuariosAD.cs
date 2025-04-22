@@ -70,6 +70,7 @@ namespace ThomasSalon.AccesoADatos.Usuarios.Listar
                                                        Genero = laPersona.Genero,
                                                        Direccion = laPersona.Direccion,
                                                        Edad = laPersona.Edad,
+                                                       NombreEstado = elEstado.Nombre,
                                                        Identificacion = laPersona.Identificacion,
                                                        NombreRol = rol.Name
                                                    }).ToList();
@@ -97,6 +98,8 @@ namespace ThomasSalon.AccesoADatos.Usuarios.Listar
                                                        Telefono = laPersona.Telefono,
                                                        Genero = laPersona.Genero,
                                                        Direccion = laPersona.Direccion,
+                                                       NombreEstado = elEstado.Nombre,
+
                                                        Edad = laPersona.Edad,
                                                        Identificacion = laPersona.Identificacion,
                                                        NombreRol = rol.Name
@@ -126,6 +129,8 @@ namespace ThomasSalon.AccesoADatos.Usuarios.Listar
                                                        Telefono = laPersona.Telefono,
                                                        Genero = laPersona.Genero,
                                                        Direccion = laPersona.Direccion,
+                                                       NombreEstado = elEstado.Nombre,
+
                                                        Edad = laPersona.Edad,
                                                        Identificacion = laPersona.Identificacion,
                                                        NombreRol = rol.Name

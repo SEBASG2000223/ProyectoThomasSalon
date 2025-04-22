@@ -22,29 +22,6 @@ namespace ThomasSalon.AccesoADatos.Citas.Agendar
         {
             try
             {
-                // Obtener la duración del servicio
-                var duracionServicio = await ObtenerDuracionServicio(modelo.IdServicio);
-
-                // Verificar que la hora de finalización no se pase de las 7:00 PM
-                var horaFin = modelo.FechaHora.AddMinutes(duracionServicio);
-                if (horaFin.Hour >= 19 || (horaFin.Hour == 18 && horaFin.Minute > 30))
-                {
-                    throw new InvalidOperationException("La duración del servicio excede el horario permitido (hasta las 7:00 PM).");
-                }
-
-                // Validación de horarios en los domingos
-                if (modelo.FechaHora.DayOfWeek == DayOfWeek.Sunday && horaFin.Hour >= 15 && horaFin.Minute > 30)
-                {
-                    throw new InvalidOperationException("Las citas los domingos no pueden ser después de las 3:30 PM.");
-                }
-
-                // Validar el horario de la primera cita
-                if (modelo.FechaHora.Hour == 9 && modelo.FechaHora.Minute != 30)
-                {
-                    throw new InvalidOperationException("La primera cita debe ser a las 9:30 AM.");
-                }
-
-
                 // Crear los parámetros para el procedimiento almacenado
                 var idServicioParam = new SqlParameter("@IdServicio", SqlDbType.Int) { Value = modelo.IdServicio };
                 var idSucursalParam = new SqlParameter("@IdSucursal", SqlDbType.Int) { Value = idSucursal }; // Usar idSucursal
@@ -72,29 +49,6 @@ namespace ThomasSalon.AccesoADatos.Citas.Agendar
         {
             try
             {
-                // Obtener la duración del servicio
-                var duracionServicio = await ObtenerDuracionServicio(modelo.IdServicio);
-
-                // Verificar que la hora de finalización no se pase de las 7:00 PM
-                var horaFin = modelo.FechaHora.AddMinutes(duracionServicio);
-                if (horaFin.Hour >= 19 || (horaFin.Hour == 18 && horaFin.Minute > 30))
-                {
-                    throw new InvalidOperationException("La duración del servicio excede el horario permitido (hasta las 7:00 PM).");
-                }
-
-                // Validación de horarios en los domingos
-                if (modelo.FechaHora.DayOfWeek == DayOfWeek.Sunday && horaFin.Hour >= 15 && horaFin.Minute > 30)
-                {
-                    throw new InvalidOperationException("Las citas los domingos no pueden ser después de las 3:30 PM.");
-                }
-
-                // Validar el horario de la primera cita
-                if (modelo.FechaHora.Hour == 9 && modelo.FechaHora.Minute != 30)
-                {
-                    throw new InvalidOperationException("La primera cita debe ser a las 9:30 AM.");
-                }
-          
-
                 // Crear los parámetros para el procedimiento almacenado
                 var idServicioParam = new SqlParameter("@IdServicio", SqlDbType.Int) { Value = modelo.IdServicio };
                 var idSucursalParam = new SqlParameter("@IdSucursal", SqlDbType.Int) { Value = modelo.IdSucursal }; // Usar idSucursal
@@ -118,30 +72,6 @@ namespace ThomasSalon.AccesoADatos.Citas.Agendar
         }
 
 
-
-        private async Task<int> ObtenerDuracionServicio(int idServicio)
-        {
-            try
-            {
-                var duracion = await _elContexto.ServiciosTabla
-                                                 .Where(s => s.IdServicio == idServicio)
-                                                 .Select(s => s.Duracion)
-                                                 .FirstOrDefaultAsync();
-
-                if (duracion == null)
-                {
-                    throw new InvalidOperationException("El servicio no tiene una duración definida.");
-                }
-
-                int duracionEnMinutos = (int)duracion.TotalMinutes;
-
-                return duracionEnMinutos;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException($"Error al obtener la duración del servicio: {ex.Message}");
-            }
-        }
 
 
 

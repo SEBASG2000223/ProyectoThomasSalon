@@ -67,7 +67,7 @@
                 // Configuración de flatpickr para el campo de fecha y hora
                 const config = {
                     enableTime: true,
-                    dateFormat: "Y-m-d H:i K",
+                    dateFormat: "Y-m-d h:i K",
                     time_24hr: false,
                     minDate: "today",
                     maxDate: new Date().fp_incr(365),
@@ -75,11 +75,23 @@
                     defaultHour: 9,
                     defaultMinute: 30,
                     minTime: "09:30",
-                    maxTime:  "5:30"
-
-                  
-
-     
+                    maxTime: "17:30",
+                    allowInput: false,
+                    disable: [
+                        function (date) {
+                            const day = date.getDate();
+                            const month = date.getMonth();
+                            return (day === 25 && month === 11) || (day === 1 && month === 0);
+                        }
+                    ],
+                    onChange: function (selectedDates, dateStr, instance) {
+                        const selectedDay = selectedDates[0].getDay();
+                        if (selectedDay === 0) {
+                            instance.set("maxTime", "13:30");
+                        } else {
+                            instance.set("maxTime", "17:30");
+                        }
+                    }
                 };
 
                 flatpickr("#fechaHora", config);
@@ -114,9 +126,3 @@
         });
     </script>
 }
-
-
-
-
-
-

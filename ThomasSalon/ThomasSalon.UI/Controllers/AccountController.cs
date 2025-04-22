@@ -512,11 +512,21 @@ namespace ThomasSalon.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditAdmin(EditViewModel model)
         {
-            if (model == null)
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "El modelo no llegó al servidor.");
+                foreach (var error in ModelState)
+                {
+                    var key = error.Key;
+                    var errors = error.Value.Errors;
+                    foreach (var err in errors)
+                    {
+                        Console.WriteLine($"Error en {key}: {err.ErrorMessage}");
+                    }
+                }
+
                 return View(model);
             }
+
 
             Console.WriteLine($"EditAdmin - IdPersona recibido: {model.IdPersona}");
 
