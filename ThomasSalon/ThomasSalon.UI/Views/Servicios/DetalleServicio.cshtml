@@ -32,14 +32,21 @@
 </style>
 
 <div class="container mt-5 d-flex justify-content-center">
-    <div class="card p-5 shadow-lg d-flex flex-row" style="background-color: #f8f9fa; border-radius: 20px;">
-        <img src="@Html.DisplayFor(model => model.LinkImagen)" class="rounded pr-1" alt="@Html.DisplayNameFor(model => model.Nombre)">
-        <div class="card-body text-center d-flex flex-column justify-content-center">
-            <h2 class="fw-bold display-6">@Html.DisplayFor(model => model.Nombre)</h2>
-            <h1 class="fw-bold text-custom display-6">₡@Html.DisplayFor(model => model.Precio)</h1>
-            <p class="text-muted fs-6">@Html.DisplayFor(model => model.Descripcion)</p>
-            <button type="button" class="btn btn-dark w-100 fs-5 py-2" style="border-radius: 10px;" id="agendarCitaBtn" data-id-servicio="@Model.IdServicio">Agendar </button>
+    <div class="card p-4 shadow-lg d-flex flex-row align-items-center" style="background-color: #f8f9fa; border-radius: 20px; max-width: 900px;">
 
+        <!-- Imagen -->
+        <div class="me-4">
+            <img src="@Model.LinkImagen" class="rounded" alt="@Model.Nombre" style="width: 250px; height: auto; border-radius: 15px;">
+        </div>
+
+        <!-- Texto -->
+        <div class="card-body text-center d-flex flex-column justify-content-center flex-grow-1">
+            <h2 class="fw-bold display-6">@Model.Nombre</h2>
+            <h1 class="fw-bold text-custom display-6">₡@Model.Precio</h1>
+            <p class="text-muted fs-6">@Model.Descripcion</p>
+            <button type="button" class="btn btn-dark w-100 fs-5 py-2 mt-3" style="border-radius: 10px;" id="agendarCitaBtn" data-id-servicio="@Model.IdServicio">
+                Agendar
+            </button>
         </div>
     </div>
 </div>

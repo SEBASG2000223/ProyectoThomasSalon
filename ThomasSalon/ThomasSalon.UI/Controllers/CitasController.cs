@@ -172,7 +172,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // GET: Citas/Create
-        [Authorize(Roles = "Gerente")]
+        [Authorize(Roles = "Gerente, Administrador")]
         public ActionResult AgendarCitaPresencial()
         {
             var idSucursal = TempData["IdSucursalSeleccionada"] != null ? Convert.ToInt32(TempData["IdSucursalSeleccionada"]) : 0;
@@ -202,7 +202,7 @@ namespace ThomasSalon.UI.Controllers
         }
 
         // POST: Citas/Create
-        [Authorize(Roles = "Gerente")]
+        [Authorize(Roles = "Gerente, Administrador")]
         [HttpPost]
         public async Task<ActionResult> AgendarCitaPresencial(CitasDto modelo)
         {
